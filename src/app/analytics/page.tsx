@@ -1,4 +1,5 @@
 import DenseTable from "@/src/components/table/table";
+import ReactVirtualizedTable from "@/src/components/table/table2";
 
 const getMovies = async () => {
   try {
@@ -16,10 +17,9 @@ const getMovies = async () => {
   }
 };
 
-
 const Page = async () => {
   const data = await getMovies();
-  
+
   const movies = data.movies ? data.movies : [];
 
   return (
@@ -27,6 +27,11 @@ const Page = async () => {
       <div>
         <DenseTable movies={movies} />
       </div>
+      <div className="py-8"></div>
+      <div>
+        <ReactVirtualizedTable />
+      </div>
+      <div className="py-8"></div>
     </>
   );
 };
