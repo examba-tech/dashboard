@@ -1,3 +1,5 @@
+import DenseTable from "@/src/components/table/table";
+
 const getMovies = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/Movies", {
@@ -14,17 +16,18 @@ const getMovies = async () => {
   }
 };
 
+
 const Page = async () => {
   const data = await getMovies();
-  console.log(data);
-
-  const text = data?.movies ? "Connection to MongoDB successful." : "Error.";
+  
+  const movies = data.movies ? data.movies : [];
 
   return (
-    <div className="text-black">
-      {" "}
-      <p>{text}</p>{" "}
-    </div>
+    <>
+      <div>
+        <DenseTable movies={movies} />
+      </div>
+    </>
   );
 };
 
