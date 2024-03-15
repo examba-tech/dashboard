@@ -7,7 +7,7 @@ import "@/src/styles/globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "EXAMBA",
+  title: "Examba",
   description: "Dashboard by Examba",
 };
 

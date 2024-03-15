@@ -7,13 +7,13 @@ export default function Home() {
   return (
     <div>
       <div className="flex justify-center py-2">
-        <Image src="/examba.jpg" width={300} height={300} alt="examba" />
+        <Image src="/examba.png" width={300} height={300} alt="examba" />
       </div>
       <div className="flex justify-center py-2">
         <Link
           href="/analytics"
           className={buttonVariants({
-            className: "w-full max-w-80",
+            className: "w-full max-w-80 ",
           })}
         >
           Entra

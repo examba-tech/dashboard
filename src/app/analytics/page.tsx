@@ -17,7 +17,7 @@ const getMovies = async () => {
 const Page = async () => {
   const data = await getMovies();
   console.log(data);
-  // Make sure we have tickets needed for production build.
+
   const text = data?.movies ? "Connection to MongoDB successful." : "Error.";
 
   return (
