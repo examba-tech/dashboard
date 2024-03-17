@@ -1,5 +1,5 @@
 import DenseTable from "@/src/components/table/table";
-import ReactVirtualizedTable from "@/src/components/table/table2";
+import ReactVirtualizedTable from "@/src/components/table/VirtualTable";
 
 const getMovies = async () => {
   try {
@@ -24,12 +24,12 @@ const Page = async () => {
 
   return (
     <>
-      <div>
+      {/* <div>
         <DenseTable movies={movies} />
       </div>
-      <div className="py-8"></div>
+      <div className="py-8"></div> */}
       <div>
-        <ReactVirtualizedTable />
+        <ReactVirtualizedTable movies={movies} />
       </div>
       <div className="py-8"></div>
     </>
