@@ -20,7 +20,7 @@ const getMovies = async () => {
 const Page = async () => {
   const data = await getMovies();
 
-  const movies = data.movies ? data.movies : [];
+  const movies = data && data.movies ? data.movies : [];
 
   return (
     <>
