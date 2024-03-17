@@ -16,9 +16,20 @@ export default function Home() {
             className: "w-full max-w-80 ",
           })}
         >
-          Entra
+          Entra a la página de análisis
+        </Link>
+      </div>
+      <div className="flex justify-center py-2">
+        <Link
+          href="/dashbord"
+          className={buttonVariants({
+            className: "w-full max-w-80 ",
+          })}
+        >
+          Entra a la página de dashboard
         </Link>
       </div>
     </div>
   );
 }
+
