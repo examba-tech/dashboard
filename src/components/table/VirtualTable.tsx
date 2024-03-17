@@ -46,7 +46,7 @@ const columns: ColumnData[] = [
 ];
 
 const rows = (movies: any) =>
-  Array.from({ length: 100000 }, (_) => {
+  Array.from({ length: movies.length > 0 ? 100000 : 0 }, (_) => {
     const randomSelection = movies[Math.floor(Math.random() * movies.length)];
     return createData(randomSelection);
   });

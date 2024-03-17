@@ -34,7 +34,7 @@ export default function Home() {
           href="/about"
           className={buttonVariants({
             className: "w-full max-w-xs",
-            variant: "subtle",
+            variant: "link",
           })}
         >
           Leer más
