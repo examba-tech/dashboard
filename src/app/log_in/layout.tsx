@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navbar from "@/src/components/ui/Navbar";
-import Sidebar from "@/src/components/ui/Sidebar";
-import { cn } from "@/src/utils/utils";
+import Sidebar from "@/src/app/components/ui/Sidebar";
+import { cn } from "@/src/app/log_in/utils/utils";
 import "@/src/styles/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,7 +25,6 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-screen pt-12 bg-slate-50 antialiased">
-        <Navbar />
         <Sidebar />
         <div className="container max-w-7xl mx-auto h-full pt-12">
           {children}
