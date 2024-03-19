@@ -15,7 +15,7 @@ export default function Home() {
           className: "w-full max-w-xs",
         })}
       >
-        Entra
+        Taula
       </Link>
       <div className="pt-4" />
       <Link
@@ -24,7 +24,7 @@ export default function Home() {
           className: "w-full max-w-80 ",
         })}
       >
-        Entra a la página de dashboard
+        Gràfic línies
       </Link>
 
       <h2 className="text-xl font-semibold pt-20">Nosaltres</h2>
@@ -45,7 +45,7 @@ export default function Home() {
           variant: "link",
         })}
       >
-        Leer más
+        Més...
       </Link>
     </div>
   );
