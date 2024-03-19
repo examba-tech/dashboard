@@ -1,3 +1,6 @@
+import DenseTable from "@/src/components/table/table";
+import ReactVirtualizedTable from "@/src/components/table/VirtualTable";
+
 const getMovies = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/Movies", {
@@ -16,16 +19,29 @@ const getMovies = async () => {
 
 const Page = async () => {
   const data = await getMovies();
-  console.log(data);
-  // Make sure we have tickets needed for production build.
-  const text = data?.movies ? "Connection to MongoDB successful." : "Error.";
+
+  const movies = data && data.movies ? data.movies : [];
 
   return (
-    <div className="text-black">
-      {" "}
-      <p>{text}</p>{" "}
-    </div>
+    <>
+      {/* <div>
+        <DenseTable movies={movies} />
+      </div>
+      <div className="py-8"></div> */}
+      <div>
+        <ReactVirtualizedTable movies={movies} />
+      </div>
+      <div className="py-8"></div>
+    </>
   );
 };
 
 export default Page;
+
+
+
+
+
+
+
+

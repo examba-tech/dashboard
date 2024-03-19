@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 export default function About (
     { children } : { children: React.ReactNode }
 )
@@ -87,7 +88,6 @@ export default function About (
                 height={500}
             />      
         </div>
-        {children}
         </section>
     )
 }
