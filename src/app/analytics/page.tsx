@@ -1,5 +1,7 @@
 import DenseTable from "@/src/components/table/table";
 import ReactVirtualizedTable from "@/src/components/table/VirtualTable";
+import Date from "@/src/components/filters/Date";
+import MultipleSelectChip from "@/src/components/filters/Select";
 
 const getMovies = async () => {
   try {
@@ -28,20 +30,16 @@ const Page = async () => {
         <DenseTable movies={movies} />
       </div>
       <div className="py-8"></div> */}
-      <div>
-        <ReactVirtualizedTable movies={movies} />
+      <div className="flex flex-row">
+        <Date />
+        <MultipleSelectChip />
+        <MultipleSelectChip />
       </div>
+      <div className="py-8" />
+      <ReactVirtualizedTable movies={movies} />
       <div className="py-8"></div>
     </>
   );
 };
 
 export default Page;
-
-
-
-
-
-
-
-
