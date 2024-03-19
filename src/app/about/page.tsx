@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+const size = 200;
+
 export default function About({ children }: { children: React.ReactNode }) {
   return (
     <section>
@@ -72,68 +74,68 @@ export default function About({ children }: { children: React.ReactNode }) {
       </p>
       <br></br>
 
-      <div style={{ display: "flex" }}>
+      <div className="flex items-center justify-center">
         <Image
           src="/nosotros/albert.png"
           alt="Albert Fugardo"
-          width={500}
-          height={500}
+          width={size}
+          height={size}
         />
         <Image
           src="/nosotros/marc.png"
           alt="Marc Franquesa"
-          width={500}
-          height={500}
+          width={size}
+          height={size}
         />
         <Image
           src="/nosotros/mariar.png"
           alt="Maria Risques"
-          width={500}
-          height={500}
+          width={size}
+          height={size}
         />
         <Image
           src="/nosotros/mariat.png"
           alt="Maria Tubella"
-          width={500}
-          height={500}
+          width={size}
+          height={size}
         />
         <Image
           src="/nosotros/mauro.png"
           alt="Mauro Filomeno"
-          width={500}
-          height={500}
+          width={size}
+          height={size}
         />
       </div>
-      <div style={{ display: "flex" }}>
+      <div className="flex items-center justify-center">
         <Image
-          src="/nosotros/albert.png"
-          alt="Albert Fugardo"
-          width={500}
-          height={500}
+          src="/nosotros/Xiao.png"
+          alt="Xiao Segarra"
+          width={size}
+          height={size}
         />
         <Image
-          src="/nosotros/marc.png"
-          alt="Marc Franquesa"
-          width={500}
-          height={500}
+          src="/nosotros/Aida.png"
+          alt="Aida Torres"
+          width={size}
+          height={size}
         />
         <Image
-          src="/nosotros/mariar.png"
-          alt="Maria Risques"
-          width={500}
-          height={500}
+          src="/nosotros/Blanca.png"
+          alt="Blanca Unanue"
+          width={size}
+          height={size}
         />
         <Image
-          src="/nosotros/mariat.png"
-          alt="Maria Tubella"
-          width={500}
-          height={500}
+          src="/nosotros/Elena.png"
+          alt="Elena González"
+          width={size}
+          height={size}
         />
         <Image
-          src="/nosotros/mauro.png"
-          alt="Mauro Filomeno"
-          width={500}
-          height={500}
+          src="/nosotros/Adri.png"
+          alt="Adrián Cerezuela"
+          width={size}
+          height={size}
         />
       </div>
     </section>
