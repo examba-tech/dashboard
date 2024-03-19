@@ -3,6 +3,7 @@ import Link from "next/link";
 import { cn } from "@/src/utils/utils";
 import Image from "next/image";
 
+
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center pt-20">
@@ -49,3 +50,4 @@ export default function Home() {
     </div>
   );
 }
+
