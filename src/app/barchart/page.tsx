@@ -4,6 +4,7 @@ import MyBarChart from "@/src/components/charts/bar_chart";
 const getVisits = async () => {
     try {
       const res = await fetch("http://localhost:3000/api/Visits", {
+        cache: "no-store"
       });
   
       if (!res.ok) {

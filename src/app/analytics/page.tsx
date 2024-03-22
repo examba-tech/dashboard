@@ -3,6 +3,7 @@ import ReactVirtualizedTable from "@/src/components/table/VirtualTable";
 const getMovies = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/Movies", {
+      cache: "no-store",
     });
 
     if (!res.ok) {
