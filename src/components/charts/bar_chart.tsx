@@ -1,12 +1,12 @@
 "use client";
 
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const MyLineChart = ({ visits }) => {
+const MyBarChart = ({ visits }) => {
   return (
     <ResponsiveContainer width="100%" height={400}>
-      <LineChart
+      <BarChart
         width={500}
         height={300}
         data={visits}
@@ -18,14 +18,15 @@ const MyLineChart = ({ visits }) => {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" tick={{ fontSize: 10 }} /> 
+        <XAxis dataKey="date" tick={{ fontSize: 10 }} />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="visits" stroke="#8884d8" /> 
-      </LineChart>
+        <Bar dataKey="visits" fill="#8884d8" />
+      </BarChart>
     </ResponsiveContainer>
   );
 };
 
-export default MyLineChart;
+export default MyBarChart;
+

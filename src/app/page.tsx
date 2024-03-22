@@ -19,7 +19,7 @@ export default function Home() {
       </Link>
       <div className="pt-4" />
       <Link
-        href="/dashbord"
+        href="/dashboard"
         className={buttonVariants({
           className: "w-full max-w-80 ",
         })}

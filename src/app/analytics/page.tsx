@@ -1,4 +1,3 @@
-import DenseTable from "@/src/components/table/table";
 import ReactVirtualizedTable from "@/src/components/table/VirtualTable";
 
 const getMovies = async () => {
