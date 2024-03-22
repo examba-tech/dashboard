@@ -33,5 +33,5 @@ const visitSchema = new Schema(
   }
 );
 
-export const Visit = mongoose.models.Movie || mongoose.model("Visit", visitSchema);
+export const Visit = mongoose.models.Visit || mongoose.model("Visit", visitSchema);
 export const Movie = mongoose.models.Movie || mongoose.model("Movie", movieSchema);
