@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import Navbar from "@/src/components/ui/Navbar";
 import { cn } from "@/src/utils/utils";
 import "@/src/styles/globals.css";
+import { montserrat } from "@/src/components/ui/fonts";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +26,7 @@ export default function RootLayout({
         inter.className
       )}
     >
-      <body className="min-h-screen pt-12 bg-slate-50 antialiased">
+      <body className={`min-h-screen pt-12 bg-slate-50 antialiased ${montserrat.className} antialiased`}>
         <Navbar />
 
         <div className="container max-w-7xl mx-auto h-full pt-12">

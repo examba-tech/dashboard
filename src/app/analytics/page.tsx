@@ -1,10 +1,8 @@
-import DenseTable from "@/src/components/table/table";
 import ReactVirtualizedTable from "@/src/components/table/VirtualTable";
 
 const getMovies = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/Movies", {
-      cache: "no-store",
     });
 
     if (!res.ok) {
@@ -18,9 +16,9 @@ const getMovies = async () => {
 };
 
 const Page = async () => {
-  const data = await getMovies();
+  const data_ = await getMovies();
 
-  const movies = data && data.movies ? data.movies : [];
+  const movies = data_ && data_.movies ? data_.movies : [];
 
   return (
     <>

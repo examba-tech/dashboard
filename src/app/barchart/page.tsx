@@ -1,5 +1,5 @@
 import React from "react";
-import MyLineChart from "@/src/components/charts/line_chart";
+import MyBarChart from "@/src/components/charts/bar_chart";
 
 const getVisits = async () => {
     try {
@@ -17,15 +17,15 @@ const getVisits = async () => {
   };
 
 const Page = async () => {
-  const a = await getVisits();
+  const data = await getVisits();
 
-  const visits = a && a.visits ? a.visits : [];
-
+  const visits = data && data.visits ? data.visits : [];
 console.log(visits)
+console.log("ok")
   return (
     <>
       <div>
-        <MyLineChart visits={visits} />
+        <MyBarChart visits={visits} />
       </div>
       <div className="py-8"></div>
     </>
@@ -33,3 +33,5 @@ console.log(visits)
 };
 
 export default Page;
+
+
