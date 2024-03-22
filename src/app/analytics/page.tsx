@@ -16,9 +16,9 @@ const getMovies = async () => {
 };
 
 const Page = async () => {
-  const data_ = await getMovies();
+  const data = await getMovies();
 
-  const movies = data_ && data_.movies ? data_.movies : [];
+  const movies = data && data.movies ? data.movies : [];
 
   return (
     <>

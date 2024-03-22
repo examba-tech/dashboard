@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import Navbar from "@/src/components/ui/Navbar";
 import { cn } from "@/src/utils/utils";
 import "@/src/styles/globals.css";
 import { montserrat } from "@/src/components/ui/fonts";
 
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Examba",
@@ -23,10 +20,10 @@ export default function RootLayout({
       lang="en"
       className={cn(
         "bg-white text-slate-900 antialiased light",
-        inter.className
+        montserrat.className
       )}
     >
-      <body className={`min-h-screen pt-12 bg-slate-50 antialiased ${montserrat.className} antialiased`}>
+      <body className={"min-h-screen pt-12 bg-slate-50 antialiased"}>
         <Navbar />
 
         <div className="container max-w-7xl mx-auto h-full pt-12">

@@ -20,8 +20,7 @@ const Page = async () => {
   const data = await getVisits();
 
   const visits = data && data.visits ? data.visits : [];
-console.log(visits)
-console.log("ok")
+
   return (
     <>
       <div>

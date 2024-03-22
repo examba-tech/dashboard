@@ -17,11 +17,10 @@ const getVisits = async () => {
   };
 
 const Page = async () => {
-  const a = await getVisits();
+  const data = await getVisits();
 
-  const visits = a && a.visits ? a.visits : [];
+  const visits = data && data.visits ? data.visits : [];
 
-console.log(visits)
   return (
     <>
       <div>
