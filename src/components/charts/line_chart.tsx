@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Brush } from 'recharts';
 
 const MyLineChart = ({ visits }) => {
   return (
@@ -23,6 +23,7 @@ const MyLineChart = ({ visits }) => {
         <Tooltip />
         <Legend />
         <Line type="monotone" dataKey="visits" stroke="#8884d8" /> 
+        <Brush />
       </LineChart>
     </ResponsiveContainer>
   );
