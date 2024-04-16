@@ -19,12 +19,32 @@ export default function Home() {
       </Link>
       <div className="pt-4" />
       <Link
-        href="/dashbord"
+        href="/dashboard"
         className={buttonVariants({
           className: "w-full max-w-80 ",
         })}
       >
         Gràfic línies
+      </Link>
+
+      <div className="pt-4" />
+      <Link
+        href="/barchart"
+        className={buttonVariants({
+          className: "w-full max-w-80 ",
+        })}
+      >
+        Bar chart
+      </Link>
+
+      <div className="pt-4" />
+      <Link
+        href="/prueba_union_graficos"
+        className={buttonVariants({
+          className: "w-full max-w-80 ",
+        })}
+      >
+        Prueba uniones
       </Link>
 
       <h2 className="text-xl font-semibold pt-20">Nosaltres</h2>

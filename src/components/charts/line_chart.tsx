@@ -1,13 +1,15 @@
-import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+"use client";
 
-const MyLineChart = ({ data }) => {
+import React from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Brush } from 'recharts';
+
+const MyLineChart = ({ visits }) => {
   return (
     <ResponsiveContainer width="100%" height={400}>
       <LineChart
         width={500}
         height={300}
-        data={data}
+        data={visits}
         margin={{
           top: 5,
           right: 30,
@@ -21,6 +23,7 @@ const MyLineChart = ({ data }) => {
         <Tooltip />
         <Legend />
         <Line type="monotone" dataKey="visits" stroke="#8884d8" /> 
+        <Brush />
       </LineChart>
     </ResponsiveContainer>
   );

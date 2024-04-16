@@ -4,8 +4,6 @@ mongoose.connect(process.env.DB_CONN_STRING!).catch((error) => {
   console.log("Failed to connect to MongoDB:", error);
 });
 
-mongoose.Promise = global.Promise;
-
 const ratingsSchema = new Schema({
   imdb: Number,
   metacritic: Number,
@@ -24,7 +22,16 @@ const movieSchema = new Schema(
     maxTimeMS: 250,
   }
 );
+const visitSchema = new Schema(
+  {
+    date: String,
+    visits: Number,
+  },
+  {
+    bufferTimeoutMS: 250,
+    maxTimeMS: 250,
+  }
+);
 
-const Movie = mongoose.models.Movie || mongoose.model("Movie", movieSchema);
-
-export default Movie;
+export const Visit = mongoose.models.Visit || mongoose.model("Visit", visitSchema);
+export const Movie = mongoose.models.Movie || mongoose.model("Movie", movieSchema);
