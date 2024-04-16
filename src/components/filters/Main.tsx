@@ -1,10 +1,10 @@
 import * as React from "react";
 import Accordion from "@mui/material/Accordion";
-import AccordionActions from "@mui/material/AccordionActions";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Button from "@mui/material/Button";
+import Date from "@/src/components/filters/Date";
+import MultipleSelectChip from "@/src/components/filters/Select";
 
 export default function Filters() {
   return (
@@ -16,11 +16,14 @@ export default function Filters() {
           id="panel1-header"
           className="md:text-center"
         >
-          Accordion 1
+          Filters
         </AccordionSummary>
         <AccordionDetails>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
+        <div className="flex flex-row">
+            <Date />
+            <MultipleSelectChip />
+            <MultipleSelectChip />
+        </div>
         </AccordionDetails>
       </Accordion>
     </div>

@@ -1,6 +1,4 @@
 import ReactVirtualizedTable from "@/src/components/table/VirtualTable";
-import Date from "@/src/components/filters/Date";
-import MultipleSelectChip from "@/src/components/filters/Select";
 import Filters from "@/src/components/filters/Main";
 
 const getMovies = async () => {
@@ -31,11 +29,6 @@ const Page = async () => {
       </div>
       <div className="py-8"></div> */}
       <Filters />
-      <div className="flex flex-row">
-        <Date />
-        <MultipleSelectChip />
-        <MultipleSelectChip />
-      </div>
       <div className="py-8" />
       <ReactVirtualizedTable movies={movies} />
       <div className="py-8"></div>
