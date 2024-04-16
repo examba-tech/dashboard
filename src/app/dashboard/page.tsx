@@ -1,6 +1,7 @@
 import React from "react";
 import MyLineChart from "@/src/components/charts/line_chart";
 
+
 const getVisits = async () => {
     try {
       const res = await fetch("http://localhost:3000/api/Visits", {
@@ -16,6 +17,7 @@ const getVisits = async () => {
       console.log("Error loading topics: ", error);
     }
   };
+  
 
 const Page = async () => {
   const data = await getVisits();
