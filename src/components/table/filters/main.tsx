@@ -3,8 +3,8 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Date from "@/src/components/filters/Date";
-import MultipleSelectChip from "@/src/components/filters/Select";
+import Date from "@/src/components/table/filters/date";
+import MultipleSelectChip from "@/src/components/table/filters/select";
 
 export default function Filters() {
   return (
@@ -19,11 +19,11 @@ export default function Filters() {
           Filters
         </AccordionSummary>
         <AccordionDetails>
-        <div className="flex flex-row">
+          <div className="flex flex-row">
             <Date />
             <MultipleSelectChip />
             <MultipleSelectChip />
-        </div>
+          </div>
         </AccordionDetails>
       </Accordion>
     </div>
