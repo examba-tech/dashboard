@@ -21,19 +21,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
-
 function getStyles(name: string, personName: readonly string[], theme: Theme) {
   return {
     fontWeight:
@@ -43,7 +30,11 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
   };
 }
 
-export default function MultipleSelectChip() {
+export default function MultipleSelectChip({
+  onSelectedValuesChange,
+  names,
+  which_column,
+}) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState<string[]>([]);
 
@@ -55,6 +46,8 @@ export default function MultipleSelectChip() {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+
+    onSelectedValuesChange(which_column, personName);
   };
 
   return (

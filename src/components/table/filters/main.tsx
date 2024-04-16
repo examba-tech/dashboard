@@ -6,7 +6,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Date from "@/src/components/table/filters/date";
 import MultipleSelectChip from "@/src/components/table/filters/select";
 
-export default function Filters() {
+export default function Filters({ onSelectedValuesChange }) {
   return (
     <div>
       <Accordion>
@@ -21,8 +21,16 @@ export default function Filters() {
         <AccordionDetails>
           <div className="flex flex-row">
             <Date />
-            <MultipleSelectChip />
-            <MultipleSelectChip />
+            <MultipleSelectChip
+              onSelectedValuesChange={onSelectedValuesChange}
+              names={[
+                "The Dark Knight",
+                "Gladiator",
+                "Inglourious Basterds",
+                "The Lord of the Rings: The Two Towers",
+              ]}
+              which_column="movie_names"
+            />
           </div>
         </AccordionDetails>
       </Accordion>
