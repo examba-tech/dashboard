@@ -14,7 +14,7 @@ const Sidebar = () => {
     <div onMouseLeave={handleMouseLeave} className="relative h-full">
       <div
         onMouseEnter={handleMouseEnter}
-        className={`fixed top-0 left-0 h-screen ${isVisible ? 'w-64' : 'w-16'} bg-black text-white transition-width duration-300 flex flex-col`}
+        className={`fixed top-0 left-0 h-screen z-50 ${isVisible ? 'w-64' : 'w-16'} bg-black text-white transition-width duration-300 flex flex-col`}
       >
         <div className="flex-grow">
           <Link href="/">
