@@ -27,6 +27,26 @@ export default function Home() {
         Gràfic línies
       </Link>
 
+      <div className="pt-4" />
+      <Link
+        href="/barchart"
+        className={buttonVariants({
+          className: "w-full max-w-80 ",
+        })}
+      >
+        Bar chart
+      </Link>
+
+      <div className="pt-4" />
+      <Link
+        href="/prueba_union_graficos"
+        className={buttonVariants({
+          className: "w-full max-w-80 ",
+        })}
+      >
+        Prueba uniones
+      </Link>
+
       <h2 className="text-xl font-semibold pt-20">Nosaltres</h2>
       <p className="mt-4 text-base max-w-xl text-justify">
         EXAMBA és una nova iniciativa que hem tirat endavant deu estudiants de
