@@ -1,9 +1,28 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"use client"
 import { ApexOptions } from "apexcharts";
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import ReactApexChart from "react-apexcharts";
 
 interface ChartThreeState {
-  series: number[];
+  info_ICS: {
+    male: number;
+    female: number;
+  };
+  
 }
 
 const options: ApexOptions = {
@@ -49,18 +68,20 @@ const options: ApexOptions = {
   ],
 };
 
-const ChartThree: React.FC = ({info}) => {
-  const [state, setState] = useState<ChartThreeState>({
-    series: [info.female, info.male],
+const ChartThree: React.FC<ChartThreeState> = ({info_ICS}) => {
+
+  const [state, setState] = useState<{ series: number[] }>({
+    series: [info_ICS.female, info_ICS.male],
   });
 
+  // Función para resetear el estado
   const handleReset = () => {
-    setState((prevState) => ({
-      ...prevState,
-      series: [info.female, info.male],
-    }));
+    setState({ series: [info_ICS.female, info_ICS.male] });
   };
-  handleReset;
+
+  useEffect(() => {
+    handleReset();
+  }, [info_ICS.female, info_ICS.male]);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">

@@ -1,4 +1,5 @@
-const HomePage = () => {
+
+const HomePage = async () => {
     return (
       <div>
       <h1>Malalties estàtiques</h1>
