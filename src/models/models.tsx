@@ -4,26 +4,26 @@ mongoose.connect(process.env.DB_CONN_STRING!).catch((error) => {
   console.log("Failed to connect to MongoDB:", error);
 });
 
-const timeout = 400;
+const timeout = 1000;
 
-const ratingsSchema = new Schema({
-  imdb: Number,
-  metacritic: Number,
-});
-
-const movieSchema = new Schema(
+const masterSchema = new Schema(
   {
-    title: String,
-    director: String,
-    year: Number,
-    genre: [String],
-    ratings: ratingsSchema,
+    DATA: Date,
+    "CODI MUNICIPAL": String,
+    NO: Number,
+    NO2: Number,
+    SO2: Number,
+    INGRESSOS: Number,
+    POBLACIO: Number,
+    S_INGRESSOS: Number,
+    N_INGRESSOS: Number,
   },
   {
     bufferTimeoutMS: timeout,
     maxTimeMS: timeout,
   }
 );
+
 const visitSchema = new Schema(
   {
     date: String,
@@ -36,6 +36,7 @@ const visitSchema = new Schema(
 );
 
 export const Visit =
-  mongoose.models.Visit || mongoose.model("Visit", visitSchema);
-export const Movie =
-  mongoose.models.Movie || mongoose.model("Movie", movieSchema);
+  mongoose.models.Visit || mongoose.model("Visit", visitSchema, "visits");
+
+export const Master =
+  mongoose.models.Master || mongoose.model("Master", masterSchema, "master");

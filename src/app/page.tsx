@@ -10,7 +10,7 @@ export default function Home() {
       <Image src="/examba.png" width={300} height={300} alt="examba" />
       <div className="pt-4" />
       <Link
-        href="/analytics"
+        href="/table"
         className={buttonVariants({
           className: "w-full max-w-xs",
         })}

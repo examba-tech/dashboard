@@ -10,8 +10,8 @@ export async function GET(
   const collection_name = params.slug;
   let model: mongoose.Model<any> | null = null;
 
-  if (collection_name === "movies") {
-    model = Models.Movie;
+  if (collection_name === "master") {
+    model = Models.Master;
   } else if (collection_name === "visits") {
     model = Models.Visit;
   } else {

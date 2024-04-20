@@ -3,10 +3,16 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Date from "@/src/components/table/filters/date";
-import MultipleSelectChip from "@/src/components/table/filters/select";
+import Date from "@/src/components/ui/filters/date";
+import MultipleSelectChip from "@/src/components/ui/filters/select";
 
-export default function Filters({ selectedValues, onSelectedValuesChange }) {
+export default function Filters({
+  selectedValues,
+  onSelectedValuesChange,
+}: {
+  selectedValues: { [key: string]: string[] };
+  onSelectedValuesChange: (attribute: string, values: string[]) => void;
+}) {
   return (
     <div>
       <Accordion>
@@ -20,17 +26,20 @@ export default function Filters({ selectedValues, onSelectedValuesChange }) {
         </AccordionSummary>
         <AccordionDetails>
           <div className="flex flex-row">
-            <Date />
+            {/* <Date /> */}
             <MultipleSelectChip
               selectedValues={selectedValues}
               onSelectedValuesChange={onSelectedValuesChange}
               names={[
-                "The Dark Knight",
-                "Gladiator",
-                "Inglourious Basterds",
-                "The Lord of the Rings: The Two Towers",
+                "080898",
+                "081141",
+                "081574",
+                "081960",
+                "082634",
+                "083015",
+                "083073",
               ]}
-              which_column="movie_names"
+              which_column="cps"
             />
           </div>
         </AccordionDetails>
