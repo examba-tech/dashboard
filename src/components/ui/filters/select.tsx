@@ -35,6 +35,11 @@ export default function MultipleSelectChip({
   onSelectedValuesChange,
   names,
   which_column,
+}: {
+  selectedValues: { [key: string]: string[] };
+  onSelectedValuesChange: (attribute: string, values: string[]) => void;
+  names: string[];
+  which_column: string;
 }) {
   const theme = useTheme();
 
@@ -53,7 +58,7 @@ export default function MultipleSelectChip({
     <>
       <div>
         <FormControl sx={{ m: 1, width: 300 }}>
-          <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
+          <InputLabel id="demo-multiple-chip-label">Filtra per codi municipal</InputLabel>
           <Select
             labelId="demo-multiple-chip-label"
             id="demo-multiple-chip"

@@ -1,17 +1,12 @@
 import React from "react";
 import MyLineChart from "@/src/components/charts/line_chart";
 import MyBarChart from "@/src/components/charts/bar_chart";
-import ReactVirtualizedTable from "@/src/components/table/tables/virtualTable";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 
 const Page = async () => {
   const data = await getMongoCollection("visits");
 
   const visits = data && data.collection ? data.collection : [];
-
-  const dataa = await getMongoCollection("movies");
-
-  const movies = dataa && dataa.collection ? dataa.collection : [];
 
   return (
     <>
@@ -30,9 +25,6 @@ const Page = async () => {
         </div>
         <div style={{ gridColumn: "1 / 2", gridRow: "2 / 3" }}>
           <MyBarChart visits={visits} />
-        </div>
-        <div style={{ gridColumn: "1 / 2", gridRow: "3 / 4" }}>
-          <ReactVirtualizedTable movies={movies} />
         </div>
       </div>
 

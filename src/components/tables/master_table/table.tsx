@@ -8,11 +8,16 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableVirtuoso, TableComponents } from "react-virtuoso";
+import { MasterInterface } from "@/src/utils/interfaces";
 
 interface Data {
-  movie: string;
-  director: string;
-  year: number;
+  date: string;
+  cp: string;
+  no: number;
+  no2: number;
+  so2: number;
+  ingressos: number;
+  poblacio: number;
 }
 
 interface ColumnData {
@@ -22,34 +27,67 @@ interface ColumnData {
   width: number;
 }
 
-function createData(object: any): Data {
-  return { movie: object.title, director: object.director, year: object.year };
+function createData(object: MasterInterface): Data {
+  return {
+    date: object.DATA,
+    cp: object["CODI MUNICIPAL"],
+    no: object.NO,
+    no2: object.NO2,
+    so2: object.SO2,
+    ingressos: object.INGRESSOS,
+    poblacio: object.POBLACIO,
+  };
 }
 
 const columns: ColumnData[] = [
   {
-    width: 200,
-    label: "Movie",
-    dataKey: "movie",
+    width: 50,
+    label: "Data",
+    dataKey: "date",
   },
   {
-    width: 120,
-    label: "Director",
-    dataKey: "director",
+    width: 25,
+    label: "Codi Municipal",
+    dataKey: "cp",
+    numeric: true,
   },
   {
-    width: 120,
-    label: "Year",
-    dataKey: "year",
+    width: 25,
+    label: "NO",
+    dataKey: "no",
+    numeric: true,
+  },
+  {
+    width: 25,
+    label: "NO2",
+    dataKey: "no2",
+    numeric: true,
+  },
+  {
+    width: 25,
+    label: "SO2",
+    dataKey: "so2",
+    numeric: true,
+  },
+  {
+    width: 25,
+    label: "Ingressos",
+    dataKey: "ingressos",
+    numeric: true,
+  },
+  {
+    width: 25,
+    label: "Poblacio",
+    dataKey: "poblacio",
     numeric: true,
   },
 ];
 
-const rows = (movies: any) =>
-  Array.from({ length: movies.length > 0 ? 100000 : 0 }, (_) => {
-    const randomSelection = movies[Math.floor(Math.random() * movies.length)];
-    return createData(randomSelection);
+const rows = (data: MasterInterface[]) => {
+  return data.map((document) => {
+    return createData(document);
   });
+};
 
 const VirtuosoTableComponents: TableComponents<Data> = {
   Scroller: React.forwardRef<HTMLDivElement>(function SCRLLR(props, ref) {
@@ -107,11 +145,17 @@ function rowContent(_index: number, row: Data) {
   );
 }
 
-export default function ReactVirtualizedTable({ movies, selectedValues }) {
-  const filteredDataset = movies.filter(
+export default function VirtualTable({
+  data,
+  selectedValues,
+}: {
+  data: MasterInterface[];
+  selectedValues: any;
+}) {
+  const filteredDataset = data.filter(
     (item) =>
-      selectedValues.movie_names.length == 0 ||
-      selectedValues.movie_names.includes(item.title)
+      selectedValues.cps.length == 0 ||
+      selectedValues.cps.includes(item["CODI MUNICIPAL"])
   );
 
   return (
