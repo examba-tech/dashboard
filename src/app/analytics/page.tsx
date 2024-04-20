@@ -1,5 +1,4 @@
-import ReactVirtualizedTable from "@/src/components/table/VirtualTable";
-import Filters from "@/src/components/filters/Main";
+import Main from "@/src/components/table/main";
 
 const getMovies = async () => {
   try {
@@ -24,14 +23,7 @@ const Page = async () => {
 
   return (
     <>
-      {/* <div>
-        <DenseTable movies={movies} />
-      </div>
-      <div className="py-8"></div> */}
-      <Filters />
-      <div className="py-8" />
-      <ReactVirtualizedTable movies={movies} />
-      <div className="py-8"></div>
+      <Main movies={movies} />
     </>
   );
 };
