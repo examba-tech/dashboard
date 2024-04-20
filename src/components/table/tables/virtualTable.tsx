@@ -111,8 +111,9 @@ export default function ReactVirtualizedTable({ movies, selectedValues }) {
   const filteredDataset = movies.filter(
     (item) =>
       selectedValues.movie_names.length == 0 ||
-      selectedValues.movie_names.includes(item.Movie)
+      selectedValues.movie_names.includes(item.title)
   );
+
   return (
     <Paper style={{ height: 400, width: "100%" }}>
       <TableVirtuoso

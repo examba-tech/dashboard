@@ -31,23 +31,22 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
 }
 
 export default function MultipleSelectChip({
+  selectedValues,
   onSelectedValuesChange,
   names,
   which_column,
 }) {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState<string[]>([]);
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+  const handleChange = (event: SelectChangeEvent<typeof selectedValues>) => {
+    console.log("handleChange called");
     const {
       target: { value },
     } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
 
-    onSelectedValuesChange(which_column, personName);
+    const tmpValue = typeof value === "string" ? value.split(",") : value;
+
+    onSelectedValuesChange(which_column, tmpValue);
   };
 
   return (
@@ -59,7 +58,7 @@ export default function MultipleSelectChip({
             labelId="demo-multiple-chip-label"
             id="demo-multiple-chip"
             multiple
-            value={personName}
+            value={selectedValues[which_column]}
             onChange={handleChange}
             input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
             renderValue={(selected) => (
@@ -75,7 +74,7 @@ export default function MultipleSelectChip({
               <MenuItem
                 key={name}
                 value={name}
-                style={getStyles(name, personName, theme)}
+                style={getStyles(name, selectedValues[which_column], theme)}
               >
                 {name}
               </MenuItem>
