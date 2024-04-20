@@ -5,7 +5,7 @@ import ReactVirtualizedTable from "@/src/components/table/tables/virtualTable";
 
 const getVisits = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/Visits", {
+    const res = await fetch("http://localhost:3000/api/mongo/visits", {
       cache: "no-store",
     });
 
@@ -21,7 +21,7 @@ const getVisits = async () => {
 
 const getMovies = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/Movies", {
+    const res = await fetch("http://localhost:3000/api/mongo/movies", {
       cache: "no-store",
     });
 
@@ -38,11 +38,11 @@ const getMovies = async () => {
 const Page = async () => {
   const data = await getVisits();
 
-  const visits = data && data.visits ? data.visits : [];
+  const visits = data && data.collection ? data.collection : [];
 
   const dataa = await getMovies();
 
-  const movies = dataa && dataa.movies ? dataa.movies : [];
+  const movies = dataa && dataa.collection ? dataa.collection : [];
 
   return (
     <>

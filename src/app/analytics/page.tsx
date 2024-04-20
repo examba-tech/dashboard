@@ -2,7 +2,7 @@ import Main from "@/src/components/table/main";
 
 const getMovies = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/Movies", {
+    const res = await fetch("http://localhost:3000/api/mongo/movies", {
       cache: "no-store",
     });
 
@@ -19,7 +19,7 @@ const getMovies = async () => {
 const Page = async () => {
   const data = await getMovies();
 
-  const movies = data && data.movies ? data.movies : [];
+  const movies = data && data.collection ? data.collection : [];
 
   return (
     <>
