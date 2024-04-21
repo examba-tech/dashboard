@@ -1,14 +1,22 @@
 "use client";
-import React, { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React, { useState } from "react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
-const MyBarChart = ({ visits }) => {
+const MyBarChart = ({ visits }: { visits: any }) => {
   const [selectedValue, setSelectedValue] = useState(null);
 
-  const handleBarClick = (entry) => {
+  const handleBarClick = ({ entry }: { entry: any }) => {
     setSelectedValue(entry.value);
   };
-  
 
   return (
     <div>
@@ -32,15 +40,9 @@ const MyBarChart = ({ visits }) => {
           <Bar dataKey="visits" fill="#8884d8" onClick={handleBarClick} />
         </BarChart>
       </ResponsiveContainer>
-      {selectedValue && (
-        <div>
-          Valor seleccionado: {selectedValue}
-        </div>
-      )}
+      {selectedValue && <div>Valor seleccionado: {selectedValue}</div>}
     </div>
   );
 };
 
 export default MyBarChart;
-
-

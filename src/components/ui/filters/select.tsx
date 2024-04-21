@@ -43,7 +43,7 @@ export default function MultipleSelectChip({
 }) {
   const theme = useTheme();
 
-  const handleChange = (event: SelectChangeEvent<typeof selectedValues>) => {
+  const handleChange = (event: SelectChangeEvent<string[]>) => {
     console.log("handleChange called");
     const {
       target: { value },
@@ -58,7 +58,9 @@ export default function MultipleSelectChip({
     <>
       <div>
         <FormControl sx={{ m: 1, width: 300 }}>
-          <InputLabel id="demo-multiple-chip-label">Filtra per codi municipal</InputLabel>
+          <InputLabel id="demo-multiple-chip-label">
+            Filtra per codi municipal
+          </InputLabel>
           <Select
             labelId="demo-multiple-chip-label"
             id="demo-multiple-chip"
