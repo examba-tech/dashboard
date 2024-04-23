@@ -32,7 +32,12 @@ const Page = () => {
           <CircularProgress />
         </Box>
       )}
-      {!loading && <MasterTable data={master} />}
+      {!loading && (
+        <>
+          <MasterTable data={master} />
+          {/* {JSON.stringify(master)} */}
+        </>
+      )}
     </>
   );
 };

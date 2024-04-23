@@ -1,4 +1,4 @@
-export interface MasterInterface {
+export interface Master {
   DATA: string;
   "CODI MUNICIPAL": string;
   NO: number;

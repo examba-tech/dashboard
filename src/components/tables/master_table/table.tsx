@@ -146,18 +146,10 @@ function rowContent(_index: number, row: Data) {
 }
 
 export default function VirtualTable({
-  data,
-  selectedValues,
+  filteredDataset,
 }: {
-  data: MasterInterface[];
-  selectedValues: any;
+  filteredDataset: MasterInterface[];
 }) {
-  const filteredDataset = data.filter(
-    (item) =>
-      selectedValues.cps.length == 0 ||
-      selectedValues.cps.includes(item["CODI MUNICIPAL"])
-  );
-
   return (
     <Paper style={{ height: 400, width: "100%" }}>
       <TableVirtuoso
