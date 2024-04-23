@@ -40,7 +40,3 @@ const MyLineChart = ({ visits }: { visits: any }) => {
 };
 
 export default MyLineChart;
-
-
-
-
