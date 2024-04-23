@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/src/components/ui/Navbar";
 import Sidebar from "@/src/components/ui/Sidebar";
 import { cn } from "@/src/utils/utils";
 import "@/src/styles/globals.css";
