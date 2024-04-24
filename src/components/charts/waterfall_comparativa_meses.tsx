@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -12,11 +12,10 @@ import {
   Legend,
   ReferenceLine,
   ResponsiveContainer,
-} from 'recharts';
+} from "recharts";
 
-
-const Waterfall = ({ data }) => {
-    return (
+const Waterfall = ({ data }: { data: any }) => {
+  return (
     <div>
       <ResponsiveContainer width="100%" height={400}>
         <BarChart
@@ -40,8 +39,8 @@ const Waterfall = ({ data }) => {
           <Bar dataKey="lastYear" fill="#82ca9d" />
         </BarChart>
       </ResponsiveContainer>
-      </div>
-    );
+    </div>
+  );
 };
 
 export default Waterfall;
