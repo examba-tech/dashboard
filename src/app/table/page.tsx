@@ -35,7 +35,6 @@ const Page = () => {
       {!loading && (
         <>
           <MasterTable data={master} />
-          {/* {JSON.stringify(master)} */}
         </>
       )}
     </>

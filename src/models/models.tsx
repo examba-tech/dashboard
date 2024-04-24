@@ -19,7 +19,6 @@ const masterSchema = new Schema(
     N_INGRESSOS: Number,
   },
   {
-    _id: false,
     bufferTimeoutMS: timeout,
     maxTimeMS: timeout,
   }
@@ -31,7 +30,6 @@ const visitSchema = new Schema(
     visits: Number,
   },
   {
-    _id: false,
     bufferTimeoutMS: timeout,
     maxTimeMS: timeout,
   }
