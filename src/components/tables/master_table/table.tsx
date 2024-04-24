@@ -8,7 +8,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableVirtuoso, TableComponents } from "react-virtuoso";
-import { MasterInterface } from "@/src/utils/interfaces";
+import * as Interfaces from "@/src/utils/interfaces";
 
 interface Data {
   date: string;
@@ -27,7 +27,7 @@ interface ColumnData {
   width: number;
 }
 
-function createData(object: MasterInterface): Data {
+function createData(object: Interfaces.Master): Data {
   return {
     date: object.DATA,
     cp: object["CODI MUNICIPAL"],
@@ -83,7 +83,7 @@ const columns: ColumnData[] = [
   },
 ];
 
-const rows = (data: MasterInterface[]) => {
+const rows = (data: Interfaces.Master[]) => {
   return data.map((document) => {
     return createData(document);
   });
@@ -148,7 +148,7 @@ function rowContent(_index: number, row: Data) {
 export default function VirtualTable({
   filteredDataset,
 }: {
-  filteredDataset: MasterInterface[];
+  filteredDataset: Interfaces.Master[];
 }) {
   return (
     <Paper style={{ height: 400, width: "100%" }}>
