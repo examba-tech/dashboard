@@ -1,7 +1,8 @@
 
 "use client"
-import ChartOne from "./ChartOne";
+/*import ChartOne from "./ChartOne";
 import ChartTwo from "./ChartTwo";
+*/
 import ChartThree from "./ChartThree";
 import React from "react";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
