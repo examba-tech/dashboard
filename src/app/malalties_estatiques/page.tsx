@@ -1,4 +1,3 @@
-
 const HomePage = async () => {
     return (
       <div>

@@ -1,17 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 "use client"
 import { ApexOptions } from "apexcharts";
 import React, { useState, useEffect} from "react";
@@ -164,4 +150,3 @@ const ChartThree: React.FC<ChartThreeState> = ({info_ICS}) => {
 };
 
 export default ChartThree;
-
