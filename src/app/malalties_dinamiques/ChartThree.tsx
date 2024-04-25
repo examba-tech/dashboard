@@ -1,14 +1,15 @@
-"use client"
 import { ApexOptions } from "apexcharts";
-import React, { useState, useEffect} from "react";
-import ReactApexChart from "react-apexcharts";
+import React from "react";
+import dynamic from "next/dynamic";
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 interface ChartThreeState {
   info_ICS: {
     male: number;
     female: number;
   };
-  
 }
 
 const options: ApexOptions = {
@@ -54,20 +55,12 @@ const options: ApexOptions = {
   ],
 };
 
-const ChartThree: React.FC<ChartThreeState> = ({info_ICS}) => {
-
-  const [state, setState] = useState<{ series: number[] }>({
-    series: [info_ICS.female, info_ICS.male],
-  });
-
-  // Función para resetear el estado
-  const handleReset = () => {
-    setState({ series: [info_ICS.female, info_ICS.male] });
-  };
-
-  useEffect(() => {
-    handleReset();
-  }, [info_ICS.female, info_ICS.male]);
+const ChartThree: React.FC<ChartThreeState> = ({
+  info_ICS,
+}: {
+  info_ICS: { female: number; male: number };
+}) => {
+  const series = [info_ICS.female, info_ICS.male];
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">
@@ -117,11 +110,7 @@ const ChartThree: React.FC<ChartThreeState> = ({info_ICS}) => {
 
       <div className="mb-2">
         <div id="chartThree" className="mx-auto flex justify-center">
-          <ReactApexChart
-            options={options}
-            series={state.series}
-            type="donut"
-          />
+          <ReactApexChart options={options} series={series} type="donut" />
         </div>
       </div>
 
