@@ -1,24 +1,10 @@
 
+"use client"
 import ChartOne from "./ChartOne";
 import ChartTwo from "./ChartTwo";
 import ChartThree from "./ChartThree";
 import React from "react";
-
-const getInfo = async () => {
-  try {
-    const res = await fetch("http://localhost:3000/api/Infos", {
-      cache: "no-store",
-    });
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch topics");
-    }
-
-    return res.json();
-  } catch (error) {
-    console.log("Error loading topics: ", error);
-  }
-};
+import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 
 interface CaseEntry {
   index: number,
@@ -48,10 +34,27 @@ const calculateTotalCasesBySex = (info:CaseEntry[]) => {
   return totalCasesBySex;
 };
 
-const HomePage = async() => {
-  const data = await getInfo();
-  const infos = data && data.info_ICS ? data.info_ICS : []
-  const info_ICS = calculateTotalCasesBySex(infos);
+const HomePage = () => {
+  const [master, setMaster] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getMongoCollection("master");
+        setMaster(data && data.collection ? data.collection : []);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+  
+  const info_ICS = calculateTotalCasesBySex(master);
+
   return (
     <div>
     <h1>Malalties dinàmiques</h1>
