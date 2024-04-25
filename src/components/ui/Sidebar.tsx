@@ -54,55 +54,24 @@ const Sidebar = () => {
           </Link>
           <ul className="flex flex-col mt-6 flex-grow">
             <li className="flex items-center">
-              <Image
-                src="/group-solid-24-2.png"
-                alt="Icon1"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              <Link
-                href="/about"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
-              >
-                Sobre Nosaltres
-              </Link>
+              <Image src="/bar-chart-regular-24.png" alt="Icon3" width={24} height={24} className="w-6 h-6 ml-5 mr-2 opacity-1" />
+              <Link href="/malalties_dinamiques" className={`block py-2 px-4 hover:bg-gray-700 w-full ${isVisible ? '' : 'opacity-0'}`}>Malalties Dinàmiques</Link>
             </li>
             <li className="flex items-center">
-              <Image
-                src="/table-regular-24.png"
-                alt="Icon2"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              <Link
-                href="/table"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
-              >
-                Taula
-              </Link>
+              <Image src="/bar-chart-regular-24.png" alt="Icon3" width={24} height={24} className="w-6 h-6 ml-5 mr-2 opacity-1" />
+              <Link href="/malalties_estatiques" className={`block py-2 px-4 hover:bg-gray-700 w-full ${isVisible ? '' : 'opacity-0'}`}>Malalties Estàtiques</Link>
             </li>
             <li className="flex items-center">
-              <Image
-                src="/bar-chart-regular-24.png"
-                alt="Icon3"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              <Link
-                href="/dashboard"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
-              >
-                Gràfic
-              </Link>
+              <Image src="/bar-chart-regular-24.png" alt="Icon3" width={24} height={24} className="w-6 h-6 ml-5 mr-2 opacity-1" />
+              <Link href="/estacions_meteo" className={`block py-2 px-4 hover:bg-gray-700 w-full ${isVisible ? '' : 'opacity-0'}`}>Estacions Meteorològiques</Link>
+            </li>
+            <li className="flex items-center">
+              <Image src="/bar-chart-regular-24.png" alt="Icon3" width={24} height={24} className="w-6 h-6 ml-5 mr-2 opacity-1" />
+              <Link href="/estacions_contaminacio" className={`block py-2 px-4 hover:bg-gray-700 w-full ${isVisible ? '' : 'opacity-0'}`}>Estacions Contaminació</Link>
+            </li>
+            <li className="flex items-center">
+              <Image src="/group-solid-24-2.png" alt="Icon1" width={24} height={24} className="w-6 h-6 ml-5 mr-2 opacity-1" />
+              <Link href="/about" className={`block py-2 px-4 hover:bg-gray-700 w-full ${isVisible ? '' : 'opacity-0'}`}>Sobre Nosaltres</Link>
             </li>
             <li className="flex items-center">
               <Image
