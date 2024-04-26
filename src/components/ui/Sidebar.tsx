@@ -31,22 +31,22 @@ const Sidebar = () => {
                 <Image
                   src="/logo.png"
                   alt="Logo"
-                  width={24}
-                  height={24}
+                  width={500}
+                  height={500}
                   className="w-6 h-6 mr-2 opacity-1"
                 />
               )}
-              <h1
+              <h2
                 className={`text-lg font-bold ${isVisible ? "" : "opacity-0"}`}
               >
                 EXAMBA
-              </h1>
+              </h2>
               {isVisible && (
                 <Image
                   src="/logo.png"
                   alt="Logo"
-                  width={24}
-                  height={24}
+                  width={500}
+                  height={500}
                   className="w-6 h-6 ml-2 opacity-1"
                 />
               )}

@@ -7,45 +7,8 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center pt-20">
-      <Image src="/examba.png" width={300} height={300} alt="examba" />
+      <Image src="/examba.png" width={600} height={600} alt="examba" />
       <div className="pt-4" />
-      <Link
-        href="/table"
-        className={buttonVariants({
-          className: "w-full max-w-xs",
-        })}
-      >
-        Taula
-      </Link>
-      <div className="pt-4" />
-      <Link
-        href="/dashboard"
-        className={buttonVariants({
-          className: "w-full max-w-80 ",
-        })}
-      >
-        Gràfic línies
-      </Link>
-
-      <div className="pt-4" />
-      <Link
-        href="/barchart"
-        className={buttonVariants({
-          className: "w-full max-w-80 ",
-        })}
-      >
-        Bar chart
-      </Link>
-
-      <div className="pt-4" />
-      <Link
-        href="/prueba_union_graficos"
-        className={buttonVariants({
-          className: "w-full max-w-80 ",
-        })}
-      >
-        Prueba uniones
-      </Link>
 
       <h2 className="text-xl font-semibold pt-20">Nosaltres</h2>
       <p className="mt-4 text-base max-w-xl text-justify">
