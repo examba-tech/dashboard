@@ -4,13 +4,11 @@ import * as React from "react";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 
 interface CaseEntry {
-  index: number;
-  "Codi Postal": String;
-  Sexe: String;
-  FranjaEdat: String;
-  "Data Alta Problema": Date;
-  DIAGNOSTIC: String;
-  NUMERO_CASOS: number;
+  CODI_MUNICIPAL: String,
+  Sexe: String,
+  FranjaEdat: String,
+  'Data Alta Problema': Date,
+  NUMERO_CASOS: number
 }
 
 // Función para calcular el recuento total de casos por sexo
@@ -21,9 +19,9 @@ const calculateTotalCasesBySex = (info: CaseEntry[]) => {
   };
 
   info.forEach((entry: CaseEntry) => {
-    if (entry.Sexe === "H") {
+    if (entry.Sexe === 'H') {
       totalCasesBySex.male += entry.NUMERO_CASOS;
-    } else if (entry.Sexe === "D") {
+    } else if (entry.Sexe === 'D') {
       totalCasesBySex.female += entry.NUMERO_CASOS;
     }
   });
@@ -36,7 +34,7 @@ const HomePage = () => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const data = await getMongoCollection("AAAAAAA");
+      const data = await getMongoCollection("Genere");
       setInfo(data && data.collection ? data.collection : []);
     };
     fetchData();

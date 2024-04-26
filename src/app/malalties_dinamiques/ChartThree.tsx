@@ -7,8 +7,8 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 
 interface ChartThreeState {
   info_ICS: {
-    male: number;
-    female: number;
+    male: Number;
+    female: Number;
   };
 }
 
@@ -55,12 +55,26 @@ const options: ApexOptions = {
   ],
 };
 
-const ChartThree: React.FC<ChartThreeState> = ({
-  info_ICS,
-}: {
-  info_ICS: { female: number; male: number };
-}) => {
-  const series = [info_ICS.female, info_ICS.male];
+interface ChartThreeProps {
+  info_ICS: {
+    female: Number;
+    male: Number;}
+  
+}
+
+const ChartThree: React.FC<ChartThreeState> = (
+  info_ICS: ChartThreeProps
+) => {
+  const series = [
+    {
+      name: 'Female',
+      data: [info_ICS.info_ICS.female.valueOf()] 
+    },
+    {
+      name: 'Male',
+      data: [info_ICS.info_ICS.male.valueOf()]
+    }
+  ];
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">

@@ -35,6 +35,23 @@ const visitSchema = new Schema(
   }
 );
 
+const genereSchema = new Schema(
+  {
+    CODI_MUNICIPAL: String,
+    Sexe: String,
+    FranjaEdat: String,
+    'Data Alta Problema': Date,
+    NUMERO_CASOS: Number
+  },
+  {
+    bufferTimeoutMS: timeout,
+    maxTimeMS: timeout,
+  }
+);
+
+export const Genere =
+  mongoose.models.Genere || mongoose.model("Genere", genereSchema, "proba_dades_ICS");
+
 export const Visit =
   mongoose.models.Visit || mongoose.model("Visit", visitSchema, "visits");
 
