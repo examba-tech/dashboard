@@ -59,7 +59,6 @@ interface ChartThreeProps {
 }
 
 const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
-  console.log(series)
   const seriesArray = [series.female, series.male];
   
   return (

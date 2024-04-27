@@ -49,7 +49,7 @@ const options: ApexOptions = {
   },
 
   xaxis: {
-    categories: ["M", "T", "W", "T", "F", "S", "S"],
+    categories: ["INFECCIONS_AGUDES_TRS", "BRONQUITIS_AGUDA", "GRIP", "BRONQUIOLITIS_AGUDA", "PNEUMONIA_BACTERIANA", "PNEUMONIA_VIRICA"],
   },
   legend: {
     position: "top",
@@ -78,12 +78,12 @@ const ChartTwo: React.FC = () => {
   const [state, setState] = useState<ChartTwoState>({
     series: [
       {
-        name: "Sales",
-        data: [44, 55, 41, 67, 22, 43, 65],
+        name: "Home",
+        data: [44, 55, 41, 67, 22, 43],
       },
       {
-        name: "Revenue",
-        data: [13, 23, 20, 8, 13, 27, 15],
+        name: "Dona",
+        data: [13, 23, 20, 8, 13, 27],
       },
     ],
   });
@@ -100,7 +100,7 @@ const ChartTwo: React.FC = () => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white">
-            Profit this week
+            Diagnòstic
           </h4>
         </div>
         <div>

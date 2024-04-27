@@ -70,7 +70,7 @@ const HomePage = () => {
           <div className="flex space-between justify-content center h-96 py8">
           <ChartThree series={info_ICS} />
           <ChartTwo />
-          <ChartOne />
+          <ChartOne/>
           </div>
           <div>
           <MasterTable data={master} />
