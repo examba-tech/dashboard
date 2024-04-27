@@ -35,34 +35,16 @@ var calculateTotalCasesBySex = (info: CaseEntry[]) => {
 const HomePage = () => {
   const [visits, setVisit] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const [master, setMaster] = React.useState([]);
 
   React.useEffect(() => {
     const fetchData = async () => {
       console.log("Iniciando la obtención de datos...");
       try {
         const data = await getMongoCollection("visits");
-        console.log("Datos recibidos:", data);
+        const datam = await getMongoCollection("master");
         setVisit(data && data.collection ? data.collection : []);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  console.log(visits)
-
-  const [master, setMaster] = React.useState([]);
-
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getMongoCollection("master");
-        console.log(data)
-        setMaster(data && data.collection ? data.collection : []);
+        setMaster(datam && datam.collection ? datam.collection : []);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -86,7 +68,7 @@ const HomePage = () => {
       {!loading && (
         <>
           <div className="flex space-between justify-content center h-96 py8">
-          <ChartThree info_ICS={info_ICS} />
+          <ChartThree series={info_ICS} />
           <ChartTwo />
           <ChartOne />
           </div>

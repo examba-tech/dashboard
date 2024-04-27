@@ -13,13 +13,12 @@ export async function getMongoCollection(collection_name: string) {
         cache: "force-cache",
       }
     );
-
+    
     if (!res.ok) {
       throw new Error("Failed to fetch topics");
     }
 
     const jsonData = await res.json();
-
     if (typeof window !== "undefined") {
       localStorage.setItem(collection_name, JSON.stringify(jsonData));
     }

@@ -27,7 +27,7 @@ const masterSchema = new Schema(
 const visitSchema = new Schema(
   {
     Sexe: String,
-    'Data Alta Problema': Date,
+    "Data Alta Problema": Date,
     DIAGNOSTIC: String,
     NUMERO_CASOS: Number
   },

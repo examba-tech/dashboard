@@ -1,21 +1,15 @@
 import { ApexOptions } from "apexcharts";
-import React from "react";
 import dynamic from "next/dynamic";
+import React, { useState } from "react";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-interface ChartThreeState {
-  info_ICS: {
-    male: number;
-    female: number;
-  };
-}
 
 const options: ApexOptions = {
   chart: {
     height: 400,
-    width: 400,
+    width: 200,
     fontFamily: "Satoshi, sans-serif",
     type: "donut",
   },
@@ -58,26 +52,16 @@ const options: ApexOptions = {
 };
 
 interface ChartThreeProps {
-  info_ICS: {
+  series: {
     female: number;
-    male: number;}
-  
+    male: number;
+  };
 }
 
-const ChartThree: React.FC<ChartThreeState> = (
-  info_ICS: ChartThreeProps
-) => {
-  const series = [
-    {
-      name: 'Female',
-      data: [info_ICS.info_ICS.female.valueOf()] 
-    },
-    {
-      name: 'Male',
-      data: [info_ICS.info_ICS.male.valueOf()]
-    }
-  ];
-
+const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
+  console.log(series)
+  const seriesArray = [series.female, series.male];
+  
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">
       <div className="mb-3 justify-between gap-4 sm:flex">
@@ -126,7 +110,8 @@ const ChartThree: React.FC<ChartThreeState> = (
 
       <div className="mb-2">
         <div id="chartThree" className="mx-auto flex justify-center">
-          <ReactApexChart options={options} series={series} type="donut" />
+          
+          <ReactApexChart options={options} series={seriesArray} type="donut" height={300} width={200}/>
         </div>
       </div>
       <div className="-mx-8 flex flex-wrap items-center justify-center gap-y-3">
@@ -135,7 +120,7 @@ const ChartThree: React.FC<ChartThreeState> = (
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary bg-[#0FADCF]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> Dona </span>
-              <span> 65% </span>
+              <span> {seriesArray[0]} </span>
             </p>
           </div>
         </div>
@@ -144,7 +129,7 @@ const ChartThree: React.FC<ChartThreeState> = (
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#3C50E0]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> Home </span>
-              <span> 35% </span>
+              <span> {seriesArray[1]} </span>
             </p>
           </div>
         </div>
