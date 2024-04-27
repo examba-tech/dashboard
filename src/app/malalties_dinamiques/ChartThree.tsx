@@ -7,13 +7,15 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 
 interface ChartThreeState {
   info_ICS: {
-    male: Number;
-    female: Number;
+    male: number;
+    female: number;
   };
 }
 
 const options: ApexOptions = {
   chart: {
+    height: 400,
+    width: 400,
     fontFamily: "Satoshi, sans-serif",
     type: "donut",
   },
@@ -57,8 +59,8 @@ const options: ApexOptions = {
 
 interface ChartThreeProps {
   info_ICS: {
-    female: Number;
-    male: Number;}
+    female: number;
+    male: number;}
   
 }
 
@@ -127,7 +129,6 @@ const ChartThree: React.FC<ChartThreeState> = (
           <ReactApexChart options={options} series={series} type="donut" />
         </div>
       </div>
-
       <div className="-mx-8 flex flex-wrap items-center justify-center gap-y-3">
         <div className="w-full px-8 sm:w-1/2">
           <div className="flex w-full items-center">

@@ -1,7 +1,10 @@
 "use client"
 import { ApexOptions } from "apexcharts";
 import React, { useState } from "react";
-import ReactApexChart from "react-apexcharts";
+import dynamic from "next/dynamic";
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 const options: ApexOptions = {
   legend: {
@@ -13,6 +16,7 @@ const options: ApexOptions = {
   chart: {
     fontFamily: "Satoshi, sans-serif",
     height: 335,
+    width: 600,
     type: "area",
     dropShadow: {
       enabled: true,
@@ -33,6 +37,8 @@ const options: ApexOptions = {
       options: {
         chart: {
           height: 300,
+          width: 550,
+          
         },
       },
     },
@@ -41,6 +47,7 @@ const options: ApexOptions = {
       options: {
         chart: {
           height: 350,
+          width: 610,
         },
       },
     },
@@ -170,7 +177,7 @@ const ChartOne: React.FC = () => {
             series={state.series}
             type="area"
             height={350}
-            width={"100%"}
+            width={600}
           />
         </div>
       </div>

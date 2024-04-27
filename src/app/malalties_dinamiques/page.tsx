@@ -1,54 +1,101 @@
 "use client";
 import ChartThree from "./ChartThree";
+import ChartTwo from "./ChartTwo";
+import ChartOne from "./ChartOne";
 import * as React from "react";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import MasterTable from "@/src/components/tables/master_table/main";
 
 interface CaseEntry {
-  CODI_MUNICIPAL: String,
   Sexe: String,
-  FranjaEdat: String,
   'Data Alta Problema': Date,
-  NUMERO_CASOS: number
+  DIAGNOSTIC: String,
+  NUMERO_CASOS: Number
 }
 
 // Función para calcular el recuento total de casos por sexo
-const calculateTotalCasesBySex = (info: CaseEntry[]) => {
-  const totalCasesBySex = {
+var calculateTotalCasesBySex = (info: CaseEntry[]) => {
+  var totalCasesBySex = {
     male: 0,
     female: 0,
   };
 
   info.forEach((entry: CaseEntry) => {
-    if (entry.Sexe === 'H') {
-      totalCasesBySex.male += entry.NUMERO_CASOS;
-    } else if (entry.Sexe === 'D') {
-      totalCasesBySex.female += entry.NUMERO_CASOS;
+    if (entry.Sexe == 'H') {
+      totalCasesBySex.male += entry.NUMERO_CASOS.valueOf();
+    } else if (entry.Sexe == 'D') {
+      totalCasesBySex.female += entry.NUMERO_CASOS.valueOf();
     }
   });
-
   return totalCasesBySex;
 };
 
 const HomePage = () => {
-  const [info_ics, setInfo] = React.useState([]);
+  const [visits, setVisit] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const data = await getMongoCollection("Genere");
-      setInfo(data && data.collection ? data.collection : []);
+      console.log("Iniciando la obtención de datos...");
+      try {
+        const data = await getMongoCollection("visits");
+        console.log("Datos recibidos:", data);
+        setVisit(data && data.collection ? data.collection : []);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
     };
+
     fetchData();
   }, []);
 
-  const info_ICS = calculateTotalCasesBySex(info_ics);
+  console.log(visits)
 
+  const [master, setMaster] = React.useState([]);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getMongoCollection("master");
+        console.log(data)
+        setMaster(data && data.collection ? data.collection : []);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const info_ICS = calculateTotalCasesBySex(visits);
+  
   return (
-    <div>
+    <>
       <h1>Malalties dinàmiques</h1>
-      <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
-        <ChartThree info_ICS={info_ICS} />
-      </div>
-    </div>
+      {loading && (
+        <Box className="flex justify-center items-center h-96">
+          <CircularProgress />
+        </Box>
+      )}
+      {!loading && (
+        <>
+          <div className="flex space-between justify-content center h-96 py8">
+          <ChartThree info_ICS={info_ICS} />
+          <ChartTwo />
+          <ChartOne />
+          </div>
+          <div>
+          <MasterTable data={master} />
+          </div>
+        </>
+      )}
+    </>
   );
 };
 
