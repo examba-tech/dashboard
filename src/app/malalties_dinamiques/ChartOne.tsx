@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { ApexOptions } from "apexcharts";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
@@ -38,7 +38,6 @@ const options: ApexOptions = {
         chart: {
           height: 300,
           width: 550,
-          
         },
       },
     },
@@ -153,10 +152,10 @@ const ChartOne: React.FC = () => {
   handleReset;
 
   return (
-    <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
+    <div className="rounded-sm border border-stroke bg-white pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
-      <div>
-          <h4 className="text-xl font-semibold text-black dark:text-white">
+        <div>
+          <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
             Predicció
           </h4>
         </div>
@@ -176,7 +175,7 @@ const ChartOne: React.FC = () => {
       </div>
 
       <div>
-        <div id="chartOne" className="-ml-5">
+        <div id="chartOne" className="pl-5 flex justify-center">
           <ReactApexChart
             options={options}
             series={state.series}

@@ -5,7 +5,6 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-
 const options: ApexOptions = {
   chart: {
     height: 400,
@@ -60,12 +59,12 @@ interface ChartThreeProps {
 
 const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
   const seriesArray = [series.female, series.male];
-  
+
   return (
-    <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">
+    <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h5 className="text-xl font-semibold text-black dark:text-white">
+          <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
             Gènere
           </h5>
         </div>
@@ -109,11 +108,16 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
 
       <div className="mb-2">
         <div id="chartThree" className="mx-auto flex justify-center">
-          
-          <ReactApexChart options={options} series={seriesArray} type="donut" height={300} width={200}/>
+          <ReactApexChart
+            options={options}
+            series={seriesArray}
+            type="donut"
+            height={300}
+            width={200}
+          />
         </div>
       </div>
-      <div className="-mx-8 flex flex-wrap items-center justify-center gap-y-3">
+      <div className="flex flex-wrap items-center justify-center gap-y-3">
         <div className="w-full px-8 sm:w-1/2">
           <div className="flex w-full items-center">
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary bg-[#0FADCF]"></span>
