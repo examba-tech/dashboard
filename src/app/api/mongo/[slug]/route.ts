@@ -14,8 +14,6 @@ export async function GET(
     model = Models.Master;
   } else if (collection_name === "visits") {
     model = Models.Visit;
-  }else if (collection_name === "generes") {
-    model = Models.Genere;
   } else {
     return NextResponse.json(
       { message: "Invalid collection name" },
