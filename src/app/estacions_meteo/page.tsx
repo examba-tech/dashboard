@@ -16,16 +16,16 @@ const HomePage = () => {
   };
 
   const estacionesMeteorologicas = [
-    { nombre: 'D3', info: <p></p>},
-    { nombre: 'UF', info: <p></p> },
-    { nombre: 'UG', info: <p></p>},
-    { nombre: 'UK', info: <p></p>},
-    { nombre: 'W4', info: <p></p>},
-    { nombre: 'XC', info: <p></p> },
-    { nombre: 'XL', info: <p></p>},
-    { nombre: 'X8', info: <p></p> },
-    { nombre: 'XU', info: <p> </p>},
-    { nombre: 'YR', info: <p></p>}
+    { nombre: 'D3, Vallirana', info: <p></p>},
+    { nombre: 'UF, Begues (PN del Garraf-El Rascler)', info: <p></p> },
+    { nombre: 'UG, Viladecans', info: <p></p>},
+    { nombre: 'UK, Sant Pere de Ribes - PN del Garraf ', info: <p></p>},
+    { nombre: 'W4, Vilafranca del Penedès - La Granada', info: <p></p>},
+    { nombre: 'XC, Castellbisbal', info: <p></p> },
+    { nombre: 'XL, El Prat de Llobregat', info: <p></p>},
+    { nombre: 'X8, Barcelona (Zona Universitaria)', info: <p></p> },
+    { nombre: 'XU, Canyelles', info: <p> </p>},
+    { nombre: 'YR, Vilanova i la Geltrú', info: <p></p>}
   ];
   return (
     <div>
