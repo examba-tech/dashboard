@@ -4,10 +4,11 @@ import MyMapa from '../../components/mapas/MyMapa_meteo';
 
 const HomePage = () => {
 
-  const [estacionesExpandidas, setEstacionesExpandidas] = useState([]);
+  //const [estacionesExpandidas, setEstacionesExpandidas] = useState([]);
+  const [estacionesExpandidas, setEstacionesExpandidas] = useState<number[]>([]);
 
   // Función para alternar la expansión de una estación
-  const toggleExpansion = (index) => {
+  const toggleExpansion = (index: number) => {
     if (estacionesExpandidas.includes(index)) {
       setEstacionesExpandidas(estacionesExpandidas.filter((item) => item !== index));
     } else {
@@ -39,13 +40,13 @@ const HomePage = () => {
         predicció han estat recollides gràcies a diferents peticions fetes al Servei 
         Meteorològic de Catalunya (<a href="https://www.meteo.cat/observacions/llistat-xema"
         target="_blank" rel="noopener noreferrer" style={{ color: 'blue' , textDecoration: 'underline'}}> 
-        meteo.cat</a>). Les dades s'han demanat tenint en compte les estacions meteorològiques
+        meteo.cat</a>). Les dades s&apos;han demanat tenint en compte les estacions meteorològiques
         que ens interessaven en aquest cas concret, és a dir, les que es troben en els municipis 
         que cauen dins de la Regió Metropolitana Sud. Cal destacar que els factors meteorològics
         recollits es corresponen amb aquells majoritàriament comuns a les dades recollides de totes
         les estacions considerades, i que ens semblaven rellevants en la predicció del nombre de visites:
         factors com la temperatura, la quantitat de precipitació, la irradiància solar global i la 
-        humitat relativa, entre d'altres.
+        humitat relativa, entre d&apos;altres.
       </p> 
 
       <br />
