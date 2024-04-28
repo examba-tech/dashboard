@@ -9,7 +9,15 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center pt-20">
       <Image src="/examba.png" width={600} height={600} alt="examba" />
       <div className="pt-4" />
-
+      <Link
+        href="/auth/signin"
+        className={buttonVariants({
+          className: "w-full max-w-xs",
+          variant: "ghost",
+        })}
+      >
+       Sign in
+      </Link>
       <h2 className="text-xl font-semibold pt-20">Nosaltres</h2>
       <p className="mt-4 text-base max-w-xl text-justify">
         EXAMBA és una nova iniciativa que hem tirat endavant deu estudiants de
