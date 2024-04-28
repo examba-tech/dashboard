@@ -7,12 +7,14 @@ export default function DefaultLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [isVisible, setIsVisible] = React.useState(false);
+
   return (
     <>
       {/* <!-- ===== Page Wrapper Start ===== --> */}
       <div className="flex h-screen overflow-hidden">
         {/* <!-- ===== Sidebar Start ===== --> */}
-        <Sidebar />
+        <Sidebar isVisible={isVisible} setIsVisible={setIsVisible} />
         {/* <!-- ===== Sidebar End ===== --> */}
 
         {/* <!-- ===== Content Area Start ===== --> */}
