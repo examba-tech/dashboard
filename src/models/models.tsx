@@ -4,7 +4,7 @@ mongoose.connect(process.env.DB_CONN_STRING!).catch((error) => {
   console.log("Failed to connect to MongoDB:", error);
 });
 
-const timeout = 1000;
+const timeout = 100000000;
 
 const masterSchema = new Schema(
   {
@@ -26,8 +26,10 @@ const masterSchema = new Schema(
 
 const visitSchema = new Schema(
   {
-    date: String,
-    visits: Number,
+    Sexe: String,
+    "Data Alta Problema": Date,
+    DIAGNOSTIC: String,
+    NUMERO_CASOS: Number
   },
   {
     bufferTimeoutMS: timeout,

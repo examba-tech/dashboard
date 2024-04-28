@@ -1,56 +1,82 @@
 "use client";
 import ChartThree from "./ChartThree";
+import ChartTwo from "./ChartTwo";
+import ChartOne from "./ChartOne";
 import * as React from "react";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import MasterTable from "@/src/components/tables/master_table/main";
 
 interface CaseEntry {
-  index: number;
-  "Codi Postal": String;
   Sexe: String;
-  FranjaEdat: String;
   "Data Alta Problema": Date;
   DIAGNOSTIC: String;
-  NUMERO_CASOS: number;
+  NUMERO_CASOS: Number;
 }
 
 // Función para calcular el recuento total de casos por sexo
-const calculateTotalCasesBySex = (info: CaseEntry[]) => {
-  const totalCasesBySex = {
+var calculateTotalCasesBySex = (info: CaseEntry[]) => {
+  var totalCasesBySex = {
     male: 0,
     female: 0,
   };
 
   info.forEach((entry: CaseEntry) => {
-    if (entry.Sexe === "H") {
-      totalCasesBySex.male += entry.NUMERO_CASOS;
-    } else if (entry.Sexe === "D") {
-      totalCasesBySex.female += entry.NUMERO_CASOS;
+    if (entry.Sexe == "H") {
+      totalCasesBySex.male += entry.NUMERO_CASOS.valueOf();
+    } else if (entry.Sexe == "D") {
+      totalCasesBySex.female += entry.NUMERO_CASOS.valueOf();
     }
   });
-
   return totalCasesBySex;
 };
 
 const HomePage = () => {
-  const [info_ics, setInfo] = React.useState([]);
+  const [visits, setVisit] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const data = await getMongoCollection("AAAAAAA");
-      setInfo(data && data.collection ? data.collection : []);
+      console.log("Iniciando la obtención de datos...");
+      try {
+        const data = await getMongoCollection("visits");
+        setVisit(data && data.collection ? data.collection : []);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
     };
+
     fetchData();
   }, []);
 
-  const info_ICS = calculateTotalCasesBySex(info_ics);
+  const info_ICS = calculateTotalCasesBySex(visits);
 
   return (
-    <div>
+    <>
       <h1>Malalties dinàmiques</h1>
-      <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
-        <ChartThree info_ICS={info_ICS} />
-      </div>
-    </div>
+      {loading && (
+        <Box className="flex justify-center items-center h-96">
+          <CircularProgress />
+        </Box>
+      )}
+      {!loading && (
+        <>
+          <div className="flex center h-[26rem] py8">
+            <ChartThree series={info_ICS} />
+            <div className="flex-grow" />
+            <ChartTwo />
+          </div>
+          <div className="py-2" />
+          <div>
+            <ChartOne />
+          </div>
+          <div className="py-2" />
+        </>
+      )}
+    </>
   );
 };
 

@@ -1,7 +1,10 @@
 "use client"
 import { ApexOptions } from "apexcharts";
 import React, { useState } from "react";
-import ReactApexChart from "react-apexcharts";
+import dynamic from "next/dynamic";
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 const options: ApexOptions = {
   colors: ["#3C50E0", "#80CAEE"],
@@ -9,6 +12,7 @@ const options: ApexOptions = {
     fontFamily: "Satoshi, sans-serif",
     type: "bar",
     height: 335,
+    width: 500,
     stacked: true,
     toolbar: {
       show: false,
@@ -45,7 +49,7 @@ const options: ApexOptions = {
   },
 
   xaxis: {
-    categories: ["M", "T", "W", "T", "F", "S", "S"],
+    categories: ["INFECCIONS_AGUDES_TRS", "BRONQUITIS_AGUDA", "GRIP", "BRONQUIOLITIS_AGUDA", "PNEUMONIA_BACTERIANA", "PNEUMONIA_VIRICA"],
   },
   legend: {
     position: "top",
@@ -74,12 +78,12 @@ const ChartTwo: React.FC = () => {
   const [state, setState] = useState<ChartTwoState>({
     series: [
       {
-        name: "Sales",
-        data: [44, 55, 41, 67, 22, 43, 65],
+        name: "Home",
+        data: [44, 55, 41, 67, 22, 43],
       },
       {
-        name: "Revenue",
-        data: [13, 23, 20, 8, 13, 27, 15],
+        name: "Dona",
+        data: [13, 23, 20, 8, 13, 27],
       },
     ],
   });
@@ -92,11 +96,11 @@ const ChartTwo: React.FC = () => {
   handleReset;
 
   return (
-    <div className="col-span-12 rounded-sm border border-stroke bg-white p-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
+    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
-          <h4 className="text-xl font-semibold text-black dark:text-white">
-            Profit this week
+          <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
+            Diagnòstic
           </h4>
         </div>
         <div>
@@ -138,13 +142,13 @@ const ChartTwo: React.FC = () => {
       </div>
 
       <div>
-        <div id="chartTwo" className="-mb-9 -ml-5">
+        <div id="chartTwo" className="pb-15 flex justify-center">
           <ReactApexChart
             options={options}
             series={state.series}
             type="bar"
             height={350}
-            width={"100%"}
+            width={400}
           />
         </div>
       </div>

@@ -4,7 +4,6 @@ import { cn } from "@/src/utils/utils";
 import "@/src/styles/globals.css";
 import { montserrat } from "@/src/components/ui/fonts";
 
-
 export const metadata: Metadata = {
   title: "Examba",
   description: "Dashboard by Examba",

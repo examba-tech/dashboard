@@ -1,11 +1,14 @@
-"use client"
+"use client";
 import { ApexOptions } from "apexcharts";
 import React, { useState } from "react";
-import ReactApexChart from "react-apexcharts";
+import dynamic from "next/dynamic";
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 const options: ApexOptions = {
   legend: {
-    show: false,
+    show: true,
     position: "top",
     horizontalAlign: "left",
   },
@@ -13,6 +16,7 @@ const options: ApexOptions = {
   chart: {
     fontFamily: "Satoshi, sans-serif",
     height: 335,
+    width: 600,
     type: "area",
     dropShadow: {
       enabled: true,
@@ -33,6 +37,7 @@ const options: ApexOptions = {
       options: {
         chart: {
           height: 300,
+          width: 550,
         },
       },
     },
@@ -41,6 +46,7 @@ const options: ApexOptions = {
       options: {
         chart: {
           height: 350,
+          width: 610,
         },
       },
     },
@@ -127,12 +133,12 @@ const ChartOne: React.FC = () => {
   const [state, setState] = useState<ChartOneState>({
     series: [
       {
-        name: "Product One",
+        name: "Pacients",
         data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30, 45],
       },
 
       {
-        name: "Product Two",
+        name: "IQCA",
         data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39, 51],
       },
     ],
@@ -146,8 +152,13 @@ const ChartOne: React.FC = () => {
   handleReset;
 
   return (
-    <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
+    <div className="rounded-sm border border-stroke bg-white pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
+        <div>
+          <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
+            Predicció
+          </h4>
+        </div>
         <div className="flex w-full max-w-45 justify-end">
           <div className="inline-flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
             <button className="rounded bg-white px-3 py-1 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:bg-boxdark dark:text-white dark:hover:bg-boxdark">
@@ -164,13 +175,13 @@ const ChartOne: React.FC = () => {
       </div>
 
       <div>
-        <div id="chartOne" className="-ml-5">
+        <div id="chartOne" className="pl-5 flex justify-center">
           <ReactApexChart
             options={options}
             series={state.series}
             type="area"
             height={350}
-            width={"100%"}
+            width={600}
           />
         </div>
       </div>
