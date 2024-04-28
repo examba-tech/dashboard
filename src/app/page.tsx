@@ -1,8 +1,12 @@
 import { buttonVariants } from "@/src/components/ui/Button";
 import Link from "next/link";
-import { cn } from "@/src/utils/utils";
 import Image from "next/image";
+import type { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Examba",
+  description: "Dashboard by Examba",
+};
 
 export default function Home() {
   return (
@@ -16,7 +20,7 @@ export default function Home() {
           variant: "ghost",
         })}
       >
-       Sign in
+        Sign in
       </Link>
       <h2 className="text-xl font-semibold pt-20">Nosaltres</h2>
       <p className="mt-4 text-base max-w-xl text-justify">
@@ -41,4 +45,3 @@ export default function Home() {
     </div>
   );
 }
-

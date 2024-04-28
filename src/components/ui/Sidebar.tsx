@@ -1,12 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const Sidebar = () => {
-  const [isVisible, setIsVisible] = useState(false); // Inicia escondido
-
-  // Manejadores para mostrar/esconder la barra lateral
+const Sidebar = ({
+  isVisible,
+  setIsVisible,
+}: {
+  isVisible: boolean;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const handleMouseEnter = () => setIsVisible(true);
   const handleMouseLeave = () => setIsVisible(false);
 
