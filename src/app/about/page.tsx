@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const size = 200;
+const size = 150;
 
 export default function About() {
   return (
@@ -84,24 +84,29 @@ export default function About() {
           width={size}
           height={size}
         />
+        <div style={{ marginRight: '30px' }}></div>
+        <div style={{ marginBottom: '200px' }}></div>
         <Image
           src="/nosotros/marc.png"
           alt="Marc Franquesa"
           width={size}
           height={size}
         />
+        <div style={{ marginRight: '30px' }}></div>
         <Image
           src="/nosotros/mariar.png"
           alt="Maria Risques"
           width={size}
           height={size}
         />
+        <div style={{ marginRight: '20px' }}></div>
         <Image
           src="/nosotros/mariat.png"
           alt="Maria Tubella"
           width={size}
           height={size}
         />
+        <div style={{ marginRight: '30px' }}></div>
         <Image
           src="/nosotros/mauro.png"
           alt="Mauro Filomeno"
@@ -116,24 +121,28 @@ export default function About() {
           width={size}
           height={size}
         />
+      <div style={{ marginRight: '30px' }}></div>
         <Image
           src="/nosotros/Aida.png"
           alt="Aida Torres"
           width={size}
           height={size}
         />
+      <div style={{ marginRight: '30px' }}></div>
         <Image
           src="/nosotros/Blanca.png"
           alt="Blanca Unanue"
           width={size}
           height={size}
         />
+      <div style={{ marginRight: '30px' }}></div>
         <Image
           src="/nosotros/Elena.png"
           alt="Elena González"
           width={size}
           height={size}
         />
+      <div style={{ marginRight: '30px' }}></div>
         <Image
           src="/nosotros/Adri.png"
           alt="Adrián Cerezuela"
