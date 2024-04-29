@@ -1,11 +1,11 @@
 export async function getMongoCollection(collection_name: string) {
   try {
-    // if (typeof window !== "undefined") {
-    //   const cachedData = localStorage.getItem(collection_name);
-    //   if (cachedData) {
-    //     return JSON.parse(cachedData);
-    //   }
-    // }
+    if (typeof window !== "undefined") {
+      const cachedData = localStorage.getItem(collection_name);
+      if (cachedData) {
+        return JSON.parse(cachedData);
+      }
+    }
 
     const res = await fetch(
       "http://localhost:3000/api/mongo/" + collection_name,

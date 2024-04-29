@@ -13,7 +13,7 @@ const options: ApexOptions = {
     type: "donut",
   },
   colors: ["#3C50E0", "#0FADCF"],
-  labels: ["Home", "Dona"],
+  labels: ["Dona", "Home"],
   legend: {
     show: false,
     position: "bottom",
