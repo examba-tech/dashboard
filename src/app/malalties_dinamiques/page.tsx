@@ -25,7 +25,11 @@ const calculateTotalCasesBySex = (info: Interfaces.Cases[]) => {
 };
 
 const HomePage = () => {
-  const [visits, setVisit] = React.useState<Interfaces.Cases[]>([]);
+  const [visits, setVisits] = React.useState<Interfaces.Cases[]>([]);
+  const [info_ICS, setInfo_ICS] = React.useState<{
+    male: number;
+    female: number;
+  }>({ male: 0, female: 0 });
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
@@ -33,7 +37,11 @@ const HomePage = () => {
       console.log("Iniciando la obtención de datos...");
       try {
         const data = await getMongoCollection("visits");
-        setVisit(data && data.collection ? data.collection : []);
+        const visits_ = data && data.collection ? data.collection : undefined;
+        setVisits(visits_);
+        if (visits_ !== undefined) {
+          setInfo_ICS(calculateTotalCasesBySex(visits_));
+        }
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -43,8 +51,6 @@ const HomePage = () => {
 
     fetchData();
   }, []);
-
-  const info_ICS = calculateTotalCasesBySex(visits);
 
   return (
     <>

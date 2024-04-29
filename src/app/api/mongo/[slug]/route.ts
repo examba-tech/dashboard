@@ -22,7 +22,7 @@ export async function GET(
   }
 
   try {
-    const collection = await model.find().limit(100).select("-_id");
+    const collection = await model.find().select("-_id");
     return NextResponse.json({ collection }, { status: 200 });
   } catch (err) {
     console.log(err);
