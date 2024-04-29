@@ -126,7 +126,7 @@ const HomePage = () => {
       </p> 
 
       <p>Els contaminants que hem obtingut de les estacions i mitjançant els quals hem fet la 
-        predicció finalment són: NO, NO2 i SO2. (Actualment s'està treballant per poder incorporal el PM10)</p>
+        predicció finalment són: NO, NO2 i SO2. (Actualment s&apos;està treballant per poder incorporal el PM10)</p>
 
       <br />
       <ul style={{ listStyleType: 'disc',marginLeft: '50px' }}>
