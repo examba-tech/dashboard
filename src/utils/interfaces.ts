@@ -9,3 +9,10 @@ export interface Master {
   S_INGRESSOS: number;
   N_INGRESSOS: number;
 }
+
+export interface Cases {
+  Sexe: String;
+  "Data Alta Problema": Date;
+  DIAGNOSTIC: String;
+  NUMERO_CASOS: Number;
+}

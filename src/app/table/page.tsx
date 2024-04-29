@@ -5,9 +5,10 @@ import MasterTable from "@/src/components/tables/master_table/main";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import * as Interfaces from "@/src/utils/interfaces";
 
 const Page = () => {
-  const [master, setMaster] = React.useState([]);
+  const [master, setMaster] = React.useState<Interfaces.Master[]>([]);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
