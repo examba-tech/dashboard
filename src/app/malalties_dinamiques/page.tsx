@@ -25,7 +25,6 @@ const calculateTotalCasesBySex = (info: Interfaces.Cases[]) => {
 };
 
 const HomePage = () => {
-  const [visits, setVisits] = React.useState<Interfaces.Cases[]>([]);
   const [info_ICS, setInfo_ICS] = React.useState<{
     male: number;
     female: number;
@@ -37,10 +36,9 @@ const HomePage = () => {
       console.log("Iniciando la obtención de datos...");
       try {
         const data = await getMongoCollection("visits");
-        const visits_ = data && data.collection ? data.collection : undefined;
-        setVisits(visits_);
-        if (visits_ !== undefined) {
-          setInfo_ICS(calculateTotalCasesBySex(visits_));
+        const visits = data && data.collection ? data.collection : undefined;
+        if (visits !== undefined) {
+          setInfo_ICS(calculateTotalCasesBySex(visits));
         }
         setLoading(false);
       } catch (error) {
