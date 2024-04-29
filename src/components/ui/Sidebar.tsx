@@ -87,7 +87,7 @@ const Sidebar = ({
                   isVisible ? "" : "opacity-0"
                 }`}
               >
-                Malalties Cròniques
+                Malalties de Prevalença
               </Link>
             </li>
             <li className="flex items-center">
@@ -121,7 +121,7 @@ const Sidebar = ({
                   isVisible ? "" : "opacity-0"
                 }`}
               >
-                Taula
+                Dades Descarregables
               </Link>
             </li>
             <li className="flex items-center">
