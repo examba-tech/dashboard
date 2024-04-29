@@ -1,10 +1,6 @@
 import React from "react";
 import Link from "next/link";
-
-export const metadata = {
-  title: "Next.js SignUp Page | TailAdmin - Next.js Dashboard Template",
-  description: "This is Next.js SignUp Page TailAdmin Dashboard Template",
-};
+import { buttonVariants } from "@/src/components/ui/Button";
 
 const SignUp: React.FC = () => {
   return (
@@ -59,12 +55,21 @@ const SignUp: React.FC = () => {
             placeholder="Introdueix el codi empresa"
             className="w-full mb-5 rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
           />
-
+          <div className="flex justify-center mt-6 mb-6">
+          <Link
+          href="/"
+          className={buttonVariants({
+          className: "w-full max-w-xs",
+          variant: "link",
+          })}
+      >
           <input
             type="submit"
             value="Crear compte"
             className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90 mb-6"
           />
+          </Link>
+          </div>
           
           <p className="text-center">
             Ja tens un compte?{" "}
