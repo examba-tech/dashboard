@@ -104,11 +104,11 @@ const HomePage = () => {
   ];
   return (
     <div>
-        <h1><strong style={{ fontWeight: 'bold', fontSize: '24px'}}>ESTACIONS DE CONTAMINACIÓ:</strong></h1>
+        <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Estacions de Contaminació</h1>
         <br />
       <MyMapa />
       <br />
-      <h1><strong style={{ fontWeight: 'bold' , fontSize: '18px'}}>DESCRIPCIÓ DE LES ESTACIONS:</strong></h1>
+      <h1><strong style={{ fontWeight: 'bold' , fontSize: '18px', textDecoration: 'underline'}}>Descripció de les estacions </strong></h1>
       <br />
       <p>Les dades diàries dels contaminants per realitzar la predicció han estat 
         recollides a partir de les diferents estacions de contaminats dels municipis de 

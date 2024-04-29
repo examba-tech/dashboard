@@ -28,6 +28,8 @@ const Page = () => {
 
   return (
     <>
+      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Descàrrega de Dades</h1>
+      <br />
       {loading && (
         <Box className="flex justify-center items-center h-96">
           <CircularProgress />

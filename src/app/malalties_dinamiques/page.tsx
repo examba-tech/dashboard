@@ -7,6 +7,7 @@ import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
+import "@/src/styles/globals.css";
 
 const calculateTotalCasesBySex = (info: Interfaces.Cases[]) => {
   var totalCasesBySex = {
@@ -52,7 +53,8 @@ const HomePage = () => {
 
   return (
     <>
-      <h1>Malalties dinàmiques</h1>
+      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Patologies agudes</h1>
+      <br />
       {loading && (
         <Box className="flex justify-center items-center h-96">
           <CircularProgress />

@@ -92,7 +92,24 @@ const Sidebar = ({
             </li>
             <li className="flex items-center">
               <Image
-                src="/bar-chart-regular-24.png"
+                src="/table-regular-24.png"
+                alt="Icon3"
+                width={24}
+                height={24}
+                className="w-6 h-6 ml-5 mr-2 opacity-1"
+              />
+              <Link
+                href="/table"
+                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
+                  isVisible ? "" : "opacity-0"
+                }`}
+              >
+                Descàrrega de Dades
+              </Link>
+            </li>
+            <li className="flex items-center">
+              <Image
+                src="/map-regular-24-2.png"
                 alt="Icon3"
                 width={24}
                 height={24}
@@ -109,24 +126,7 @@ const Sidebar = ({
             </li>
             <li className="flex items-center">
               <Image
-                src="/bar-chart-regular-24.png"
-                alt="Icon3"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              <Link
-                href="/table"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
-              >
-                Dades Descarregables
-              </Link>
-            </li>
-            <li className="flex items-center">
-              <Image
-                src="/bar-chart-regular-24.png"
+                src="/map-regular-24-2.png"
                 alt="Icon3"
                 width={24}
                 height={24}
@@ -158,24 +158,26 @@ const Sidebar = ({
                 Sobre Nosaltres
               </Link>
             </li>
-            <li className="flex items-center">
-              <Image
-                src="/log-out-regular-24.png"
-                alt="Icon4"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              <Link
-                href="/"
-                className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
-              >
-                Log out
-              </Link>
-            </li>
           </ul>
+        </div>
+        <div className={`ml-5 ${isVisible ? "block" : "hidden"}`}>
+          <li className="flex items-center">
+            <Image
+              src="/log-out-regular-24.png"
+              alt="Icon4"
+              width={24}
+              height={24}
+              className="w-6 h-6 mr-2 opacity-1"
+            />
+            <Link
+              href="/"
+              className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${
+                isVisible ? "" : "opacity-0"
+              }`}
+            >
+              Log out
+            </Link>
+          </li>
         </div>
         <div className={`ml-auto ${isVisible ? "block" : "hidden"}`}>
           <div className="w-16 flex items-center justify-center">
