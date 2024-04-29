@@ -6,23 +6,15 @@ import * as React from "react";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import MasterTable from "@/src/components/tables/master_table/main";
+import * as Interfaces from "@/src/utils/interfaces";
 
-interface CaseEntry {
-  Sexe: String;
-  "Data Alta Problema": Date;
-  DIAGNOSTIC: String;
-  NUMERO_CASOS: Number;
-}
-
-// Función para calcular el recuento total de casos por sexo
-var calculateTotalCasesBySex = (info: CaseEntry[]) => {
+const calculateTotalCasesBySex = (info: Interfaces.Cases[]) => {
   var totalCasesBySex = {
     male: 0,
     female: 0,
   };
 
-  info.forEach((entry: CaseEntry) => {
+  info.forEach((entry: Interfaces.Cases) => {
     if (entry.Sexe == "H") {
       totalCasesBySex.male += entry.NUMERO_CASOS.valueOf();
     } else if (entry.Sexe == "D") {
@@ -33,7 +25,10 @@ var calculateTotalCasesBySex = (info: CaseEntry[]) => {
 };
 
 const HomePage = () => {
-  const [visits, setVisit] = React.useState([]);
+  const [info_ICS, setInfo_ICS] = React.useState<{
+    male: number;
+    female: number;
+  }>({ male: 0, female: 0 });
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
@@ -41,7 +36,10 @@ const HomePage = () => {
       console.log("Iniciando la obtención de datos...");
       try {
         const data = await getMongoCollection("visits");
-        setVisit(data && data.collection ? data.collection : []);
+        const visits = data && data.collection ? data.collection : undefined;
+        if (visits !== undefined) {
+          setInfo_ICS(calculateTotalCasesBySex(visits));
+        }
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -51,8 +49,6 @@ const HomePage = () => {
 
     fetchData();
   }, []);
-
-  const info_ICS = calculateTotalCasesBySex(visits);
 
   return (
     <>
