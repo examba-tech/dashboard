@@ -49,7 +49,7 @@ const SignIn = () => (
       <p className="text-center mt-6">
         No tens cap compte?{" "}
         <Link href="/auth/signup">
-          Registrar-se
+          Registrar&apos;t
         </Link>
       </p>
     </form>

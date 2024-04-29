@@ -48,11 +48,11 @@ const SignUp: React.FC = () => {
           />
 
         <label className="block font-medium text-black dark:text-white mb-2.5">
-            Codi Empresa
+            Codi de l&apos;empresa
           </label>
           <input
             type="password"
-            placeholder="Introdueix el codi empresa"
+            placeholder="Introdueix el codi de l&apos; empresa"
             className="w-full mb-5 rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
           />
           <div className="flex justify-center mt-6 mb-6">
