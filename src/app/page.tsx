@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center pt-20">
-      <Image src="/examba.png" width={600} height={600} alt="examba" />
+    <div className="flex flex-col items-center justify-center">
+      <Image src="/examba.png" width={500} height={500} alt="examba" />
       <div className="pt-4" />
       <Link
         href="/auth/signin"

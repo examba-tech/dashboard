@@ -22,17 +22,16 @@ export default function RootLayout({
       )}
     >
       <body
-        
         className={`min-h-screen pt-12 bg-slate-50 antialiased ${
           isVisible ? "ml-64" : "ml-16"
-        } transition-width duration-300`}>
+        } transition-width duration-300`}
+      >
         <Sidebar isVisible={isVisible} setIsVisible={setIsVisible} />
-        <div className="container max-w-7xl mx-auto h-full pt-12">
+        <div className="container max-w-7xl mx-auto h-full pt-10 min-h-screen">
           {children}
-          <Footer/>
         </div>
+        <Footer />
       </body>
-      
     </html>
   );
 }
