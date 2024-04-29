@@ -1,5 +1,6 @@
 "use client";
 import Sidebar from "@/src/components/ui/Sidebar";
+import Footer from "@/src/components/ui/Footer";
 import { cn } from "@/src/utils/utils";
 import "@/src/styles/globals.css";
 import React from "react";
@@ -26,9 +27,10 @@ export default function RootLayout({
         } transition-width duration-300`}
       >
         <Sidebar isVisible={isVisible} setIsVisible={setIsVisible} />
-        <div className="container max-w-7xl mx-auto h-full pt-12">
+        <div className="container max-w-7xl mx-auto h-full pt-10 min-h-screen">
           {children}
         </div>
+        <Footer />
       </body>
     </html>
   );
