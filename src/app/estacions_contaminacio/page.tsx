@@ -1,6 +1,9 @@
 "use client"
 import React, { useState } from 'react';
 import MyMapa from '../../components/mapas/MyMapa_cont';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+
 
 
 const HomePage = () => {
@@ -107,14 +110,14 @@ const HomePage = () => {
       <br />
       <h1><strong style={{ fontWeight: 'bold' , fontSize: '18px'}}>DESCRIPCIÓ DE LES ESTACIONS:</strong></h1>
       <br />
-      <p>Les dades diàries respecte dels contaminants per realitzar la predicció han estat 
-        recollides gràcies a les diferents estacions de contaminats dels municipis de 
-        la Regió Metropolitana Sud, concretament les situades als llocs següents. Cal 
-        destacar que tot i que hi hagi estacions manuals i automàtiques, en aquest apartat 
-        només hem reflectit les automàtiques, ja que són de les que hem extret la majoria 
-        d&apos;informació, amb excepció d&apos;alguns contaminants com el PM10. A més, moltes de les 
+      <p>Les dades diàries dels contaminants per realitzar la predicció han estat 
+        recollides a partir de les diferents estacions de contaminats dels municipis de 
+        la Regió Metropolitana Sud, concretament les situades als llocs llistats a sota. Cal 
+        destacar que, tot i que hi hagi estacions manuals i automàtiques, en aquest apartat 
+        només es mostren les automàtiques, ja que són d&apos;on hem extret la majoria 
+        d&apos;informació, amb excepció d&apos;alguns contaminants, com el PM10. A més, moltes de les 
         coordenades de les estacions manuals i de les estacions automàtiques se situaven a menys
-        de 10 metres i per tant hem considerat que eren la mateixa estació. Més concretament, 
+        de 10 metres i, per tant, hem considerat que eren la mateixa estació. Més concretament, 
         les dades de contaminació han estat extretes a partir de <a href="https://mediambient.gencat.cat/ca/05_ambits_dactuacio/atmosfera/qualitat_de_laire/vols-saber-que-respires/descarrega-de-dades/descarrega-dades-automatiques/"
         target="_blank" rel="noopener noreferrer" style={{ color: 'blue' , textDecoration: 'underline'}}>Dades automàtiques de Medi Ambient 
         i Sostenibilitat de la Generalitat de Catalunya</a> i les dades de les estacions corresponents
@@ -123,7 +126,7 @@ const HomePage = () => {
       </p> 
 
       <p>Els contaminants que hem obtingut de les estacions i mitjançant els quals hem fet la 
-        predicció finalment són: ...</p>
+        predicció finalment són: NO, NO2 i SO2. (Actualment s'està treballant per poder incorporal el PM10)</p>
 
       <br />
       <ul style={{ listStyleType: 'disc',marginLeft: '50px' }}>
@@ -131,11 +134,16 @@ const HomePage = () => {
           <li key={index}>
             <span onClick={() => toggleExpansion(index)}>
               <strong style={{ fontWeight: 'bold' }}>{estacion.nombre}</strong>
+              {estacionesExpandidas.includes(index) ? (
+                <FontAwesomeIcon icon={faChevronUp} style={{ marginLeft: '5px' }} />
+              ) : (
+                <FontAwesomeIcon icon={faChevronDown} style={{ marginLeft: '5px' }} />
+              )}
             </span>
             {estacionesExpandidas.includes(index) && (
               <div style={{ marginLeft: '20px' }}>
-              <p>{estacion.info}</p>
-            </div>
+                <p>{estacion.info}</p>
+              </div>
             )}
           </li>
         ))}
