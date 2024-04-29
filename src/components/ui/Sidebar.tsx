@@ -70,7 +70,7 @@ const Sidebar = ({
                   isVisible ? "" : "opacity-0"
                 }`}
               >
-                Malalties Dinàmiques
+                Patologies Agudes
               </Link>
             </li>
             <li className="flex items-center">
@@ -87,7 +87,7 @@ const Sidebar = ({
                   isVisible ? "" : "opacity-0"
                 }`}
               >
-                Malalties Estàtiques
+                Malalties de Prevalença
               </Link>
             </li>
             <li className="flex items-center">
@@ -105,6 +105,23 @@ const Sidebar = ({
                 }`}
               >
                 Estacions Meteorològiques
+              </Link>
+            </li>
+            <li className="flex items-center">
+              <Image
+                src="/bar-chart-regular-24.png"
+                alt="Icon3"
+                width={24}
+                height={24}
+                className="w-6 h-6 ml-5 mr-2 opacity-1"
+              />
+              <Link
+                href="/table"
+                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
+                  isVisible ? "" : "opacity-0"
+                }`}
+              >
+                Dades Descarregables
               </Link>
             </li>
             <li className="flex items-center">
