@@ -140,7 +140,7 @@ const Sidebar = ({
             </li>
             <li className="flex items-center">
               <Image
-                src="/bar-chart-regular-24.png"
+                src="/map-regular-24-2.png"
                 alt="Icon3"
                 width={24}
                 height={24}
