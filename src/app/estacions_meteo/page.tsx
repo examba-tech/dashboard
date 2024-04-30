@@ -30,11 +30,11 @@ const HomePage = () => {
   ];
   return (
     <div>
-        <h1><strong style={{ fontWeight: 'bold', fontSize: '24px'}}>ESTACIONS METEOROLÒGIQUES:</strong></h1>
+        <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Estacions Meteorològiques</h1>
         <br />
       <MyMapa />
       <br />
-      <h1><strong style={{ fontWeight: 'bold' , fontSize: '18px'}}>DESCRIPCIÓ DE LES ESTACIONS:</strong></h1>
+      <h1><strong style={{ fontWeight: 'bold', fontSize: '20px', textDecoration: 'underline' }}>Descripció de les estacions</strong></h1>
       <br />
       <p>Les dades diàries respecte dels diferents factors meteorològics per realitzar la 
         predicció han estat recollides gràcies a diferents peticions fetes al Servei 
