@@ -28,7 +28,7 @@ const SignIn = () => (
           className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-white outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
         />
       </div>
-      <div className="flex justify-center mt-6 mb-6">
+      <div className="flex justify-center mt-6 mb-6 pt-5">
         <Link
           href="/dashboard/malalties_dinamiques"
           className={buttonVariants({
@@ -45,7 +45,16 @@ const SignIn = () => (
       </div>
 
       <p className="text-center mt-6">
-        No tens cap compte? <Link href="/auth/signup">Registra&apos;t</Link>
+        No tens cap compte?{" "}
+        <Link
+          href="/auth/signup"
+          className={buttonVariants({
+            variant: "link",
+            size: "text",
+          })}
+        >
+          Registra&apos;t
+        </Link>
       </p>
     </form>
   </div>
