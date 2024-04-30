@@ -5,7 +5,7 @@ const size = 150;
 export default function About() {
   return (
     <section>
-      <h2 className="text-xl font-semibold">Sobre Nosaltres</h2>
+      <h2 className="text-xl font-semibold">Nosaltres</h2>
       <br></br>
       <p>
         {" "}
@@ -84,29 +84,29 @@ export default function About() {
           width={size}
           height={size}
         />
-        <div style={{ marginRight: '30px' }}></div>
-        <div style={{ marginBottom: '200px' }}></div>
+        <div style={{ marginRight: "30px" }}></div>
+        <div style={{ marginBottom: "200px" }}></div>
         <Image
           src="/nosotros/marc.png"
           alt="Marc Franquesa"
           width={size}
           height={size}
         />
-        <div style={{ marginRight: '30px' }}></div>
+        <div style={{ marginRight: "30px" }}></div>
         <Image
           src="/nosotros/mariar.png"
           alt="Maria Risques"
           width={size}
           height={size}
         />
-        <div style={{ marginRight: '20px' }}></div>
+        <div style={{ marginRight: "20px" }}></div>
         <Image
           src="/nosotros/mariat.png"
           alt="Maria Tubella"
           width={size}
           height={size}
         />
-        <div style={{ marginRight: '30px' }}></div>
+        <div style={{ marginRight: "30px" }}></div>
         <Image
           src="/nosotros/mauro.png"
           alt="Mauro Filomeno"
@@ -121,28 +121,28 @@ export default function About() {
           width={size}
           height={size}
         />
-      <div style={{ marginRight: '30px' }}></div>
+        <div style={{ marginRight: "30px" }}></div>
         <Image
           src="/nosotros/Aida.png"
           alt="Aida Torres"
           width={size}
           height={size}
         />
-      <div style={{ marginRight: '30px' }}></div>
+        <div style={{ marginRight: "30px" }}></div>
         <Image
           src="/nosotros/Blanca.png"
           alt="Blanca Unanue"
           width={size}
           height={size}
         />
-      <div style={{ marginRight: '30px' }}></div>
+        <div style={{ marginRight: "30px" }}></div>
         <Image
           src="/nosotros/Elena.png"
           alt="Elena González"
           width={size}
           height={size}
         />
-      <div style={{ marginRight: '30px' }}></div>
+        <div style={{ marginRight: "30px" }}></div>
         <Image
           src="/nosotros/Adri.png"
           alt="Adrián Cerezuela"

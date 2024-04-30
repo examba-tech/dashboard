@@ -2,7 +2,7 @@ import Link from "next/link";
 import { buttonVariants } from "@/src/components/ui/Button";
 
 const SignIn = () => (
-  <div className="rounded-sm border border-stroke bg-white shadow-default p-4 sm:p-8 dark:border-strokedark dark:bg-boxdark">
+  <div className="rounded-sm border border-stroke bg-white shadow-default sm:p-8 dark:border-strokedark dark:bg-boxdark">
     <h2 className="mb-9 font-bold text-black dark:text-white sm:text-title-xl2">
       Entra a EXAMBA
     </h2>
@@ -29,28 +29,23 @@ const SignIn = () => (
         />
       </div>
       <div className="flex justify-center mt-6 mb-6">
-      <Link
-        href="/EXAMBA/malalties_dinamiques"
-        className={buttonVariants({
-          className: "w-full max-w-xs",
-          variant: "link",
-        })}
-      >
-        
-        <input
-        type="submit"
-        value="Inicia la sessió"
-        className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90 mb-4"
-      />
-    
-      </Link>
+        <Link
+          href="/dashboard/malalties_dinamiques"
+          className={buttonVariants({
+            className: "w-full max-w-xs",
+            variant: "link",
+          })}
+        >
+          <input
+            type="submit"
+            value="Inicia la sessió"
+            className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90 mb-4"
+          />
+        </Link>
       </div>
 
       <p className="text-center mt-6">
-        No tens cap compte?{" "}
-        <Link href="/auth/signup">
-          Registra&apos;t
-        </Link>
+        No tens cap compte? <Link href="/auth/signup">Registra&apos;t</Link>
       </p>
     </form>
   </div>

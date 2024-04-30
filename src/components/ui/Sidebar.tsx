@@ -12,7 +12,9 @@ const Sidebar = ({
 }) => {
   const handleMouseEnter = () => setIsVisible(true);
   const handleMouseLeave = () => setIsVisible(false);
-  const handleLogout = () => {window.location.href = '/'};
+  const handleLogout = () => {
+    window.location.href = "/";
+  };
 
   return (
     <div onMouseLeave={handleMouseLeave} className="relative h-full">
@@ -20,7 +22,8 @@ const Sidebar = ({
         onMouseEnter={handleMouseEnter}
         className={`fixed top-0 left-0 h-screen z-50 ${
           isVisible ? "w-64" : "w-16"
-        } bg-black text-white transition-width duration-300 flex flex-col`}>
+        } bg-black text-white transition-width duration-300 flex flex-col`}
+      >
         <div className="flex-grow">
           <Link href="/">
             <span
@@ -39,18 +42,22 @@ const Sidebar = ({
                   className="w-6 h-6 mr-2 opacity-1"
                 />
               )}
-              
-                <span
+
+              <span
                 onClick={handleLogout}
-                className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${isVisible ? "" : "opacity-0"}`}
+                className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${
+                  isVisible ? "" : "opacity-0"
+                }`}
               >
-              <h2
-              className={`text-lg font-bold ${isVisible ? "" : "opacity-0"}`}
-              >
-                EXAMBA
-              </h2>
+                <h2
+                  className={`text-lg font-bold ${
+                    isVisible ? "" : "opacity-0"
+                  }`}
+                >
+                  EXAMBA
+                </h2>
               </span>
-                
+
               {isVisible && (
                 <Image
                   src="/logo.png"
@@ -72,7 +79,7 @@ const Sidebar = ({
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
               />
               <Link
-                href="/EXAMBA/malalties_dinamiques"
+                href="/dashboard/malalties_dinamiques"
                 className={`block py-2 px-4 hover:bg-gray-700 w-full ${
                   isVisible ? "" : "opacity-0"
                 }`}
@@ -89,7 +96,7 @@ const Sidebar = ({
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
               />
               <Link
-                href="/EXAMBA/malalties_estatiques"
+                href="/dashboard/malalties_estatiques"
                 className={`block py-2 px-4 hover:bg-gray-700 w-full ${
                   isVisible ? "" : "opacity-0"
                 }`}
@@ -106,7 +113,7 @@ const Sidebar = ({
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
               />
               <Link
-                href="/table"
+                href="/dashboard/table"
                 className={`block py-2 px-4 hover:bg-gray-700 w-full ${
                   isVisible ? "" : "opacity-0"
                 }`}
@@ -123,7 +130,7 @@ const Sidebar = ({
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
               />
               <Link
-                href="/EXAMBA/estacions_meteo"
+                href="/dashboard/estacions_meteo"
                 className={`block py-2 px-4 hover:bg-gray-700 w-full ${
                   isVisible ? "" : "opacity-0"
                 }`}
@@ -140,24 +147,7 @@ const Sidebar = ({
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
               />
               <Link
-                href="/EXAMBA/table"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
-              >
-                Dades Descarregables
-              </Link>
-            </li>
-            <li className="flex items-center">
-              <Image
-                src="/bar-chart-regular-24.png"
-                alt="Icon3"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              <Link
-                href="/EXAMBA/estacions_contaminacio"
+                href="/dashboard/estacions_contaminacio"
                 className={`block py-2 px-4 hover:bg-gray-700 w-full ${
                   isVisible ? "" : "opacity-0"
                 }`}
@@ -174,7 +164,7 @@ const Sidebar = ({
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
               />
               <Link
-                href="/EXAMBA/about_us"
+                href="/dashboard/about_us"
                 className={`block py-2 px-4 hover:bg-gray-700 w-full ${
                   isVisible ? "" : "opacity-0"
                 }`}
@@ -197,11 +187,13 @@ const Sidebar = ({
                 }`}
               >
                 <span
-                onClick={handleLogout}
-                className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${isVisible ? "" : "opacity-0"}`}
-              >
-                Log out
-              </span>
+                  onClick={handleLogout}
+                  className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${
+                    isVisible ? "" : "opacity-0"
+                  }`}
+                >
+                  Log out
+                </span>
               </Link>
             </li>
           </ul>
