@@ -22,8 +22,7 @@ const Sidebar = ({
         onMouseEnter={handleMouseEnter}
         className={`fixed top-0 left-0 h-screen z-50 ${
           isVisible ? "w-64" : "w-16"
-        } bg-black text-white transition-width duration-300 flex flex-col`}
-      >
+        } bg-black text-white transition-width duration-300 flex flex-col`}>
         <div className="flex-grow">
           <Link href="/">
             <span
