@@ -172,30 +172,6 @@ const Sidebar = ({
                 Sobre Nosaltres
               </Link>
             </li>
-            <li className="flex items-center">
-              <Image
-                src="/log-out-regular-24.png"
-                alt="Icon4"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              <Link
-                href="/"
-                className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
-              >
-                <span
-                  onClick={handleLogout}
-                  className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${
-                    isVisible ? "" : "opacity-0"
-                  }`}
-                >
-                  Log out
-                </span>
-              </Link>
-            </li>
           </ul>
         </div>
         <div className={`ml-5 ${isVisible ? "block" : "hidden"}`}>
@@ -205,7 +181,7 @@ const Sidebar = ({
               alt="Icon4"
               width={24}
               height={24}
-              className="w-6 h-6 mr-2 opacity-1"
+              className="w-6 h-6 ml-5 mr-2 opacity-1"
             />
             <Link
               href="/"
@@ -213,7 +189,14 @@ const Sidebar = ({
                 isVisible ? "" : "opacity-0"
               }`}
             >
-              Log out
+              <span
+                onClick={handleLogout}
+                className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${
+                  isVisible ? "" : "opacity-0"
+                }`}
+              >
+                Log out
+              </span>
             </Link>
           </li>
         </div>
