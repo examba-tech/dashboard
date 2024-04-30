@@ -22,7 +22,8 @@ const Sidebar = ({
         onMouseEnter={handleMouseEnter}
         className={`fixed top-0 left-0 h-screen z-50 ${
           isVisible ? "w-64" : "w-16"
-        } bg-black text-white transition-width duration-300 flex flex-col`}>
+        } bg-black text-white transition-width duration-300 flex flex-col`}
+      >
         <div className="flex-grow">
           <Link href="/">
             <span
@@ -152,23 +153,6 @@ const Sidebar = ({
                 }`}
               >
                 Estacions Contaminació
-              </Link>
-            </li>
-            <li className="flex items-center">
-              <Image
-                src="/group-solid-24-2.png"
-                alt="Icon1"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              <Link
-                href="/dashboard/about_us"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
-              >
-                Sobre Nosaltres
               </Link>
             </li>
           </ul>
