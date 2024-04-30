@@ -7,7 +7,6 @@ import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
-import "@/src/styles/globals.css";
 
 const calculateTotalCasesBySex = (info: Interfaces.Cases[]) => {
   var totalCasesBySex = {
