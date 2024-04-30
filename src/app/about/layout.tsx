@@ -1,4 +1,5 @@
 "use client";
+import Sidebar from "@/src/components/ui/Sidebar";
 import Footer from "@/src/components/ui/Footer";
 import { cn } from "@/src/utils/utils";
 import "@/src/styles/globals.css";
@@ -7,10 +8,9 @@ import { montserrat } from "@/src/components/ui/fonts";
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html
       lang="en"
@@ -26,5 +26,5 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
-  );
+  )
 }
