@@ -39,7 +39,7 @@ const SignIn = () => (
         
         <input
         type="submit"
-        value="Inicieu la sessió"
+        value="Inicia la sessió"
         className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90 mb-4"
       />
     
@@ -49,7 +49,7 @@ const SignIn = () => (
       <p className="text-center mt-6">
         No tens cap compte?{" "}
         <Link href="/auth/signup">
-          Registrar&apos;t
+          Registra&apos;t
         </Link>
       </p>
     </form>
