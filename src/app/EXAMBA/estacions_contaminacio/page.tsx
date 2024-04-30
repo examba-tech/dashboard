@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import MyMapa from '../../components/mapas/MyMapa_cont';
+import MyMapa from '../../../components/mapas/MyMapa_cont';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 

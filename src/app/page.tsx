@@ -13,10 +13,13 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center pt-20">
       <Image src="/examba.png" width={600} height={600} alt="examba" />
-      <div className="w-full max-w-2xl"> 
-      <SignIn />
-      <div className="flex flex-col items-center justify-center pt-10">
-      <h2 className="text-xl font-semibold pt-4">Nosaltres</h2>
+      <div className="w-full max-w-2xl">
+        <div className="min-h-screen">
+        <SignIn />
+        </div>
+      
+      <div className="flex flex-col items-center justify-center">
+      <h2 className="text-xl font-semibold">Nosaltres</h2>
 
       <p className="mt-4 text-base max-w-xl text-justify">
         EXAMBA és una nova iniciativa que hem tirat endavant deu estudiants de

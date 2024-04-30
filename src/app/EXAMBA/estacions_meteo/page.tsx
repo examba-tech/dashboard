@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import MyMapa from '../../components/mapas/MyMapa_meteo';
+import MyMapa from '../../../components/mapas/MyMapa_meteo';
 
 const HomePage = () => {
 
