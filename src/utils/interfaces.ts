@@ -14,13 +14,13 @@ export interface Cases {
   Sexe: String;
   "Data Alta Problema": Date;
   DIAGNOSTIC: String;
-  NUMERO_CASOS: Number;
+  NUMERO_CASOS: number;
 }
 
 export interface Cases1 {
   Sexe: String,
   'Data Alta Problema': Date,
   FranjaEdat: String,
-  index: Number,
-  NUMERO_CASOS: Number
+  index: number,
+  NUMERO_CASOS: number
 }

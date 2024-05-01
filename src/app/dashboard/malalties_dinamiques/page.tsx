@@ -8,6 +8,7 @@ import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
+import MyLineChart from "@/src/components/charts/line_chart";
 
 const calculateTotalCasesBySex = (info: Interfaces.Cases[]) => {
   var totalCasesBySex = {
@@ -99,6 +100,36 @@ const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
   };
 
 
+  const calcularVisitasPorDia2023 = (visitas: Interfaces.Cases[]) => {
+    var visitasPorDia: { [key: string]: number } = {};
+  
+    visitas.forEach((visita: Interfaces.Cases) => {
+      const fecha = new Date(visita["Data Alta Problema"]);
+      const year = fecha.getFullYear();
+  
+      // Verificar si el año es 2023
+      if (year === 2023) {
+        const fechaClave = fecha.toISOString().split('T')[0]; // Formato 'YYYY-MM-DD'
+  
+        // Si la fecha no existe en el diccionario, inicializar a 0
+        if (!visitasPorDia[fechaClave]) {
+          visitasPorDia[fechaClave] = 0;
+        }
+  
+        // Sumar el número de casos a la fecha correspondiente
+        visitasPorDia[fechaClave] += visita.NUMERO_CASOS;
+      }
+    });
+  
+    // Convertir el diccionario en un array de objetos con fecha y cantidad de visitas
+    return Object.keys(visitasPorDia).map(date => ({
+      date: date,
+      count: visitasPorDia[date]
+    }));
+  };
+  
+
+
 
 const HomePage = () => {
   const [info_ICS, setInfo_ICS] = React.useState<{
@@ -116,6 +147,11 @@ const HomePage = () => {
     name: string;
     data: number[]
   }[]>([]);
+
+  const [visits, setVisits] = React.useState<{
+    date: string
+    count: number
+  }[]>([]);
   
 
   React.useEffect(() => {
@@ -129,6 +165,7 @@ const HomePage = () => {
           setInfo_ICS(calculateTotalCasesBySex(visits));
           setInfo2_ICS([calculateTotalCasesByDiagnostic(visits)]);
           setInfo3_ICS([calculateTotalCasesByEdats(edats)]);
+          setVisits(calcularVisitasPorDia2023(visits));
         }
         setLoading(false);
       } catch (error) { 
@@ -142,8 +179,8 @@ const HomePage = () => {
 
   React.useEffect(() => {
     // Este efecto se ejecutará cada vez que info2_ICS cambie
-    console.log("Resultado de info3_ICS:", info3_ICS);
-  }, [info3_ICS]);
+    console.log("Resultado de info3_ICS:", visits);
+  }, [visits]);
   return (
     <>
       <h1>Malalties dinàmiques</h1>
@@ -163,6 +200,7 @@ const HomePage = () => {
           <div className="py-2" />
           <div>
             <ChartOne />
+            <MyLineChart visits={visits} />
           </div>
           <div className="py-2" />
         </>
