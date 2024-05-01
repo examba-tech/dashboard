@@ -155,23 +155,6 @@ const Sidebar = ({
                 Estacions Contaminació
               </Link>
             </li>
-            <li className="flex items-center">
-              <Image
-                src="/group-solid-24-2.png"
-                alt="Icon1"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              <Link
-                href="/dashboard/about_us"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
-              >
-                Sobre Nosaltres
-              </Link>
-            </li>
           </ul>
         </div>
         <div className={`ml-5 ${isVisible ? "block" : "hidden"}`}>
