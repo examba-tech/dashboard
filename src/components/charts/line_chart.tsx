@@ -32,7 +32,7 @@ const MyLineChart = ({ visits }: { visits: any }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="visits" stroke="#8884d8" />
+        <Line type="monotone" dataKey="count" stroke="#8884d8" />
         <Brush />
       </LineChart>
     </ResponsiveContainer>
