@@ -49,7 +49,7 @@ const options: ApexOptions = {
   },
 
   xaxis: {
-    categories: ["INFECCIONS_AGUDES_TRS", "BRONQUITIS_AGUDA", "GRIP", "BRONQUIOLITIS_AGUDA", "PNEUMONIA_BACTERIANA", "PNEUMONIA_VIRICA"],
+    categories: ["<15>", "15-44", "46-64", "65-74", ">75"],
   },
   legend: {
     position: "top",
@@ -82,7 +82,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series }) => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Diagnòstic
+            Franja d&apos;Edat
           </h4>
         </div>
         <div>

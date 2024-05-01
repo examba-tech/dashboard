@@ -16,3 +16,11 @@ export interface Cases {
   DIAGNOSTIC: String;
   NUMERO_CASOS: Number;
 }
+
+export interface Cases1 {
+  Sexe: String,
+  'Data Alta Problema': Date,
+  FranjaEdat: String,
+  index: Number,
+  NUMERO_CASOS: Number
+}
