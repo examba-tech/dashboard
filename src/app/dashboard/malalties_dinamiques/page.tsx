@@ -99,6 +99,7 @@ const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
   };
   };
 
+
   const calcularVisitasPorDia2023 = (visitas: Interfaces.Cases[]) => {
     var visitasPorDia: { [key: string]: number } = {};
   
@@ -128,6 +129,8 @@ const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
   };
   
 
+
+
 const HomePage = () => {
   const [info_ICS, setInfo_ICS] = React.useState<{
     male: number;
@@ -149,6 +152,7 @@ const HomePage = () => {
     date: string
     count: number
   }[]>([]);
+
   
 
   React.useEffect(() => {
@@ -175,10 +179,9 @@ const HomePage = () => {
   }, []);
 
   React.useEffect(() => {
-    // Este efecto se ejecutará cada vez que visits cambie
-    console.log("Resultado de visits:", visits);
+    // Este efecto se ejecutará cada vez que info2_ICS cambie
+    console.log("Resultado de info3_ICS:", visits);
   }, [visits]);
-
   return (
     <>
       <h1>Malalties dinàmiques</h1>
