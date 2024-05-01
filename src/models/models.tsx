@@ -37,8 +37,25 @@ const visitSchema = new Schema(
   }
 );
 
+const edatSchema = new Schema(
+  {
+    Sexe: String,
+    'Data Alta Problema': Date,
+    FranjaEdat: String,
+    index: Number,
+    NUMERO_CASOS: Number
+  },
+  {
+    bufferTimeoutMS: timeout,
+    maxTimeMS: timeout,
+  }
+);
+
 export const Visit =
   mongoose.models.Visit || mongoose.model("Visit", visitSchema, "visits");
+
+export const Edat =
+  mongoose.models.Edat || mongoose.model("Edat", edatSchema, "edats");
 
 export const Master =
   mongoose.models.Master || mongoose.model("Master", masterSchema, "master");
