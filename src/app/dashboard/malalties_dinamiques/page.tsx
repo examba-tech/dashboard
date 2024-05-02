@@ -129,8 +129,6 @@ const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
   };
   
 
-
-
 const HomePage = () => {
   const [info_ICS, setInfo_ICS] = React.useState<{
     male: number;
@@ -183,7 +181,7 @@ const HomePage = () => {
   }, [visits]);
   return (
     <>
-      <h1>Malalties dinàmiques</h1>
+       <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Malalties dinàmiques</h1>
       {loading && (
         <Box className="flex justify-center items-center h-96">
           <CircularProgress />
@@ -198,7 +196,7 @@ const HomePage = () => {
             <ChartTwoEdats series={info3_ICS} />
           </div>
           <div className="py-2" />
-          <div>
+          <div className="flex center h-[26rem] py8">
             <ChartOne />
             <MyLineChart visits={visits} />
           </div>

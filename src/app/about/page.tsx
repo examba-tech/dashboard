@@ -5,7 +5,7 @@ const size = 150;
 export default function About() {
   return (
     <section>
-      <h2 className="text-xl font-semibold">Nosaltres</h2>
+      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Sobre Nosaltres</h1>
       <br></br>
       <p>
         {" "}
