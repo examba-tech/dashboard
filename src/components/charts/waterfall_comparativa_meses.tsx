@@ -1,10 +1,7 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import {
   BarChart,
   Bar,
-  Cell,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -14,14 +11,38 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const Waterfall = ({ data }: { data: any }) => {
+const Waterfall = ({ data, average }: { data: any; average: number }) => {
+  const monthNames = [
+    "Gener", "Febrer", "Març", "Abril", "Maig", "Juny",
+    "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"
+  ];
+
+  const adjustValue = (value: number) => {
+    return value - average;
+  };
+
+  const getFillColor = (entry: any) => {
+    return entry.last_year > 0 ? "#3056D3" : "#80CAEE";
+  };
+
+  const adjustedData = data.map((entry: any) => ({
+    ...entry,
+    last_year: adjustValue(entry.last_year),
+  }));
+
+  const chartData = adjustedData.map((entry: any, index: number) => ({
+    ...entry,
+    name: monthNames[index],
+    fill: getFillColor(entry),
+  }));
+
   return (
     <div>
       <ResponsiveContainer width="100%" height={400}>
         <BarChart
           width={500}
           height={300}
-          data={data}
+          data={chartData}
           margin={{
             top: 5,
             right: 30,
@@ -35,8 +56,7 @@ const Waterfall = ({ data }: { data: any }) => {
           <Tooltip />
           <Legend />
           <ReferenceLine y={0} stroke="#000" />
-          <Bar dataKey="thisYear" fill="#8884d8" />
-          <Bar dataKey="lastYear" fill="#82ca9d" />
+          <Bar dataKey="last_year" fill="fill" />
         </BarChart>
       </ResponsiveContainer>
     </div>
