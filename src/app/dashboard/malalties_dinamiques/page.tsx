@@ -178,10 +178,7 @@ const HomePage = () => {
     fetchData();
   }, []);
 
-  React.useEffect(() => {
-    // Este efecto se ejecutará cada vez que info2_ICS cambie
-    console.log("Resultado de info3_ICS:", visits);
-  }, [visits]);
+
   return (
     <>
       <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Patolgies agudes</h1>
