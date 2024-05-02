@@ -181,7 +181,7 @@ const HomePage = () => {
 
   return (
     <>
-      <h1>Malalties dinàmiques</h1>
+      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Patologies Agudes</h1>
       {loading && (
         <Box className="flex justify-center items-center h-96">
           <CircularProgress />

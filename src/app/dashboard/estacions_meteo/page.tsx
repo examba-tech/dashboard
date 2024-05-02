@@ -34,7 +34,7 @@ const HomePage = () => {
         <br />
       <MyMapa />
       <br />
-      <h1><strong style={{ fontWeight: 'bold', fontSize: '20px', textDecoration: 'underline' }}>Descripció de les estacions</strong></h1>
+      <h1><strong style={{ fontWeight: 'bold', fontSize: '18px', textDecoration: 'underline' }}>Descripció de les estacions</strong></h1>
       <br />
       <p>Les dades diàries respecte dels diferents factors meteorològics per realitzar la 
         predicció han estat recollides gràcies a diferents peticions fetes al Servei 
