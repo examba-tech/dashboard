@@ -112,7 +112,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
             options={options}
             series={seriesArray}
             type="donut"
-            height={300}
+            height={350}
             width={200}
           />
         </div>

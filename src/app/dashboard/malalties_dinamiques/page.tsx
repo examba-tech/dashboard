@@ -99,6 +99,7 @@ const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
   };
   };
 
+
   const calcularVisitasPorDia2023 = (visitas: Interfaces.Cases[]) => {
     var visitasPorDia: { [key: string]: number } = {};
   
@@ -123,10 +124,12 @@ const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
     // Convertir el diccionario en un array de objetos con fecha y cantidad de visitas
     return Object.keys(visitasPorDia).map(date => ({
       date: date,
-      count: visitasPorDia[date]
+      o: visitasPorDia[date]
     }));
   };
   
+
+
 
 const HomePage = () => {
   const [info_ICS, setInfo_ICS] = React.useState<{
@@ -147,8 +150,9 @@ const HomePage = () => {
 
   const [visits, setVisits] = React.useState<{
     date: string
-    count: number
+    o: number
   }[]>([]);
+
   
 
   React.useEffect(() => {
@@ -174,14 +178,10 @@ const HomePage = () => {
     fetchData();
   }, []);
 
-  React.useEffect(() => {
-    // Este efecto se ejecutará cada vez que visits cambie
-    console.log("Resultado de visits:", visits);
-  }, [visits]);
 
   return (
     <>
-      <h1>Malalties dinàmiques</h1>
+      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Patolgies agudes</h1>
       {loading && (
         <Box className="flex justify-center items-center h-96">
           <CircularProgress />
@@ -189,19 +189,28 @@ const HomePage = () => {
       )}
       {!loading && (
         <>
-          <div className="flex center h-[26rem] py8">
-            <ChartThree series={info_ICS} />
-            <div className="flex-grow" />
-            <ChartTwo series={info2_ICS} />
-            <ChartTwoEdats series={info3_ICS} />
-          </div>
-          <div className="py-2" />
-          <div>
+        <div style={{ marginTop: '50px' }}></div>
+        <div className="flex justify-center items-center h-[26rem] gap-4">
+          <div className="flex-1 flex justify-center items-center">
             <ChartOne />
+          </div>
+          <div className="flex-1 flex justify-center items-center">
             <MyLineChart visits={visits} />
           </div>
-          <div className="py-2" />
-        </>
+        </div>
+        <div className="flex justify-center items-center h-[26rem] gap-4" style={{ transform: 'scale(0.8)' }}>
+          <div className="flex-1 flex justify-center items-center">
+            <ChartThree series={info_ICS} />
+          </div>
+          <div className="flex-1 flex justify-center items-center">
+            <ChartTwo series={info2_ICS} />
+          </div>
+          <div className="flex-1 flex justify-center items-center">
+            <ChartTwoEdats series={info3_ICS} />
+          </div>
+        </div>
+      </>
+      
       )}
     </>
   );
