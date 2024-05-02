@@ -7,12 +7,12 @@ import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 
 const calculateTotalCasesByMonth = (visits: any[]) => {
   const monthlyData: { [key: string]: { last_year: number } } = {};
-  const last_year = 2023; // Ajusta el año actual según tus necesidades
+  const last_year = 2023;
 
   visits.forEach((visit: any) => {
     const date = new Date(visit["Data Alta Problema"]);
     const year = date.getFullYear();
-    const month = date.getMonth() + 1; // getMonth devuelve el mes base 0, sumamos 1
+    const month = date.getMonth() + 1;
 
     if (year === last_year) {
       const key = `${month}`;
@@ -56,7 +56,7 @@ const HomePage = () => {
     if (visits.length > 0) {
       const monthlyData = calculateTotalCasesByMonth(visits);
       const totalCasesThisYear = monthlyData.reduce((acc, curr) => acc + curr.last_year, 0);
-      const average = totalCasesThisYear / 12; // Dividir por 12 para obtener el promedio mensual
+      const average = totalCasesThisYear / 12;
       setAverage(average);
     }
   }, [visits]);
