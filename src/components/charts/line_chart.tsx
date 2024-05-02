@@ -77,9 +77,9 @@ const MyLineChart = ({ visits }: { visits: any }) => {
         <XAxis dataKey="date" tick={{ fontSize: 10 }} />
         <YAxis tick={{ fontSize: 10 }}/>
         <Tooltip 
-        formatter={(value, name) =>  [<span style={{ color: 'black' }}>
-        {name} <span style={{ color: 'black', fontWeight: 'bold' }}>{value}</span>
-      </span>]}
+        formatter={(value, name) =>  <span style={{ color: 'black' }}>
+        {"count:"} <span style={{ color: 'black', fontWeight: 'bold' }}>{value}
+      </span></span>}
         labelFormatter={(label) => 
           new Date(label).toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric' })
         }
@@ -94,8 +94,8 @@ const MyLineChart = ({ visits }: { visits: any }) => {
         }}
         labelStyle={{ color: 'black' }}
 />
-        <Legend />
-        <Line type="monotone" dataKey="count" stroke="#80CAEE" />
+        {/*<Legend />*/}
+        <Line type="monotone" dataKey="o" stroke="#80CAEE" />
         <Brush />
       </LineChart>
     </ResponsiveContainer>

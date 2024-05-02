@@ -124,7 +124,7 @@ const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
     // Convertir el diccionario en un array de objetos con fecha y cantidad de visitas
     return Object.keys(visitasPorDia).map(date => ({
       date: date,
-      count: visitasPorDia[date]
+      o: visitasPorDia[date]
     }));
   };
   
@@ -150,7 +150,7 @@ const HomePage = () => {
 
   const [visits, setVisits] = React.useState<{
     date: string
-    count: number
+    o: number
   }[]>([]);
 
   
