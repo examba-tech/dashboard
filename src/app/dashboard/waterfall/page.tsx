@@ -5,11 +5,19 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 
-const calculateTotalCasesByMonth = (visits: any[]) => {
+interface Visit {
+    _id: { $oid: string };
+    Sexe: string;
+    'Data Alta Problema': Date;
+    DIAGNOSTIC: string;
+    NUMERO_CASOS: number;
+  }
+
+const calculateTotalCasesByMonth = (visits: Visit[]) => {
   const monthlyData: { [key: string]: { last_year: number } } = {};
   const last_year = 2023;
 
-  visits.forEach((visit: any) => {
+  visits.forEach((visit: Visit) => {
     const date = new Date(visit["Data Alta Problema"]);
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
