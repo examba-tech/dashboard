@@ -37,7 +37,7 @@ const options: ApexOptions = {
   ],
   plotOptions: {
     bar: {
-      horizontal: false,
+      horizontal: true,
       borderRadius: 0,
       columnWidth: "25%",
       borderRadiusApplication: "end",
@@ -49,7 +49,7 @@ const options: ApexOptions = {
   },
 
   xaxis: {
-    categories: ["<15>", "15-44", "46-64", "65-74", ">75"],
+    categories: ["<15", "15-44", "46-64", "65-74", ">75"],
   },
   legend: {
     position: "top",
@@ -130,7 +130,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series }) => {
             series={series}
             type="bar"
             height={350}
-            width={400}
+            width={600}
           />
         </div>
       </div>

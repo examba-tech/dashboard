@@ -184,7 +184,7 @@ const HomePage = () => {
   }, [visits]);
   return (
     <>
-      <h1>Malalties dinàmiques</h1>
+      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Patolgies agudes</h1>
       {loading && (
         <Box className="flex justify-center items-center h-96">
           <CircularProgress />
@@ -192,19 +192,28 @@ const HomePage = () => {
       )}
       {!loading && (
         <>
-          <div className="flex center h-[26rem] py8">
-            <ChartThree series={info_ICS} />
-            <div className="flex-grow" />
-            <ChartTwo series={info2_ICS} />
-            <ChartTwoEdats series={info3_ICS} />
-          </div>
-          <div className="py-2" />
-          <div>
+        <div style={{ marginTop: '50px' }}></div>
+        <div className="flex justify-center items-center h-[26rem] gap-4">
+          <div className="flex-1 flex justify-center items-center">
             <ChartOne />
+          </div>
+          <div className="flex-1 flex justify-center items-center">
             <MyLineChart visits={visits} />
           </div>
-          <div className="py-2" />
-        </>
+        </div>
+        <div className="flex justify-center items-center h-[26rem] gap-4" style={{ transform: 'scale(0.8)' }}>
+          <div className="flex-1 flex justify-center items-center">
+            <ChartThree series={info_ICS} />
+          </div>
+          <div className="flex-1 flex justify-center items-center">
+            <ChartTwo series={info2_ICS} />
+          </div>
+          <div className="flex-1 flex justify-center items-center">
+            <ChartTwoEdats series={info3_ICS} />
+          </div>
+        </div>
+      </>
+      
       )}
     </>
   );
