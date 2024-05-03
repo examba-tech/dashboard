@@ -1,7 +1,10 @@
-export async function getMongoCollection(collection_name: string) {
+export async function getMongoCollection(
+  collection_name: string,
+  params?: { [key: string]: any }
+) {
   try {
     const res = await fetch(
-      "http://localhost:3000/api/mongo/" + collection_name,
+      "http://localhost:3000/api/mongo/" + collection_name + "?" + new URLSearchParams(params),
       {
         cache: "force-cache",
       }

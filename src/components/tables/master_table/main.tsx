@@ -23,7 +23,7 @@ export default function MasterTable({ data }: { data: Interfaces.Master[] }) {
   const filteredDataset = data.filter(
     (item) =>
       selectedValues.cps.length == 0 ||
-      selectedValues.cps.includes(item["CODI MUNICIPAL"])
+      selectedValues.cps.includes(item["CODI_MUNICIPAL"])
   );
 
   return (
