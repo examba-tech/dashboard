@@ -3,7 +3,6 @@ import React from "react";
 import ChartThree from "./ChartThree";
 import ChartTwo from "./ChartTwo";
 import ChartTwoEdats from "./ChartTwoEdats";
-import MapaOne from "./Mapa";
 import ChartOne from "./ChartOne";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -11,6 +10,7 @@ import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
 import MyLineChart from "@/src/components/charts/line_chart";
 import Filters from "@/src/app/dashboard/malalties_dinamiques/filters";
+import MapaOne from "./Mapa";
 import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 
 const calculateTotalCasesBySex = (info: Interfaces.Cases[], selectedDiagnostic: string | null) => {
@@ -73,7 +73,7 @@ const calculateTotalCasesByDiagnostic = (info: Interfaces.Cases[]) => {
 };
 
 
-const calculateTotalCasesByEdats = (info: Interfaces.Cases1[], selectedDiagnostic: string | null) => {
+const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
   var totalCasesByEdats = {
     de_15_44: 0,
     de_45_64: 0,
@@ -83,10 +83,6 @@ const calculateTotalCasesByEdats = (info: Interfaces.Cases1[], selectedDiagnosti
   };
 
   info.forEach((entry: Interfaces.Cases1) => {
-    // Aplicar filtro por diagnóstico si está seleccionado
-    if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
-      return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
-    }
 
     if (entry.FranjaEdat == "15-44") {
       totalCasesByEdats.de_15_44 += entry.NUMERO_CASOS.valueOf();
@@ -129,7 +125,7 @@ const calcularVisitasPorDia2023 = (visitas: Interfaces.Cases[]) => {
       if (!visitasPorDia[fechaClave]) {
         visitasPorDia[fechaClave] = 0;
       }
-
+  
       // Sumar el número de casos a la fecha correspondiente
       visitasPorDia[fechaClave] += visita.NUMERO_CASOS;
     }
@@ -141,48 +137,40 @@ const calcularVisitasPorDia2023 = (visitas: Interfaces.Cases[]) => {
     o: visitasPorDia[date]
   }));
 };
-    // Convertir el diccionario en un array de objetos con fecha y cantidad de visitas
-    return Object.keys(visitasPorDia).map(date => ({
-      date: date,
-      o: visitasPorDia[date]
-    }));
-  };
 
-  interface Visit {
-    _id: { $oid: string };
-    Sexe: string;
-    'Data Alta Problema': Date;
-    DIAGNOSTIC: string;
-    NUMERO_CASOS: number;
-  }
+interface Visit {
+  _id: { $oid: string };
+  Sexe: string;
+  'Data Alta Problema': Date;
+  DIAGNOSTIC: string;
+  NUMERO_CASOS: number;
+}
 
 const calculateTotalCasesByMonth = (visits: Visit[]) => {
-  const monthlyData: { [key: string]: { last_year: number } } = {};
-  const last_year = 2023;
-  
-  visits.forEach((visit: Visit) => {
-    const date = new Date(visit["Data Alta Problema"]);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-  
-  if (year === last_year) {
-    const key = `${month}`;
-  
-  if (!monthlyData[key]) {
-    monthlyData[key] = { last_year: 0 };
-    }
-  
-  monthlyData[key].last_year += visit.NUMERO_CASOS;
+const monthlyData: { [key: string]: { last_year: number } } = {};
+const last_year = 2023;
+
+visits.forEach((visit: Visit) => {
+  const date = new Date(visit["Data Alta Problema"]);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+
+if (year === last_year) {
+  const key = `${month}`;
+
+if (!monthlyData[key]) {
+  monthlyData[key] = { last_year: 0 };
   }
+
+monthlyData[key].last_year += visit.NUMERO_CASOS;
+}
 });
-  
-    return Object.entries(monthlyData).map(([month, data]) => ({
-      name: `Month ${month}`,
-      last_year: data.last_year,
-    }));
-  };
 
-
+  return Object.entries(monthlyData).map(([month, data]) => ({
+    name: `Month ${month}`,
+    last_year: data.last_year,
+  }));
+};
 
 const HomePage = () => {
   const [info_ICS, setInfo_ICS] = React.useState<{
@@ -226,7 +214,8 @@ const HomePage = () => {
         if (visits !== undefined) {
           setInfo_ICS(calculateTotalCasesBySex(visits, selectedDiagnostic));
           setInfo2_ICS([calculateTotalCasesByDiagnostic(visits)]);
-          setInfo3_ICS([calculateTotalCasesByEdats(edats, selectedDiagnostic)]);
+          setInfo3_ICS([calculateTotalCasesByEdats(edats)]);
+          setVisits(calcularVisitasPorDia2023(visits));
           setVisits(calcularVisitasPorDia2023(visits));
           setVisits1(visits);
         }
@@ -238,8 +227,7 @@ const HomePage = () => {
     };
 
     fetchData();
-  }, [selectedDiagnostic]); // Dependencia del efecto
-  }, []);
+  }, [selectedDiagnostic]);
   
   React.useEffect(() => {
     if (visits1.length > 0) {
@@ -260,42 +248,41 @@ const HomePage = () => {
       )}
       {!loading && (
         <>
-          {/* Componente Filters con selectedDiagnostic y onDiagnosticChange pasados como props */}
-          <Filters
+        <Filters
             selectedDiagnostic={selectedDiagnostic}
             onDiagnosticChange={handleDiagnosticChange}
           />
-          <div style={{ marginTop: '50px' }}></div>
-          <div className="flex justify-center items-center h-[26rem] gap-4">
-            <div className="flex-1 flex justify-center items-center">
-              <ChartOne />
-            </div>
-            <div className="flex-1 flex justify-center items-center">
-              <MyLineChart visits={visits} />
-            </div>
+
+        <div style={{ marginTop: '50px' }}></div>
+        <div className="flex justify-center items-center h-[26rem] gap-4">
+          <div className="flex-1 flex justify-center items-center">
+            <ChartOne />
           </div>
-          <div className="flex justify-center items-center h-[26rem] gap-4" style={{ transform: 'scale(0.8)' }}>
-            <div className="flex-1 flex justify-center items-center">
-              <ChartThree series={info_ICS} />
-            </div>
-            <div className="flex-1 flex justify-center items-center">
-              <ChartTwo series={info2_ICS} />
-            </div>
-            <div className="flex-1 flex justify-center items-center">
-              <ChartTwoEdats series={info3_ICS} />
-            </div>
+          <div className="flex-1 flex justify-center items-center">
+            <MyLineChart visits={visits} />
           </div>
-        </>
+        </div>
+        <div className="flex justify-center items-center h-[26rem] gap-4" style={{ transform: 'scale(0.8)' }}>
+          <div className="flex-1 flex justify-center items-center">
+            <ChartThree series={info_ICS} />
+          </div>
+          <div className="flex-1 flex justify-center items-center">
+            <ChartTwo series={info2_ICS} />
+          </div>
+          <div className="flex-1 flex justify-center items-center">
+            <ChartTwoEdats series={info3_ICS} />
+          </div>
         </div>
         <div className="flex justify-center items-center h-[26rem] gap-4">
           <div className="flex-1 flex justify-center items-center">
           <Waterfall data={calculateTotalCasesByMonth(visits1)} average={average} />
           </div>
           <div className="flex-1 flex justify-center items-center">
-          
+          <MapaOne />
           </div>
         </div>
       </>
+      
       )}
     </>
   );
