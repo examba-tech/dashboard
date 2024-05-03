@@ -3,6 +3,7 @@ import React from "react";
 import ChartThree from "./ChartThree";
 import ChartTwo from "./ChartTwo";
 import ChartTwoEdats from "./ChartTwoEdats";
+import MapaOne from "./Mapa";
 import ChartOne from "./ChartOne";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -10,6 +11,7 @@ import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
 import MyLineChart from "@/src/components/charts/line_chart";
 import Filters from "@/src/app/dashboard/malalties_dinamiques/filters";
+import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 
 const calculateTotalCasesBySex = (info: Interfaces.Cases[], selectedDiagnostic: string | null) => {
   var totalCasesBySex = {
@@ -127,7 +129,7 @@ const calcularVisitasPorDia2023 = (visitas: Interfaces.Cases[]) => {
       if (!visitasPorDia[fechaClave]) {
         visitasPorDia[fechaClave] = 0;
       }
-  
+
       // Sumar el número de casos a la fecha correspondiente
       visitasPorDia[fechaClave] += visita.NUMERO_CASOS;
     }
@@ -139,6 +141,48 @@ const calcularVisitasPorDia2023 = (visitas: Interfaces.Cases[]) => {
     o: visitasPorDia[date]
   }));
 };
+    // Convertir el diccionario en un array de objetos con fecha y cantidad de visitas
+    return Object.keys(visitasPorDia).map(date => ({
+      date: date,
+      o: visitasPorDia[date]
+    }));
+  };
+
+  interface Visit {
+    _id: { $oid: string };
+    Sexe: string;
+    'Data Alta Problema': Date;
+    DIAGNOSTIC: string;
+    NUMERO_CASOS: number;
+  }
+
+const calculateTotalCasesByMonth = (visits: Visit[]) => {
+  const monthlyData: { [key: string]: { last_year: number } } = {};
+  const last_year = 2023;
+  
+  visits.forEach((visit: Visit) => {
+    const date = new Date(visit["Data Alta Problema"]);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+  
+  if (year === last_year) {
+    const key = `${month}`;
+  
+  if (!monthlyData[key]) {
+    monthlyData[key] = { last_year: 0 };
+    }
+  
+  monthlyData[key].last_year += visit.NUMERO_CASOS;
+  }
+});
+  
+    return Object.entries(monthlyData).map(([month, data]) => ({
+      name: `Month ${month}`,
+      last_year: data.last_year,
+    }));
+  };
+
+
 
 const HomePage = () => {
   const [info_ICS, setInfo_ICS] = React.useState<{
@@ -169,6 +213,9 @@ const HomePage = () => {
     setSelectedDiagnostic(diagnostic);
   };
 
+  const [average, setAverage] = React.useState(0);
+  const [visits1, setVisits1] = React.useState<any[]>([]);
+
   React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -181,6 +228,7 @@ const HomePage = () => {
           setInfo2_ICS([calculateTotalCasesByDiagnostic(visits)]);
           setInfo3_ICS([calculateTotalCasesByEdats(edats, selectedDiagnostic)]);
           setVisits(calcularVisitasPorDia2023(visits));
+          setVisits1(visits);
         }
         setLoading(false);
       } catch (error) { 
@@ -191,6 +239,16 @@ const HomePage = () => {
 
     fetchData();
   }, [selectedDiagnostic]); // Dependencia del efecto
+  }, []);
+  
+  React.useEffect(() => {
+    if (visits1.length > 0) {
+      const monthlyData = calculateTotalCasesByMonth(visits1);
+      const totalCasesThisYear = monthlyData.reduce((acc, curr) => acc + curr.last_year, 0);
+      const average = totalCasesThisYear / 12;
+      setAverage(average);
+    }
+  }, [visits]);
 
   return (
     <>
@@ -228,6 +286,16 @@ const HomePage = () => {
             </div>
           </div>
         </>
+        </div>
+        <div className="flex justify-center items-center h-[26rem] gap-4">
+          <div className="flex-1 flex justify-center items-center">
+          <Waterfall data={calculateTotalCasesByMonth(visits1)} average={average} />
+          </div>
+          <div className="flex-1 flex justify-center items-center">
+          
+          </div>
+        </div>
+      </>
       )}
     </>
   );

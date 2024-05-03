@@ -30,7 +30,7 @@ interface ColumnData {
 function createData(object: Interfaces.Master): Data {
   return {
     date: object.DATA.substring(0, 10),
-    cp: object["CODI MUNICIPAL"],
+    cp: object["CODI_MUNICIPAL"],
     no: object.NO,
     no2: object.NO2,
     so2: object.SO2,
