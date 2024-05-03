@@ -1,6 +1,6 @@
 export interface Master {
   DATA: string;
-  "CODI MUNICIPAL": string;
+  "CODI_MUNICIPAL": string;
   NO: number;
   NO2: number;
   SO2: number;
