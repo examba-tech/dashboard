@@ -16,15 +16,20 @@ export async function GET(
     model = Models.Visit;
   } else if (collection_name === "edats") {
     model = Models.Edat;
-  }  else {
+  } else {
     return NextResponse.json(
       { message: "Invalid collection name" },
       { status: 400 }
     );
   }
+  const searchParams = request.nextUrl.searchParams;
+  let mongoQuery: { [key: string]: any } = {};
+  searchParams.forEach((value, key) => {
+    mongoQuery[key] = value;
+  });
 
   try {
-    const collection = await model.find().select("-_id");
+    const collection = await model.find(mongoQuery).select("-_id");
     return NextResponse.json({ collection }, { status: 200 });
   } catch (err) {
     console.log(err);

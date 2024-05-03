@@ -12,9 +12,12 @@ const Page = () => {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
+    const params = {
+      CODI_MUNICIPAL: "081141",
+    };
     const fetchData = async () => {
       try {
-        const data = await getMongoCollection("master");
+        const data = await getMongoCollection("master", params);
         setMaster(data && data.collection ? data.collection : []);
         setLoading(false);
       } catch (error) {
@@ -27,20 +30,17 @@ const Page = () => {
   }, []);
 
   return (
-    <>
-      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Descàrrega de Dades</h1>
-      <br />
+    <div>
+      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
+        Descàrrega de Dades
+      </h1>
       {loading && (
         <Box className="flex justify-center items-center h-96">
           <CircularProgress />
         </Box>
       )}
-      {!loading && (
-        <>
-          <MasterTable data={master} />
-        </>
-      )}
-    </>
+      {!loading && <MasterTable data={master} />}
+    </div>
   );
 };
 
