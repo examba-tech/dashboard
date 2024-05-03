@@ -1,22 +1,28 @@
-"use client";
+"use client"
+import React from "react";
 import ChartThree from "./ChartThree";
 import ChartTwo from "./ChartTwo";
 import ChartTwoEdats from "./ChartTwoEdats";
 import ChartOne from "./ChartOne";
-import * as React from "react";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
 import MyLineChart from "@/src/components/charts/line_chart";
+import Filters from "@/src/app/dashboard/malalties_dinamiques/filters";
 
-const calculateTotalCasesBySex = (info: Interfaces.Cases[]) => {
+const calculateTotalCasesBySex = (info: Interfaces.Cases[], selectedDiagnostic: string | null) => {
   var totalCasesBySex = {
     male: 0,
     female: 0,
   };
 
   info.forEach((entry: Interfaces.Cases) => {
+    // Aplicar filtro por diagnóstico si está seleccionado
+    if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
+      return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
+    }
+
     if (entry.Sexe == "H") {
       totalCasesBySex.male += entry.NUMERO_CASOS.valueOf();
     } else if (entry.Sexe == "D") {
@@ -62,9 +68,10 @@ const calculateTotalCasesByDiagnostic = (info: Interfaces.Cases[]) => {
       totalCasesByDiagnostic.PNEUMONIA_VIRICA
     ]
   };
-  };
+};
 
-const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
+
+const calculateTotalCasesByEdats = (info: Interfaces.Cases1[], selectedDiagnostic: string | null) => {
   var totalCasesByEdats = {
     de_15_44: 0,
     de_45_64: 0,
@@ -72,8 +79,13 @@ const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
     mes_75: 0,
     menys_15: 0,
   };
-  
+
   info.forEach((entry: Interfaces.Cases1) => {
+    // Aplicar filtro por diagnóstico si está seleccionado
+    if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
+      return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
+    }
+
     if (entry.FranjaEdat == "15-44") {
       totalCasesByEdats.de_15_44 += entry.NUMERO_CASOS.valueOf();
     } else if (entry.FranjaEdat == "45-64") {
@@ -95,41 +107,38 @@ const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
       totalCasesByEdats.de_45_64,
       totalCasesByEdats.de_65_74,
       totalCasesByEdats.mes_75,
-      ]
+    ]
   };
-  };
+};
 
 
-  const calcularVisitasPorDia2023 = (visitas: Interfaces.Cases[]) => {
-    var visitasPorDia: { [key: string]: number } = {};
+const calcularVisitasPorDia2023 = (visitas: Interfaces.Cases[]) => {
+  var visitasPorDia: { [key: string]: number } = {};
   
-    visitas.forEach((visita: Interfaces.Cases) => {
-      const fecha = new Date(visita["Data Alta Problema"]);
-      const year = fecha.getFullYear();
+  visitas.forEach((visita: Interfaces.Cases) => {
+    const fecha = new Date(visita["Data Alta Problema"]);
+    const year = fecha.getFullYear();
   
-      // Verificar si el año es 2023
-      if (year === 2023) {
-        const fechaClave = fecha.toISOString().split('T')[0]; // Formato 'YYYY-MM-DD'
+    // Verificar si el año es 2023
+    if (year === 2023) {
+      const fechaClave = fecha.toISOString().split('T')[0]; // Formato 'YYYY-MM-DD'
   
-        // Si la fecha no existe en el diccionario, inicializar a 0
-        if (!visitasPorDia[fechaClave]) {
-          visitasPorDia[fechaClave] = 0;
-        }
-  
-        // Sumar el número de casos a la fecha correspondiente
-        visitasPorDia[fechaClave] += visita.NUMERO_CASOS;
+      // Si la fecha no existe en el diccionario, inicializar a 0
+      if (!visitasPorDia[fechaClave]) {
+        visitasPorDia[fechaClave] = 0;
       }
-    });
   
-    // Convertir el diccionario en un array de objetos con fecha y cantidad de visitas
-    return Object.keys(visitasPorDia).map(date => ({
-      date: date,
-      o: visitasPorDia[date]
-    }));
-  };
+      // Sumar el número de casos a la fecha correspondiente
+      visitasPorDia[fechaClave] += visita.NUMERO_CASOS;
+    }
+  });
   
-
-
+  // Convertir el diccionario en un array de objetos con fecha y cantidad de visitas
+  return Object.keys(visitasPorDia).map(date => ({
+    date: date,
+    o: visitasPorDia[date]
+  }));
+};
 
 const HomePage = () => {
   const [info_ICS, setInfo_ICS] = React.useState<{
@@ -153,7 +162,12 @@ const HomePage = () => {
     o: number
   }[]>([]);
 
-  
+  const [selectedDiagnostic, setSelectedDiagnostic] = React.useState<string | null>(null);
+
+  // Función para manejar el cambio de diagnóstico seleccionado
+  const handleDiagnosticChange = (diagnostic: string) => {
+    setSelectedDiagnostic(diagnostic);
+  };
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -163,9 +177,9 @@ const HomePage = () => {
         const data1 = await getMongoCollection("edats");
         const edats = data1 && data1.collection ? data1.collection : undefined;
         if (visits !== undefined) {
-          setInfo_ICS(calculateTotalCasesBySex(visits));
+          setInfo_ICS(calculateTotalCasesBySex(visits, selectedDiagnostic));
           setInfo2_ICS([calculateTotalCasesByDiagnostic(visits)]);
-          setInfo3_ICS([calculateTotalCasesByEdats(edats)]);
+          setInfo3_ICS([calculateTotalCasesByEdats(edats, selectedDiagnostic)]);
           setVisits(calcularVisitasPorDia2023(visits));
         }
         setLoading(false);
@@ -176,8 +190,7 @@ const HomePage = () => {
     };
 
     fetchData();
-  }, []);
-
+  }, [selectedDiagnostic]); // Dependencia del efecto
 
   return (
     <>
@@ -189,28 +202,32 @@ const HomePage = () => {
       )}
       {!loading && (
         <>
-        <div style={{ marginTop: '50px' }}></div>
-        <div className="flex justify-center items-center h-[26rem] gap-4">
-          <div className="flex-1 flex justify-center items-center">
-            <ChartOne />
+          {/* Componente Filters con selectedDiagnostic y onDiagnosticChange pasados como props */}
+          <Filters
+            selectedDiagnostic={selectedDiagnostic}
+            onDiagnosticChange={handleDiagnosticChange}
+          />
+          <div style={{ marginTop: '50px' }}></div>
+          <div className="flex justify-center items-center h-[26rem] gap-4">
+            <div className="flex-1 flex justify-center items-center">
+              <ChartOne />
+            </div>
+            <div className="flex-1 flex justify-center items-center">
+              <MyLineChart visits={visits} />
+            </div>
           </div>
-          <div className="flex-1 flex justify-center items-center">
-            <MyLineChart visits={visits} />
+          <div className="flex justify-center items-center h-[26rem] gap-4" style={{ transform: 'scale(0.8)' }}>
+            <div className="flex-1 flex justify-center items-center">
+              <ChartThree series={info_ICS} />
+            </div>
+            <div className="flex-1 flex justify-center items-center">
+              <ChartTwo series={info2_ICS} />
+            </div>
+            <div className="flex-1 flex justify-center items-center">
+              <ChartTwoEdats series={info3_ICS} />
+            </div>
           </div>
-        </div>
-        <div className="flex justify-center items-center h-[26rem] gap-4" style={{ transform: 'scale(0.8)' }}>
-          <div className="flex-1 flex justify-center items-center">
-            <ChartThree series={info_ICS} />
-          </div>
-          <div className="flex-1 flex justify-center items-center">
-            <ChartTwo series={info2_ICS} />
-          </div>
-          <div className="flex-1 flex justify-center items-center">
-            <ChartTwoEdats series={info3_ICS} />
-          </div>
-        </div>
-      </>
-      
+        </>
       )}
     </>
   );
