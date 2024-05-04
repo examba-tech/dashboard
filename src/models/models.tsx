@@ -51,6 +51,30 @@ const edatSchema = new Schema(
   }
 );
 
+const estaticSchema = new Schema(
+  {
+    Localitat: String,
+    Sexe: String,
+    FranjaEdat: String,
+    DIAGNOSTIC: String,
+    Numero_Casos: Number,
+    municipi: String,
+    valor: Number,
+    Latitud: Number,
+    Longitud: Number,
+    NO2: Number,
+    NO: Number,
+    SO2: Number,
+    "ICQA NO2": String,
+    "ICQA SO2": String
+  },
+  {
+    bufferTimeoutMS: timeout,
+    maxTimeMS: timeout,
+  }
+);
+
+
 export const Visit =
   mongoose.models.Visit || mongoose.model("Visit", visitSchema, "visits");
 
@@ -59,3 +83,6 @@ export const Edat =
 
 export const Master =
   mongoose.models.Master || mongoose.model("Master", masterSchema, "master");
+
+export const Estatic =
+  mongoose.models.Estatic || mongoose.model("Estatic", estaticSchema, "estatics");

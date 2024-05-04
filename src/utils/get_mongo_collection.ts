@@ -3,12 +3,28 @@ export async function getMongoCollection(
   params?: { [key: string]: any }
 ) {
   try {
-    const res = await fetch(
-      "http://localhost:3000/api/mongo/" + collection_name + "?" + new URLSearchParams(params),
-      {
-        cache: "force-cache",
+
+    let url;
+    if (params && Object.keys(params).length !== 0) {
+        url = "http://localhost:3000/api/mongo/" + collection_name + "?" + new URLSearchParams(params);
+      } else {
+        url = "http://localhost:3000/api/mongo/" + collection_name;
       }
-    );
+      const res = await fetch(url, 
+        {
+          cache: "force-cache",
+        }
+      );
+
+
+    // const res = await fetch(
+    //   "http://localhost:3000/api/mongo/" + collection_name + "?" + new URLSearchParams(params),
+    //   //"http://localhost:3000/api/mongo/" + collection_name, //+ "?" + new URLSearchParams(params),
+      
+    //   {
+    //     cache: "force-cache",
+    //   }
+    // );
 
     if (!res.ok) {
       throw new Error("Failed to fetch topics");
