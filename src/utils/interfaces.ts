@@ -24,3 +24,20 @@ export interface Cases1 {
   index: number,
   NUMERO_CASOS: number
 }
+
+export interface Estatiques {
+    Localitat: string,
+    Sexe: string,
+    FranjaEdat: string,
+    DIAGNOSTIC: string,
+    Numero_Casos: number,
+    municipi: string,
+    valor: number,
+    Latitud: number,
+    Longitud: number,
+    NO2: number,
+    NO: number,
+    SO2: number,
+    "ICQA NO2": string,
+    "ICQA SO2": string
+  }

@@ -192,11 +192,15 @@ const HomePage = () => {
   const [visits1, setVisits1] = React.useState<any[]>([]);
 
   React.useEffect(() => {
+    const params = {
+    };
     const fetchData = async () => {
       try {
-        const data = await getMongoCollection("visits");
+        const data = await getMongoCollection("visits", params);
         const visits = data && data.collection ? data.collection : undefined;
-        const data1 = await getMongoCollection("edats");
+        console.log("Bbbbbbbbbbbbbbb");
+        console.log("Data from MongoDB:", visits);
+        const data1 = await getMongoCollection("edats", params);
         const edats = data1 && data1.collection ? data1.collection : undefined;
         if (visits !== undefined) {
           setInfo_ICS(calculateTotalCasesBySex(visits));
