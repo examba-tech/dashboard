@@ -3,19 +3,19 @@ import React from "react";
 import ChartThree from "./ChartThree";
 import ChartTwo from "./ChartTwo";
 import ChartTwoEdats from "./ChartTwoEdats";
-import MapaOne from "./Mapa";
 import ChartOne from "./ChartOne";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
 import MyLineChart from "@/src/components/charts/line_chart";
-import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 import Filters from "@/src/app/dashboard/malalties_dinamiques/filters";
+//import MapaOne from "./Mapa";
+import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Cases[],
-  selectedDiagnostic: string | null
+  selectedDiagnostic: string
 ) => {
   var totalCasesBySex = {
     male: 0,
@@ -78,10 +78,7 @@ const calculateTotalCasesByDiagnostic = (info: Interfaces.Cases[]) => {
   };
 };
 
-const calculateTotalCasesByEdats = (
-  info: Interfaces.Cases1[],
-  selectedDiagnostic: string | null
-) => {
+const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
   var totalCasesByEdats = {
     de_15_44: 0,
     de_45_64: 0,
@@ -227,7 +224,8 @@ const HomePage = () => {
         if (visits !== undefined) {
           setInfo_ICS(calculateTotalCasesBySex(visits, selectedDiagnostic));
           setInfo2_ICS([calculateTotalCasesByDiagnostic(visits)]);
-          setInfo3_ICS([calculateTotalCasesByEdats(edats, selectedDiagnostic)]);
+          setInfo3_ICS([calculateTotalCasesByEdats(edats)]);
+          setVisits(calcularVisitasPorDia2023(visits));
           setVisits(calcularVisitasPorDia2023(visits));
           setVisits1(visits);
         }
