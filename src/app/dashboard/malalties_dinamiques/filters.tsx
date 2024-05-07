@@ -10,6 +10,7 @@ const Filters: React.FC<FiltersProps> = ({
   selectedDiagnostic,
   onDiagnosticChange,
 }) => {
+
   return (
     <div>
       <SingleSelectChip

@@ -59,6 +59,11 @@ interface ChartThreeProps {
 
 const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
   const seriesArray = [series.female, series.male];
+  const [infoVisible, setInfoVisible] = useState(false);
+
+  const toggleInfo = () => {
+    setInfoVisible(!infoVisible);
+  };
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
@@ -66,6 +71,13 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
             Gènere
+            <span
+              className="text-sm text-gray-400 cursor-pointer"
+              onClick={toggleInfo}
+            >
+              {" "}
+              +info
+            </span>
           </h5>
         </div>
         <div>
@@ -107,7 +119,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
       </div>
 
       <div className="mb-2">
-        <div id="chartThree" className="mx-auto flex justify-center">
+        <div id="chartThree" className="mx-auto flex justify-center relative">
           <ReactApexChart
             options={options}
             series={seriesArray}
@@ -115,6 +127,16 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
             height={350}
             width={200}
           />
+          {infoVisible && (
+            <div
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-12 py-4 rounded-lg shadow-lg"
+              onClick={toggleInfo}
+            >
+              <p className="text-sm text-gray-800">
+                Aquest gràfic mostra la distribució del número de visites segons el gènere ... Aquest gràfic mostra la distribució del número de visites segons el gènere ...
+              </p>
+            </div>
+          )}
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-y-3">

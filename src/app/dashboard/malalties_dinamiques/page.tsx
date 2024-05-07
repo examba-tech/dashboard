@@ -10,10 +10,10 @@ import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
 import MyLineChart from "@/src/components/charts/line_chart";
 import Filters from "@/src/app/dashboard/malalties_dinamiques/filters";
-import MapaOne from "./Mapa";
+//import MapaOne from "./Mapa";
 import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 
-const calculateTotalCasesBySex = (info: Interfaces.Cases[], selectedDiagnostic: string | null) => {
+const calculateTotalCasesBySex = (info: Interfaces.Cases[], selectedDiagnostic: string) => {
   var totalCasesBySex = {
     male: 0,
     female: 0,
@@ -194,7 +194,7 @@ const HomePage = () => {
     o: number
   }[]>([]);
 
-  const [selectedDiagnostic, setSelectedDiagnostic] = React.useState<string | null>(null);
+  const [selectedDiagnostic, setSelectedDiagnostic] = React.useState<string>("GRIP"); // Valor predeterminado
 
   // Función para manejar el cambio de diagnóstico seleccionado
   const handleDiagnosticChange = (diagnostic: string) => {
@@ -227,7 +227,7 @@ const HomePage = () => {
     };
 
     fetchData();
-  }, [selectedDiagnostic]);
+  }, [visits1, selectedDiagnostic]);
   
   React.useEffect(() => {
     if (visits1.length > 0) {
@@ -236,7 +236,7 @@ const HomePage = () => {
       const average = totalCasesThisYear / 12;
       setAverage(average);
     }
-  }, [visits]);
+  }, [visits1]);
 
   return (
     <>
@@ -276,9 +276,6 @@ const HomePage = () => {
         <div className="flex justify-center items-center h-[26rem] gap-4">
           <div className="flex-1 flex justify-center items-center">
           <Waterfall data={calculateTotalCasesByMonth(visits1)} average={average} />
-          </div>
-          <div className="flex-1 flex justify-center items-center">
-          <MapaOne />
           </div>
         </div>
       </>
