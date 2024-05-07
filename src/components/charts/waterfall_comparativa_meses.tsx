@@ -13,8 +13,18 @@ import {
 
 const Waterfall = ({ data, average }: { data: any; average: number }) => {
   const monthNames = [
-    "Gen", "Feb", "Mar", "Abr", "Mai", "Jun",
-    "Jul", "Ago", "Set", "Oct", "Nov", "Des"
+    "Gen",
+    "Feb",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Oct",
+    "Nov",
+    "Des",
   ];
 
   const adjustValue = (value: number) => {
@@ -83,40 +93,30 @@ const Waterfall = ({ data, average }: { data: any; average: number }) => {
       </div>
 
       <div>
-      <div>
-      <ResponsiveContainer width={650} height={400}>
-        <BarChart
-          width={500}
-          height={300}
-          data={chartData}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" tick={{ fontSize: 10 }}/>
-          <YAxis tick={{ fontSize: 10 }}/>
-          <Tooltip 
-            contentStyle={{ 
-              backgroundColor: 'rgba(400, 400, 400, 1)', 
-              borderColor: '#ccc', 
-              padding: '10px',
-              borderRadius: '8px', 
-              background: 'linear-gradient(to bottom, rgba(240,240,240,1) 50%, rgba(255,255,255,1) 50%)',
-              fontSize: '12px',
-              color: 'linear-gradient(to bottom, black, black)'
-            }}
-            labelStyle={{ color: 'black' }}
-            />
-          <ReferenceLine y={average} stroke="#000" />
-          <Bar dataKey="last_year" fill="fill" />
-        </BarChart>
-      </ResponsiveContainer>
+        <div>
+          <ResponsiveContainer width={650} height={400}>
+            <BarChart
+              width={500}
+              height={300}
+              data={chartData}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis tickFormatter={(value) => value + average} />
+              <Tooltip />
+              <Legend />
+              <ReferenceLine y={0} stroke="#000" />
+              <Bar dataKey="last_year" fill="fill" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

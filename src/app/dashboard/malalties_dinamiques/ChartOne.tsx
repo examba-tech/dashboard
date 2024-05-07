@@ -151,12 +151,25 @@ const ChartOne: React.FC = () => {
   };
   handleReset;
 
+  const [infoVisible, setInfoVisible] = useState(false);
+
+  const toggleInfo = () => {
+    setInfoVisible(!infoVisible);
+  };
+
   return (
     <div className="rounded-sm border border-stroke bg-white pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
             Predicció
+            <span
+              className="text-sm text-gray-400 cursor-pointer"
+              onClick={toggleInfo}
+            >
+              {" "}
+              +info
+            </span>
           </h4>
         </div>
         <div className="flex w-full max-w-45 justify-end">
@@ -183,6 +196,16 @@ const ChartOne: React.FC = () => {
             height={380}
             width={600}
           />
+          {infoVisible && (
+            <div
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-12 py-4 rounded-lg shadow-lg"
+              onClick={toggleInfo}
+            >
+              <p className="text-sm text-gray-800">
+                Aquest gràfic mostra la distribució del número de visites segons el gènere ... Aquest gràfic mostra la distribució del número de visites segons el gènere ...
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
