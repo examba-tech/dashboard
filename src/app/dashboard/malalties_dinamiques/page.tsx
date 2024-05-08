@@ -13,10 +13,7 @@ import Filters from "@/src/app/dashboard/malalties_dinamiques/filters";
 import Filters_municipi from "@/src/app/dashboard/malalties_dinamiques/filter_municipi";
 import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 
-const calculateTotalCasesBySex = (
-  info: Interfaces.Cases[],
-  selectedDiagnostic: string
-) => {
+const calculateTotalCasesBySex = (info: Interfaces.Dinamic[], selectedDiagnostic: string) => {
   var totalCasesBySex = {
     male: 0,
     female: 0,
@@ -214,6 +211,7 @@ const filterByDay = (info: Interfaces.Prediccions[]) => {
   };
 };
 
+
 const HomePage = () => {
   const [info_ICS, setInfo_ICS] = React.useState<{
     male: number;
@@ -343,7 +341,8 @@ const HomePage = () => {
         <br></br>
         <div className="flex justify-center items-center h-[26rem] gap-4">
           <div className="flex-1 flex justify-center items-center">
-          <Waterfall data={calculateTotalCasesByMonth(visits_month, selectedDiagnostic)} average={average} />
+          <Waterfall data={calculateTotalCasesByMonth(visits_month, selectedDiagnostic)} average={average} 
+        />
            </div>
          </div>
         </>

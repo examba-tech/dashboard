@@ -41,6 +41,12 @@ const dinamicSchema = new Schema(
     NUMERO_CASOS: Number,
     ICQA_NO2: String,
     ICQA_SO2: String
+  },
+  {
+    bufferTimeoutMS: timeout,
+    maxTimeMS: timeout,
+  }
+);
 
 const estaticSchema = new Schema(
   {
