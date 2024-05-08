@@ -10,16 +10,16 @@ import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
 import MyLineChart from "@/src/components/charts/line_chart";
 import Filters from "@/src/app/dashboard/malalties_dinamiques/filters";
-//import MapaOne from "./Mapa";
+import Filters_municipi from "@/src/app/dashboard/malalties_dinamiques/filter_municipi";
 import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 
-const calculateTotalCasesBySex = (info: Interfaces.Cases[], selectedDiagnostic: string) => {
+const calculateTotalCasesBySex = (info: Interfaces.Dinamic[], selectedDiagnostic: string) => {
   var totalCasesBySex = {
     male: 0,
     female: 0,
   };
 
-  info.forEach((entry: Interfaces.Cases) => {
+  info.forEach((entry: Interfaces.Dinamic) => {
     // Aplicar filtro por diagnóstico si está seleccionado
     if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
       return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
@@ -34,7 +34,7 @@ const calculateTotalCasesBySex = (info: Interfaces.Cases[], selectedDiagnostic: 
   return totalCasesBySex;
 };
 
-const calculateTotalCasesByDiagnostic = (info: Interfaces.Cases[]) => {
+const calculateTotalCasesByDiagnostic = (info: Interfaces.Dinamic[]) => {
   var totalCasesByDiagnostic = {
     INFECCIONS_AGUDES_TRS: 0,
     BRONQUITIS_AGUDA: 0,
@@ -44,7 +44,7 @@ const calculateTotalCasesByDiagnostic = (info: Interfaces.Cases[]) => {
     PNEUMONIA_VIRICA: 0,
   };
 
-  info.forEach((entry: Interfaces.Cases) => {
+  info.forEach((entry: Interfaces.Dinamic) => {
     if (entry.DIAGNOSTIC == "INFECCIONS_AGUDES_TRS") {
       totalCasesByDiagnostic.INFECCIONS_AGUDES_TRS += entry.NUMERO_CASOS.valueOf();
     } else if (entry.DIAGNOSTIC == "BRONQUITIS_AGUDA") {
@@ -73,7 +73,7 @@ const calculateTotalCasesByDiagnostic = (info: Interfaces.Cases[]) => {
 };
 
 
-const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
+const calculateTotalCasesByEdats = (info: Interfaces.Dinamic[], selectedDiagnostic: string) => {
   var totalCasesByEdats = {
     de_15_44: 0,
     de_45_64: 0,
@@ -82,7 +82,10 @@ const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
     menys_15: 0,
   };
 
-  info.forEach((entry: Interfaces.Cases1) => {
+  info.forEach((entry: Interfaces.Dinamic) => {
+    if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
+      return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
+    }
 
     if (entry.FranjaEdat == "15-44") {
       totalCasesByEdats.de_15_44 += entry.NUMERO_CASOS.valueOf();
@@ -110,61 +113,53 @@ const calculateTotalCasesByEdats = (info: Interfaces.Cases1[]) => {
 };
 
 
-const calcularVisitasPorDia2023 = (visitas: Interfaces.Cases[]) => {
-  var visitasPorDia: { [key: string]: number } = {};
-  
-  visitas.forEach((visita: Interfaces.Cases) => {
-    const fecha = new Date(visita["Data Alta Problema"]);
-    const year = fecha.getFullYear();
-  
-    // Verificar si el año es 2023
-    if (year === 2023) {
-      const fechaClave = fecha.toISOString().split('T')[0]; // Formato 'YYYY-MM-DD'
-  
-      // Si la fecha no existe en el diccionario, inicializar a 0
-      if (!visitasPorDia[fechaClave]) {
-        visitasPorDia[fechaClave] = 0;
+const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
+  const weeklyData: { [key: string]: number } = {};
+  const lastYear = "2023";
+
+  dinamics.forEach((entry: Interfaces.Dinamic) => {
+    const [week, , year] = entry.DATA_SETMANA.split("-").map(Number);
+
+    if (year === parseInt(lastYear)) {
+      if (!weeklyData[week]) {
+        weeklyData[week] = 0;
       }
-  
-      // Sumar el número de casos a la fecha correspondiente
-      visitasPorDia[fechaClave] += visita.NUMERO_CASOS;
+
+      weeklyData[week] += Number(entry.NUMERO_CASOS);
     }
   });
-  
-  // Convertir el diccionario en un array de objetos con fecha y cantidad de visitas
-  return Object.keys(visitasPorDia).map(date => ({
-    date: date,
-    o: visitasPorDia[date]
+
+  // Convertir el objeto semanal en un array de objetos
+  return Object.keys(weeklyData).map((week) => ({
+    name: `Week ${week}`,
+    data: [weeklyData[week]],
   }));
 };
 
-interface Visit {
-  _id: { $oid: string };
-  Sexe: string;
-  'Data Alta Problema': Date;
-  DIAGNOSTIC: string;
-  NUMERO_CASOS: number;
-}
 
-const calculateTotalCasesByMonth = (visits: Visit[]) => {
-const monthlyData: { [key: string]: { last_year: number } } = {};
-const last_year = 2023;
+const calculateTotalCasesByMonth = (dinamics: Interfaces.Dinamic[], selectedDiagnostic: string) => {
+  const monthlyData: { [key: string]: { last_year: number } } = {};
+  const last_year = 2023;
 
-visits.forEach((visit: Visit) => {
-  const date = new Date(visit["Data Alta Problema"]);
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
+  dinamics.forEach((entry: Interfaces.Dinamic) => {
+    if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
+      return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
+    }
 
-if (year === last_year) {
-  const key = `${month}`;
+    const dateParts = entry.DATA_SETMANA.split("-");
+    const month = parseInt(dateParts[1]);
+    const year = parseInt(dateParts[2]);
 
-if (!monthlyData[key]) {
-  monthlyData[key] = { last_year: 0 };
-  }
+    if (year === last_year) {
+      const key = `${month}`;
 
-monthlyData[key].last_year += visit.NUMERO_CASOS;
-}
-});
+      if (!monthlyData[key]) {
+        monthlyData[key] = { last_year: 0 };
+      }
+
+      monthlyData[key].last_year += Number(entry.NUMERO_CASOS);
+    }
+  });
 
   return Object.entries(monthlyData).map(([month, data]) => ({
     name: `Month ${month}`,
@@ -190,34 +185,45 @@ const HomePage = () => {
   }[]>([]);
 
   const [visits, setVisits] = React.useState<{
-    date: string
-    o: number
+    name: string;
+    data: number[]
   }[]>([]);
 
-  const [selectedDiagnostic, setSelectedDiagnostic] = React.useState<string>("GRIP"); // Valor predeterminado
+  const [visits_month, setVisits_Month] = React.useState<any[]>([]);
 
+  const [average, setAverage] = React.useState(0);
+
+  const [selectedDiagnostic, setSelectedDiagnostic] = React.useState<string>("GRIP"); // Valor predeterminado
   // Función para manejar el cambio de diagnóstico seleccionado
   const handleDiagnosticChange = (diagnostic: string) => {
     setSelectedDiagnostic(diagnostic);
   };
 
-  const [average, setAverage] = React.useState(0);
-  const [visits1, setVisits1] = React.useState<any[]>([]);
+  const [selectedMunicipi, setSelectedMunicipi] = React.useState<string>("Collbató"); // Valor predeterminado
+  // Función para manejar el cambio de diagnóstico seleccionado
+  const handleMunicipiChange = (municipi: string) => {
+    setSelectedMunicipi(municipi);
+  };
 
   React.useEffect(() => {
+    const params = {
+      CODI_MUNICIPAL: "80898",
+    };
     const fetchData = async () => {
       try {
-        const data = await getMongoCollection("visits");
-        const visits = data && data.collection ? data.collection : undefined;
-        const data1 = await getMongoCollection("edats");
-        const edats = data1 && data1.collection ? data1.collection : undefined;
-        if (visits !== undefined) {
-          setInfo_ICS(calculateTotalCasesBySex(visits, selectedDiagnostic));
-          setInfo2_ICS([calculateTotalCasesByDiagnostic(visits)]);
-          setInfo3_ICS([calculateTotalCasesByEdats(edats)]);
-          setVisits(calcularVisitasPorDia2023(visits));
-          setVisits(calcularVisitasPorDia2023(visits));
-          setVisits1(visits);
+        const data_full = await getMongoCollection("dinamics", params);
+        const dinamics = data_full && data_full.collection ? data_full.collection : undefined;
+        if (dinamics !== undefined) {
+          setInfo_ICS(calculateTotalCasesBySex(dinamics, selectedDiagnostic));
+          setInfo2_ICS([calculateTotalCasesByDiagnostic(dinamics)]);
+          setInfo3_ICS([calculateTotalCasesByEdats(dinamics, selectedDiagnostic)]);
+          setVisits(calculateTotalCasesByWeek(dinamics));
+          setVisits_Month(dinamics);
+          const monthlyData = calculateTotalCasesByMonth(dinamics, selectedDiagnostic);
+          console.log(visits);
+          const totalCasesThisYear = monthlyData.reduce((acc, curr) => acc + curr.last_year, 0);
+          const average = totalCasesThisYear / 12;
+          setAverage(average);
         }
         setLoading(false);
       } catch (error) { 
@@ -227,16 +233,7 @@ const HomePage = () => {
     };
 
     fetchData();
-  }, [visits1, selectedDiagnostic]);
-  
-  React.useEffect(() => {
-    if (visits1.length > 0) {
-      const monthlyData = calculateTotalCasesByMonth(visits1);
-      const totalCasesThisYear = monthlyData.reduce((acc, curr) => acc + curr.last_year, 0);
-      const average = totalCasesThisYear / 12;
-      setAverage(average);
-    }
-  }, [visits1]);
+  }, [visits_month, visits, selectedDiagnostic, selectedMunicipi]);
 
   return (
     <>
@@ -248,9 +245,10 @@ const HomePage = () => {
       )}
       {!loading && (
         <>
-        <Filters
-            selectedDiagnostic={selectedDiagnostic}
-            onDiagnosticChange={handleDiagnosticChange}
+
+        <Filters_municipi
+            selectedMunicipi={selectedMunicipi}
+            onMunicipiChange={handleMunicipiChange}
           />
 
         <div style={{ marginTop: '50px' }}></div>
@@ -267,15 +265,20 @@ const HomePage = () => {
             <ChartThree series={info_ICS} />
           </div>
           <div className="flex-1 flex justify-center items-center">
-            <ChartTwo series={info2_ICS} />
+            <ChartTwo series={info2_ICS} selectedDiagnostic={selectedDiagnostic}/>
           </div>
           <div className="flex-1 flex justify-center items-center">
             <ChartTwoEdats series={info3_ICS} />
           </div>
         </div>
+        <Filters
+            selectedDiagnostic={selectedDiagnostic}
+            onDiagnosticChange={handleDiagnosticChange}
+          />
+        <br></br>
         <div className="flex justify-center items-center h-[26rem] gap-4">
           <div className="flex-1 flex justify-center items-center">
-          <Waterfall data={calculateTotalCasesByMonth(visits1)} average={average} />
+          <Waterfall data={calculateTotalCasesByMonth(visits_month, selectedDiagnostic)} average={average} />
           </div>
         </div>
       </>

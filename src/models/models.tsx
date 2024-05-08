@@ -51,6 +51,32 @@ const edatSchema = new Schema(
   }
 );
 
+
+const dinamicSchema = new Schema(
+  {
+    'Unnamed: 0': Number,
+    DATA_SETMANA: String,
+    Codi_municipi: Number,
+    FranjaEdat: String,
+    Sexe: String,
+    DIAGNOSTIC: String,
+    Nom_municipi: String,
+    Latitud: Number,
+    Longitud: Number,
+    NO: Number,
+    NO2: Number,
+    SO2: Number,
+    NUMERO_CASOS: Number,
+    ICQA_NO2: String,
+    ICQA_SO2: String
+  },
+  {
+    bufferTimeoutMS: timeout,
+    maxTimeMS: timeout,
+  }
+);
+
+
 export const Visit =
   mongoose.models.Visit || mongoose.model("Visit", visitSchema, "visits");
 
@@ -59,3 +85,6 @@ export const Edat =
 
 export const Master =
   mongoose.models.Master || mongoose.model("Master", masterSchema, "master");
+
+export const Dinamic =
+  mongoose.models.Dinamic || mongoose.model("Dinamic", dinamicSchema, "dinamics");
