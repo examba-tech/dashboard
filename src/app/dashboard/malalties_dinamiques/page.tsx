@@ -175,6 +175,47 @@ const calculateTotalCasesByMonth = (visits: Visit[]) => {
   }));
 };
 
+const filterByDay = (info: Interfaces.Prediccions[]) => {
+  var totalCasesByDay = {
+    dia1: 0,
+    dia2: 0,
+    dia3: 0,
+    dia4: 0,
+    dia5: 0,
+    dia6: 0,
+    dia7: 0
+  };
+  info.forEach((entry: Interfaces.Prediccions) => {
+    if ((entry.DIA == 25) && (entry.MES=12)) {
+      totalCasesByDay.dia1 = entry.INGRESSOS_AVG.valueOf();
+    } else if ((entry.DIA == 26) && (entry.MES=12)) {
+      totalCasesByDay.dia2 = entry.INGRESSOS_AVG.valueOf();
+    } else if ((entry.DIA == 27) && (entry.MES=12)) {
+      totalCasesByDay.dia3 = entry.INGRESSOS_AVG.valueOf();
+    } else if ((entry.DIA == 28) && (entry.MES=12)) {
+      totalCasesByDay.dia4 = entry.INGRESSOS_AVG.valueOf();
+    } else if ((entry.DIA == 29) && (entry.MES=12)) {
+      totalCasesByDay.dia5 = entry.INGRESSOS_AVG.valueOf();
+    } else if ((entry.DIA == 30) && (entry.MES=12)) {
+      totalCasesByDay.dia6 = entry.INGRESSOS_AVG.valueOf();
+    } else if ((entry.DIA == 31) && (entry.MES=12)) {
+      totalCasesByDay.dia7 = entry.INGRESSOS_AVG.valueOf();
+    } 
+  });
+  return {
+    name: "Prediccions",
+    data: [
+      totalCasesByDay.dia1,
+      totalCasesByDay.dia2,
+      totalCasesByDay.dia3,
+      totalCasesByDay.dia4,
+      totalCasesByDay.dia5,
+      totalCasesByDay.dia6,
+      totalCasesByDay.dia7,
+    ],
+  };
+};
+
 const HomePage = () => {
   const [info_ICS, setInfo_ICS] = React.useState<{
     male: number;
@@ -203,6 +244,13 @@ const HomePage = () => {
     }[]
   >([]);
 
+  const [prediccions, setPrediccions] = React.useState<
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
+
   const [selectedDiagnostic, setSelectedDiagnostic] =
     React.useState<string>("GRIP"); // Valor predeterminado
 
@@ -221,6 +269,18 @@ const HomePage = () => {
         const visits = data && data.collection ? data.collection : undefined;
         const data1 = await getMongoCollection("edats");
         const edats = data1 && data1.collection ? data1.collection : undefined;
+        const params = {
+          CODI_MUNICIPAL:"80898",
+        };
+        const data2 = await getMongoCollection("prediccions",params);
+        const prediccions = data2 && data2.collection ? data2.collection : undefined;
+        console.log("PRUEBA DE DATOS:");
+        console.log(prediccions);
+        const filteredPrediccions = filterByDay(prediccions);
+        console.log("PRUEBA filtrando:");
+        console.log(filteredPrediccions);
+
+
         if (visits !== undefined) {
           setInfo_ICS(calculateTotalCasesBySex(visits, selectedDiagnostic));
           setInfo2_ICS([calculateTotalCasesByDiagnostic(visits)]);
@@ -230,6 +290,9 @@ const HomePage = () => {
           setVisits1(visits);
         }
         setLoading(false);
+        if (prediccions !== undefined) {
+          setPrediccions([filterByDay(prediccions)]);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
         setLoading(false);
@@ -271,7 +334,7 @@ const HomePage = () => {
           <div style={{ marginTop: "50px" }}></div>
           <div className="flex justify-center items-center h-[26rem] gap-4">
             <div className="flex-1 flex justify-center items-center">
-              <ChartOne />
+              <ChartOne series={prediccions}/>
             </div>
             <div className="flex-1 flex justify-center items-center">
               <MyLineChart visits={visits} />
