@@ -13,7 +13,10 @@ import Filters from "@/src/app/dashboard/malalties_dinamiques/filters";
 import Filters_municipi from "@/src/app/dashboard/malalties_dinamiques/filter_municipi";
 import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 
-const calculateTotalCasesBySex = (info: Interfaces.Dinamic[], selectedDiagnostic: string) => {
+const calculateTotalCasesBySex = (
+  info: Interfaces.Cases[],
+  selectedDiagnostic: string
+) => {
   var totalCasesBySex = {
     male: 0,
     female: 0,
@@ -46,15 +49,18 @@ const calculateTotalCasesByDiagnostic = (info: Interfaces.Dinamic[]) => {
 
   info.forEach((entry: Interfaces.Dinamic) => {
     if (entry.DIAGNOSTIC == "INFECCIONS_AGUDES_TRS") {
-      totalCasesByDiagnostic.INFECCIONS_AGUDES_TRS += entry.NUMERO_CASOS.valueOf();
+      totalCasesByDiagnostic.INFECCIONS_AGUDES_TRS +=
+        entry.NUMERO_CASOS.valueOf();
     } else if (entry.DIAGNOSTIC == "BRONQUITIS_AGUDA") {
       totalCasesByDiagnostic.BRONQUITIS_AGUDA += entry.NUMERO_CASOS.valueOf();
     } else if (entry.DIAGNOSTIC == "GRIP") {
       totalCasesByDiagnostic.GRIP += entry.NUMERO_CASOS.valueOf();
     } else if (entry.DIAGNOSTIC == "BRONQUIOLITIS_AGUDA") {
-      totalCasesByDiagnostic.BRONQUIOLITIS_AGUDA += entry.NUMERO_CASOS.valueOf();
+      totalCasesByDiagnostic.BRONQUIOLITIS_AGUDA +=
+        entry.NUMERO_CASOS.valueOf();
     } else if (entry.DIAGNOSTIC == "PNEUMONIA_BACTERIANA") {
-      totalCasesByDiagnostic.PNEUMONIA_BACTERIANA += entry.NUMERO_CASOS.valueOf();
+      totalCasesByDiagnostic.PNEUMONIA_BACTERIANA +=
+        entry.NUMERO_CASOS.valueOf();
     } else if (entry.DIAGNOSTIC == "PNEUMONIA_VIRICA") {
       totalCasesByDiagnostic.PNEUMONIA_VIRICA += entry.NUMERO_CASOS.valueOf();
     }
@@ -72,7 +78,6 @@ const calculateTotalCasesByDiagnostic = (info: Interfaces.Dinamic[]) => {
   };
 };
 
-
 const calculateTotalCasesByEdats = (info: Interfaces.Dinamic[], selectedDiagnostic: string) => {
   var totalCasesByEdats = {
     de_15_44: 0,
@@ -86,7 +91,6 @@ const calculateTotalCasesByEdats = (info: Interfaces.Dinamic[], selectedDiagnost
     if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
       return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
     }
-
     if (entry.FranjaEdat == "15-44") {
       totalCasesByEdats.de_15_44 += entry.NUMERO_CASOS.valueOf();
     } else if (entry.FranjaEdat == "45-64") {
@@ -111,6 +115,8 @@ const calculateTotalCasesByEdats = (info: Interfaces.Dinamic[], selectedDiagnost
     ]
   };
 };
+
+
 
 
 const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
@@ -165,6 +171,47 @@ const calculateTotalCasesByMonth = (dinamics: Interfaces.Dinamic[], selectedDiag
     name: `Month ${month}`,
     last_year: data.last_year,
   }));
+    
+
+const filterByDay = (info: Interfaces.Prediccions[]) => {
+  var totalCasesByDay = {
+    dia1: 0,
+    dia2: 0,
+    dia3: 0,
+    dia4: 0,
+    dia5: 0,
+    dia6: 0,
+    dia7: 0
+  };
+  info.forEach((entry: Interfaces.Prediccions) => {
+    if ((entry.DIA == 25) && (entry.MES=12)) {
+      totalCasesByDay.dia1 = entry.INGRESSOS_AVG.valueOf();
+    } else if ((entry.DIA == 26) && (entry.MES=12)) {
+      totalCasesByDay.dia2 = entry.INGRESSOS_AVG.valueOf();
+    } else if ((entry.DIA == 27) && (entry.MES=12)) {
+      totalCasesByDay.dia3 = entry.INGRESSOS_AVG.valueOf();
+    } else if ((entry.DIA == 28) && (entry.MES=12)) {
+      totalCasesByDay.dia4 = entry.INGRESSOS_AVG.valueOf();
+    } else if ((entry.DIA == 29) && (entry.MES=12)) {
+      totalCasesByDay.dia5 = entry.INGRESSOS_AVG.valueOf();
+    } else if ((entry.DIA == 30) && (entry.MES=12)) {
+      totalCasesByDay.dia6 = entry.INGRESSOS_AVG.valueOf();
+    } else if ((entry.DIA == 31) && (entry.MES=12)) {
+      totalCasesByDay.dia7 = entry.INGRESSOS_AVG.valueOf();
+    } 
+  });
+  return {
+    name: "Prediccions",
+    data: [
+      totalCasesByDay.dia1,
+      totalCasesByDay.dia2,
+      totalCasesByDay.dia3,
+      totalCasesByDay.dia4,
+      totalCasesByDay.dia5,
+      totalCasesByDay.dia6,
+      totalCasesByDay.dia7,
+    ],
+  };
 };
 
 const HomePage = () => {
@@ -174,15 +221,26 @@ const HomePage = () => {
   }>({ male: 0, female: 0 });
   const [loading, setLoading] = React.useState(true);
 
-  const [info2_ICS, setInfo2_ICS] = React.useState<{
-    name: string;
-    data: number[]
-  }[]>([]);
+  const [info2_ICS, setInfo2_ICS] = React.useState<
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
 
-  const [info3_ICS, setInfo3_ICS] = React.useState<{
-    name: string;
-    data: number[]
-  }[]>([]);
+  const [info3_ICS, setInfo3_ICS] = React.useState<
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
+
+  const [prediccions, setPrediccions] = React.useState<
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
 
   const [visits, setVisits] = React.useState<{
     name: string;
@@ -211,6 +269,7 @@ const HomePage = () => {
     };
     const fetchData = async () => {
       try {
+
         const data_full = await getMongoCollection("dinamics", params);
         const dinamics = data_full && data_full.collection ? data_full.collection : undefined;
         if (dinamics !== undefined) {
@@ -224,9 +283,15 @@ const HomePage = () => {
           const totalCasesThisYear = monthlyData.reduce((acc, curr) => acc + curr.last_year, 0);
           const average = totalCasesThisYear / 12;
           setAverage(average);
-        }
+        }    
+        const data2 = await getMongoCollection("prediccions",params);
+        const prediccions = data2 && data2.collection ? data2.collection : undefined;
+  
         setLoading(false);
-      } catch (error) { 
+        if (prediccions !== undefined) {
+          setPrediccions([filterByDay(prediccions)]);
+        }
+      } catch (error) {
         console.error("Error fetching data:", error);
         setLoading(false);
       }
@@ -237,7 +302,9 @@ const HomePage = () => {
 
   return (
     <>
-      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Patologies Agudes</h1>
+      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
+        Patologies Agudes
+      </h1>
       {loading && (
         <Box className="flex justify-center items-center h-96">
           <CircularProgress />
@@ -245,16 +312,14 @@ const HomePage = () => {
       )}
       {!loading && (
         <>
-
         <Filters_municipi
             selectedMunicipi={selectedMunicipi}
             onMunicipiChange={handleMunicipiChange}
           />
-
         <div style={{ marginTop: '50px' }}></div>
         <div className="flex justify-center items-center h-[26rem] gap-4">
           <div className="flex-1 flex justify-center items-center">
-            <ChartOne />
+            <ChartOne series={prediccions}/>
           </div>
           <div className="flex-1 flex justify-center items-center">
             <MyLineChart visits={visits} />
@@ -279,10 +344,9 @@ const HomePage = () => {
         <div className="flex justify-center items-center h-[26rem] gap-4">
           <div className="flex-1 flex justify-center items-center">
           <Waterfall data={calculateTotalCasesByMonth(visits_month, selectedDiagnostic)} average={average} />
-          </div>
-        </div>
-      </>
-      
+           </div>
+         </div>
+        </>
       )}
     </>
   );

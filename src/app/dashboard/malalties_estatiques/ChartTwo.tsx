@@ -1,57 +1,88 @@
-import React from "react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ReferenceLine,
-  ResponsiveContainer,
-} from "recharts";
+"use client"
+import { ApexOptions } from "apexcharts";
+import React, { useState } from "react";
+import dynamic from "next/dynamic";
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
-const Waterfall = ({ data, average }: { data: any; average: number }) => {
-  const monthNames = [
-    "Gen",
-    "Feb",
-    "Mar",
-    "Abr",
-    "Mai",
-    "Jun",
-    "Jul",
-    "Ago",
-    "Set",
-    "Oct",
-    "Nov",
-    "Des",
-  ];
+const options: ApexOptions = {
+  colors: ["#3C50E0", "#80CAEE"],
+  chart: {
+    fontFamily: "Satoshi, sans-serif",
+    type: "bar",
+    height: 335,
+    width: 300,
+    stacked: true,
+    toolbar: {
+      show: false,
+    },
+    zoom: {
+      enabled: false,
+    },
+  },
 
-  const adjustValue = (value: number) => {
-    return value;
-  };
+  responsive: [
+    {
+      breakpoint: 1536,
+      options: {
+        plotOptions: {
+          bar: {
+            borderRadius: 0,
+            columnWidth: "25%",
+          },
+        },
+      },
+    },
+  ],
+  plotOptions: {
+    bar: {
+      horizontal: true,
+      borderRadius: 0,
+      columnWidth: "25%",
+      borderRadiusApplication: "end",
+      borderRadiusWhenStacked: "last",
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
 
-  const getFillColor = (entry: any) => {
-    return entry.last_year > 0 ? "#3056D3" : "#80CAEE";
-  };
+  xaxis: {
+    categories: ["ASMA", "BRONQUITIS_CRONICA", "MPOC_MIXTE", "BRONQUIECTASIES", "OTHER", "NEOPLASIA_PULMONAR", "ENFISEMA", "FIBROSI_PULMONAR", "AGENTS_EXTERNS"],
+  },
+  legend: {
+    position: "top",
+    horizontalAlign: "left",
+    fontFamily: "Satoshi",
+    fontWeight: 500,
+    fontSize: "14px",
 
-  const adjustedData = data.map((entry: any) => ({
-    ...entry,
-    last_year: adjustValue(entry.last_year),
-  }));
+    markers: {
+      radius: 99,
+    },
+  },
+  fill: {
+    opacity: 1,
+  },
+};
 
-  const chartData = adjustedData.map((entry: any, index: number) => ({
-    ...entry,
-    name: monthNames[index],
-    fill: getFillColor(entry),
-  }));
+interface ChartTwoProps {
+  series: {
+    name: string;
+    data: number[];
+  }[];
+}
+
+
+const ChartTwo: React.FC<ChartTwoProps> = ({ series }) => {
 
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Comparativa Mesos
+            Diagnòstic
           </h4>
         </div>
         <div>
@@ -93,32 +124,18 @@ const Waterfall = ({ data, average }: { data: any; average: number }) => {
       </div>
 
       <div>
-        <div>
-          <ResponsiveContainer width={650} height={400}>
-            <BarChart
-              width={500}
-              height={300}
-              data={chartData}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis tickFormatter={(value) => value + average} />
-              <Tooltip />
-              <Legend />
-              <ReferenceLine y={0} stroke="#000" />
-              <Bar dataKey="last_year" fill="fill" />
-            </BarChart>
-          </ResponsiveContainer>
+        <div id="chartTwo" className="pb-15 flex justify-center">
+          <ReactApexChart
+            options={options}
+            series={series}
+            type="bar"
+            height={350}
+            width={600}
+          />
         </div>
       </div>
     </div>
   );
 };
 
-export default Waterfall;
+export default ChartTwo;

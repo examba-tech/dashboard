@@ -10,21 +10,6 @@ export interface Master {
   N_INGRESSOS: number;
 }
 
-export interface Cases {
-  Sexe: String;
-  "Data Alta Problema": Date;
-  DIAGNOSTIC: String;
-  NUMERO_CASOS: number;
-}
-
-export interface Cases1 {
-  Sexe: String,
-  'Data Alta Problema': Date,
-  FranjaEdat: String,
-  index: number,
-  NUMERO_CASOS: number
-}
-
 export interface Dinamic {
   'Unnamed: 0': Number,
   DATA_SETMANA: String,
@@ -42,3 +27,33 @@ export interface Dinamic {
   ICQA_NO2: String,
   ICQA_SO2: String
 }
+
+export interface Estatiques {
+    Localitat: string,
+    Sexe: string,
+    FranjaEdat: string,
+    DIAGNOSTIC: string,
+    Numero_Casos: number,
+    municipi: string,
+    valor: number,
+    Latitud: number,
+    Longitud: number,
+    NO2: number,
+    NO: number,
+    SO2: number,
+    "ICQA NO2": string,
+    "ICQA SO2": string
+  }
+
+  export interface Prediccions {
+    CODI_MUNICIPAL: number,
+    ANY: number,
+    MES: number,
+    DIA: number,
+    DIA_SETMANA: number,
+    NO_AVG: number,
+    NO2_AVG: number,
+    SO2_AVG: number,
+    POBLACIO: number,
+    INGRESSOS_AVG: number
+  }

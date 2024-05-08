@@ -12,12 +12,12 @@ export async function GET(
 
   if (collection_name === "master") {
     model = Models.Master;
-  } else if (collection_name === "visits") {
-    model = Models.Visit;
-  } else if (collection_name === "edats") {
-    model = Models.Edat;
   } else if (collection_name === "dinamics") {
     model = Models.Dinamic;
+  } else if (collection_name === "estatics") {
+    model = Models.Estatic;
+  } else if (collection_name === "prediccions") {
+    model = Models.Prediccion;
   } else {
     return NextResponse.json(
       { message: "Invalid collection name" },
