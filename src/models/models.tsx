@@ -74,6 +74,25 @@ const estaticSchema = new Schema(
   }
 );
 
+const prediccionSchema = new Schema(
+  {
+    CODI_MUNICIPAL: Number,
+    ANY: Number,
+    MES: Number,
+    DIA: Number,
+    DIA_SETMANA: Number,
+    NO_AVG: Number,
+    NO2_AVG: Number,
+    SO2_AVG: Number,
+    POBLACIO: Number,
+    INGRESSOS_AVG: Number
+  },
+  {
+    bufferTimeoutMS: timeout,
+    maxTimeMS: timeout,
+  }
+);
+
 
 export const Visit =
   mongoose.models.Visit || mongoose.model("Visit", visitSchema, "visits");
@@ -86,3 +105,7 @@ export const Master =
 
 export const Estatic =
   mongoose.models.Estatic || mongoose.model("Estatic", estaticSchema, "estatics");
+
+export const Prediccion =
+  mongoose.models.Prediccion || mongoose.model("Prediccion", prediccionSchema, "prediccions");
+

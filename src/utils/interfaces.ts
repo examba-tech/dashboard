@@ -41,3 +41,16 @@ export interface Estatiques {
     "ICQA NO2": string,
     "ICQA SO2": string
   }
+
+  export interface Prediccions {
+    CODI_MUNICIPAL: number,
+    ANY: number,
+    MES: number,
+    DIA: number,
+    DIA_SETMANA: number,
+    NO_AVG: number,
+    NO2_AVG: number,
+    SO2_AVG: number,
+    POBLACIO: number,
+    INGRESSOS_AVG: number
+  }
