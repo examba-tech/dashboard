@@ -46,6 +46,7 @@ export interface Estatiques {
   }
 
   export interface Prediccions {
+    Nom_municipi: String,
     CODI_MUNICIPAL: number,
     ANY: number,
     MES: number,
