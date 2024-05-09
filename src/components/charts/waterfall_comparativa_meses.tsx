@@ -94,10 +94,10 @@ const Waterfall = ({ data, average }: { data: any; average: number }) => {
 
       <div>
         <div>
-          <ResponsiveContainer width={650} height={400}>
+          <ResponsiveContainer width={500} height={590}>
             <BarChart
               width={500}
-              height={300}
+              height={500}
               data={chartData}
               margin={{
                 top: 5,

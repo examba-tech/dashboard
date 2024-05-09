@@ -32,10 +32,10 @@ const options: ApexOptions = {
   },
   responsive: [
     {
-      breakpoint: 2600,
+      breakpoint: 260,
       options: {
         chart: {
-          width: 380,
+          width: 450,
         },
       },
     },
@@ -43,7 +43,7 @@ const options: ApexOptions = {
       breakpoint: 640,
       options: {
         chart: {
-          width: 200,
+          width: 220,
         },
       },
     },
@@ -122,7 +122,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
           <div className="flex w-full items-center">
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary bg-[#0FADCF]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Dona </span>
+              <span> Dona: </span>
               <span> {seriesArray[0]} </span>
             </p>
           </div>
@@ -131,7 +131,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
           <div className="flex w-full items-center">
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#3C50E0]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Home </span>
+              <span> Home: </span>
               <span> {seriesArray[1]} </span>
             </p>
           </div>

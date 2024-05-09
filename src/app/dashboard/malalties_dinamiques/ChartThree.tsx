@@ -35,7 +35,7 @@ const options: ApexOptions = {
       breakpoint: 2600,
       options: {
         chart: {
-          width: 380,
+          width: 300,
         },
       },
     },
@@ -43,7 +43,7 @@ const options: ApexOptions = {
       breakpoint: 640,
       options: {
         chart: {
-          width: 200,
+          width: 100,
         },
       },
     },
@@ -124,8 +124,8 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
             options={options}
             series={seriesArray}
             type="donut"
-            height={350}
-            width={200}
+            height={200}
+            width={50}
           />
           {infoVisible && (
             <div
@@ -140,25 +140,27 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-y-3">
-        <div className="w-full px-8 sm:w-1/2">
-          <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary bg-[#0FADCF]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Dona </span>
-              <span> {seriesArray[0]} </span>
-            </p>
-          </div>
-        </div>
-        <div className="w-full px-8 sm:w-1/2">
-          <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#3C50E0]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Home </span>
-              <span> {seriesArray[1]} </span>
-            </p>
-          </div>
+      <div className="w-full px-8 sm:w-1/2">
+        <div className="flex w-full items-center">
+          <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary bg-[#0FADCF]"></span>
+          <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
+            <span> Dona </span>
+            <span> {seriesArray[0]} </span>
+          </p>
         </div>
       </div>
+    </div>
+    <div className="flex flex-wrap items-center justify-center gap-y-3">
+      <div className="w-full px-8 sm:w-1/2">
+        <div className="flex w-full items-center">
+          <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#3C50E0]"></span>
+          <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
+            <span> Home </span>
+            <span> {seriesArray[1]} </span>
+          </p>
+        </div>
+      </div>
+    </div>
     </div>
   );
 };

@@ -198,7 +198,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ visits }) => {
           </div>
         </div>
       </div>
-    <ResponsiveContainer width="100%" height={400}>
+    <ResponsiveContainer width={575} height={175}>
       <LineChart
         data={visits}
         margin={{
