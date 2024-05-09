@@ -36,7 +36,9 @@
     "react-virtuoso": "^4.7.2",
     "recharts": "^2.12.2",
     "tailwind-merge": "^2.2.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "vega": "^5.28.0",
+    "vega-lite": "^5.18.1"
   },
   "devDependencies": {
     "@types/mongodb": "^4.0.7",
