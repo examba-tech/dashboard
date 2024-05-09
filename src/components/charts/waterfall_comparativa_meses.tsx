@@ -28,7 +28,7 @@ const Waterfall = ({ data, average }: { data: any; average: number }) => {
   ];
 
   const adjustValue = (value: number) => {
-    return value - average;
+    return value;
   };
 
   const getFillColor = (entry: any) => {

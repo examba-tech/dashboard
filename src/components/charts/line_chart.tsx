@@ -8,12 +8,23 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   Brush,
 } from "recharts";
 
-const MyLineChart = ({ visits }: { visits: any }) => {
+
+// Definir una interfaz para la estructura de los datos de visits
+interface VisitData {
+  name: string;
+  data: number[];
+}
+
+// Proporcionar un tipo explícito para visits
+interface MyLineChartProps {
+  visits: VisitData[];
+}
+
+const MyLineChart: React.FC<MyLineChartProps> = ({ visits }) => {
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-4 justify-between gap-4 sm:flex">
@@ -61,44 +72,56 @@ const MyLineChart = ({ visits }: { visits: any }) => {
       </div>
 
       <div>
-      <ResponsiveContainer width={690} height={400}>
-      <LineChart
-        width={800}
-        height={300}
-        data={visits}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" tick={{ fontSize: 10 }} />
-        <YAxis tick={{ fontSize: 10 }}/>
-        <Tooltip 
-        formatter={(value, name) =>  <span style={{ color: 'black' }}>
-        {"count:"} <span style={{ color: 'black', fontWeight: 'bold' }}>{value}
-      </span></span>}
-        labelFormatter={(label) => 
-          new Date(label).toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric' })
-        }
-        contentStyle={{ 
-          backgroundColor: 'rgba(400, 400, 400, 1)', 
-          borderColor: '#ccc', 
-          padding: '10px',
-          borderRadius: '8px', 
-          background: 'linear-gradient(to bottom, rgba(240,240,240,1) 50%, rgba(255,255,255,1) 50%)',
-          fontSize: '12px',
-          color: 'linear-gradient(to bottom, black, black)'
-        }}
-        labelStyle={{ color: 'black' }}
-/>
-        {/*<Legend />*/}
-        <Line type="monotone" dataKey="o" stroke="#80CAEE" />
-        <Brush />
-      </LineChart>
-    </ResponsiveContainer>
+        <ResponsiveContainer width="100%" height={400}>
+          <LineChart
+            data={visits}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" tick={{ fontSize: 10 }} />
+            <YAxis tick={{ fontSize: 10 }} />
+            <Tooltip
+              formatter={(value, name) => (
+                <span style={{ color: "black" }}>
+                  {"count:"}{" "}
+                  <span style={{ color: "black", fontWeight: "bold" }}>
+                    {value}
+                  </span>
+                </span>
+              )}
+              labelFormatter={(label) =>
+                new Date(label).toLocaleDateString("es-ES", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })
+              }
+              contentStyle={{
+                backgroundColor: "rgba(400, 400, 400, 1)",
+                borderColor: "#ccc",
+                padding: "10px",
+                borderRadius: "8px",
+                background:
+                  "linear-gradient(to bottom, rgba(240,240,240,1) 50%, rgba(255,255,255,1) 50%)",
+                fontSize: "12px",
+                color: "linear-gradient(to bottom, black, black)",
+              }}
+              labelStyle={{ color: "black" }}
+            />
+            <Line
+              type="monotone"
+              dataKey="last_year"
+              stroke="#80CAEE"
+              dot={false}
+            />
+            <Brush />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );

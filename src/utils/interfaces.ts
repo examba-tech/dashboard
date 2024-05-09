@@ -10,19 +10,22 @@ export interface Master {
   N_INGRESSOS: number;
 }
 
-export interface Cases {
-  Sexe: String;
-  "Data Alta Problema": Date;
-  DIAGNOSTIC: String;
-  NUMERO_CASOS: number;
-}
-
-export interface Cases1 {
-  Sexe: String,
-  'Data Alta Problema': Date,
+export interface Dinamic {
+  'Unnamed: 0': Number,
+  DATA_SETMANA: String,
+  CODI_MUNICIPAL: Number,
   FranjaEdat: String,
-  index: number,
-  NUMERO_CASOS: number
+  Sexe: String,
+  DIAGNOSTIC: String,
+  Nom_municipi: String,
+  Latitud: Number,
+  Longitud: Number,
+  NO: Number,
+  NO2: Number,
+  SO2: Number,
+  NUMERO_CASOS: Number,
+  ICQA_NO2: String,
+  ICQA_SO2: String
 }
 
 export interface Estatiques {

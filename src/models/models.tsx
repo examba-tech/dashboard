@@ -24,26 +24,23 @@ const masterSchema = new Schema(
   }
 );
 
-const visitSchema = new Schema(
+const dinamicSchema = new Schema(
   {
-    Sexe: String,
-    "Data Alta Problema": Date,
-    DIAGNOSTIC: String,
-    NUMERO_CASOS: Number
-  },
-  {
-    bufferTimeoutMS: timeout,
-    maxTimeMS: timeout,
-  }
-);
-
-const edatSchema = new Schema(
-  {
-    Sexe: String,
-    'Data Alta Problema': Date,
+    'Unnamed: 0': Number,
+    DATA_SETMANA: String,
+    Codi_municipi: Number,
     FranjaEdat: String,
-    index: Number,
-    NUMERO_CASOS: Number
+    Sexe: String,
+    DIAGNOSTIC: String,
+    Nom_municipi: String,
+    Latitud: Number,
+    Longitud: Number,
+    NO: Number,
+    NO2: Number,
+    SO2: Number,
+    NUMERO_CASOS: Number,
+    ICQA_NO2: String,
+    ICQA_SO2: String
   },
   {
     bufferTimeoutMS: timeout,
@@ -94,18 +91,14 @@ const prediccionSchema = new Schema(
 );
 
 
-export const Visit =
-  mongoose.models.Visit || mongoose.model("Visit", visitSchema, "visits");
-
-export const Edat =
-  mongoose.models.Edat || mongoose.model("Edat", edatSchema, "edats");
-
 export const Master =
   mongoose.models.Master || mongoose.model("Master", masterSchema, "master");
+
+export const Dinamic =
+  mongoose.models.Dinamic || mongoose.model("Dinamic", dinamicSchema, "dinamics");
 
 export const Estatic =
   mongoose.models.Estatic || mongoose.model("Estatic", estaticSchema, "estatics");
 
 export const Prediccion =
   mongoose.models.Prediccion || mongoose.model("Prediccion", prediccionSchema, "prediccions");
-
