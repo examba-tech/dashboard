@@ -136,8 +136,60 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
 
   // Convertir el objeto semanal en un array de objetos
   return Object.keys(weeklyData).map((week) => ({
-    name: `Week ${week}`,
+    name: `Setmana ${week}`,
     data: [weeklyData[week]],
+  }));
+};
+
+const calculateTotalCasesByWeekSos = (dinamics: Interfaces.Dinamic[]) => {
+  const weeklyData: { [key: string]: number } = {};
+  const i: { [key: string]: number } = {};
+  const lastYear = "2023";
+
+  dinamics.forEach((entry: Interfaces.Dinamic) => {
+    const [week, , year] = entry.DATA_SETMANA.split("-").map(Number);
+
+    if (year === parseInt(lastYear)) {
+      if (!weeklyData[week]) {
+        weeklyData[week] = 0;
+        i[week] = 0;
+      }
+      i[week] += 1;
+      weeklyData[week] += Number(entry.SO2);
+    }
+  });
+
+
+  // Convertir el objeto semanal en un array de objetos
+  return Object.keys(weeklyData).map((week) => ({
+    name: `Setmana${week}`,
+    data: [weeklyData[week]/i[week]],
+  }));
+};
+
+const calculateTotalCasesByWeekNos = (dinamics: Interfaces.Dinamic[]) => {
+  const weeklyData: { [key: string]: number } = {};
+  const i: { [key: string]: number } = {};
+  const lastYear = "2023";
+
+  dinamics.forEach((entry: Interfaces.Dinamic) => {
+    const [week, , year] = entry.DATA_SETMANA.split("-").map(Number);
+
+    if (year === parseInt(lastYear)) {
+      if (!weeklyData[week]) {
+        weeklyData[week] = 0;
+        i[week] = 0;
+      }
+      i[week] += 1;
+      weeklyData[week] += Number(entry.NO);
+    }
+  });
+
+
+  // Convertir el objeto semanal en un array de objetos
+  return Object.keys(weeklyData).map((week) => ({
+    name: `Setmana${week}`,
+    data: [weeklyData[week]/i[week]],
   }));
 };
 
@@ -247,6 +299,16 @@ const HomePage = () => {
     data: number[]
   }[]>([]);
 
+  const [sos, setSos] = React.useState<{
+    name: string;
+    data: number[]
+  }[]>([]);
+
+  const [nos, setNos] = React.useState<{
+    name: string;
+    data: number[]
+  }[]>([]);
+
   const [visits_month, setVisits_Month] = React.useState<any[]>([]);
 
   const [average, setAverage] = React.useState(0);
@@ -280,6 +342,8 @@ const HomePage = () => {
           setInfo2_ICS([calculateTotalCasesByDiagnostic(dinamics)]);
           setInfo3_ICS([calculateTotalCasesByEdats(dinamics, selectedDiagnostic)]);
           setVisits(calculateTotalCasesByWeek(dinamics));
+          setSos(calculateTotalCasesByWeekSos(dinamics));
+          setNos(calculateTotalCasesByWeekNos(dinamics));
           setVisits_Month(dinamics);
           const monthlyData = calculateTotalCasesByMonth(dinamics, selectedDiagnostic);
           console.log(visits);
@@ -352,8 +416,8 @@ return (
           <MyLineChart visits={visits} />
           </div>
           <div className="flex-1 flex flex-col justify-center items-center">
-            <MyLineChart1 visits={visits} />
-            <MyLineChart1 visits={visits} />
+            <MyLineChart1 visits={sos} />
+            <MyLineChart1 visits={nos} />
           </div>
         </div>
         <br></br>
