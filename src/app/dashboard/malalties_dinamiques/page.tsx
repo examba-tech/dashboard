@@ -326,9 +326,6 @@ const HomePage = () => {
   };
 
   React.useEffect(() => {
-    const params_pred = {
-      CODI_MUNICIPAL: "080689",
-    };
     const params = {
       Nom_municipi: selectedMunicipi,
     };
@@ -351,7 +348,7 @@ const HomePage = () => {
           const average = totalCasesThisYear / 12;
           setAverage(average);
         }    
-        const data2 = await getMongoCollection("prediccions", params_pred);
+        const data2 = await getMongoCollection("prediccions", params);
         const prediccions = data2 && data2.collection ? data2.collection : undefined;
   
         setLoading(false);

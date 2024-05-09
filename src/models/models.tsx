@@ -73,6 +73,7 @@ const estaticSchema = new Schema(
 
 const prediccionSchema = new Schema(
   {
+    Nom_municipi: String,
     CODI_MUNICIPAL: Number,
     ANY: Number,
     MES: Number,
