@@ -150,8 +150,8 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedDiagnostic }) => {
             options={options}
             series={series}
             type="bar"
-            height={350}
-            width={600}
+            height={250}
+            width={700}
           />
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client"
 import React from "react";
 import ChartThree from "./ChartThree";
+import Mapa from "./Mapa";
 import ChartTwo from "./ChartTwo";
 import ChartTwoEdats from "./ChartTwoEdats";
 import ChartOne from "./ChartOne";
@@ -9,6 +10,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
 import MyLineChart from "@/src/components/charts/line_chart";
+import MyLineChart1 from "@/src/components/charts/line_chart_SO";
 import Filters from "@/src/app/dashboard/malalties_dinamiques/filters";
 import Filters_municipi from "@/src/app/dashboard/malalties_dinamiques/filter_municipi";
 import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
@@ -262,8 +264,11 @@ const HomePage = () => {
   };
 
   React.useEffect(() => {
-    const params = {
+    const params_pred = {
       CODI_MUNICIPAL: "80898",
+    };
+    const params = {
+      Codi_municipi: "80898",
     };
     const fetchData = async () => {
       try {
@@ -282,7 +287,7 @@ const HomePage = () => {
           const average = totalCasesThisYear / 12;
           setAverage(average);
         }    
-        const data2 = await getMongoCollection("prediccions",params);
+        const data2 = await getMongoCollection("prediccions",params_pred);
         const prediccions = data2 && data2.collection ? data2.collection : undefined;
   
         setLoading(false);
@@ -298,57 +303,92 @@ const HomePage = () => {
     fetchData();
   }, [visits_month, visits, selectedDiagnostic, selectedMunicipi]);
 
-  return (
-    <>
-      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
-        Patologies Agudes
-      </h1>
-      {loading && (
-        <Box className="flex justify-center items-center h-96">
-          <CircularProgress />
-        </Box>
-      )}
-      {!loading && (
-        <>
+return (
+
+  <>
+    <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Patologies Agudes</h1>
+    {loading && (
+      <Box className="flex justify-center items-center h-96">
+        <CircularProgress />
+      </Box>
+    )}
+    {!loading && (
+      <>
+      <br></br>
+      <br></br>
+      <br></br>
+      <div className="flex items-center gap-4">
+          <h1 className="text-xl font-bold">Prediccions</h1>
+        </div>
+        <div className="border-b border-black my-4"></div>
+        <div className="flex items-center gap-4">
         <Filters_municipi
-            selectedMunicipi={selectedMunicipi}
-            onMunicipiChange={handleMunicipiChange}
-          />
-        <div style={{ marginTop: '50px' }}></div>
-        <div className="flex justify-center items-center h-[26rem] gap-4">
-          <div className="flex-1 flex justify-center items-center">
-            <ChartOne series={prediccions}/>
-          </div>
-          <div className="flex-1 flex justify-center items-center">
-            <MyLineChart visits={visits} />
-          </div>
-        </div>
-        <div className="flex justify-center items-center h-[26rem] gap-4" style={{ transform: 'scale(0.8)' }}>
-          <div className="flex-1 flex justify-center items-center">
-            <ChartThree series={info_ICS} />
-          </div>
-          <div className="flex-1 flex justify-center items-center">
-            <ChartTwo series={info2_ICS} selectedDiagnostic={selectedDiagnostic}/>
-          </div>
-          <div className="flex-1 flex justify-center items-center">
-            <ChartTwoEdats series={info3_ICS} />
-          </div>
-        </div>
-        <Filters
-            selectedDiagnostic={selectedDiagnostic}
-            onDiagnosticChange={handleDiagnosticChange}
-          />
-        <br></br>
-        <div className="flex justify-center items-center h-[26rem] gap-4">
-          <div className="flex-1 flex justify-center items-center">
-          <Waterfall data={calculateTotalCasesByMonth(visits_month, selectedDiagnostic)} average={average} 
+          selectedMunicipi={selectedMunicipi}
+          onMunicipiChange={handleMunicipiChange}
         />
-           </div>
-         </div>
-        </>
-      )}
-    </>
-  );
+        </div>
+        <div className="flex justify-center items-center gap-4">
+          <div className="flex-1 flex justify-center items-center">
+            <Mapa/>
+          </div>
+          <div className="flex-1 flex flex-col justify-center items-center">
+            <ChartOne series={prediccions}/>
+            <br></br>
+            <div className="flex justify-center items-center  gap-2">
+            <ChartOne series={prediccions}/>
+            </div>
+          </div>
+        </div>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <div className="flex items-center gap-4">
+          <h1 className="text-xl font-bold">Històric de dades</h1>
+        </div>
+        <div className="border-b border-black my-4"></div>
+        <div className="flex justify-center items-center gap-4">
+          <div className="flex-1 flex justify-center items-center">
+          <MyLineChart visits={visits} />
+          </div>
+          <div className="flex-1 flex flex-col justify-center items-center">
+            <MyLineChart1 visits={visits} />
+            <MyLineChart1 visits={visits} />
+          </div>
+        </div>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <div className="flex items-center gap-4">
+          <h1 className="text-xl font-bold">Anàlisi de malalties</h1>
+        </div>
+        <div className="border-b border-black my-4"></div>
+        <div className="flex items-center gap-4">
+        <Filters
+          selectedDiagnostic={selectedDiagnostic}
+          onDiagnosticChange={handleDiagnosticChange}
+        />
+        </div>
+
+        <div className="flex justify-center items-center gap-4">
+          <div className="flex-1 flex flex-col justify-center items-center">
+            <ChartTwo series={info2_ICS} selectedDiagnostic={selectedDiagnostic}/>
+            <br></br>
+            <div className="flex justify-center items-center  gap-2">
+              <ChartThree series={info_ICS} />
+              <ChartTwoEdats series={info3_ICS} />
+            </div>
+          </div>
+          <div className="flex-1 flex justify-center items-center">
+            <Waterfall data={calculateTotalCasesByMonth(visits_month, selectedDiagnostic)} average={average} />
+          </div>
+        </div>
+      </>
+    )}
+  </> 
+);
 };
+
 
 export default HomePage;

@@ -182,8 +182,8 @@ interface ChartOneProps {
             options={options}
             series={series}
             type="area"
-            height={380}
-            width={600}
+            height={190}
+            width={550}
           />
           {/* {infoVisible && (
             <div
