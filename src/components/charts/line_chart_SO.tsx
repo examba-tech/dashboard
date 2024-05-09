@@ -158,7 +158,8 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ visits }) => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Evolució (contaminant)
+            Evolució SO2
+
           </h4>
         </div>
       </div>
