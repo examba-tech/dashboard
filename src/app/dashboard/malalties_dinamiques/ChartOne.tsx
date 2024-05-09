@@ -130,13 +130,21 @@ interface ChartOneProps {
   }[];
 }
 
+//   const handleReset = () => {
+//     setState((prevState) => ({
+//       ...prevState,
+//     }));
+//   };
+//   handleReset;
+
+//   const [infoVisible, setInfoVisible] = useState(false);
+
+//   const toggleInfo = () => {
+//     setInfoVisible(!infoVisible);
+//   };
+
+  
   const ChartOne: React.FC<ChartOneProps> = ({ series }) => {
-
-  const [infoVisible, setInfoVisible] = useState(false);
-
-  const toggleInfo = () => {
-    setInfoVisible(!infoVisible);
-  };
 
   return (
     <div className="rounded-sm border border-stroke bg-white pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
@@ -146,8 +154,7 @@ interface ChartOneProps {
             Predicció
             <span
               className="text-sm text-gray-400 cursor-pointer"
-
-              onClick={toggleInfo}
+              // onClick={toggleInfo}
             >
               {" "}
               +info
@@ -178,7 +185,16 @@ interface ChartOneProps {
             height={380}
             width={600}
           />
-          {infoVisible && (
+          {/* {infoVisible && (
+            <div
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-12 py-4 rounded-lg shadow-lg"
+              onClick={toggleInfo}
+            >
+              <p className="text-sm text-gray-800">
+                Aquest gràfic mostra la distribució del número de visites segons el gènere ... Aquest gràfic mostra la distribució del número de visites segons el gènere ...
+              </p>
+            </div>
+          )} */}
         </div>
       </div>
     </div>

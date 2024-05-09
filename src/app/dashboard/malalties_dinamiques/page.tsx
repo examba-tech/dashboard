@@ -167,7 +167,7 @@ const calculateTotalCasesByMonth = (dinamics: Interfaces.Dinamic[], selectedDiag
   return Object.entries(monthlyData).map(([month, data]) => ({
     name: `Month ${month}`,
     last_year: data.last_year,
-  }));
+  }))};
     
 
 const filterByDay = (info: Interfaces.Prediccions[]) => {
