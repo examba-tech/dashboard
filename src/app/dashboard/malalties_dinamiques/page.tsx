@@ -136,7 +136,7 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
 
   // Convertir el objeto semanal en un array de objetos
   return Object.keys(weeklyData).map((week) => ({
-    name: `Week ${week}`,
+    name: `Setmana ${week}`,
     data: [weeklyData[week]],
   }));
 };
@@ -251,13 +251,13 @@ const HomePage = () => {
 
   const [average, setAverage] = React.useState(0);
 
-  const [selectedDiagnostic, setSelectedDiagnostic] = React.useState<string>("GRIP"); // Valor predeterminado
+  const [selectedDiagnostic, setSelectedDiagnostic] = React.useState<string>("INFECCIONS_AGUDES_TRS"); // Valor predeterminado
   // Función para manejar el cambio de diagnóstico seleccionado
   const handleDiagnosticChange = (diagnostic: string) => {
     setSelectedDiagnostic(diagnostic);
   };
 
-  const [selectedMunicipi, setSelectedMunicipi] = React.useState<string>("Collbató"); // Valor predeterminado
+  const [selectedMunicipi, setSelectedMunicipi] = React.useState<string>("Abrera"); // Valor predeterminado
   // Función para manejar el cambio de diagnóstico seleccionado
   const handleMunicipiChange = (municipi: string) => {
     setSelectedMunicipi(municipi);
@@ -265,10 +265,10 @@ const HomePage = () => {
 
   React.useEffect(() => {
     const params_pred = {
-      CODI_MUNICIPAL: "80898",
+      CODI_MUNICIPAL: "080689",
     };
     const params = {
-      Codi_municipi: "80898",
+      Nom_municipi: selectedMunicipi,
     };
     const fetchData = async () => {
       try {
@@ -287,7 +287,7 @@ const HomePage = () => {
           const average = totalCasesThisYear / 12;
           setAverage(average);
         }    
-        const data2 = await getMongoCollection("prediccions",params_pred);
+        const data2 = await getMongoCollection("prediccions", params_pred);
         const prediccions = data2 && data2.collection ? data2.collection : undefined;
   
         setLoading(false);
