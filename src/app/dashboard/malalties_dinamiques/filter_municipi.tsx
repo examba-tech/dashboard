@@ -39,7 +39,7 @@ const Filters_municipi: React.FC<FiltersProps> = ({
         'Viladecans', 'Vilobí del Penedès', 'Vilafranca del Penedès',
         'Vilanova i la Geltrú', 'La Palma de Cervelló']}
         label="Selecciona un municipi"
-        which_column="Nom municipi"
+        which_column="Nom_municipi"
       />
     </div>
   );
