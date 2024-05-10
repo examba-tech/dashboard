@@ -18,6 +18,8 @@ export async function GET(
     model = Models.Estatic;
   } else if (collection_name === "prediccions") {
     model = Models.Prediccion;
+  } else if (collection_name === "mapas") {
+    model = Models.Mapa;
   } else {
     return NextResponse.json(
       { message: "Invalid collection name" },

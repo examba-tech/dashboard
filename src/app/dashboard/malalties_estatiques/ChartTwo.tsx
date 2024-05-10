@@ -130,7 +130,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series }) => {
             series={series}
             type="bar"
             height={350}
-            width={600}
+            width={500}
           />
         </div>
       </div>

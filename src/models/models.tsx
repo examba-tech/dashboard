@@ -91,6 +91,30 @@ const prediccionSchema = new Schema(
   }
 );
 
+const mapaSchema = new Schema(
+  {
+    Codi_municipi: String,
+    municipi: String,
+    Latitud: Number,
+    Longitud: Number,
+    valor: Number,
+    TN: Number,
+    TX: Number,
+    TM: Number,
+    HRM: Number,
+    PPT: Number,
+    RS24h: Number,
+    NO2: Number,
+    NO: Number,
+    SO2: Number,
+    Numero_Casos: Number,
+  },
+  {
+    bufferTimeoutMS: timeout,
+    maxTimeMS: timeout,
+  }
+);
+
 
 export const Master =
   mongoose.models.Master || mongoose.model("Master", masterSchema, "master");
@@ -103,3 +127,6 @@ export const Estatic =
 
 export const Prediccion =
   mongoose.models.Prediccion || mongoose.model("Prediccion", prediccionSchema, "prediccions");
+
+export const Mapa =
+  mongoose.models.Mapa || mongoose.model("Mapa", mapaSchema, "mapas");

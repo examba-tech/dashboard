@@ -294,6 +294,22 @@ const HomePage = () => {
     }[]
   >([]);
 
+  const [preds, setPreds] = React.useState<
+    {
+      Nom_municipi: String,
+      CODI_MUNICIPAL: Number,
+      ANY: Number,
+      MES: Number,
+      DIA: Number,
+      DIA_SETMANA: Number,
+      NO_AVG: Number,
+      NO2_AVG: Number,
+      SO2_AVG: Number,
+      POBLACIO: Number,
+      INGRESSOS_AVG: Number
+    }[]
+  >([]);
+
   const [visits, setVisits] = React.useState<{
     name: string;
     data: number[]
@@ -329,6 +345,9 @@ const HomePage = () => {
     const params = {
       Nom_municipi: selectedMunicipi,
     };
+    const params_pred = {
+     
+    };
     const fetchData = async () => {
       try {
 
@@ -349,11 +368,13 @@ const HomePage = () => {
           setAverage(average);
         }    
         const data2 = await getMongoCollection("prediccions", params);
+        const data3 = await getMongoCollection("prediccions", params_pred);
         const prediccions = data2 && data2.collection ? data2.collection : undefined;
-  
+        const prediccions1 = data3 && data3.collection ? data3.collection : undefined;
         setLoading(false);
         if (prediccions !== undefined) {
           setPrediccions([filterByDay(prediccions)]);
+          setPreds(prediccions1);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -390,7 +411,7 @@ return (
         </div>
         <div className="flex justify-center items-center gap-4">
           <div className="flex-1 flex justify-center items-center">
-            <Mapa/>
+            <Mapa predictions={preds}/>
           </div>
           <div className="flex-1 flex flex-col justify-center items-center">
             <ChartOne series={prediccions}/>
