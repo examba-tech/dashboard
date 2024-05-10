@@ -9,7 +9,7 @@ const timeout = 100000000;
 const masterSchema = new Schema(
   {
     DATA: Date,
-    "CODI MUNICIPAL": String,
+    CODI_MUNICIPAL: String,
     NO: Number,
     NO2: Number,
     SO2: Number,
@@ -26,7 +26,6 @@ const masterSchema = new Schema(
 
 const dinamicSchema = new Schema(
   {
-    'Unnamed: 0': Number,
     DATA_SETMANA: String,
     Codi_municipi: Number,
     FranjaEdat: String,
