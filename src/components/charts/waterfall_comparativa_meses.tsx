@@ -71,8 +71,8 @@ const Waterfall = ({ data, average }: { data: any; average: number }) => {
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis tickFormatter={(value) => value} />
+              <XAxis dataKey="name"  tick={{ fontSize: 10 }}/>
+              <YAxis tickFormatter={(value) => value} tick={{ fontSize: 10 }}/>
               <Tooltip />
               
               <ReferenceLine y={average} stroke="#000" />
