@@ -5,17 +5,21 @@ import data from './Filtered_MC.json';
 
 interface ChartPredProps {
     predictions: {
-        Nom_municipi: String,
-        CODI_MUNICIPAL: Number,
-        ANY: Number,
-        MES: Number,
-        DIA: Number,
-        DIA_SETMANA: Number,
-        NO_AVG: Number,
-        NO2_AVG: Number,
-        SO2_AVG: Number,
-        POBLACIO: Number,
-        INGRESSOS_AVG: Number
+      Codi_municipi: String,
+      municipi: String,
+      Latitud: Number,
+      Longitud: Number,
+      valor: Number,
+      TN: Number,
+      TX: Number,
+      TM: Number,
+      HRM: Number,
+      PPT: Number,
+      RS24h: Number,
+      NO2: Number,
+      NO: Number,
+      SO2: Number,
+      Numero_Casos: Number,
     }[];
   }
 
@@ -26,15 +30,11 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
           // Puedes optar por eliminar estos elementos, asignarles un valor predeterminado o simplemente tomar nota para investigar más.
         }
     });
-    const predictionsWithStringKeys = predictions.map(prediction => ({
-     ...prediction,
-    CODI_MUNICIPAL: "0" + prediction.CODI_MUNICIPAL.toString()
-    }));
-    console.log(predictionsWithStringKeys)
+
     console.log(data.features)
   const spec: any = {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 400,
+    "width": 425,
     "height": 600,
     "data": {
       "values": data.features
@@ -44,10 +44,10 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
           "lookup": "properties.codimuni", // Asegúrate de que este campo exista en tu data de geometría
           "from": {
             "data": {
-              "values": predictionsWithStringKeys
+              "values": predictions
             },
-            "key": "CODI_MUNICIPAL",
-            "fields": ["INGRESSOS_AVG"] // Asegúrate de que este campo esté incluido en las predicciones
+            "key": "Codi_municipi",
+            "fields": ["Numero_Casos"] // Asegúrate de que este campo esté incluido en las predicciones
           },
           "default": null,
         }
@@ -56,7 +56,7 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
     "mark": "geoshape",
     "encoding": {
       "color": {
-        "field": "INGRESSOS_AVG", 
+        "field": "Numero_Casos", 
         "type": "quantitative",
         "scale": {
           "scheme": "blues"

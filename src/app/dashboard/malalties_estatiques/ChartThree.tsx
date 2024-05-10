@@ -35,7 +35,7 @@ const options: ApexOptions = {
       breakpoint: 260,
       options: {
         chart: {
-          width: 450,
+          width: 150,
         },
       },
     },
@@ -43,7 +43,7 @@ const options: ApexOptions = {
       breakpoint: 640,
       options: {
         chart: {
-          width: 220,
+          width: 150,
         },
       },
     },
@@ -113,7 +113,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
             series={seriesArray}
             type="donut"
             height={350}
-            width={200}
+            width={350}
           />
         </div>
       </div>

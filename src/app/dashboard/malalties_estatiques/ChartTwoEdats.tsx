@@ -12,7 +12,7 @@ const options: ApexOptions = {
     fontFamily: "Satoshi, sans-serif",
     type: "bar",
     height: 335,
-    width: 500,
+    width: 400,
     stacked: true,
     toolbar: {
       show: false,
@@ -130,7 +130,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series }) => {
             series={series}
             type="bar"
             height={350}
-            width={580}
+            width={550}
           />
         </div>
       </div>

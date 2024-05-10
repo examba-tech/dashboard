@@ -8,6 +8,8 @@ import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
+import Mapa from "./Mapa";
+import Mapa_cont from "./Mapa_cont";
 
 const calculateTotalCasesBySex = (info: Interfaces.Estatiques[]) => {
   var totalCasesBySex = {
@@ -152,23 +154,44 @@ const HomePage = () => {
     data: number[]
   }[]>([]);
 
+  const [mapa_casos, set_mapa_casos] = React.useState<{
+    Codi_municipi: String,
+    municipi: String,
+    Latitud: Number,
+    Longitud: Number,
+    valor: Number,
+    TN: Number,
+    TX: Number,
+    TM: Number,
+    HRM: Number,
+    PPT: Number,
+    RS24h: Number,
+    NO2: Number,
+    NO: Number,
+    SO2: Number,
+    Numero_Casos: Number,
+  }[]>([]);
+
   React.useEffect(() => {
     const params = {
     };
     const fetchData = async () => {
       try {
         const data = await getMongoCollection("estatics", params);
+        const data1 = await getMongoCollection("mapas", params);
         console.log("ZZZZZZZZZZZZ");
         console.log("Data from MongoDB:", data);
         const estatics = data && data.collection ? data.collection : undefined;
+        const mapaestatics = data1 && data1.collection ? data1.collection : undefined;
         console.log("Bbbbbbbbbbbbbbb");
-        console.log("Data from MongoDB:", estatics);
+        console.log("Data from MongoDB:", data1);
         // const data1 = await getMongoCollection("edats");
         // const edats = data1 && data1.collection ? data1.collection : undefined;
         if (estatics !== undefined) {
           setInfo_ICS(calculateTotalCasesBySex(estatics));
           setInfo2_ICS([calculateTotalCasesByDiagnostic(estatics)]);
           setInfo3_ICS([calculateTotalCasesByEdats(estatics)]);
+          set_mapa_casos(mapaestatics)
         }
         setLoading(false);
       } catch (error) { 
@@ -195,15 +218,25 @@ const HomePage = () => {
       )}
       {!loading && (
         <>
-        <div style={{ marginTop: '50px' }}></div>
-        <div className="flex justify-center items-center h-[26rem] gap-4" style={{ transform: 'scale(0.8)' }}>
-          <div className="flex-1 flex justify-center items-center">
-            <ChartThree series={info_ICS} />
+        <br></br>
+        <br></br>
+        <br></br>
+        <div className="flex justify-center items-center gap-4">
+          <div className="flex-1 flex flex-col justify-center items-center">
+          <Mapa predictions={mapa_casos} />
           </div>
-          <div className="flex-1 flex justify-center items-center">
+          <div className="flex-1 flex flex-col justify-center items-center">
+          <Mapa_cont predictions={mapa_casos} />
+          </div>
+        </div>
+        <div className="flex justify-center items-center gap-4" style={{ transform: 'scale(0.8)' }}>
+          <div className="flex-1 flex flex-col justify-center items-center">
             <ChartTwo series={info2_ICS} />
           </div>
-          <div className="flex-1 flex justify-center items-center">
+          <div className="flex-1 flex flex-col justify-center items-center">
+            <ChartThree series={info_ICS} />
+          </div>
+          <div className="flex-1 flex flex-col justify-center items-center">
             <ChartTwoEdats series={info3_ICS} />
           </div>
         </div>
