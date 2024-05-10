@@ -10,13 +10,13 @@ const Filters: React.FC<FiltersProps> = ({
   selectedDiagnostic,
   onDiagnosticChange,
 }) => {
-
   return (
     <div>
       <SingleSelectChip
         selectedValue={selectedDiagnostic}
         onSelectedValueChange={(column, value) => onDiagnosticChange(value)}
         options={[
+          "Tots",
           "INFECCIONS_AGUDES_TRS",
           "BRONQUITIS_AGUDA",
           "GRIP",
@@ -24,7 +24,7 @@ const Filters: React.FC<FiltersProps> = ({
           "PNEUMONIA_BACTERIANA",
           "PNEUMONIA_VIRICA",
         ]}
-        label="Seleccione un diagnóstico"
+        label="Selecciona un diagnòstic"
         which_column="DIAGNOSTIC"
       />
     </div>

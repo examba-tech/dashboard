@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center pt-20">
+    <div className="flex flex-col items-center justify-center">
       <Image src="/examba.png" width={300} height={300} alt="examba" />
       <div className="w-full max-w-2xl">
         <div className="">

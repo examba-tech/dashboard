@@ -33,7 +33,7 @@ export async function GET(
   });
 
   try {
-    const collection = await model.find(mongoQuery).select("-_id");
+    const collection = await model.find(mongoQuery).select("-_id").lean();
     return NextResponse.json({ collection }, { status: 200 });
   } catch (err) {
     console.log(err);

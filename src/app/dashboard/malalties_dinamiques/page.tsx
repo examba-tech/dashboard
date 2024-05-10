@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import ChartThree from "./ChartThree";
 import Mapa from "./Mapa";
@@ -15,7 +15,10 @@ import Filters from "@/src/app/dashboard/malalties_dinamiques/filters";
 import Filters_municipi from "@/src/app/dashboard/malalties_dinamiques/filter_municipi";
 import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 
-const calculateTotalCasesBySex = (info: Interfaces.Dinamic[], selectedDiagnostic: string) => {
+const calculateTotalCasesBySex = (
+  info: Interfaces.Dinamic[],
+  selectedDiagnostic: string
+) => {
   var totalCasesBySex = {
     male: 0,
     female: 0,
@@ -72,12 +75,15 @@ const calculateTotalCasesByDiagnostic = (info: Interfaces.Dinamic[]) => {
       totalCasesByDiagnostic.GRIP,
       totalCasesByDiagnostic.BRONQUIOLITIS_AGUDA,
       totalCasesByDiagnostic.PNEUMONIA_BACTERIANA,
-      totalCasesByDiagnostic.PNEUMONIA_VIRICA
-    ]
+      totalCasesByDiagnostic.PNEUMONIA_VIRICA,
+    ],
   };
 };
 
-const calculateTotalCasesByEdats = (info: Interfaces.Dinamic[], selectedDiagnostic: string) => {
+const calculateTotalCasesByEdats = (
+  info: Interfaces.Dinamic[],
+  selectedDiagnostic: string
+) => {
   var totalCasesByEdats = {
     de_15_44: 0,
     de_45_64: 0,
@@ -111,12 +117,9 @@ const calculateTotalCasesByEdats = (info: Interfaces.Dinamic[], selectedDiagnost
       totalCasesByEdats.de_45_64,
       totalCasesByEdats.de_65_74,
       totalCasesByEdats.mes_75,
-    ]
+    ],
   };
 };
-
-
-
 
 const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
   const weeklyData: { [key: string]: number } = {};
@@ -159,11 +162,10 @@ const calculateTotalCasesByWeekSos = (dinamics: Interfaces.Dinamic[]) => {
     }
   });
 
-
   // Convertir el objeto semanal en un array de objetos
   return Object.keys(weeklyData).map((week) => ({
     name: `Setmana${week}`,
-    data: [weeklyData[week]/i[week]],
+    data: [weeklyData[week] / i[week]],
   }));
 };
 
@@ -185,16 +187,17 @@ const calculateTotalCasesByWeekNos = (dinamics: Interfaces.Dinamic[]) => {
     }
   });
 
-
   // Convertir el objeto semanal en un array de objetos
   return Object.keys(weeklyData).map((week) => ({
     name: `Setmana${week}`,
-    data: [weeklyData[week]/i[week]],
+    data: [weeklyData[week] / i[week]],
   }));
 };
 
-
-const calculateTotalCasesByMonth = (dinamics: Interfaces.Dinamic[], selectedDiagnostic: string) => {
+const calculateTotalCasesByMonth = (
+  dinamics: Interfaces.Dinamic[],
+  selectedDiagnostic: string
+) => {
   const monthlyData: { [key: string]: { last_year: number } } = {};
   const last_year = 2023;
 
@@ -221,8 +224,8 @@ const calculateTotalCasesByMonth = (dinamics: Interfaces.Dinamic[], selectedDiag
   return Object.entries(monthlyData).map(([month, data]) => ({
     name: `Month ${month}`,
     last_year: data.last_year,
-  }))};
-    
+  }));
+};
 
 const filterByDay = (info: Interfaces.Prediccions[]) => {
   var totalCasesByDay = {
@@ -232,24 +235,24 @@ const filterByDay = (info: Interfaces.Prediccions[]) => {
     dia4: 0,
     dia5: 0,
     dia6: 0,
-    dia7: 0
+    dia7: 0,
   };
   info.forEach((entry: Interfaces.Prediccions) => {
-    if ((entry.DIA == 25) && (entry.MES=12)) {
+    if (entry.DIA == 25 && (entry.MES = 12)) {
       totalCasesByDay.dia1 = entry.INGRESSOS_AVG.valueOf();
-    } else if ((entry.DIA == 26) && (entry.MES=12)) {
+    } else if (entry.DIA == 26 && (entry.MES = 12)) {
       totalCasesByDay.dia2 = entry.INGRESSOS_AVG.valueOf();
-    } else if ((entry.DIA == 27) && (entry.MES=12)) {
+    } else if (entry.DIA == 27 && (entry.MES = 12)) {
       totalCasesByDay.dia3 = entry.INGRESSOS_AVG.valueOf();
-    } else if ((entry.DIA == 28) && (entry.MES=12)) {
+    } else if (entry.DIA == 28 && (entry.MES = 12)) {
       totalCasesByDay.dia4 = entry.INGRESSOS_AVG.valueOf();
-    } else if ((entry.DIA == 29) && (entry.MES=12)) {
+    } else if (entry.DIA == 29 && (entry.MES = 12)) {
       totalCasesByDay.dia5 = entry.INGRESSOS_AVG.valueOf();
-    } else if ((entry.DIA == 30) && (entry.MES=12)) {
+    } else if (entry.DIA == 30 && (entry.MES = 12)) {
       totalCasesByDay.dia6 = entry.INGRESSOS_AVG.valueOf();
-    } else if ((entry.DIA == 31) && (entry.MES=12)) {
+    } else if (entry.DIA == 31 && (entry.MES = 12)) {
       totalCasesByDay.dia7 = entry.INGRESSOS_AVG.valueOf();
-    } 
+    }
   });
   return {
     name: "Prediccions",
@@ -264,7 +267,6 @@ const filterByDay = (info: Interfaces.Prediccions[]) => {
     ],
   };
 };
-
 
 const HomePage = () => {
   const [info_ICS, setInfo_ICS] = React.useState<{
@@ -296,46 +298,54 @@ const HomePage = () => {
 
   const [preds, setPreds] = React.useState<
     {
-      Nom_municipi: String,
-      CODI_MUNICIPAL: Number,
-      ANY: Number,
-      MES: Number,
-      DIA: Number,
-      DIA_SETMANA: Number,
-      NO_AVG: Number,
-      NO2_AVG: Number,
-      SO2_AVG: Number,
-      POBLACIO: Number,
-      INGRESSOS_AVG: Number
+      Nom_municipi: String;
+      CODI_MUNICIPAL: Number;
+      ANY: Number;
+      MES: Number;
+      DIA: Number;
+      DIA_SETMANA: Number;
+      NO_AVG: Number;
+      NO2_AVG: Number;
+      SO2_AVG: Number;
+      POBLACIO: Number;
+      INGRESSOS_AVG: Number;
     }[]
   >([]);
 
-  const [visits, setVisits] = React.useState<{
-    name: string;
-    data: number[]
-  }[]>([]);
+  const [visits, setVisits] = React.useState<
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
 
-  const [sos, setSos] = React.useState<{
-    name: string;
-    data: number[]
-  }[]>([]);
+  const [sos, setSos] = React.useState<
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
 
-  const [nos, setNos] = React.useState<{
-    name: string;
-    data: number[]
-  }[]>([]);
+  const [nos, setNos] = React.useState<
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
 
   const [visits_month, setVisits_Month] = React.useState<any[]>([]);
 
   const [average, setAverage] = React.useState(0);
 
-  const [selectedDiagnostic, setSelectedDiagnostic] = React.useState<string>("INFECCIONS_AGUDES_TRS"); // Valor predeterminado
+  const [selectedDiagnostic, setSelectedDiagnostic] =
+    React.useState<string>("Tots"); // Valor predeterminado
   // Función para manejar el cambio de diagnóstico seleccionado
   const handleDiagnosticChange = (diagnostic: string) => {
     setSelectedDiagnostic(diagnostic);
   };
 
-  const [selectedMunicipi, setSelectedMunicipi] = React.useState<string>("Abrera"); // Valor predeterminado
+  const [selectedMunicipi, setSelectedMunicipi] =
+    React.useState<string>("Tots"); // Valor predeterminado
   // Función para manejar el cambio de diagnóstico seleccionado
   const handleMunicipiChange = (municipi: string) => {
     setSelectedMunicipi(municipi);
@@ -345,32 +355,40 @@ const HomePage = () => {
     const params = {
       Nom_municipi: selectedMunicipi,
     };
-    const params_pred = {
-     
-    };
+    const params_pred = {};
     const fetchData = async () => {
       try {
-
         const data_full = await getMongoCollection("dinamics", params);
-        const dinamics = data_full && data_full.collection ? data_full.collection : undefined;
+        const dinamics =
+          data_full && data_full.collection ? data_full.collection : undefined;
         if (dinamics !== undefined) {
           setInfo_ICS(calculateTotalCasesBySex(dinamics, selectedDiagnostic));
           setInfo2_ICS([calculateTotalCasesByDiagnostic(dinamics)]);
-          setInfo3_ICS([calculateTotalCasesByEdats(dinamics, selectedDiagnostic)]);
+          setInfo3_ICS([
+            calculateTotalCasesByEdats(dinamics, selectedDiagnostic),
+          ]);
           setVisits(calculateTotalCasesByWeek(dinamics));
           setSos(calculateTotalCasesByWeekSos(dinamics));
           setNos(calculateTotalCasesByWeekNos(dinamics));
           setVisits_Month(dinamics);
-          const monthlyData = calculateTotalCasesByMonth(dinamics, selectedDiagnostic);
+          const monthlyData = calculateTotalCasesByMonth(
+            dinamics,
+            selectedDiagnostic
+          );
           console.log(visits);
-          const totalCasesThisYear = monthlyData.reduce((acc, curr) => acc + curr.last_year, 0);
+          const totalCasesThisYear = monthlyData.reduce(
+            (acc, curr) => acc + curr.last_year,
+            0
+          );
           const average = totalCasesThisYear / 12;
           setAverage(average);
-        }    
+        }
         const data2 = await getMongoCollection("prediccions", params);
         const data3 = await getMongoCollection("prediccions", params_pred);
-        const prediccions = data2 && data2.collection ? data2.collection : undefined;
-        const prediccions1 = data3 && data3.collection ? data3.collection : undefined;
+        const prediccions =
+          data2 && data2.collection ? data2.collection : undefined;
+        const prediccions1 =
+          data3 && data3.collection ? data3.collection : undefined;
         setLoading(false);
         if (prediccions !== undefined) {
           setPrediccions([filterByDay(prediccions)]);
@@ -385,92 +403,101 @@ const HomePage = () => {
     fetchData();
   }, [visits_month, visits, selectedDiagnostic, selectedMunicipi]);
 
-return (
-
-  <>
-    <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Patologies Agudes</h1>
-    {loading && (
-      <Box className="flex justify-center items-center h-96">
-        <CircularProgress />
-      </Box>
-    )}
-    {!loading && (
-      <>
-      <br></br>
-      <br></br>
-      <br></br>
-      <div className="flex items-center gap-4">
-          <h1 className="text-xl font-bold">Prediccions</h1>
-        </div>
-        <div className="border-b border-black my-4"></div>
-        <div className="flex items-center gap-4">
-        <Filters_municipi
-          selectedMunicipi={selectedMunicipi}
-          onMunicipiChange={handleMunicipiChange}
-        />
-        </div>
-        <div className="flex justify-center items-center gap-4">
-          <div className="flex-1 flex justify-center items-center">
-            <Mapa predictions={preds}/>
+  return (
+    <>
+      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
+        Patologies Agudes
+      </h1>
+      {loading && (
+        <Box className="flex justify-center items-center h-96">
+          <CircularProgress />
+        </Box>
+      )}
+      {!loading && (
+        <>
+          <br></br>
+          <br></br>
+          <br></br>
+          <div className="flex items-center gap-4">
+            <h1 className="text-xl font-bold">Prediccions</h1>
           </div>
-          <div className="flex-1 flex flex-col justify-center items-center">
-            <ChartOne series={prediccions}/>
-            <br></br>
-            <div className="flex justify-center items-center  gap-2">
-            <ChartOne series={prediccions}/>
+          <div className="border-b border-black my-4"></div>
+          <div className="flex items-center gap-4">
+            <Filters_municipi
+              selectedMunicipi={selectedMunicipi}
+              onMunicipiChange={handleMunicipiChange}
+            />
+          </div>
+          <div className="flex justify-center items-center gap-4">
+            <div className="flex-1 flex justify-center items-center">
+              <Mapa predictions={preds} />
+            </div>
+            <div className="flex-1 flex flex-col justify-center items-center">
+              <ChartOne series={prediccions} />
+              <br></br>
+              <div className="flex justify-center items-center  gap-2">
+                <ChartOne series={prediccions} />
+              </div>
             </div>
           </div>
-        </div>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <div className="flex items-center gap-4">
-          <h1 className="text-xl font-bold">Històric de dades</h1>
-        </div>
-        <div className="border-b border-black my-4"></div>
-        <div className="flex justify-center items-center gap-4">
-          <div className="flex-1 flex justify-center items-center">
-          <MyLineChart visits={visits} />
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <div className="flex items-center gap-4">
+            <h1 className="text-xl font-bold">Històric de dades</h1>
           </div>
-          <div className="flex-1 flex flex-col justify-center items-center">
-            <MyLineChart1 visits={sos} />
-            <MyLineChart1 visits={nos} />
-          </div>
-        </div>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <div className="flex items-center gap-4">
-          <h1 className="text-xl font-bold">Anàlisi de malalties</h1>
-        </div>
-        <div className="border-b border-black my-4"></div>
-        <div className="flex items-center gap-4">
-        <Filters
-          selectedDiagnostic={selectedDiagnostic}
-          onDiagnosticChange={handleDiagnosticChange}
-        />
-        </div>
-
-        <div className="flex justify-center items-center gap-4">
-          <div className="flex-1 flex flex-col justify-center items-center">
-            <ChartTwo series={info2_ICS} selectedDiagnostic={selectedDiagnostic}/>
-            <br></br>
-            <div className="flex justify-center items-center  gap-2">
-              <ChartThree series={info_ICS} />
-              <ChartTwoEdats series={info3_ICS} />
+          <div className="border-b border-black my-4"></div>
+          <div className="flex justify-center items-center gap-4">
+            <div className="flex-1 flex justify-center items-center">
+              <MyLineChart visits={visits} />
+            </div>
+            <div className="flex-1 flex flex-col justify-center items-center">
+              <MyLineChart1 visits={sos} />
+              <MyLineChart1 visits={nos} />
             </div>
           </div>
-          <div className="flex-1 flex justify-center items-center">
-            <Waterfall data={calculateTotalCasesByMonth(visits_month, selectedDiagnostic)} average={average} />
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <div className="flex items-center gap-4">
+            <h1 className="text-xl font-bold">Anàlisi de malalties</h1>
           </div>
-        </div>
-      </>
-    )}
-  </> 
-);
+          <div className="border-b border-black my-4"></div>
+          <div className="flex items-center gap-4">
+            <Filters
+              selectedDiagnostic={selectedDiagnostic}
+              onDiagnosticChange={handleDiagnosticChange}
+            />
+          </div>
+
+          <div className="flex justify-center items-center gap-4">
+            <div className="flex-1 flex flex-col justify-center items-center">
+              <ChartTwo
+                series={info2_ICS}
+                selectedDiagnostic={selectedDiagnostic}
+              />
+              <br></br>
+              <div className="flex justify-center items-center  gap-2">
+                <ChartThree series={info_ICS} />
+                <ChartTwoEdats series={info3_ICS} />
+              </div>
+            </div>
+            <div className="flex-1 flex justify-center items-center">
+              <Waterfall
+                data={calculateTotalCasesByMonth(
+                  visits_month,
+                  selectedDiagnostic
+                )}
+                average={average}
+              />
+            </div>
+          </div>
+        </>
+      )}
+    </>
+  );
 };
-
 
 export default HomePage;

@@ -16,7 +16,7 @@ const Filters_municipi: React.FC<FiltersProps> = ({
       <SingleSelectChip
         selectedValue={selectedMunicipi}
         onSelectedValueChange={(column, value) => onMunicipiChange(value)}
-        options={['Abrera', 'Avinyonet del Penedès', 'Begues', 'Les Cabanyes',
+        options={['Tots', 'Abrera', 'Avinyonet del Penedès', 'Begues', 'Les Cabanyes',
         'Canyelles', 'Castelldefels', 'Castellet i la Gornal',
         'Castellví de la Marca', 'Castellví de Rosanes', 'Cervelló', 'Collbató',
         'Corbera de Llobregat', 'Cornellà de Llobregat',

@@ -12,12 +12,9 @@ const Page = () => {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    const params = {
-      CODI_MUNICIPAL: "081141",
-    };
     const fetchData = async () => {
       try {
-        const data = await getMongoCollection("master", params);
+        const data = await getMongoCollection("master");
         setMaster(data && data.collection ? data.collection : []);
         setLoading(false);
       } catch (error) {
