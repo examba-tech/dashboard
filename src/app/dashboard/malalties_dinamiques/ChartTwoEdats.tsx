@@ -82,7 +82,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series }) => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Franja d&apos;Edat
+            Franges d&apos;Edat
           </h4>
         </div>
       </div>
