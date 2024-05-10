@@ -713,6 +713,13 @@
   resolved "https://registry.npmjs.org/@types/scheduler/-/scheduler-0.16.8.tgz"
   integrity sha512-WZLiwShhwLRmeV6zH+GkbOFT6Z6VklCItrDioxUnv+u4Ll+8vKeFySoFyK/0ctcRpOmwAicELfmys1sDc/Rw+A==
 
+"@types/vega@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@types/vega/-/vega-3.2.0.tgz#96b48570a390fb9f659145fdef70e39aecceca9f"
+  integrity sha512-07hQ1ca9YEgEaPuYYJrDVMzcoA0JpySv87T46AY0nBNqGYR9v1hdZOygu0WfJMwjEFkyxg5h5dISpubF/wRDnA==
+  dependencies:
+    vega "*"
+
 "@types/webidl-conversions@*":
   version "7.0.3"
   resolved "https://registry.npmjs.org/@types/webidl-conversions/-/webidl-conversions-7.0.3.tgz"
@@ -4168,7 +4175,7 @@ vega-wordcloud@~4.1.4:
     vega-statistics "^1.8.1"
     vega-util "^1.17.1"
 
-vega@^5.28.0:
+vega@*, vega@^5.28.0:
   version "5.28.0"
   resolved "https://registry.yarnpkg.com/vega/-/vega-5.28.0.tgz#9c6509b7e3ccb9b610660a43303e165c8e258012"
   integrity sha512-5EDVhjBUgcVdrA6LZDBLah/nuk4FRUwZqTgP/Yi32qeRCoiN0xkptQ5Sbmj6XfH7wu1SdbAbsCm1Zls+9NC/8Q==

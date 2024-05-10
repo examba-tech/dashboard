@@ -344,12 +344,22 @@ const HomePage = () => {
     setSelectedDiagnostic(diagnostic);
   };
 
-  const [selectedMunicipi, setSelectedMunicipi] =
-    React.useState<string>("Tots"); // Valor predeterminado
-  // Función para manejar el cambio de diagnóstico seleccionado
-  const handleMunicipiChange = (municipi: string) => {
-    setSelectedMunicipi(municipi);
+  const [selectedMunicipi, setSelectedMunicipi] = React.useState('Tots');
+
+  // This function will be passed to the Mapa component
+  const handleMunicipiSelect = (municipi: any) => {
+      setSelectedMunicipi(municipi);
+      console.log("Municipi selected:", municipi);
   };
+  // const [selectedMunicipi, setSelectedMunicipi] =
+  //   React.useState<string>("Tots"); // Valor predeterminado
+
+  // Función para manejar el cambio de diagnóstico seleccionado
+
+  // const handleMunicipiChange = (municipi: string) => {
+  //   setSelectedMunicipi(municipi);
+
+  // };
 
   React.useEffect(() => {
     const params = {
@@ -402,7 +412,7 @@ const HomePage = () => {
 
     fetchData();
   }, [visits_month, visits, selectedDiagnostic, selectedMunicipi]);
-
+  
   return (
     <>
       <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
@@ -423,14 +433,14 @@ const HomePage = () => {
           </div>
           <div className="border-b border-black my-4"></div>
           <div className="flex items-center gap-4">
-            <Filters_municipi
+            {/* <Filters_municipi
               selectedMunicipi={selectedMunicipi}
               onMunicipiChange={handleMunicipiChange}
-            />
+            /> */}
           </div>
           <div className="flex justify-center items-center gap-4">
             <div className="flex-1 flex justify-center items-center">
-              <Mapa predictions={preds} />
+              <Mapa predictions={preds}  onMunicipiSelect = {handleMunicipiSelect}/>
             </div>
             <div className="flex-1 flex flex-col justify-center items-center">
               <ChartOne series={prediccions} />
