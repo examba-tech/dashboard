@@ -23,7 +23,7 @@ const PredictionsAlerts: React.FC<PredictionsAlertsProps> = ({ predictions }) =>
     if (Number(pred.INGRESSOS_AVG) > Number(1.9)) {
       alerts.push(
         <Alert severity="error" style={{ marginBottom: '10px' }}>
-          Compte! El municipi {pred.Nom_municipi} té una previsió d'alts ingresos para la pròxima setmana.
+          Compte! El municipi {pred.Nom_municipi} té una previsió d&apos;alts ingresos para la pròxima setmana.
         </Alert>
       );
     }
