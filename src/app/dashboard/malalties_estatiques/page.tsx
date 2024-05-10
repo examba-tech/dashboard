@@ -10,14 +10,19 @@ import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
 import Mapa from "./Mapa";
 import Mapa_cont from "./Mapa_cont";
+import Filter_diagnostic from "@/src/app/dashboard/malalties_estatiques/filter_diagnostic";
 
-const calculateTotalCasesBySex = (info: Interfaces.Estatiques[]) => {
+const calculateTotalCasesBySex = (info: Interfaces.Estatiques[], selectedDiagnostic: string) => {
   var totalCasesBySex = {
     male: 0,
     female: 0,
   };
 
   info.forEach((entry: Interfaces.Estatiques) => {
+    if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
+      return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
+    }
+
     if (entry.Sexe == "H") {
       totalCasesBySex.male += entry.Numero_Casos.valueOf();
     } else if (entry.Sexe == "D") {
@@ -77,7 +82,7 @@ const calculateTotalCasesByDiagnostic = (info: Interfaces.Estatiques[]) => {
   };
   };
 
-const calculateTotalCasesByEdats = (info: Interfaces.Estatiques[]) => {
+const calculateTotalCasesByEdats = (info: Interfaces.Estatiques[], selectedDiagnostic: string) => {
   var totalCasesByEdats = {
     menys_5: 0,
     de_5_9: 0,
@@ -93,6 +98,9 @@ const calculateTotalCasesByEdats = (info: Interfaces.Estatiques[]) => {
   };
   
   info.forEach((entry: Interfaces.Estatiques) => {
+    if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
+      return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
+    }
     if (entry.FranjaEdat == "<5") {
       totalCasesByEdats.menys_5 += entry.Numero_Casos.valueOf();
     } else if (entry.FranjaEdat == "5-9") {
@@ -172,25 +180,27 @@ const HomePage = () => {
     Numero_Casos: Number,
   }[]>([]);
 
+  const [selectedDiagnostic, setSelectedDiagnostic] = React.useState<string>("ASMA"); // Valor predeterminado
+// Función para manejar el cambio de diagnóstico seleccionado
+  const handleDiagnosticChange = (diagnostic: string) => {
+  setSelectedDiagnostic(diagnostic);
+};
+
   React.useEffect(() => {
     const params = {
+
     };
     const fetchData = async () => {
       try {
         const data = await getMongoCollection("estatics", params);
         const data1 = await getMongoCollection("mapas", params);
-        console.log("ZZZZZZZZZZZZ");
-        console.log("Data from MongoDB:", data);
         const estatics = data && data.collection ? data.collection : undefined;
         const mapaestatics = data1 && data1.collection ? data1.collection : undefined;
-        console.log("Bbbbbbbbbbbbbbb");
-        console.log("Data from MongoDB:", data1);
-        // const data1 = await getMongoCollection("edats");
-        // const edats = data1 && data1.collection ? data1.collection : undefined;
+
         if (estatics !== undefined) {
-          setInfo_ICS(calculateTotalCasesBySex(estatics));
+          setInfo_ICS(calculateTotalCasesBySex(estatics, selectedDiagnostic));
           setInfo2_ICS([calculateTotalCasesByDiagnostic(estatics)]);
-          setInfo3_ICS([calculateTotalCasesByEdats(estatics)]);
+          setInfo3_ICS([calculateTotalCasesByEdats(estatics, selectedDiagnostic)]);
           set_mapa_casos(mapaestatics)
         }
         setLoading(false);
@@ -201,12 +211,7 @@ const HomePage = () => {
     };
 
     fetchData();
-  }, []);
-
-  console.log("Aaaaaaaaaaaaaaaaaaa");
-  console.log("info_ICS:", info_ICS);
-  console.log("info2_ICS:", info2_ICS);
-  console.log("info3_ICS:", info3_ICS);
+  }, [selectedDiagnostic]);
 
   return (
     <>
@@ -229,6 +234,14 @@ const HomePage = () => {
           <Mapa_cont predictions={mapa_casos} />
           </div>
         </div>
+        <br></br>
+        <br></br>
+        <div className="flex items-center gap-4">
+            <Filter_diagnostic
+              selectedDiagnostic={selectedDiagnostic}
+              onDiagnosticChange={handleDiagnosticChange}
+            />
+          </div>
         <div className="flex justify-center items-center gap-4" style={{ transform: 'scale(0.8)' }}>
           <div className="flex-1 flex flex-col justify-center items-center">
             <ChartTwo series={info2_ICS} />
