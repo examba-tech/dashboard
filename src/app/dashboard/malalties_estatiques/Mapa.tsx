@@ -1,3 +1,4 @@
+
 "use client"
 import React from 'react';
 import { VegaLite } from 'react-vega';
@@ -73,40 +74,76 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
 export default Mapa;
 
 
-
-
-
 /*
-
 
 import React from 'react';
 import { VegaLite } from 'react-vega';
 import data from './Filtered_MC.json';
 
+interface ChartPredProps {
+  predictions: {
+    Codi_municipi: string;
+    municipi: string;
+    Latitud: number;
+    Longitud: number;
+    valor: number;
+    TN: number;
+    TX: number;
+    TM: number;
+    HRM: number;
+    PPT: number;
+    RS24h: number;
+    NO2: number;
+    NO: number;
+    SO2: number;
+    Numero_Casos: number;
+  }[];
+}
 
-const Mapa = ({predictions}) => {
+const Mapa: React.FC<ChartPredProps> = ({ predictions }) => {
+  const spec: any = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 425,
+    "height": 600,
+    "data": {
+      "values": data.features
+    },
     "transform": [
       {
-        "lookup": "features.properties.codimuni", // Asegúrate de que este campo exista en tu data de geometría
+        "lookup": "properties.codimuni",
         "from": {
           "data": {
             "values": predictions
           },
-          "key": "CODI_MUNICIPAL",
-          "fields": ["NUMERO_CASOS"] // Asegúrate de que este campo esté incluido en las predicciones
-        }
+          "key": "Codi_municipi",
+          "fields": ["Numero_Casos", "municipi"]
+        },
+        "default": null,
       }
     ],
     "projection": {"type": "mercator"},
-    "mark": "geoshape",
+    "mark": {"type": "geoshape"},
+    "selection": {
+      "municipi": {
+        "type": "single",
+        "on": "click",
+        "fields": ["properties.nommuni"],
+        "empty": "none"
+      }
+    },
     "encoding": {
       "color": {
-        "field": "NUMERO_CASOS",
+        "field": "Numero_Casos",
         "type": "quantitative",
-        "scale": {
-          "scheme": "reds"
-        },
-        "title": "Número de Casos"
+        "scale": {"scheme": "blues"}
+      },
+      "stroke": {
+        "condition": {"selection": "municipi", "value": "black"},
+        "value": null
+      },
+      "strokeWidth": {
+        "condition": {"selection": "municipi", "value": 3},
+        "value": 1
       }
     }
   };
@@ -115,152 +152,4 @@ const Mapa = ({predictions}) => {
 };
 
 export default Mapa;
-
-
-/*import React from 'react';
-import { VegaLite } from 'react-vega';
-import data from './Filtered_MC.json'; 
-
-const Mapa = () => {
-  const spec: any = {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 400,
-    "height": 600,
-    "data": {
-      "values": data
-    },
-    "projection": {"type": "mercator"},
-    "mark": "geoshape",
-    "encoding": {
-      "color": {
-        "field": "properties.nomcomar", 
-        "type": "nominal"
-      }
-    }
-  };
-
-  return <VegaLite spec={spec} />;
-};
-
-export default Mapa;
-
-
-
-import * as Interfaces from "@/src/utils/interfaces";
-import React, { useEffect, useState } from 'react';
-import { VegaLite } from 'react-vega';
-import geoData from './Filtered_MC.json';
-
-// Asumimos que tienes un tipo adecuado para 'predictions'
-const Mapa = ({ prediccions }: { prediccions: Interfaces.PredictionType[] }) => {
-  const [data, setData] = useState<Interfaces.GeoJSON>({ type: "FeatureCollection", features: [] });
-
-  useEffect(() => {
-    if (!prediccions || prediccions.length === 0) return;
-
-    const mergedData: Interfaces.GeoJSON = {
-      ...geoData,
-      features: geoData.features.map(feature => {
-        const prediction = prediccions.find(p => p.CODI_MUNICIPAL.toString() === feature.properties.codimuni);
-        return {
-          ...feature,
-          properties: {
-            ...feature.properties,
-            visitas: prediction ? prediction.INGRESSOS_AVG : 0
-          }
-        };
-      })
-    };
-
-    setData(mergedData);
-  }, [prediccions]);
-
-  const spec = {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 500,
-    "height": 300,
-    "data": {
-      "values": data.features
-    },
-    "projection": {"type": "mercator"},
-    "mark": "geoshape",
-    "encoding": {
-      "color": {
-        "field": "properties.INGRESSOS_AVG",
-        "type": "quantitative",
-        "scale": {
-          "scheme": "blues"
-        }
-      },
-      "tooltip": [
-        {"field": "properties.codimuni", "title": "Municipi"},
-        {"field": "properties.INGRESSOS_AVG", "title": "Visitas", "type": "quantitative"}
-      ]
-    }
-  };
-
-  return <VegaLite spec={spec} />;
-};
-
-export default Mapa;
-
-
-import * as Interfaces from "@/src/utils/interfaces";
-import React, { useEffect, useState } from 'react';
-import { VegaLite } from 'react-vega';
-import geoData from './Filtered_MC.json';
-
-// Asumimos que tienes un tipo adecuado para 'predictions'
-const Mapa = ({ prediccions }: { prediccions: Interfaces.PredictionType[] }) => {
-  const [data, setData] = useState<Interfaces.GeoJSON>({ type: "FeatureCollection", features: [] });
-
-  useEffect(() => {
-    if (!prediccions || prediccions.length === 0) return;
-
-    const mergedData: Interfaces.GeoJSON = {
-      ...geoData,
-      features: geoData.features.map(feature => {
-        const prediction = prediccions.find(p => p.CODI_MUNICIPAL.toString() === feature.properties.codimuni);
-        return {
-          ...feature,
-          properties: {
-            ...feature.properties,
-            visitas: prediction ? prediction.INGRESSOS_AVG : 0
-          }
-        };
-      })
-    };
-
-    setData(mergedData);
-  }, [prediccions]);
-
-  const spec = {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 500,
-    "height": 300,
-    "data": {
-      "values": data.features
-    },
-    "projection": {"type": "mercator"},
-    "mark": "geoshape",
-    "encoding": {
-      "color": {
-        "field": "properties.INGRESSOS_AVG",
-        "type": "quantitative",
-        "scale": {
-          "scheme": "blues"
-        }
-      },
-      "tooltip": [
-        {"field": "properties.codimuni", "title": "Municipi"},
-        {"field": "properties.INGRESSOS_AVG", "title": "Visitas", "type": "quantitative"}
-      ]
-    }
-  };
-
-  return <VegaLite spec={spec} />;
-};
-
-export default Mapa;
-
 */
