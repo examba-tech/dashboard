@@ -13,9 +13,9 @@ const options: ApexOptions = {
     type: "donut",
   },
   colors: ["#3C50E0", "#0FADCF"],
-  labels: ["Dona", "Home"],
+  labels: ["Home", "Dona"],
   legend: {
-    show: false,
+    show: true, 
     position: "bottom",
   },
 
@@ -88,7 +88,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
             options={options}
             series={seriesArray}
             type="donut"
-            height={200}
+            height={250}
             width={50}
           />
           {infoVisible && (
@@ -103,28 +103,6 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
           )}
         </div>
       </div>
-      <div className="flex flex-wrap items-center justify-center gap-y-3">
-      <div className="w-full px-8 sm:w-1/2">
-        <div className="flex w-full items-center">
-          <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary bg-[#0FADCF]"></span>
-          <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-            <span> Dona </span>
-            <span> {seriesArray[0]} </span>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div className="flex flex-wrap items-center justify-center gap-y-3">
-      <div className="w-full px-8 sm:w-1/2">
-        <div className="flex w-full items-center">
-          <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#3C50E0]"></span>
-          <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-            <span> Home </span>
-            <span> {seriesArray[1]} </span>
-          </p>
-        </div>
-      </div>
-    </div>
     </div>
   );
 };
