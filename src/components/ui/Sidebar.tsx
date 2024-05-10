@@ -43,7 +43,7 @@ const Sidebar = ({
                 />
               )}
 
-              <span
+              {isVisible && <span
                 onClick={handleLogout}
                 className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${
                   isVisible ? "" : "opacity-0"
@@ -56,7 +56,7 @@ const Sidebar = ({
                 >
                   EXAMBA
                 </h2>
-              </span>
+              </span>}
 
               {isVisible && (
                 <Image
@@ -71,89 +71,90 @@ const Sidebar = ({
           </Link>
           <ul className="flex flex-col mt-6 flex-grow">
             <li className="flex items-center">
+              <div className="py-4">
               <Image
                 src="/bar-chart-regular-24.png"
                 alt="Icon3"
                 width={24}
                 height={24}
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              <Link
+              /></div>
+              {isVisible && <Link
                 href="/dashboard/malalties_dinamiques"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
+                className={`block py-2 px-4 hover:bg-gray-700 w-full`}
               >
                 Patologies Agudes
-              </Link>
+              </Link>}
             </li>
             <li className="flex items-center">
+              <div className="py-4">
               <Image
                 src="/bar-chart-regular-24.png"
                 alt="Icon3"
                 width={24}
                 height={24}
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              <Link
+              /> </div>
+              {isVisible && <Link
                 href="/dashboard/malalties_estatiques"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
+                className={`block py-2 px-4 hover:bg-gray-700 w-full`}
               >
                 Malalties de Prevalença
-              </Link>
+              </Link>}
             </li>
             <li className="flex items-center">
+              <div className="py-4">
               <Image
                 src="/table-regular-24.png"
                 alt="Icon3"
                 width={24}
                 height={24}
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              <Link
+              /> </div>
+              {isVisible && <Link
                 href="/dashboard/table"
                 className={`block py-2 px-4 hover:bg-gray-700 w-full ${
                   isVisible ? "" : "opacity-0"
                 }`}
               >
                 Descàrrega de Dades
-              </Link>
+              </Link>}
             </li>
             <li className="flex items-center">
+              <div className="py-4">
               <Image
                 src="/map-regular-24-2.png"
                 alt="Icon3"
                 width={24}
                 height={24}
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              <Link
+              /> </div>
+              {isVisible && <Link
                 href="/dashboard/estacions_meteo"
                 className={`block py-2 px-4 hover:bg-gray-700 w-full ${
                   isVisible ? "" : "opacity-0"
                 }`}
               >
                 Estacions Meteorològiques
-              </Link>
+              </Link>}
             </li>
             <li className="flex items-center">
+              <div className="py-4">
               <Image
                 src="/map-regular-24-2.png"
                 alt="Icon3"
                 width={24}
                 height={24}
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              <Link
+              /></div>
+              {isVisible && <Link
                 href="/dashboard/estacions_contaminacio"
                 className={`block py-2 px-4 hover:bg-gray-700 w-full ${
                   isVisible ? "" : "opacity-0"
                 }`}
               >
                 Estacions Contaminació
-              </Link>
+              </Link>}
             </li>
           </ul>
         </div>
@@ -166,7 +167,7 @@ const Sidebar = ({
               height={24}
               className="w-6 h-6 ml-5 mr-2 opacity-1"
             />
-            <Link
+            {isVisible && <Link
               href="/"
               className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${
                 isVisible ? "" : "opacity-0"
@@ -180,7 +181,7 @@ const Sidebar = ({
               >
                 Log out
               </span>
-            </Link>
+            </Link>}
           </li>
         </div>
         <div className={`ml-auto ${isVisible ? "block" : "hidden"}`}>
