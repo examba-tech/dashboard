@@ -443,7 +443,7 @@ const HomePage = () => {
               style={{ marginLeft: "25px" }}
               >
                 <p className="text-sm text-gray-800 px-4 py-2 text-center">
-                En aquesta secció es realitza un estudi sobre les patologies agudes, les quals són malalties o trastorns que es desenvolupen de manera ràpida i repentina, amb una durada curta i una intensitat variable. Aquest tipus de patologia es caracteritza per aparèixer de manera brusca i provocar símptomes aguts que poden ser severes, però tendeixen a resoldre's en un període relativament curt de temps. Ens hem enfocat en aquestes 6: Bronquiolitis Aguda, Bronquitis Aguda, Grip, Infeccions Agudes de les Vies Respiratòries Superiors (TRS), Pneumònia Viral i Pneumònia Bacteriana.
+                En aquesta secció es realitza un estudi sobre les patologies agudes, les quals són malalties o trastorns que es desenvolupen de manera ràpida i repentina, amb una durada curta i una intensitat variable. Aquest tipus de patologia es caracteritza per aparèixer de manera brusca i provocar símptomes aguts que poden ser severes, però tendeixen a resoldre&apos;s en un període relativament curt de temps. Ens hem enfocat en aquestes 6: Bronquiolitis Aguda, Bronquitis Aguda, Grip, Infeccions Agudes de les Vies Respiratòries Superiors (TRS), Pneumònia Viral i Pneumònia Bacteriana.
                 </p>
               </div>
             )}

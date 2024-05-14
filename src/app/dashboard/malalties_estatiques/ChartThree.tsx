@@ -98,7 +98,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
               style={{ marginLeft: "-25px" }}
             >
               <p className="text-sm text-gray-800">
-              El gràfic de donut mostrat representa la proporció de visites segons el sexe. Utilitza dos segments acolorits per representar la distribució de pacients entre dues categories de gènere: "Dona" i "Home". Abaix es veu el nom exacte de pacients de cada sexe, el qual ha estat filtrat per malaltia de prevalença on volem veure aquesta proporció (tenint l&apos;opció també de totes).
+              El gràfic de donut mostrat representa la proporció de visites segons el sexe. Utilitza dos segments acolorits per representar la distribució de pacients entre dues categories de gènere: &quot;Dona&quot; i &quot;Home&quot;. Abaix es veu el nom exacte de pacients de cada sexe, el qual ha estat filtrat per malaltia de prevalença on volem veure aquesta proporció (tenint l&apos;opció també de totes).
               </p>
             </div>
           )}
