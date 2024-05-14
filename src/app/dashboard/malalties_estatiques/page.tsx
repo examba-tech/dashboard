@@ -3,7 +3,7 @@ import ChartThree from "./ChartThree";
 import ChartTwo from "./ChartTwo";
 import ChartTwoEdats from "./ChartTwoEdats";
 //import MapaOne from "./Mapa";
-import * as React from "react";
+import React, { useState } from "react";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -213,9 +213,34 @@ const HomePage = () => {
     fetchData();
   }, [selectedDiagnostic]);
 
+  const [infoVisible, setInfoVisible] = useState(false);
+
+  const toggleInfo = () => {
+    setInfoVisible(!infoVisible);
+  };
+
   return (
     <>
-      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Malalties de Prevalença</h1>
+        <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Malalties de Prevalença
+        {infoVisible && (
+                <div
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
+                onClick={toggleInfo}
+                style={{ marginLeft: "25px" }}
+                >
+                  <p className="text-sm text-gray-800 px-4 py-2 text-center">
+                  En aquesta secció es realitza un estudi sobre les malalties de prevalença, les quals són presents en una població durant un període de temps específic. Es defineix per la quantitat total de persones que tenen la malaltia en un moment determinat en relació amb el nombre total de persones en aquella població. En el nostre cas, la variable temporal no la considerem sinó que ens enfoquem més en la comparativa i en la correlació que pugui haver entre les variables. Ens hem centrat en les següents 7 malalties: Asma, Bronquitis Crònica, MPOC Mixte (Malaltia Pulmonar Obstructiva Crònica), Bronquiectàsies, Emfisema, Neoplàsia Pulmonar i Fibrosi Pulmonar.
+                  </p>
+                </div>
+              )}
+            <span
+                  className="text-sm text-gray-400 cursor-pointer"
+                  onClick={toggleInfo}
+                >
+                  {" "}
+                  +info
+                </span>
+        </h1>
       {loading && (
         <Box className="flex justify-center items-center h-96">
           <CircularProgress />

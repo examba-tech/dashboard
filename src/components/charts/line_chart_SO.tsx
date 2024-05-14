@@ -130,7 +130,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ visits }) => {
 export default MyLineChart;
 */
 
-import React from "react";
+import React, { useState } from "react";
 import {
   LineChart,
   Line,
@@ -153,13 +153,24 @@ interface MyLineChartProps {
 }
 
 const MyLineChart: React.FC<MyLineChartProps> = ({ visits }) => {
+  const [infoVisible, setInfoVisible] = useState(false);
+
+  const toggleInfo = () => {
+    setInfoVisible(!infoVisible);
+  };
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
             Evolució SO2
-
+            <span
+              className="text-sm text-gray-400 cursor-pointer"
+              onClick={toggleInfo}
+            >
+              {" "}
+              +info
+            </span>
           </h4>
         </div>
       </div>
@@ -205,6 +216,17 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ visits }) => {
               labelStyle={{ color: "black" }}
             />
         <Line type="monotone" dataKey="data[0]" stroke="#80CAEE" />
+        {infoVisible && (
+                <div
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
+                  onClick={toggleInfo}
+                  style={{ marginLeft: "25px" }}
+                >
+                  <p className="text-sm text-gray-800 px-4 py-2 text-center">
+                  Aquest gràfic mostra l&apos;evolució de SO2 al llarg de les setmanes de 2023. Sabem que aquest és un gas incolor i d&apos;olor forta i sufocant. En una atmósfera humida es transforma en àcid sulfúric i causa la deposició àcida. A partir de concentracions majors a 0.1 ppm es produeix una important reducció de la visibilitat. Pot provocar irritació i inflamació del sistema respiratori, afeccions i insuficiències pulmonars, alteració del metabolisme de les proteïnes i mal de cap.
+                  </p>
+                </div>
+              )}
       </LineChart>
     </ResponsiveContainer>
     </div>
