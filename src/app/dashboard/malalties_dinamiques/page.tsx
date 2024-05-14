@@ -14,6 +14,7 @@ import MyLineChart1 from "@/src/components/charts/line_chart_SO";
 import Filters from "@/src/app/dashboard/malalties_dinamiques/filters";
 import Filters_municipi from "@/src/app/dashboard/malalties_dinamiques/filter_municipi";
 import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
+import SimpleChart from "./cuadro_preds";
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Dinamic[],
@@ -268,6 +269,58 @@ const filterByDay = (info: Interfaces.Prediccions[]) => {
   };
 };
 
+const ultima_prediccion = (info: Interfaces.Prediccions[]) => {
+  var totalCases = {
+    dia: 0,
+  };
+  info.forEach((entry: Interfaces.Prediccions) => {
+    if (entry.DIA == 31 && (entry.MES = 12)) {
+      totalCases.dia = entry.INGRESSOS_AVG.valueOf();
+    } 
+  });
+  return {
+    name: "Prediccions",
+    data: [
+      totalCases.dia,
+    ],
+  };
+};
+
+const NO_ultims_6_dies = (info: Interfaces.Prediccions[]) => {
+  var totalCases = {
+    dia: 0,
+  };
+  info.forEach((entry: Interfaces.Prediccions) => {
+    if (entry.DIA == 31 && (entry.MES = 12)) {
+      totalCases.dia = entry.NO_AVG.valueOf();
+    } 
+  });
+  return {
+    name: "Prediccions",
+    data: [
+      totalCases.dia,
+    ],
+  };
+};
+
+const SO2_ultims_6_dies = (info: Interfaces.Prediccions[]) => {
+  var totalCases = {
+    dia: 0,
+  };
+  info.forEach((entry: Interfaces.Prediccions) => {
+    if (entry.DIA == 31 && (entry.MES = 12)) {
+      totalCases.dia = entry.SO2_AVG.valueOf();
+    } 
+  });
+  return {
+    name: "Prediccions",
+    data: [
+      totalCases.dia,
+    ],
+  };
+};
+
+
 const HomePage = () => {
   const [info_ICS, setInfo_ICS] = React.useState<{
     male: number;
@@ -295,6 +348,27 @@ const HomePage = () => {
       data: number[];
     }[]
   >([]);
+
+  const [prediccions2, setPrediccions2] = React.useState<
+  {
+    name: string;
+    data: number[];
+  }[]
+>([]);
+
+  const [prediccions3, setPrediccions3] = React.useState<
+  {
+    name: string;
+    data: number[];
+  }[]
+>([]);
+
+  const [prediccions4, setPrediccions4] = React.useState<
+  {
+    name: string;
+    data: number[];
+  }[]
+>([]);
 
   const [preds, setPreds] = React.useState<
     {
@@ -399,10 +473,25 @@ const HomePage = () => {
           data2 && data2.collection ? data2.collection : undefined;
         const prediccions1 =
           data3 && data3.collection ? data3.collection : undefined;
+        const data4 = await getMongoCollection("prediccions", params);
+        const prediccions2 =
+          data4 && data4.collection ? data4.collection : undefined;
+        const data5 = await getMongoCollection("prediccions", params);
+        const prediccions3 =
+          data5 && data5.collection ? data5.collection : undefined;
+        const data6 = await getMongoCollection("prediccions", params);
+        const prediccions4 =
+          data6 && data6.collection ? data6.collection : undefined;
+        console.log("pruebaaaaaaaaa")
+        console.log(prediccions4)
+        console.log(NO_ultims_6_dies(prediccions4))
         setLoading(false);
         if (prediccions !== undefined) {
           setPrediccions([filterByDay(prediccions)]);
           setPreds(prediccions1);
+          setPrediccions2([ultima_prediccion(prediccions2)])
+          setPrediccions3([NO_ultims_6_dies(prediccions3)])
+          setPrediccions4([SO2_ultims_6_dies(prediccions4)])
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -442,10 +531,26 @@ const HomePage = () => {
             <div className="flex-1 flex justify-center items-center">
               <Mapa predictions={preds}  onMunicipiSelect = {handleMunicipiSelect}/>
             </div>
-            <div className="flex-1 flex flex-col justify-center items-center">
-              <ChartOne series={prediccions} />
+            <div className="flex-1 flex flex-col justify-center items-center" style={{ marginTop: '0px' }}>
+              <div style={{ display: 'flex' }}>
+                <div style={{ width: '170px', height: '170px', backgroundColor: 'white', border: '1.5px solid #dddddd', marginRight: '30px',justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '10px' }} className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+                  <SimpleChart data={prediccions2}></SimpleChart>
+                  <p style={{ fontSize: '13px' }}>Predicció de la mitja de número de visites de la propera setmana</p>
+                </div>
+                <div style={{ width: '170px', height: '170px', backgroundColor: 'white', border: '1.5px solid #dddddd', marginRight: '30px',justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '10px' }}  className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+                  <SimpleChart data={prediccions3}></SimpleChart>
+                  <p style={{ fontSize: '13px' }}>Mitja del valor de NO dels 6 dies anteriors</p>
+                </div>
+                <div style={{ width: '170px', height: '170px', backgroundColor: 'white', border: '1.5px solid #dddddd', marginRight: '30px', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '10px' }} className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+                  {/* <p style={{ fontSize: '65px',fontWeight: 'bold', fontFamily: 'Roboto'  }}>4.14</p> */}
+                  <SimpleChart data={prediccions4}></SimpleChart>
+                  <p style={{ fontSize: '13px' }}>Mitja del valor de SO2 dels 6 dies anteriors</p>
+                </div>
+              </div>
+   
               <br></br>
-              <div className="flex justify-center items-center  gap-2">
+              <br></br>
+              <div className="flex justify-center items-center  gap-2" >
                 <ChartOne series={prediccions} />
               </div>
             </div>
