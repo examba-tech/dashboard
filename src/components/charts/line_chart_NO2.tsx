@@ -152,19 +152,20 @@ interface MyLineChartProps {
   visits: VisitData[];
 }
 
-const MyLineChart: React.FC<MyLineChartProps> = ({ visits }) => {
-  const [infoVisible, setInfoVisible] = useState(false);
 
-  const toggleInfo = () => {
-    setInfoVisible(!infoVisible);
-  };
+const LineChartNO2: React.FC<MyLineChartProps> = ({ visits }) => {
+    const [infoVisible, setInfoVisible] = useState(false);
 
+    const toggleInfo = () => {
+      setInfoVisible(!infoVisible);
+    };
+    
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
-      <div className="mb-4 justify-between gap-4 sm:flex">
+      <div className="mb-4 justify-between gap-4 sm:flex relative">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Evolució del número de visites a l'any 2023
+            Evolució NO2
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -175,68 +176,63 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ visits }) => {
           </h4>
         </div>
       </div>
-      
-      <div>
-        <div >
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart
-              data={visits}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" tick={{ fontSize: 10 }}/>
-              <YAxis tick={{ fontSize: 10 }}/>
-              <Tooltip
-                formatter={(value, name) => (
-                  <span style={{ color: "black" }}>
-                    {"count:"}{" "}
-                    <span style={{ color: "black", fontWeight: "bold" }}>
-                      {value}
-                    </span>
+    <ResponsiveContainer width={575} height={175}>
+      <LineChart
+        data={visits}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" tick={{ fontSize: 10 }}/>
+        <YAxis tick={{ fontSize: 10 }}/>
+        <Tooltip
+              formatter={(value, name) => (
+                <span style={{ color: "black" }}>
+                  {"count:"}{" "}
+                  <span style={{ color: "black", fontWeight: "bold" }}>
+                    {value}
                   </span>
-                )}
-                labelFormatter={(label) =>
-                  new Date(label).toLocaleDateString("es-ES", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })
-                }
-                contentStyle={{
-                  backgroundColor: "rgba(400, 400, 400, 1)",
-                  borderColor: "#ccc",
-                  padding: "10px",
-                  borderRadius: "8px",
-                  background:
-                    "linear-gradient(to bottom, rgba(240,240,240,1) 50%, rgba(255,255,255,1) 50%)",
-                  fontSize: "12px",
-                  color: "linear-gradient(to bottom, black, black)",
-                }}
-                labelStyle={{ color: "black" }}
-              />
-              {infoVisible && (
+                </span>
+              )}
+              labelFormatter={(label) =>
+                new Date(label).toLocaleDateString("es-ES", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })
+              }
+              contentStyle={{
+                backgroundColor: "rgba(400, 400, 400, 1)",
+                borderColor: "#ccc",
+                padding: "10px",
+                borderRadius: "8px",
+                background:
+                  "linear-gradient(to bottom, rgba(240,240,240,1) 50%, rgba(255,255,255,1) 50%)",
+                fontSize: "12px",
+                color: "linear-gradient(to bottom, black, black)",
+              }}
+              labelStyle={{ color: "black" }}
+            />
+        <Line type="monotone" dataKey="data[0]" stroke="#80CAEE" />
+      </LineChart>
+    </ResponsiveContainer>
+    {infoVisible && (
                 <div
                   className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
                   onClick={toggleInfo}
                   style={{ marginLeft: "25px" }}
                 >
                   <p className="text-sm text-gray-800 px-4 py-2 text-center">
-                  Aquest gràfic de línies mostra l&apos;evolució del nombre de visites l&apos;any 2023. Està dissenyat per representar dades temporals on l&apos;eix x mostra els noms dels períodes de temps (en aquest cas, les diferents setmanes de l&apos;any), i l&apos;eix y representa la quantitat de visites. A més que estarà filtrat segons el municipi seleccionat (o tots).  
+                  Aquest gràfic mostra l&apos;evolució de NO2 al llarg de les setmanes de 2023. Aquest gas està format per dos àtoms d’oxigen i un de nitrogen. És un dels elements del boirum fotoquímic i precursor de l&apos;àcid nítric, que ès un dels constituents de la pluja àcida. Provoca efectes com inflamació de les vies respiratòries reducció la funció pulmonar i la seva exposició prolongada fa augmentar els símptomes de bronquitis en nens asmàtics.
                   </p>
                 </div>
               )}
-              <Line type="monotone" dataKey="data[0]" stroke="#80CAEE" />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
     </div>
   );
 };
 
-export default MyLineChart;
+export default LineChartNO2;

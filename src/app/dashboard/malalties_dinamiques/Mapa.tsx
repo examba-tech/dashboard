@@ -5,7 +5,6 @@ import { View } from 'vega';
 
 interface ChartPredProps {
     predictions: {
-        Nom_municipi: String,
         CODI_MUNICIPAL: Number,
         ANY: Number,
         MES: Number,
@@ -15,7 +14,8 @@ interface ChartPredProps {
         NO2_AVG: Number,
         SO2_AVG: Number,
         POBLACIO: Number,
-        INGRESSOS_AVG: Number
+        INGRESSOS_AVG: Number,
+        NOM_MUNICIPI: String,
     }[];
     onMunicipiSelect: (municipi: string) => void;
   }
@@ -29,7 +29,7 @@ const Mapa: React.FC<ChartPredProps> = ({predictions, onMunicipiSelect}) => {
     });
     const predictionsWithStringKeys = predictions.map(prediction => ({
      ...prediction,
-    CODI_MUNICIPAL: "0" + prediction.CODI_MUNICIPAL.toString()
+    CODI_MUNICIPAL: prediction.CODI_MUNICIPAL.toString()
     }));
     console.log(predictionsWithStringKeys)
     console.log(data.features)

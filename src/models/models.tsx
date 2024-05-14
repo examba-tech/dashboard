@@ -72,7 +72,6 @@ const estaticSchema = new Schema(
 
 const prediccionSchema = new Schema(
   {
-    Nom_municipi: String,
     CODI_MUNICIPAL: Number,
     ANY: Number,
     MES: Number,
@@ -82,7 +81,8 @@ const prediccionSchema = new Schema(
     NO2_AVG: Number,
     SO2_AVG: Number,
     POBLACIO: Number,
-    INGRESSOS_AVG: Number
+    INGRESSOS_AVG: Number,
+    NOM_MUNICIPI: String,
   },
   {
     bufferTimeoutMS: timeout,

@@ -59,6 +59,7 @@ interface ChartThreeProps {
 
 const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
   const seriesArray = [series.female, series.male];
+
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -70,7 +71,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
-            Gènere
+            Proporció de visites segons el sexe
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -93,11 +94,11 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
           />
           {infoVisible && (
             <div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-12 py-4 rounded-lg shadow-lg"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-2 py-4 w-64 h-54 rounded-lg shadow-lg"
               onClick={toggleInfo}
             >
               <p className="text-sm text-gray-800">
-                Aquest gràfic mostra la distribució del número de visites segons el gènere ... Aquest gràfic mostra la distribució del número de visites segons el gènere ...
+              El gràfic de donut mostrat representa la proporció de visites segons el sexe. Utilitza dos segments acolorits per representar la distribució de visites entre dues categories de gènere: "Dona" i "Home". Abaix es veu el nom exacte de pacients de cada sexe, el qual ha estat filtrat per patologia aguda i moment del temps on volem veure aquesta proporció (tenint l&apos;opció també de tot l&apos;històric).
               </p>
             </div>
           )}

@@ -113,7 +113,7 @@ const options: ApexOptions = {
       },
     },
     min: 0,
-    max: 2,
+    max: 100,
     labels: {
       formatter: function(value) {
         return value.toFixed(2); // Redondea al segundo decimal
@@ -145,6 +145,11 @@ interface ChartOneProps {
 
   
   const ChartOne: React.FC<ChartOneProps> = ({ series }) => {
+  const [infoVisible, setInfoVisible] = useState(false);
+
+  const toggleInfo = () => {
+    setInfoVisible(!infoVisible);
+  };
 
   return (
     <div className="rounded-sm border border-stroke bg-white pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
@@ -154,7 +159,7 @@ interface ChartOneProps {
             Predicció
             <span
               className="text-sm text-gray-400 cursor-pointer"
-              // onClick={toggleInfo}
+              onClick={toggleInfo}
             >
               {" "}
               +info
@@ -172,7 +177,7 @@ interface ChartOneProps {
             height={190}
             width={550}
           />
-          {/* {infoVisible && (
+          {infoVisible && (
             <div
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-12 py-4 rounded-lg shadow-lg"
               onClick={toggleInfo}
@@ -181,7 +186,7 @@ interface ChartOneProps {
                 Aquest gràfic mostra la distribució del número de visites segons el gènere ... Aquest gràfic mostra la distribució del número de visites segons el gènere ...
               </p>
             </div>
-          )} */}
+          )}
         </div>
       </div>
     </div>
