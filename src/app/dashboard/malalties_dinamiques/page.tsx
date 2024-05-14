@@ -13,7 +13,7 @@ import MyLineChart from "@/src/components/charts/line_chart";
 import MyLineChart1 from "@/src/components/charts/line_chart_SO";
 import LineChartNO2 from "@/src/components/charts/line_chart_NO2";
 import Filters from "@/src/app/dashboard/malalties_dinamiques/filters";
-//import Filters_municipi from "@/src/app/dashboard/malalties_dinamiques/filter_municipi";
+import Filters_municipi from "@/src/app/dashboard/malalties_dinamiques/filter_municipi";
 import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 import SimpleChart from "./cuadro_preds";
 
@@ -277,13 +277,11 @@ const ultima_prediccion = (info: Interfaces.Prediccions[]) => {
   info.forEach((entry: Interfaces.Prediccions) => {
     if (entry.DIA == 31 && (entry.MES = 12)) {
       totalCases.dia = entry.INGRESSOS_AVG.valueOf();
-    } 
+    }
   });
   return {
     name: "Prediccions",
-    data: [
-      totalCases.dia,
-    ],
+    data: [totalCases.dia],
   };
 };
 
@@ -294,13 +292,11 @@ const NO_ultims_6_dies = (info: Interfaces.Prediccions[]) => {
   info.forEach((entry: Interfaces.Prediccions) => {
     if (entry.DIA == 31 && (entry.MES = 12)) {
       totalCases.dia = entry.NO_AVG.valueOf();
-    } 
+    }
   });
   return {
     name: "Prediccions",
-    data: [
-      totalCases.dia,
-    ],
+    data: [totalCases.dia],
   };
 };
 
@@ -311,16 +307,13 @@ const SO2_ultims_6_dies = (info: Interfaces.Prediccions[]) => {
   info.forEach((entry: Interfaces.Prediccions) => {
     if (entry.DIA == 31 && (entry.MES = 12)) {
       totalCases.dia = entry.SO2_AVG.valueOf();
-    } 
+    }
   });
   return {
     name: "Prediccions",
-    data: [
-      totalCases.dia,
-    ],
+    data: [totalCases.dia],
   };
 };
-
 
 const HomePage = () => {
   const [info_ICS, setInfo_ICS] = React.useState<{
@@ -351,25 +344,25 @@ const HomePage = () => {
   >([]);
 
   const [prediccions2, setPrediccions2] = React.useState<
-  {
-    name: string;
-    data: number[];
-  }[]
->([]);
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
 
   const [prediccions3, setPrediccions3] = React.useState<
-  {
-    name: string;
-    data: number[];
-  }[]
->([]);
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
 
   const [prediccions4, setPrediccions4] = React.useState<
-  {
-    name: string;
-    data: number[];
-  }[]
->([]);
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
 
   const [preds, setPreds] = React.useState<
     {
@@ -388,6 +381,13 @@ const HomePage = () => {
   >([]);
 
   const [visits, setVisits] = React.useState<
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
+
+  const [secondVisits, setSecondVisits] = React.useState<
     {
       name: string;
       data: number[];
@@ -419,14 +419,20 @@ const HomePage = () => {
     setSelectedDiagnostic(diagnostic);
   };
 
-  const [selectedMunicipi, setSelectedMunicipi] = React.useState('Tots');
+  const [selectedMunicipi, setSelectedMunicipi] = React.useState("Tots");
+  const [selectedSecondMunicipi, setSecondSelectedMunicipi] =
+    React.useState("Tots");
+
+  const handleSecondMunicipiSelect = (municipi: any) => {
+    setSecondSelectedMunicipi(municipi);
+    console.log("Second municipi selected:", municipi);
+  };
 
   // This function will be passed to the Mapa component
   const handleMunicipiSelect = (municipi: any) => {
-      setSelectedMunicipi(municipi);
-      console.log("Municipi selected:", municipi);
+    setSelectedMunicipi(municipi);
+    console.log("Municipi selected:", municipi);
   };
-
 
   // const [selectedMunicipi, setSelectedMunicipi] =
   //   React.useState<string>("Tots"); // Valor predeterminado
@@ -442,6 +448,10 @@ const HomePage = () => {
     const params = {
       Nom_municipi: selectedMunicipi,
     };
+    const params_second = {
+      Nom_municipi: selectedSecondMunicipi,
+    };
+
     const params2 = {
       NOM_MUNICIPI: selectedMunicipi,
     };
@@ -455,6 +465,20 @@ const HomePage = () => {
         const data_full = await getMongoCollection("dinamics", params);
         const dinamics =
           data_full && data_full.collection ? data_full.collection : undefined;
+
+        const data_full_second = await getMongoCollection(
+          "dinamics",
+          params_second
+        );
+        const dinamics_second =
+          data_full_second && data_full_second.collection
+            ? data_full_second.collection
+            : undefined;
+
+        if (dinamics_second !== undefined) {
+          setSecondVisits(calculateTotalCasesByWeek(dinamics_second));
+        }
+
         if (dinamics !== undefined) {
           setInfo_ICS(calculateTotalCasesBySex(dinamics, selectedDiagnostic));
           setInfo2_ICS([calculateTotalCasesByDiagnostic(dinamics)]);
@@ -492,16 +516,16 @@ const HomePage = () => {
         const data6 = await getMongoCollection("prediccions", params);
         const prediccions4 =
           data6 && data6.collection ? data6.collection : undefined;
-        console.log("pruebaaaaaaaaa")
-        console.log(prediccions4)
-        console.log(NO_ultims_6_dies(prediccions4))
+        console.log("pruebaaaaaaaaa");
+        console.log(prediccions4);
+        console.log(NO_ultims_6_dies(prediccions4));
         setLoading(false);
         if (prediccions !== undefined) {
           setPrediccions([filterByDay(prediccions)]);
           setPreds(prediccions1);
-          setPrediccions2([ultima_prediccion(prediccions2)])
-          setPrediccions3([NO_ultims_6_dies(prediccions3)])
-          setPrediccions4([SO2_ultims_6_dies(prediccions4)])
+          setPrediccions2([ultima_prediccion(prediccions2)]);
+          setPrediccions3([NO_ultims_6_dies(prediccions3)]);
+          setPrediccions4([SO2_ultims_6_dies(prediccions4)]);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -510,8 +534,8 @@ const HomePage = () => {
     };
 
     fetchData();
-  }, [visits_month, visits, selectedDiagnostic, selectedMunicipi]);
-  
+  }, [visits_month, visits, secondVisits, selectedDiagnostic, selectedMunicipi, selectedSecondMunicipi]);
+
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -522,27 +546,36 @@ const HomePage = () => {
 
   return (
     <>
-      <div>   
+      <div>
         <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
           Patologies Agudes
           {infoVisible && (
-              <div
+            <div
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
               onClick={toggleInfo}
               style={{ marginLeft: "25px" }}
-              >
-                <p className="text-sm text-gray-800 px-4 py-2 text-center">
-                En aquesta secció es realitza un estudi sobre les patologies agudes, les quals són malalties o trastorns que es desenvolupen de manera ràpida i repentina, amb una durada curta i una intensitat variable. Aquest tipus de patologia es caracteritza per aparèixer de manera brusca i provocar símptomes aguts que poden ser severes, però tendeixen a resoldre&apos;s en un període relativament curt de temps. Ens hem enfocat en aquestes 6: Bronquiolitis Aguda, Bronquitis Aguda, Grip, Infeccions Agudes de les Vies Respiratòries Superiors (TRS), Pneumònia Viral i Pneumònia Bacteriana.
-                </p>
-              </div>
-            )}
+            >
+              <p className="text-sm text-gray-800 px-4 py-2 text-center">
+                En aquesta secció es realitza un estudi sobre les patologies
+                agudes, les quals són malalties o trastorns que es desenvolupen
+                de manera ràpida i repentina, amb una durada curta i una
+                intensitat variable. Aquest tipus de patologia es caracteritza
+                per aparèixer de manera brusca i provocar símptomes aguts que
+                poden ser severes, però tendeixen a resoldre&apos;s en un
+                període relativament curt de temps. Ens hem enfocat en aquestes
+                6: Bronquiolitis Aguda, Bronquitis Aguda, Grip, Infeccions
+                Agudes de les Vies Respiratòries Superiors (TRS), Pneumònia
+                Viral i Pneumònia Bacteriana.
+              </p>
+            </div>
+          )}
           <span
-                className="text-sm text-gray-400 cursor-pointer"
-                onClick={toggleInfo}
-              >
-                {" "}
-                +info
-              </span>
+            className="text-sm text-gray-400 cursor-pointer"
+            onClick={toggleInfo}
+          >
+            {" "}
+            +info
+          </span>
         </h1>
       </div>
       {loading && (
@@ -559,36 +592,83 @@ const HomePage = () => {
             <h1 className="text-xl font-bold">Prediccions</h1>
           </div>
           <div className="border-b border-black my-4"></div>
-          <div className="flex items-center gap-4">
-            {/* <Filters_municipi
-              selectedMunicipi={selectedMunicipi}
-              onMunicipiChange={handleMunicipiChange}
-            /> */}
-          </div>
+          <div className="flex items-center gap-4"></div>
           <div className="flex justify-center items-center gap-4">
             <div className="flex-1 flex justify-center items-center">
-              <Mapa predictions={preds}  onMunicipiSelect = {handleMunicipiSelect}/>
+              <Mapa
+                predictions={preds}
+                onMunicipiSelect={handleMunicipiSelect}
+              />
             </div>
-            <div className="flex-1 flex flex-col justify-center items-center" style={{ marginTop: '0px' }}>
-              <div style={{ display: 'flex' }}>
-                <div style={{ width: '170px', height: '170px', backgroundColor: 'white', border: '1.5px solid #dddddd', marginRight: '30px',justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '10px' }} className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+            <div
+              className="flex-1 flex flex-col justify-center items-center"
+              style={{ marginTop: "0px" }}
+            >
+              <div style={{ display: "flex" }}>
+                <div
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    backgroundColor: "white",
+                    border: "1.5px solid #dddddd",
+                    marginRight: "30px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    textAlign: "center",
+                    padding: "10px",
+                  }}
+                  className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow"
+                >
                   <SimpleChart data={prediccions2}></SimpleChart>
-                  <p style={{ fontSize: '13px' }}>Predicció de la mitja de número de visites de la propera setmana</p>
+                  <p style={{ fontSize: "13px" }}>
+                    Predicció de la mitja de número de visites de la propera
+                    setmana
+                  </p>
                 </div>
-                <div style={{ width: '170px', height: '170px', backgroundColor: 'white', border: '1.5px solid #dddddd', marginRight: '30px',justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '10px' }}  className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+                <div
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    backgroundColor: "white",
+                    border: "1.5px solid #dddddd",
+                    marginRight: "30px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    textAlign: "center",
+                    padding: "10px",
+                  }}
+                  className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow"
+                >
                   <SimpleChart data={prediccions3}></SimpleChart>
-                  <p style={{ fontSize: '13px' }}>Mitja del valor de NO dels 6 dies anteriors</p>
+                  <p style={{ fontSize: "13px" }}>
+                    Mitja del valor de NO dels 6 dies anteriors
+                  </p>
                 </div>
-                <div style={{ width: '170px', height: '170px', backgroundColor: 'white', border: '1.5px solid #dddddd', marginRight: '30px', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '10px' }} className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+                <div
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    backgroundColor: "white",
+                    border: "1.5px solid #dddddd",
+                    marginRight: "30px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    textAlign: "center",
+                    padding: "10px",
+                  }}
+                  className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow"
+                >
                   {/* <p style={{ fontSize: '65px',fontWeight: 'bold', fontFamily: 'Roboto'  }}>4.14</p> */}
                   <SimpleChart data={prediccions4}></SimpleChart>
-                  <p style={{ fontSize: '13px' }}>Mitja del valor de SO2 dels 6 dies anteriors</p>
+                  <p style={{ fontSize: "13px" }}>
+                    Mitja del valor de SO2 dels 6 dies anteriors
+                  </p>
                 </div>
               </div>
-   
+
               <br></br>
               <br></br>
-              <div className="flex justify-center items-center  gap-2" >
+              <div className="flex justify-center items-center  gap-2">
                 <ChartOne series={prediccions} />
               </div>
             </div>
@@ -601,9 +681,13 @@ const HomePage = () => {
             <h1 className="text-xl font-bold">Històric de dades</h1>
           </div>
           <div className="border-b border-black my-4"></div>
+          <Filters_municipi
+            selectedMunicipi={selectedSecondMunicipi}
+            onMunicipiChange={handleSecondMunicipiSelect}
+          />
           <div className="flex justify-center items-center gap-4">
             <div className="flex-1 flex justify-center items-center">
-              <MyLineChart visits={visits} />
+              <MyLineChart visits={visits} secondVisits={secondVisits} />
             </div>
             <div className="flex-1 flex flex-col justify-center items-center">
               <MyLineChart1 visits={sos} />
@@ -628,7 +712,8 @@ const HomePage = () => {
           <div className="flex justify-center items-center gap-4">
             <div className="flex-1 flex flex-col justify-center items-center">
               <ChartTwo
-                series={info2_ICS} onDiagnosticChange = {handleDiagnosticChange}
+                series={info2_ICS}
+                onDiagnosticChange={handleDiagnosticChange}
               />
               <br></br>
               <div className="flex justify-center items-center  gap-2">
