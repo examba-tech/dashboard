@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import ChartThree from "./ChartThree";
 import Mapa from "./Mapa";
 import ChartTwo from "./ChartTwo";
@@ -11,8 +11,9 @@ import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
 import MyLineChart from "@/src/components/charts/line_chart";
 import MyLineChart1 from "@/src/components/charts/line_chart_SO";
+import LineChartNO2 from "@/src/components/charts/line_chart_NO2";
 import Filters from "@/src/app/dashboard/malalties_dinamiques/filters";
-import Filters_municipi from "@/src/app/dashboard/malalties_dinamiques/filter_municipi";
+//import Filters_municipi from "@/src/app/dashboard/malalties_dinamiques/filter_municipi";
 import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 import SimpleChart from "./cuadro_preds";
 
@@ -372,7 +373,6 @@ const HomePage = () => {
 
   const [preds, setPreds] = React.useState<
     {
-      Nom_municipi: String;
       CODI_MUNICIPAL: Number;
       ANY: Number;
       MES: Number;
@@ -383,6 +383,7 @@ const HomePage = () => {
       SO2_AVG: Number;
       POBLACIO: Number;
       INGRESSOS_AVG: Number;
+      NOM_MUNICIPI: String;
     }[]
   >([]);
 
@@ -425,6 +426,8 @@ const HomePage = () => {
       setSelectedMunicipi(municipi);
       console.log("Municipi selected:", municipi);
   };
+
+
   // const [selectedMunicipi, setSelectedMunicipi] =
   //   React.useState<string>("Tots"); // Valor predeterminado
 
@@ -439,7 +442,14 @@ const HomePage = () => {
     const params = {
       Nom_municipi: selectedMunicipi,
     };
-    const params_pred = {};
+    const params2 = {
+      NOM_MUNICIPI: selectedMunicipi,
+    };
+    const params_pred = {
+      DIA: "27",
+      MES: "11",
+      ANY: "2015",
+    };
     const fetchData = async () => {
       try {
         const data_full = await getMongoCollection("dinamics", params);
@@ -467,7 +477,7 @@ const HomePage = () => {
           const average = totalCasesThisYear / 12;
           setAverage(average);
         }
-        const data2 = await getMongoCollection("prediccions", params);
+        const data2 = await getMongoCollection("prediccions", params2);
         const data3 = await getMongoCollection("prediccions", params_pred);
         const prediccions =
           data2 && data2.collection ? data2.collection : undefined;
@@ -502,11 +512,39 @@ const HomePage = () => {
     fetchData();
   }, [visits_month, visits, selectedDiagnostic, selectedMunicipi]);
   
+  const [infoVisible, setInfoVisible] = useState(false);
+
+  const toggleInfo = () => {
+    setInfoVisible(!infoVisible);
+  };
+
+  console.log(preds);
+
   return (
     <>
-      <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
-        Patologies Agudes
-      </h1>
+      <div>   
+        <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
+          Patologies Agudes
+          {infoVisible && (
+              <div
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
+              onClick={toggleInfo}
+              style={{ marginLeft: "25px" }}
+              >
+                <p className="text-sm text-gray-800 px-4 py-2 text-center">
+                En aquesta secció es realitza un estudi sobre les patologies agudes, les quals són malalties o trastorns que es desenvolupen de manera ràpida i repentina, amb una durada curta i una intensitat variable. Aquest tipus de patologia es caracteritza per aparèixer de manera brusca i provocar símptomes aguts que poden ser severes, però tendeixen a resoldre&apos;s en un període relativament curt de temps. Ens hem enfocat en aquestes 6: Bronquiolitis Aguda, Bronquitis Aguda, Grip, Infeccions Agudes de les Vies Respiratòries Superiors (TRS), Pneumònia Viral i Pneumònia Bacteriana.
+                </p>
+              </div>
+            )}
+          <span
+                className="text-sm text-gray-400 cursor-pointer"
+                onClick={toggleInfo}
+              >
+                {" "}
+                +info
+              </span>
+        </h1>
+      </div>
       {loading && (
         <Box className="flex justify-center items-center h-96">
           <CircularProgress />
@@ -569,7 +607,7 @@ const HomePage = () => {
             </div>
             <div className="flex-1 flex flex-col justify-center items-center">
               <MyLineChart1 visits={sos} />
-              <MyLineChart1 visits={nos} />
+              <LineChartNO2 visits={nos} />
             </div>
           </div>
           <br></br>
@@ -590,8 +628,7 @@ const HomePage = () => {
           <div className="flex justify-center items-center gap-4">
             <div className="flex-1 flex flex-col justify-center items-center">
               <ChartTwo
-                series={info2_ICS}
-                selectedDiagnostic={selectedDiagnostic}
+                series={info2_ICS} onDiagnosticChange = {handleDiagnosticChange}
               />
               <br></br>
               <div className="flex justify-center items-center  gap-2">

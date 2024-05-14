@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -6,9 +6,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
-  ReferenceLine,
   ResponsiveContainer,
+  ReferenceLine,
 } from "recharts";
 
 const Waterfall = ({ data, average }: { data: any; average: number }) => {
@@ -46,12 +45,25 @@ const Waterfall = ({ data, average }: { data: any; average: number }) => {
     fill: getFillColor(entry),
   }));
 
+  const [infoVisible, setInfoVisible] = useState(false);
+
+  const toggleInfo = () => {
+    setInfoVisible(!infoVisible);
+  };
+
   return (
-    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow relative">
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
             Comparativa de casos en els mesos de 2023
+            <span
+              className="text-sm text-gray-400 cursor-pointer"
+              onClick={toggleInfo}
+            >
+              {" "}
+              +info
+            </span>
           </h4>
         </div>
       </div>
@@ -74,12 +86,22 @@ const Waterfall = ({ data, average }: { data: any; average: number }) => {
               <XAxis dataKey="name" tick={{ fontSize: 13 }} angle={-90} textAnchor="end" dx={-5}/>
               <YAxis tickFormatter={(value) => value} />
               <Tooltip />
-              
               <ReferenceLine y={average} stroke="#000" />
               <Bar dataKey="last_year" fill="fill" />
             </BarChart>
           </ResponsiveContainer>
         </div>
+        {infoVisible && (
+            <div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
+            onClick={toggleInfo}
+            style={{ marginLeft: "25px" }}
+            >
+              <p className="text-sm text-gray-800 px-4 py-2 text-center">
+              El gràfic compara el nombre de casos registrats els mesos de 2023, representats per barres verticals. Cada barra correspon a un mes específic, amb l&apos;eix horitzontal mostrant els noms dels mesos. L&apos;alçada de cada barra reflecteix la quantitat de casos registrats per a aquest mes en particular. A més, s&apos;hi ha inclòs una línia de referència horitzontal que indica la mitjana de casos durant aquest període.
+              </p>
+            </div>
+          )}
       </div>
     </div>
   );
