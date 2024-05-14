@@ -150,14 +150,22 @@ interface VisitData {
 // Define el tipo de props para el componente MyLineChart
 interface MyLineChartProps {
   visits: VisitData[];
+  secondVisits: VisitData[];
 }
 
-const MyLineChart: React.FC<MyLineChartProps> = ({ visits }) => {
+const MyLineChart: React.FC<MyLineChartProps> = ({ visits, secondVisits }) => {
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
     setInfoVisible(!infoVisible);
   };
+
+  const mergedVisits = visits.map((visit, index) => {
+    return {
+      ...visit,
+      data2: secondVisits[index].data,
+    };
+  });
 
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
@@ -175,12 +183,12 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ visits }) => {
           </h4>
         </div>
       </div>
-      
+
       <div>
-        <div >
+        <div>
           <ResponsiveContainer width="100%" height={400}>
             <LineChart
-              data={visits}
+              data={mergedVisits}
               margin={{
                 top: 5,
                 right: 30,
@@ -189,8 +197,8 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ visits }) => {
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" tick={{ fontSize: 10 }}/>
-              <YAxis tick={{ fontSize: 10 }}/>
+              <XAxis dataKey="name" tick={{ fontSize: 10 }} />
+              <YAxis tick={{ fontSize: 10 }} />
               <Tooltip
                 formatter={(value, name) => (
                   <span style={{ color: "black" }}>
@@ -226,11 +234,18 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ visits }) => {
                   style={{ marginLeft: "25px" }}
                 >
                   <p className="text-sm text-gray-800 px-4 py-2 text-center">
-                  Aquest gràfic de línies mostra l&apos;evolució del nombre de visites l&apos;any 2023. Està dissenyat per representar dades temporals on l&apos;eix x mostra els noms dels períodes de temps (en aquest cas, les diferents setmanes de l&apos;any), i l&apos;eix y representa la quantitat de visites. A més que estarà filtrat segons el municipi seleccionat (o tots).  
+                    Aquest gràfic de línies mostra l&apos;evolució del nombre de
+                    visites l&apos;any 2023. Està dissenyat per representar
+                    dades temporals on l&apos;eix x mostra els noms dels
+                    períodes de temps (en aquest cas, les diferents setmanes de
+                    l&apos;any), i l&apos;eix y representa la quantitat de
+                    visites. A més que estarà filtrat segons el municipi
+                    seleccionat (o tots).
                   </p>
                 </div>
               )}
-              <Line type="monotone" dataKey="data[0]" stroke="#80CAEE" />
+              <Line type="monotone" dataKey="data" stroke="#80CAEE" />
+              <Line type="monotone" dataKey="data2" stroke="#B22222" />
             </LineChart>
           </ResponsiveContainer>
         </div>
