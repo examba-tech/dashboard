@@ -174,7 +174,7 @@ interface ChartOneProps {
             options={options}
             series={series}
             type="area"
-            height={190}
+            height={313}
             width={550}
           />
           {infoVisible && (
