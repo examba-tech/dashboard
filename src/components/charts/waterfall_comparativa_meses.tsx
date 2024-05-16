@@ -56,7 +56,7 @@ const Waterfall = ({ data, average }: { data: any; average: number }) => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Comparativa de casos en els mesos de 2023
+            Comparativa de visites en els mesos de 2023
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}

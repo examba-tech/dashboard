@@ -621,7 +621,7 @@ const HomePage = () => {
                 >
                   <SimpleChart data={prediccions2}></SimpleChart>
                   <p style={{ fontSize: "13px" }}>
-                    Predicció de la mitja de número de visites de la propera
+                    Predicció de la mitjana de número de visites de la propera
                     setmana
                   </p>
                 </div>
@@ -641,7 +641,7 @@ const HomePage = () => {
                 >
                   <SimpleChart data={prediccions3}></SimpleChart>
                   <p style={{ fontSize: "13px" }}>
-                    Mitja del valor de NO dels 6 dies anteriors
+                    Mitjana del valor de NO dels 6 dies anteriors
                   </p>
                 </div>
                 <div
@@ -661,7 +661,7 @@ const HomePage = () => {
                   {/* <p style={{ fontSize: '65px',fontWeight: 'bold', fontFamily: 'Roboto'  }}>4.14</p> */}
                   <SimpleChart data={prediccions4}></SimpleChart>
                   <p style={{ fontSize: "13px" }}>
-                    Mitja del valor de SO2 dels 6 dies anteriors
+                    Mitjana del valor de SO2 dels 6 dies anteriors
                   </p>
                 </div>
               </div>
