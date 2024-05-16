@@ -70,7 +70,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
-          Proporció de visites segons el sexe
+          Proporció de pacients segons el sexe
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
