@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {CloudIcon, HomeIcon, ChartPieIcon, GlobeIcon} from '@heroicons/react/outline';
 
 const Sidebar = ({
   isVisible,
@@ -71,36 +70,31 @@ const Sidebar = ({
             </span>
           </Link>
           <ul className="flex flex-col mt-6 flex-grow">
-            <li className="flex items-center">
-              <div className="py-2">
-              {<HomeIcon className="w-6 h-6 ml-5 mr-2" /> && <div className="mb-2">{<HomeIcon className="w-6 h-6 ml-5 mr-2" />}</div>}
-              {/* <Image
-                src="/bar-chart-regular-24.png"
+          <li className="flex items-center">
+              <div className="py-4">
+              <Image
+                src="/home-regular-24 (2).png"
                 alt="Icon3"
                 width={24}
                 height={24}
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
-              /> */}
-              </div>
+              /></div>
               {isVisible && <Link
                 href="/home"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full mt-[-1px] pl-2`}
-                
+                className={`block py-2 px-4 hover:bg-gray-700 w-full`}
               >
                 Pàgina principal
               </Link>}
             </li>
             <li className="flex items-center">
-              <div className="py-3">
-              {/* {<CloudIcon className="w-6 h-6 ml-5 mr-2" /> && <div className="mb-2">{<CloudIcon className="w-6 h-7 ml-5 mr-2" />}</div>} */}
+              <div className="py-4">
               <Image
                 src="/bar-chart-regular-24.png"
                 alt="Icon3"
                 width={24}
                 height={24}
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />
-              </div>
+              /></div>
               {isVisible && <Link
                 href="/dashboard/malalties_dinamiques"
                 className={`block py-2 px-4 hover:bg-gray-700 w-full`}
@@ -109,25 +103,23 @@ const Sidebar = ({
               </Link>}
             </li>
             <li className="flex items-center">
-              <div className="py-5">
-              {<ChartPieIcon className="w-6 h-6 ml-5 mr-2" /> && <div className="mb-2">{<ChartPieIcon className="w-6 h-6 ml-5 mr-2" />}</div>}
-              {/* <Image
-                src="/bar-chart-regular-24.png"
+              <div className="py-4">
+              <Image
+                src="/pie-chart-alt-2-regular-24.png"
                 alt="Icon3"
                 width={24}
                 height={24}
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
-              />  */}
-              </div>
+              /> </div>
               {isVisible && <Link
                 href="/dashboard/malalties_estatiques"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full mt-[-1px] pl-2`}
+                className={`block py-2 px-4 hover:bg-gray-700 w-full`}
               >
                 Malalties de Prevalença
               </Link>}
             </li>
             <li className="flex items-center">
-              <div className="py-2">
+              <div className="py-4">
               <Image
                 src="/table-regular-24.png"
                 alt="Icon3"
@@ -145,41 +137,39 @@ const Sidebar = ({
               </Link>}
             </li>
             <li className="flex items-center">
-              <div className="py-6">
-              {<CloudIcon className="w-6 h-6 ml-5 mr-2" /> && <div className="mb-2">{<CloudIcon className="w-6 h-6 ml-5 mr-2" />}</div>}
-              {/* <Image
-                src="/map-regular-24-2.png"
+              <div className="py-4">
+              <Image
+                src="/cloud-lightning-regular-24.png"
                 alt="Icon3"
                 width={24}
                 height={24}
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
-              /> */}
-              </div>
+              /> </div>
               {isVisible && <Link
                 href="/dashboard/estacions_meteo"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full mt-[-1px] pl-2`}
-                
+                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
+                  isVisible ? "" : "opacity-0"
+                }`}
               >
                 Estacions Meteorològiques
               </Link>}
             </li>
             <li className="flex items-center">
-              <div className="py-1">
-              {<GlobeIcon className="w-6 h-6 ml-5 mr-2" /> && <div className="mb-2">{<GlobeIcon className="w-6 h-6 ml-5 mr-2" />}</div>}
-              {/* <Image
-                src="/map-regular-24-2.png"
+              <div className="py-4">
+              <Image
+                src="/world-regular-24.png"
                 alt="Icon3"
                 width={24}
                 height={24}
                 className="w-6 h-6 ml-5 mr-2 opacity-1"
-              /> */}
-              </div>
+              /></div>
               {isVisible && <Link
                 href="/dashboard/estacions_contaminacio"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full mt-[-1px] pl-2`}
-                
+                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
+                  isVisible ? "" : "opacity-0"
+                }`}
               >
-               Estacions Contaminació
+                Estacions Contaminació
               </Link>}
             </li>
           </ul>
