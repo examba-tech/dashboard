@@ -151,9 +151,10 @@ interface VisitData {
 interface MyLineChartProps {
   visits: VisitData[];
   secondVisits: VisitData[];
+  selectedMunicipi: string;
 }
 
-const MyLineChart: React.FC<MyLineChartProps> = ({ visits, secondVisits }) => {
+const MyLineChart: React.FC<MyLineChartProps> = ({ visits, secondVisits, selectedMunicipi }) => {
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -172,7 +173,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ visits, secondVisits }) => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Evolució del número de visites a l&apos;any 2023
+            Evolució del número de visites a l&apos;any 2023 al municipi {selectedMunicipi}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}

@@ -493,7 +493,6 @@ const HomePage = () => {
             dinamics,
             selectedDiagnostic
           );
-          console.log(visits);
           const totalCasesThisYear = monthlyData.reduce(
             (acc, curr) => acc + curr.last_year,
             0
@@ -516,9 +515,6 @@ const HomePage = () => {
         const data6 = await getMongoCollection("prediccions", params);
         const prediccions4 =
           data6 && data6.collection ? data6.collection : undefined;
-        console.log("pruebaaaaaaaaa");
-        console.log(prediccions4);
-        console.log(NO_ultims_6_dies(prediccions4));
         setLoading(false);
         if (prediccions !== undefined) {
           setPrediccions([filterByDay(prediccions)]);
@@ -541,8 +537,6 @@ const HomePage = () => {
   const toggleInfo = () => {
     setInfoVisible(!infoVisible);
   };
-
-  console.log(preds);
 
   return (
     <>
@@ -621,7 +615,7 @@ const HomePage = () => {
                 >
                   <SimpleChart data={prediccions2}></SimpleChart>
                   <p style={{ fontSize: "13px" }}>
-                    Predicció de la mitjana de número de visites de la propera
+                    Predicció de la mitjana del número de visites de la propera
                     setmana
                   </p>
                 </div>
@@ -669,7 +663,7 @@ const HomePage = () => {
               <br></br>
               <br></br>
               <div className="flex justify-center items-center  gap-2">
-                <ChartOne series={prediccions} />
+                <ChartOne series={prediccions} selectedMunicipi={selectedMunicipi}/>
               </div>
             </div>
           </div>
@@ -687,11 +681,11 @@ const HomePage = () => {
           />
           <div className="flex justify-center items-center gap-4">
             <div className="flex-1 flex justify-center items-center">
-              <MyLineChart visits={visits} secondVisits={secondVisits} />
+              <MyLineChart visits={visits} secondVisits={secondVisits} selectedMunicipi={selectedMunicipi}/>
             </div>
             <div className="flex-1 flex flex-col justify-center items-center">
-              <MyLineChart1 visits={sos} />
-              <LineChartNO2 visits={nos} />
+              <MyLineChart1 visits={sos} selectedMunicipi={selectedMunicipi}/>
+              <LineChartNO2 visits={nos} selectedMunicipi={selectedMunicipi}/>
             </div>
           </div>
           <br></br>
@@ -705,7 +699,7 @@ const HomePage = () => {
           <div className="flex items-center gap-4">
             <Filters
               selectedDiagnostic={selectedDiagnostic}
-              onDiagnosticChange={handleDiagnosticChange}
+              onMunicipiSelect={handleMunicipiSelect}
             />
           </div>
 
@@ -713,12 +707,12 @@ const HomePage = () => {
             <div className="flex-1 flex flex-col justify-center items-center">
               <ChartTwo
                 series={info2_ICS}
-                onDiagnosticChange={handleDiagnosticChange}
+                selectedMunicipi={selectedMunicipi}
               />
               <br></br>
               <div className="flex justify-center items-center  gap-2">
-                <ChartThree series={info_ICS} />
-                <ChartTwoEdats series={info3_ICS} />
+                <ChartThree series={info_ICS} selectedMunicipi={selectedMunicipi}/>
+                <ChartTwoEdats series={info3_ICS} selectedMunicipi={selectedMunicipi}/>
               </div>
             </div>
             <div className="flex-1 flex justify-center items-center">
@@ -728,6 +722,7 @@ const HomePage = () => {
                   selectedDiagnostic
                 )}
                 average={average}
+                selectedMunicipi={selectedMunicipi}
               />
             </div>
           </div>
