@@ -38,7 +38,7 @@ const Filters_municipi: React.FC<FiltersProps> = ({
         'Torrelles de Foix', 'Torrelles de Llobregat', 'Vallirana',
         'Viladecans', 'Vilobí del Penedès', 'Vilafranca del Penedès',
         'Vilanova i la Geltrú', 'La Palma de Cervelló']}
-        label="Selecciona un municipi"
+        label="Selecciona un segon municipi"
         which_column="Nom_municipi"
       />
     </div>
