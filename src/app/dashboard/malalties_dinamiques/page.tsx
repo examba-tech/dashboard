@@ -699,7 +699,7 @@ const HomePage = () => {
           <div className="flex items-center gap-4">
             <Filters
               selectedDiagnostic={selectedDiagnostic}
-              onMunicipiSelect={handleMunicipiSelect}
+              onDiagnosticChange={handleDiagnosticChange}
             />
           </div>
 
