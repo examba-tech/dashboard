@@ -72,10 +72,11 @@ interface ChartTwoProps {
     name: string;
     data: number[];
   }[];
+  selectedDiagnostic: string;
 }
 
 
-const ChartTwo: React.FC<ChartTwoProps> = ({ series }) => {
+const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedDiagnostic }) => {
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -87,7 +88,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series }) => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Comparativa del nombre de pacients segons les diferents franges d&apos;edat
+            Comparativa del nombre de pacients del diagnòstic {selectedDiagnostic} segons les diferents franges d&apos;edat
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -115,7 +116,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series }) => {
             style={{ marginTop: "-20px", marginLeft: "10px" }}
           >
             <p className="text-base text-gray-1000 px-4 py-2">
-            Cada barra representa una franja d&apos;edat on la llargària de la barra representa el nombre de pacients que pateixen aquella malaltia. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de franges d&apos;edat. Aquests valors han estat filtrats per la malaltia de prevalença seleccionada (tenint l&apos;opció també d&apos;escollir totes).
+            Cada barra representa una franja d&apos;edat on la llargària de la barra representa el nombre de pacients que pateixen aquella malaltia. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de franges d&apos;edat. Aquests valors han estat filtrats per la malaltia crònica seleccionada (tenint l&apos;opció també de veure&apos;n el nombre total sense distingir per malaltia).
             </p>
           </div>
           )}

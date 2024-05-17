@@ -51,6 +51,20 @@ const Waterfall = ({ data, average, selectedMunicipi }: { data: any; average: nu
     setInfoVisible(!infoVisible);
   };
 
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip bg-white p-2 border border-gray-200 rounded shadow-lg">
+          <p className="label text-gray-800">
+            {`${label}: `}
+            <span className="font-bold">{payload[0].value}</span>
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow relative">
       <div className="mb-4 justify-between gap-4 sm:flex">
@@ -85,7 +99,7 @@ const Waterfall = ({ data, average, selectedMunicipi }: { data: any; average: nu
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" tick={{ fontSize: 13 }} angle={-90} textAnchor="end" dx={-5}/>
               <YAxis tickFormatter={(value) => value} />
-              <Tooltip />
+              <Tooltip content={<CustomTooltip />} />
               <ReferenceLine y={average} stroke="#000" />
               <Bar dataKey="last_year" fill="fill" />
             </BarChart>
