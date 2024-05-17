@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
 import Mapa from "./Mapa";
 import Mapa_cont from "./Mapa_cont";
-import Filter_diagnostic from "@/src/app/dashboard/malalties_estatiques/filter_diagnostic";
+import Filter_diagnostic from "@/src/app/dashboard/malalties_prevalença/filter_diagnostic";
 
 const calculateTotalCasesBySex = (info: Interfaces.Estatiques[], selectedDiagnostic: string) => {
   var totalCasesBySex = {
