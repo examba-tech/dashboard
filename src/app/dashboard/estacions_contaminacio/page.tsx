@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import MyMapa from '../../../components/mapas/MyMapa_cont';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import Image from "next/image";
 
 
 
@@ -116,15 +117,6 @@ const HomePage = () => {
 
   const contaminantes = [
     {
-      nombre: 'NO, Monòxid de Nitrogen', info: <div>
-        <p style={{ marginBottom: '5px', textAlign: 'justify' }}>
-          L&apos;òxid nítric i monòxid de nitrogen és un dels compostos químics gasosos més 
-          importants del grup dels òxids de nitrogen (NOx). La major part d&apos;aquests s&apos;emeten
-          a l&apos;atmosfera en forma de NO, que s&apos;oxida ràpidament a NO2.
-        </p>
-      </div>
-    },
-    {
       nombre: 'NO2, Diòxid de Nitrogen', info: <div>
         <p style={{ marginBottom: '5px', textAlign: 'justify' }}>El diòxid de nitrogen és Gas format per dos àtoms d’oxigen 
           i un de nitrogen. És un dels elements del boirum fotoquímic 
@@ -164,31 +156,7 @@ const HomePage = () => {
         </p>
       </div>
     },
-    {
-      nombre: 'Partícules PM', info: <div>
-        <p style={{ marginBottom: '5px', textAlign: 'justify' }}>
-          Són una barreja complexa de partícules sòlides i líquides formada per un conjunt de 
-          molècules de la mateixa substància o d&apos;altres de diferents. N’hi ha de diferents 
-          tipus depenent del diàmetre de les partícules (PM10 són partícules inferiors a 10 
-          micres de diàmetre, PM2.5 inferiors a 2.5 micres i PM1 inferiors a 1 micra).
-        </p>
-        <p style={{ marginBottom: '5px' }}>
-          El seu origen es troba en el trànsit, la indústria, les emissions domèstiques i també
-          poden ser d&apos;origen natural (com per exemple provinents de la pols africana).
-        </p>
-        <p style={{ marginBottom: '5px' }}>
-          Una exposició crònica fa que augmenti el risc de patir malalties cardiovasculars, 
-          respiratòries i càncer de pulmó.
-        </p>
-        <p style={{ marginBottom: '5px' }}>
-          Segons l&apos;ICQA, superar les 50 µg/m³ en una dia ja es considera que
-          qualitat de l&apos;aire es desfavorable.
-        </p>
-      </div>
-    },
   ];
-  
-  
 
 
   return (
@@ -200,7 +168,7 @@ const HomePage = () => {
       <h1><strong style={{ fontWeight: 'bold' , fontSize: '18px'}}>DESCRIPCIÓ DE LES ESTACIONS:</strong></h1>
       <br />
       <p style={{ textAlign: 'justify' }}>Les dades diàries dels contaminants per realitzar la predicció han estat 
-        recollides a partir de les diferents estacions de contaminats dels municipis de 
+        recollides a partir de les diferents <span style={{ fontWeight: 'bold' }}>estacions de contaminats</span> dels municipis de 
         la Regió Metropolitana Sud, concretament les situades als llocs llistats a sota. Cal 
         destacar que en aquest apartat només es mostren les estacions automàtiques, ja que 
         són d&apos;on hem extret la majoria d&apos;informació. Més concretament, 
@@ -233,9 +201,8 @@ const HomePage = () => {
         ))}
       </ul>
       <br />
-      <p style={{ textAlign: 'justify' }}>Els contaminants que hem obtingut de les estacions i mitjançant els quals hem fet la 
-        predicció finalment són: NO, NO2 i SO2. (Actualment s&apos;està treballant per poder 
-        incorporar el PM10, el qual s&apos;obté d&apos;estacions de contaminació manuals). </p>
+      <p style={{ textAlign: 'justify' }}>Els <span style={{ fontWeight: 'bold' }}>contaminants</span> que hem obtingut de les estacions i mitjançant els quals hem fet la 
+        predicció finalment són el NO2 i SO2:</p>
 
       <br />
       <ul style={{ listStyleType: 'disc',marginLeft: '50px' }}>
@@ -258,7 +225,29 @@ const HomePage = () => {
         ))}
       </ul>
       <br />
+      <p style={{ textAlign: 'justify' }}>L&apos;<span style={{ fontWeight: 'bold' }}>ICQA</span> és el sistema d&apos;informació pública de l&apos;estat de la qualitat de l&apos;aire implantat 
+      a Catalunya des del gener de 1995. Vol ser l&apos;eina que ens permeti informar tothom de forma clara, directa 
+      i ràpida sobre la qualitat de l&apos;aire que respirem, que garanteixi amb efectivitat el dret que tenim tots 
+      els ciutadans d&apos;accedir a la informació ambiental. Tot i això, cal esmentar que aquest és un índex indicatiu 
+      que té com a objectiu que la població disposi d&apos;informació sobre l&apos;estat de la contaminació atmosfèrica.</p>
       <br />
+      <p style={{ textAlign: 'justify' }}>L&apos;Índex Català de la Qualitat de l’Aire transforma la informació donada per la concentració de diferents 
+      contaminants atmosfèrics, amb afectacions diferents segons els nivells d&apos;immissió, per obtenir una categoria 
+      única, centrat en la qualitat de l&apos;aire que es respira i que es pot representar amb una escala de colors. 
+      Per tant, l&apos;ICQA permet passar d&apos;informació altament tècnica a dades fàcilment comprensibles. La següent escala  
+      ha estat adaptada a partir de l&apos;oficial, que es por obtenir a la web de <a href="https://mediambient.gencat.cat/ca/05_ambits_dactuacio/atmosfera/qualitat_de_laire/avaluacio/icqa/index.html"
+        target="_blank" rel="noopener noreferrer" style={{ color: 'blue' , textDecoration: 'underline'}}>Medi Ambient de la Generalitat de Catalunya</a>:</p>
+      <br />
+      <br />
+      <div className="flex justify-center items-center">
+        <Image
+          src="/PHOTO-2024-05-17-12-03-41.jpg"
+          alt="Taula ICQUA"
+          width={900}
+          height={1100}
+          className="image"
+        />
+      </div>
       <br />
       <br />
       <br />

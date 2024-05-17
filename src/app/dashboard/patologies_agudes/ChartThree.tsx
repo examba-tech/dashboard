@@ -15,7 +15,7 @@ const options: ApexOptions = {
   colors: ["#3C50E0", "#0FADCF"],
   labels: ["Dona", "Home"],
   legend: {
-    show: false,
+    show: true, 
     position: "bottom",
   },
 
@@ -32,10 +32,10 @@ const options: ApexOptions = {
   },
   responsive: [
     {
-      breakpoint: 260,
+      breakpoint: 2600,
       options: {
         chart: {
-          width: 150,
+          width: 300,
         },
       },
     },
@@ -43,7 +43,7 @@ const options: ApexOptions = {
       breakpoint: 640,
       options: {
         chart: {
-          width: 150,
+          width: 100,
         },
       },
     },
@@ -55,10 +55,12 @@ interface ChartThreeProps {
     female: number;
     male: number;
   };
+  selectedMunicipi: string;
 }
 
-const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
+const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi}) => {
   const seriesArray = [series.female, series.male];
+
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -70,7 +72,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
-          Proporció de pacients segons el sexe
+            Proporció de visites segons el sexe al municipi {selectedMunicipi}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -83,31 +85,31 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
       </div>
 
       <div className="mb-2">
-        <div id="chartThree" className="mx-auto flex justify-center">
+        <div id="chartThree" className="mx-auto flex justify-center relative">
           <ReactApexChart
             options={options}
             series={seriesArray}
             type="donut"
-            height={350}
-            width={350}
+            height={250}
+            width={50}
           />
           {infoVisible && (
             <div
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-2 py-4 w-64 h-54 rounded-lg shadow-lg"
               onClick={toggleInfo}
-              style={{ marginLeft: "-25px" }}
             >
               <p className="text-sm text-gray-800">
-              El gràfic de donut mostrat representa la proporció de visites segons el sexe. Utilitza dos segments acolorits per representar la distribució de pacients entre dues categories de gènere: &quot;Dona&quot; i &quot;Home&quot;. Abaix es veu el nom exacte de pacients de cada sexe, el qual ha estat filtrat per malaltia de prevalença on volem veure aquesta proporció (tenint l&apos;opció també de totes).
+              El gràfic de donut mostrat representa la proporció de visites segons el sexe. Utilitza dos segments acolorits per representar la distribució de visites entre dues categories de gènere: &quot;Dona&quot; i &quot;Home&quot;. Abaix es veu el nom exacte de pacients de cada sexe, el qual ha estat filtrat per patologia aguda i moment del temps on volem veure aquesta proporció (tenint l&apos;opció també de tot l&apos;històric).
               </p>
             </div>
           )}
         </div>
       </div>
+      {/*
       <div className="flex flex-wrap items-center justify-center gap-y-3">
         <div className="w-full px-8 sm:w-1/2">
           <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary bg-[#0FADCF]"></span>
+          <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary bg-[#0FADCF]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> Dona: </span>
               <span> {seriesArray[0]} </span>
@@ -124,6 +126,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
           </div>
         </div>
       </div>
+        */}
     </div>
   );
 };

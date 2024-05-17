@@ -41,8 +41,8 @@ export interface Estatiques {
     NO2: number,
     NO: number,
     SO2: number,
-    "ICQA NO2": string,
-    "ICQA SO2": string
+    ICQA_NO2: string,
+    ICQA_SO2: string
   }
 
   export interface Prediccions {

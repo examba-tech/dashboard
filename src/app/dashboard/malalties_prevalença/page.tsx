@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
 import Mapa from "./Mapa";
 import Mapa_cont from "./Mapa_cont";
-import Filter_diagnostic from "@/src/app/dashboard/malalties_estatiques/filter_diagnostic";
+import Filter_diagnostic from "@/src/app/dashboard/malalties_prevalença/filter_diagnostic";
 
 const calculateTotalCasesBySex = (info: Interfaces.Estatiques[], selectedDiagnostic: string) => {
   var totalCasesBySex = {
@@ -29,6 +29,8 @@ const calculateTotalCasesBySex = (info: Interfaces.Estatiques[], selectedDiagnos
       totalCasesBySex.female += entry.Numero_Casos.valueOf();
     }
   });
+  console.log("SEXE");
+  console.log(totalCasesBySex);
   return totalCasesBySex;
 };
 
@@ -82,67 +84,44 @@ const calculateTotalCasesByDiagnostic = (info: Interfaces.Estatiques[]) => {
   };
   };
 
-const calculateTotalCasesByEdats = (info: Interfaces.Estatiques[], selectedDiagnostic: string) => {
-  var totalCasesByEdats = {
-    menys_5: 0,
-    de_5_9: 0,
-    de_10_14: 0,
-    de_15_17: 0,
-    de_18_24: 0,
-    de_25_34: 0,
-    de_35_44: 0,
-    de_45_54: 0,
-    de_55_64: 0,
-    de_65_74: 0,
-    mes_75: 0,
+  const calculateTotalCasesByEdats = (info: Interfaces.Estatiques[], selectedDiagnostic: string) => {
+    var totalCasesByEdats = {
+      de_15_44: 0,
+      de_45_64: 0,
+      de_65_74: 0,
+      mes_75: 0,
+      menys_15: 0,
+    };
+    
+    info.forEach((entry: Interfaces.Estatiques) => {
+      if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
+        return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
+      }
+      if (entry.FranjaEdat === '15-44') {
+        totalCasesByEdats.de_15_44 += entry.Numero_Casos.valueOf();
+      } else if (entry.FranjaEdat === '45-64') {
+        totalCasesByEdats.de_45_64 += entry.Numero_Casos.valueOf();
+      } else if (entry.FranjaEdat === '65-74') {
+        totalCasesByEdats.de_65_74 += entry.Numero_Casos.valueOf();
+      } else if (entry.FranjaEdat === '>75') {
+        totalCasesByEdats.mes_75 += entry.Numero_Casos.valueOf();
+      } else if (entry.FranjaEdat === '<15') {
+        totalCasesByEdats.menys_15 += entry.Numero_Casos.valueOf();
+      }
+    });
+  
+    return {
+      name: "Visites",
+      data: [
+        totalCasesByEdats.menys_15,
+        totalCasesByEdats.de_15_44,
+        totalCasesByEdats.de_45_64,
+        totalCasesByEdats.de_65_74,
+        totalCasesByEdats.mes_75,
+      ],
+    };
   };
   
-  info.forEach((entry: Interfaces.Estatiques) => {
-    if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
-      return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
-    }
-    if (entry.FranjaEdat == "<5") {
-      totalCasesByEdats.menys_5 += entry.Numero_Casos.valueOf();
-    } else if (entry.FranjaEdat == "5-9") {
-      totalCasesByEdats.de_5_9 += entry.Numero_Casos.valueOf();
-    } else if (entry.FranjaEdat == "10-14") {
-      totalCasesByEdats.de_10_14 += entry.Numero_Casos.valueOf();
-    } else if (entry.FranjaEdat == "15-17") {
-      totalCasesByEdats.de_15_17 += entry.Numero_Casos.valueOf();
-    } else if (entry.FranjaEdat == "18-24") {
-      totalCasesByEdats.de_18_24 += entry.Numero_Casos.valueOf();
-    } else if (entry.FranjaEdat == "25-34") {
-      totalCasesByEdats.de_25_34 += entry.Numero_Casos.valueOf();
-    } else if (entry.FranjaEdat == "35-44") {
-      totalCasesByEdats.de_35_44 += entry.Numero_Casos.valueOf();
-    } else if (entry.FranjaEdat == "45-54") {
-      totalCasesByEdats.de_45_54 += entry.Numero_Casos.valueOf();
-    } else if (entry.FranjaEdat == "55-64") {
-      totalCasesByEdats.de_55_64 += entry.Numero_Casos.valueOf();
-    } else if (entry.FranjaEdat == "65-74") {
-      totalCasesByEdats.de_65_74 += entry.Numero_Casos.valueOf();
-    } else if (entry.FranjaEdat == "75+") {
-      totalCasesByEdats.mes_75 += entry.Numero_Casos.valueOf();
-    }
-  });
-
-  return {
-    name: "Visites",
-    data: [
-      totalCasesByEdats.menys_5,
-      totalCasesByEdats.de_5_9,
-      totalCasesByEdats.de_10_14,
-      totalCasesByEdats.de_15_17,
-      totalCasesByEdats.de_18_24,
-      totalCasesByEdats.de_25_34,
-      totalCasesByEdats.de_35_44,
-      totalCasesByEdats.de_45_54,
-      totalCasesByEdats.de_55_64,
-      totalCasesByEdats.de_65_74,
-      totalCasesByEdats.mes_75,
-      ]
-  };
-  };
 
 
 const HomePage = () => {
@@ -201,6 +180,8 @@ const HomePage = () => {
           setInfo_ICS(calculateTotalCasesBySex(estatics, selectedDiagnostic));
           setInfo2_ICS([calculateTotalCasesByDiagnostic(estatics)]);
           setInfo3_ICS([calculateTotalCasesByEdats(estatics, selectedDiagnostic)]);
+          console.log([calculateTotalCasesByEdats(estatics, selectedDiagnostic)]);
+          console.log(info3_ICS);
           set_mapa_casos(mapaestatics)
         }
         setLoading(false);
@@ -221,7 +202,7 @@ const HomePage = () => {
 
   return (
     <>
-        <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Malalties de Prevalença
+        <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Prevalença de malalties respiratòries cròniques 
         {infoVisible && (
                 <div
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"

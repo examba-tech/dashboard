@@ -23,10 +23,10 @@ const SignIn = () => (
           Escriu la teva contrasenya
         </label>
         <input
-          type="password"
-          placeholder="6+ Caracters, 1 Lletra en majuscules"
-          className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-white outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-        />
+            type="password"
+            placeholder="Introdueix la teva contrasenya"
+            className="w-full mb-4 rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+          />
       </div>
       <div className="flex justify-center mt-6 mb-6 pt-5">
         <Link

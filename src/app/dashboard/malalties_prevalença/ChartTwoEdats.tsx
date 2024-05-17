@@ -1,3 +1,4 @@
+"use client"
 import { ApexOptions } from "apexcharts";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
@@ -11,7 +12,7 @@ const options: ApexOptions = {
     fontFamily: "Satoshi, sans-serif",
     type: "bar",
     height: 335,
-    width: 500,
+    width: 400,
     stacked: true,
     toolbar: {
       show: false,
@@ -20,6 +21,7 @@ const options: ApexOptions = {
       enabled: false,
     },
   },
+
   responsive: [
     {
       breakpoint: 1536,
@@ -45,6 +47,7 @@ const options: ApexOptions = {
   dataLabels: {
     enabled: false,
   },
+
   xaxis: {
     categories: ["<15", "15-44", "45-64", "65-74", ">75"],
   },
@@ -54,6 +57,7 @@ const options: ApexOptions = {
     fontFamily: "Satoshi",
     fontWeight: 500,
     fontSize: "14px",
+
     markers: {
       radius: 99,
     },
@@ -68,11 +72,10 @@ interface ChartTwoProps {
     name: string;
     data: number[];
   }[];
-  selectedMunicipi: string;
-
 }
 
-const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi}) => {
+
+const ChartTwo: React.FC<ChartTwoProps> = ({ series }) => {
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -84,7 +87,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi}) => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Comparativa del nombre de visites segons les diferents franges d&apos;edat al municipi {selectedMunicipi}
+            Comparativa del nombre de pacients segons les diferents franges d&apos;edat
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -102,19 +105,19 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi}) => {
             options={options}
             series={series}
             type="bar"
-            height={225}
-            width={350}
+            height={350}
+            width={550}
           />
           {infoVisible && (
             <div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white w-64 h-54 rounded-lg shadow-lg"
-              onClick={toggleInfo}
-              style={{ marginTop: "-10px" , marginLeft: "10px" }}
-            >
-              <p className="text-sm text-gray-800 px-4 py-2">
-              Cada barra representa una franja d’edat on la llargària de la barra representa el nombre de visites degut a aquella patologia en un moment concret del temps. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de franges d&apos;edat.
-              </p>
-            </div>
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-4 w-144 h-84 rounded-lg shadow-lg"
+            onClick={toggleInfo}
+            style={{ marginTop: "-20px", marginLeft: "10px" }}
+          >
+            <p className="text-base text-gray-1000 px-4 py-2">
+            Cada barra representa una franja d&apos;edat on la llargària de la barra representa el nombre de pacients que pateixen aquella malaltia. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de franges d&apos;edat. Aquests valors han estat filtrats per la malaltia de prevalença seleccionada (tenint l&apos;opció també d&apos;escollir totes).
+            </p>
+          </div>
           )}
         </div>
       </div>
