@@ -56,12 +56,12 @@ const Page = () => {
       </div>
       <div className="flex justify-center flex-wrap items-center mt-10 gap-5">
         <HomeCard
-          link="/dashboard/malalties_dinamiques"
+          link="/dashboard/patologies_agudes"
           img_path="/bar-chart-regular-24-negro.png"
           text="Patologies Agudes"
         />
         <HomeCard
-          link="/dashboard/malalties_estatiques"
+          link="/dashboard/malalties_prevalenca"
           img_path="/pie-chart-alt-2-regular-24 (1).png"
           text="Malalties de prevalença"
         />

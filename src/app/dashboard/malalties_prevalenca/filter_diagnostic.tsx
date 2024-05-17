@@ -1,5 +1,5 @@
 import React from "react";
-import SingleSelectChip from "@/src/app/dashboard/malalties_dinamiques/select";
+import SingleSelectChip from "@/src/app/dashboard/patologies_agudes/select";
 
 interface FiltersProps {
   selectedDiagnostic: string;
