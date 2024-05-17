@@ -32,8 +32,7 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
         }
     });
 
-    console.log(data.features)
-  const spec: any = {
+  nst spec: any = {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 425,
     "height": 600,
