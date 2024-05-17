@@ -30,7 +30,7 @@ const SignIn = () => (
       </div>
       <div className="flex justify-center mt-6 mb-6 pt-5">
         <Link
-          href="/home"
+          href="/dashboard"
           className={buttonVariants({
             className: "w-full max-w-xs",
             variant: "link",

@@ -530,7 +530,14 @@ const HomePage = () => {
     };
 
     fetchData();
-  }, [visits_month, visits, secondVisits, selectedDiagnostic, selectedMunicipi, selectedSecondMunicipi]);
+  }, [
+    visits_month,
+    visits,
+    secondVisits,
+    selectedDiagnostic,
+    selectedMunicipi,
+    selectedSecondMunicipi,
+  ]);
 
   const [infoVisible, setInfoVisible] = useState(false);
 
@@ -578,7 +585,7 @@ const HomePage = () => {
         </Box>
       )}
       {!loading && (
-        <>
+        <div className="max-w-7xl">
           <br></br>
           <br></br>
           <br></br>
@@ -587,8 +594,8 @@ const HomePage = () => {
           </div>
           <div className="border-b border-black my-4"></div>
           <div className="flex items-center gap-4"></div>
-          <div className="flex justify-center items-center gap-4">
-            <div className="flex-1 flex justify-center items-center">
+          <div className="flex flex-wrap justify-center items-center gap-4">
+            <div className="flex justify-center items-center">
               <Mapa
                 predictions={preds}
                 onMunicipiSelect={handleMunicipiSelect}
@@ -598,7 +605,7 @@ const HomePage = () => {
               className="flex-1 flex flex-col justify-center items-center"
               style={{ marginTop: "0px" }}
             >
-              <div style={{ display: "flex" }}>
+              <div className="flex flex-wrap">
                 <div
                   style={{
                     width: "170px",
@@ -674,7 +681,8 @@ const HomePage = () => {
           <div className="flex items-center gap-4">
             <h1 className="text-xl font-bold">Històric de dades</h1>
           </div>
-          <div className="border-b border-black my-4"></div>
+          <div className="border-b border-black my-4" />
+
           <Filters_municipi
             selectedMunicipi={selectedSecondMunicipi}
             onMunicipiChange={handleSecondMunicipiSelect}
@@ -703,8 +711,8 @@ const HomePage = () => {
             />
           </div>
 
-          <div className="flex justify-center items-center gap-4">
-            <div className="flex-1 flex flex-col justify-center items-center">
+          <div className="flex flex-wrap justify-left items-center gap-4 pl-[-80px]">
+            <div className="flex flex-col justify-center items-center">
               <ChartTwo
                 series={info2_ICS}
                 selectedMunicipi={selectedMunicipi}
@@ -726,7 +734,7 @@ const HomePage = () => {
               />
             </div>
           </div>
-        </>
+        </div>
       )}
     </>
   );

@@ -43,20 +43,22 @@ const Sidebar = ({
                 />
               )}
 
-              {isVisible && <span
-                onClick={handleLogout}
-                className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
-              >
-                <h2
-                  className={`text-lg font-bold ${
+              {isVisible && (
+                <span
+                  onClick={handleLogout}
+                  className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${
                     isVisible ? "" : "opacity-0"
                   }`}
                 >
-                  EXAMBA
-                </h2>
-              </span>}
+                  <h2
+                    className={`text-lg font-bold ${
+                      isVisible ? "" : "opacity-0"
+                    }`}
+                  >
+                    EXAMBA
+                  </h2>
+                </span>
+              )}
 
               {isVisible && (
                 <Image
@@ -70,107 +72,125 @@ const Sidebar = ({
             </span>
           </Link>
           <ul className="flex flex-col mt-6 flex-grow">
-          <li className="flex items-center">
+            <li className="flex items-center">
               <div className="py-4">
-              <Image
-                src="/home-regular-24 (2).png"
-                alt="Icon3"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              /></div>
-              {isVisible && <Link
-                href="/home"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full`}
-              >
-                Pàgina principal
-              </Link>}
+                <Image
+                  src="/home-regular-24 (2).png"
+                  alt="Icon3"
+                  width={24}
+                  height={24}
+                  className="w-6 h-6 ml-5 mr-2 opacity-1"
+                />
+              </div>
+              {isVisible && (
+                <Link
+                  href="/dashboard"
+                  className={`block py-2 px-4 hover:bg-gray-700 w-full`}
+                >
+                  Pàgina principal
+                </Link>
+              )}
             </li>
             <li className="flex items-center">
               <div className="py-4">
-              <Image
-                src="/bar-chart-regular-24.png"
-                alt="Icon3"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              /></div>
-              {isVisible && <Link
-                href="/dashboard/malalties_dinamiques"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full`}
-              >
-                Patologies Agudes
-              </Link>}
+                <Image
+                  src="/bar-chart-regular-24.png"
+                  alt="Icon3"
+                  width={24}
+                  height={24}
+                  className="w-6 h-6 ml-5 mr-2 opacity-1"
+                />
+              </div>
+              {isVisible && (
+                <Link
+                  href="/dashboard/malalties_dinamiques"
+                  className={`block py-2 px-4 hover:bg-gray-700 w-full`}
+                >
+                  Patologies Agudes
+                </Link>
+              )}
             </li>
             <li className="flex items-center">
               <div className="py-4">
-              <Image
-                src="/pie-chart-alt-2-regular-24.png"
-                alt="Icon3"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              /> </div>
-              {isVisible && <Link
-                href="/dashboard/malalties_estatiques"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full`}
-              >
-                Malalties de Prevalença
-              </Link>}
+                <Image
+                  src="/pie-chart-alt-2-regular-24.png"
+                  alt="Icon3"
+                  width={24}
+                  height={24}
+                  className="w-6 h-6 ml-5 mr-2 opacity-1"
+                />{" "}
+              </div>
+              {isVisible && (
+                <Link
+                  href="/dashboard/malalties_estatiques"
+                  className={`block py-2 px-4 hover:bg-gray-700 w-full`}
+                >
+                  Malalties de Prevalença
+                </Link>
+              )}
             </li>
             <li className="flex items-center">
               <div className="py-4">
-              <Image
-                src="/table-regular-24.png"
-                alt="Icon3"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              /> </div>
-              {isVisible && <Link
-                href="/dashboard/table"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
-              >
-                Descàrrega de Dades
-              </Link>}
+                <Image
+                  src="/table-regular-24.png"
+                  alt="Icon3"
+                  width={24}
+                  height={24}
+                  className="w-6 h-6 ml-5 mr-2 opacity-1"
+                />{" "}
+              </div>
+              {isVisible && (
+                <Link
+                  href="/dashboard/table"
+                  className={`block py-2 px-4 hover:bg-gray-700 w-full ${
+                    isVisible ? "" : "opacity-0"
+                  }`}
+                >
+                  Descàrrega de Dades
+                </Link>
+              )}
             </li>
             <li className="flex items-center">
               <div className="py-4">
-              <Image
-                src="/cloud-lightning-regular-24.png"
-                alt="Icon3"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              /> </div>
-              {isVisible && <Link
-                href="/dashboard/estacions_meteo"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
-              >
-                Estacions Meteorològiques
-              </Link>}
+                <Image
+                  src="/cloud-lightning-regular-24.png"
+                  alt="Icon3"
+                  width={24}
+                  height={24}
+                  className="w-6 h-6 ml-5 mr-2 opacity-1"
+                />{" "}
+              </div>
+              {isVisible && (
+                <Link
+                  href="/dashboard/estacions_meteo"
+                  className={`block py-2 px-4 hover:bg-gray-700 w-full ${
+                    isVisible ? "" : "opacity-0"
+                  }`}
+                >
+                  Estacions Meteorològiques
+                </Link>
+              )}
             </li>
             <li className="flex items-center">
               <div className="py-4">
-              <Image
-                src="/world-regular-24.png"
-                alt="Icon3"
-                width={24}
-                height={24}
-                className="w-6 h-6 ml-5 mr-2 opacity-1"
-              /></div>
-              {isVisible && <Link
-                href="/dashboard/estacions_contaminacio"
-                className={`block py-2 px-4 hover:bg-gray-700 w-full ${
-                  isVisible ? "" : "opacity-0"
-                }`}
-              >
-                Estacions Contaminació
-              </Link>}
+                <Image
+                  src="/world-regular-24.png"
+                  alt="Icon3"
+                  width={24}
+                  height={24}
+                  className="w-6 h-6 ml-5 mr-2 opacity-1"
+                />
+              </div>
+              {isVisible && (
+                <Link
+                  href="/dashboard/estacions_contaminacio"
+                  className={`block py-2 px-4 hover:bg-gray-700 w-full ${
+                    isVisible ? "" : "opacity-0"
+                  }`}
+                >
+                  Estacions Contaminació
+                </Link>
+              )}
             </li>
           </ul>
         </div>
@@ -183,21 +203,23 @@ const Sidebar = ({
               height={24}
               className="w-6 h-6 ml-5 mr-2 opacity-1"
             />
-            {isVisible && <Link
-              href="/"
-              className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${
-                isVisible ? "" : "opacity-0"
-              }`}
-            >
-              <span
-                onClick={handleLogout}
+            {isVisible && (
+              <Link
+                href="/"
                 className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${
                   isVisible ? "" : "opacity-0"
                 }`}
               >
-                Log out
-              </span>
-            </Link>}
+                <span
+                  onClick={handleLogout}
+                  className={`block font-bold py-2 px-4 hover:bg-gray-700 w-full ${
+                    isVisible ? "" : "opacity-0"
+                  }`}
+                >
+                  Log out
+                </span>
+              </Link>
+            )}
           </li>
         </div>
         <div className={`ml-auto ${isVisible ? "block" : "hidden"}`}>
