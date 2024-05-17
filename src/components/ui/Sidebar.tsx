@@ -103,7 +103,7 @@ const Sidebar = ({
               </div>
               {isVisible && (
                 <Link
-                  href="/dashboard/malalties_dinamiques"
+                  href="/dashboard/patologies_agudes"
                   className={`block py-2 px-4 hover:bg-gray-700 w-full`}
                 >
                   Patologies Agudes
@@ -122,7 +122,7 @@ const Sidebar = ({
               </div>
               {isVisible && (
                 <Link
-                  href="/dashboard/malalties_estatiques"
+                  href="/dashboard/malalties_prevalenca"
                   className={`block py-2 px-4 hover:bg-gray-700 w-full`}
                 >
                   Malalties de Prevalença
