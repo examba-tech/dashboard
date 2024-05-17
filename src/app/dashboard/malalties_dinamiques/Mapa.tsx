@@ -31,8 +31,6 @@ const Mapa: React.FC<ChartPredProps> = ({predictions, onMunicipiSelect}) => {
      ...prediction,
     CODI_MUNICIPAL: prediction.CODI_MUNICIPAL.toString()
     }));
-    console.log(predictionsWithStringKeys)
-    console.log(data.features)
 
     const spec:any = {
       "$schema": "https://vega.github.io/schema/vega-lite/v5.json",

@@ -61,8 +61,8 @@ const estaticSchema = new Schema(
     NO2: Number,
     NO: Number,
     SO2: Number,
-    "ICQA NO2": String,
-    "ICQA SO2": String
+    ICQA_NO2: String,
+    ICQA_SO2: String
   },
   {
     bufferTimeoutMS: timeout,

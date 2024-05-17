@@ -13,7 +13,7 @@ const options: ApexOptions = {
     type: "donut",
   },
   colors: ["#3C50E0", "#0FADCF"],
-  labels: ["Home", "Dona"],
+  labels: ["Dona", "Home"],
   legend: {
     show: true, 
     position: "bottom",
@@ -55,9 +55,10 @@ interface ChartThreeProps {
     female: number;
     male: number;
   };
+  selectedMunicipi: string;
 }
 
-const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
+const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi}) => {
   const seriesArray = [series.female, series.male];
 
   const [infoVisible, setInfoVisible] = useState(false);
@@ -71,7 +72,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
-            Proporció de visites segons el sexe
+            Proporció de visites segons el sexe al municipi {selectedMunicipi}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -104,6 +105,28 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
           )}
         </div>
       </div>
+      {/*
+      <div className="flex flex-wrap items-center justify-center gap-y-3">
+        <div className="w-full px-8 sm:w-1/2">
+          <div className="flex w-full items-center">
+          <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary bg-[#0FADCF]"></span>
+            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
+              <span> Dona: </span>
+              <span> {seriesArray[0]} </span>
+            </p>
+          </div>
+        </div>
+        <div className="w-full px-8 sm:w-1/2">
+          <div className="flex w-full items-center">
+            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#3C50E0]"></span>
+            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
+              <span> Home: </span>
+              <span> {seriesArray[1]} </span>
+            </p>
+          </div>
+        </div>
+      </div>
+        */}
     </div>
   );
 };

@@ -128,6 +128,7 @@ interface ChartOneProps {
     name: string;
     data: number[];
   }[];
+  selectedMunicipi: string;
 }
 
 //   const handleReset = () => {
@@ -144,7 +145,7 @@ interface ChartOneProps {
 //   };
 
   
-  const ChartOne: React.FC<ChartOneProps> = ({ series }) => {
+  const ChartOne: React.FC<ChartOneProps> = ({ series, selectedMunicipi }) => {
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -156,7 +157,7 @@ interface ChartOneProps {
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Predicció
+            Predicció al municipi {selectedMunicipi}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
