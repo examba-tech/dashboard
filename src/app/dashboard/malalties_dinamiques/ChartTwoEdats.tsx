@@ -46,7 +46,7 @@ const options: ApexOptions = {
     enabled: false,
   },
   xaxis: {
-    categories: ["<15", "15-44", "46-64", "65-74", ">75"],
+    categories: ["<15", "15-44", "45-64", "65-74", ">75"],
   },
   legend: {
     position: "top",
@@ -68,9 +68,11 @@ interface ChartTwoProps {
     name: string;
     data: number[];
   }[];
+  selectedMunicipi: string;
+
 }
 
-const ChartTwo: React.FC<ChartTwoProps> = ({ series }) => {
+const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi}) => {
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -82,7 +84,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series }) => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Comparativa del nombre de visites segons les diferents franges d&apos;edat
+            Comparativa del nombre de visites segons les diferents franges d&apos;edat al municipi {selectedMunicipi}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}

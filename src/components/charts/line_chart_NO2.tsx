@@ -150,10 +150,11 @@ interface VisitData {
 // Define el tipo de props para el componente MyLineChart
 interface MyLineChartProps {
   visits: VisitData[];
+  selectedMunicipi: string;
 }
 
 
-const LineChartNO2: React.FC<MyLineChartProps> = ({ visits }) => {
+const LineChartNO2: React.FC<MyLineChartProps> = ({ visits, selectedMunicipi }) => {
     const [infoVisible, setInfoVisible] = useState(false);
 
     const toggleInfo = () => {
@@ -165,7 +166,7 @@ const LineChartNO2: React.FC<MyLineChartProps> = ({ visits }) => {
       <div className="mb-4 justify-between gap-4 sm:flex relative">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Evolució NO2
+            Evolució NO2 al municipi {selectedMunicipi}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}

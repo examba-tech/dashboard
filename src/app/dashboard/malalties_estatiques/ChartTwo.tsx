@@ -49,7 +49,15 @@ const options: ApexOptions = {
   },
 
   xaxis: {
-    categories: ["ASMA", "BRONQUITIS_CRONICA", "MPOC_MIXTE", "BRONQUIECTASIES", "OTHER", "NEOPLASIA_PULMONAR", "ENFISEMA", "FIBROSI_PULMONAR", "AGENTS_EXTERNS"],
+    categories: ["Asma", 
+    "Bronquitis Crònica", 
+    "MPOC Mixte", 
+    "Bronquiectasies", 
+    "Other", 
+    "Neoplasia Pulmonar", 
+    "Enfisema", 
+    "Fibrosi Pulmonar", 
+    "Agents externs"],
   },
   legend: {
     position: "top",

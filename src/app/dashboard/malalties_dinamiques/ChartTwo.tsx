@@ -10,10 +10,10 @@ interface ChartTwoProps {
     name: string;
     data: number[];
   }[];
-  onDiagnosticChange: (municipi: string) => void;
+  selectedMunicipi: string;
 }
 
-const ChartTwo: React.FC<ChartTwoProps> = ({ series, onDiagnosticChange }) => {
+const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi }) => {
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -99,7 +99,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, onDiagnosticChange }) => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Comparativa del nombre de visites segons la seva patologia aguda
+            Comparativa del nombre de visites segons la seva patologia aguda al municipi {selectedMunicipi}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}

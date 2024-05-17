@@ -1,11 +1,11 @@
 const HomePage = async () => {
-    return (
-      <div>
+  return (
+    <div>
       <h1>Termes</h1>
       <h1>Privacitat</h1>
       <h1>Contacte</h1>
-      </div>
-    );
-  };
-  
-  export default HomePage;
+    </div>
+  );
+};
+
+export default HomePage;

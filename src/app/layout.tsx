@@ -15,7 +15,10 @@ export default function RootLayout({
   const [isVisible, setIsVisible] = React.useState(false);
   const pathname = usePathname();
 
-  const inLogin = pathname === "/";
+  const inLogin =
+    pathname === "/" ||
+    pathname === "/auth/signup" ||
+    pathname === "/Terms_Privacidad_Contact";
 
   return (
     <html
