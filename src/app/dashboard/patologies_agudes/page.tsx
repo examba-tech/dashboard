@@ -185,7 +185,7 @@ const calculateTotalCasesByWeekNos = (dinamics: Interfaces.Dinamic[]) => {
         i[week] = 0;
       }
       i[week] += 1;
-      weeklyData[week] += Number(entry.NO);
+      weeklyData[week] += Number(entry.NO2);
     }
   });
 
@@ -285,13 +285,13 @@ const ultima_prediccion = (info: Interfaces.Prediccions[]) => {
   };
 };
 
-const NO_ultims_6_dies = (info: Interfaces.Prediccions[]) => {
+const NO2_ultims_6_dies = (info: Interfaces.Prediccions[]) => {
   var totalCases = {
     dia: 0,
   };
   info.forEach((entry: Interfaces.Prediccions) => {
     if (entry.DIA == 31 && (entry.MES = 12)) {
-      totalCases.dia = entry.NO_AVG.valueOf();
+      totalCases.dia = entry.NO2_AVG.valueOf();
     }
   });
   return {
@@ -520,7 +520,7 @@ const HomePage = () => {
           setPrediccions([filterByDay(prediccions)]);
           setPreds(prediccions1);
           setPrediccions2([ultima_prediccion(prediccions2)]);
-          setPrediccions3([NO_ultims_6_dies(prediccions3)]);
+          setPrediccions3([NO2_ultims_6_dies(prediccions3)]);
           setPrediccions4([SO2_ultims_6_dies(prediccions4)]);
         }
       } catch (error) {
@@ -635,7 +635,7 @@ const HomePage = () => {
                 >
                   <SimpleChart data={prediccions3}></SimpleChart>
                   <p style={{ fontSize: "13px" }}>
-                    Mitjana del valor de NO dels 6 dies anteriors
+                    Mitjana del valor de NO2 dels 6 dies anteriors
                   </p>
                 </div>
                 <div
