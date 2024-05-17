@@ -4,8 +4,7 @@ import Alertas_taula from "../dashboard/Alertas_taula";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import Link from "next/link";
-import Image from "next/image";
+import HomeCard from "@/src/components/ui/HomeCard";
 
 const Page = () => {
   const [preds, setPreds] = React.useState<
@@ -55,102 +54,32 @@ const Page = () => {
           </div>
         </h1>
       </div>
-      <div className="flex justify-center items-center mt-10 space-x-8">
-        <Link href={"/dashboard/malalties_dinamiques"}>
-          <div
-            className="option-box flex flex-col justify-center items-center rounded-lg border border-primary bg-blue-100 p-4 text-black transition hover:bg-opacity-90 mr-4 cursor-pointer"
-            style={{ height: "200px", width: "200px" }}
-          >
-            <div className="mb-1">
-              <Image
-                src="/bar-chart-regular-24-negro.png"
-                alt="Icon3"
-                width={24}
-                height={24}
-                className="w-8 h-8 ml-5 mr-2 opacity-1"
-              />
-            </div>
-            <p className="text-center text-2xl font-bold">
-              {"Patologies Agudes"}
-            </p>
-          </div>
-        </Link>
-        <Link href={"/dashboard/malalties_estatiques"}>
-          <div
-            className="option-box flex flex-col justify-center items-center rounded-lg border border-primary bg-blue-100 p-4 text-black transition hover:bg-opacity-90 mr-4 cursor-pointer"
-            style={{ height: "200px", width: "200px" }}
-          >
-            <div className="mb-1">
-              <Image
-                src="/pie-chart-alt-2-regular-24 (1).png"
-                alt="Icon3"
-                width={24}
-                height={24}
-                className="w-8 h-8 ml-5 mr-2 opacity-1"
-              />
-            </div>
-            <p className="text-center text-2xl font-bold">
-              {"Malalties de prevalença"}
-            </p>
-          </div>
-        </Link>
-        <Link href={"/dashboard/table"}>
-          <div
-            className="option-box flex flex-col justify-center items-center rounded-lg border border-primary bg-blue-100 p-4 text-black transition hover:bg-opacity-90 mr-4 cursor-pointer"
-            style={{ height: "200px", width: "200px" }}
-          >
-            <div className="mb-1">
-              <Image
-                src="/table-regular-24-negro.png"
-                alt="Icon3"
-                width={24}
-                height={24}
-                className="w-8 h-8 ml-5 mr-2 opacity-1"
-              />
-            </div>
-            <p className="text-center text-2xl font-bold">
-              {"Descàrrega de dades"}
-            </p>
-          </div>
-        </Link>
-        <Link href={"/dashboard/estacions_meteo"}>
-          <div
-            className="option-box flex flex-col justify-center items-center rounded-lg border border-primary bg-blue-100 p-4 text-black transition hover:bg-opacity-90 mr-4 cursor-pointer"
-            style={{ height: "200px", width: "200px" }}
-          >
-            <div className="mb-1">
-              <Image
-                src="/cloud-lightning-regular-24 (1)-negro.png"
-                alt="Icon3"
-                width={24}
-                height={24}
-                className="w-8 h-8 ml-5 mr-2 opacity-1"
-              />
-            </div>
-            <p className="text-center text-2xl font-bold">
-              {"Estacions meteorològiques"}
-            </p>
-          </div>
-        </Link>
-        <Link href={"/dashboard/estacions_contaminacio"}>
-          <div
-            className="option-box flex flex-col justify-center items-center rounded-lg border border-primary bg-blue-100 p-4 text-black transition hover:bg-opacity-90 mr-4 cursor-pointer"
-            style={{ height: "200px", width: "200px" }}
-          >
-            <div className="mb-1">
-              <Image
-                src="/world-regular-24 (1).png"
-                alt="Icon3"
-                width={24}
-                height={24}
-                className="w-8 h-8 ml-5 mr-2 opacity-1"
-              />
-            </div>
-            <p className="text-center text-2xl font-bold">
-              {"Estacions de contaminació"}
-            </p>
-          </div>
-        </Link>
+      <div className="flex justify-center flex-wrap items-center mt-10 gap-5">
+        <HomeCard
+          link="/dashboard/malalties_dinamiques"
+          img_path="/bar-chart-regular-24-negro.png"
+          text="Patologies Agudes"
+        />
+        <HomeCard
+          link="/dashboard/malalties_estatiques"
+          img_path="/pie-chart-alt-2-regular-24 (1).png"
+          text="Malalties de prevalença"
+        />
+        <HomeCard
+          link="/dashboard/table"
+          img_path="/table-regular-24-negro.png"
+          text="Descàrrega de dades"
+        />
+        <HomeCard
+          link="/dashboard/estacions_meteo"
+          img_path="/cloud-lightning-regular-24 (1)-negro.png"
+          text="Estacions meteorològiques"
+        />
+        <HomeCard
+          link="/dashboard/estacions_contaminacio"
+          img_path="/world-regular-24 (1).png"
+          text="Estacions de contaminació"
+        />
       </div>
       <div className="mt-10">
         {loading && (
