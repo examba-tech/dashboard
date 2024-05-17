@@ -70,6 +70,22 @@ const Sidebar = ({
             </span>
           </Link>
           <ul className="flex flex-col mt-6 flex-grow">
+          <li className="flex items-center">
+              <div className="py-4">
+              <Image
+                src="/home-regular-24 (2).png"
+                alt="Icon3"
+                width={24}
+                height={24}
+                className="w-6 h-6 ml-5 mr-2 opacity-1"
+              /></div>
+              {isVisible && <Link
+                href="/home"
+                className={`block py-2 px-4 hover:bg-gray-700 w-full`}
+              >
+                Pàgina principal
+              </Link>}
+            </li>
             <li className="flex items-center">
               <div className="py-4">
               <Image
@@ -89,7 +105,7 @@ const Sidebar = ({
             <li className="flex items-center">
               <div className="py-4">
               <Image
-                src="/bar-chart-regular-24.png"
+                src="/pie-chart-alt-2-regular-24.png"
                 alt="Icon3"
                 width={24}
                 height={24}
@@ -123,7 +139,7 @@ const Sidebar = ({
             <li className="flex items-center">
               <div className="py-4">
               <Image
-                src="/map-regular-24-2.png"
+                src="/cloud-lightning-regular-24.png"
                 alt="Icon3"
                 width={24}
                 height={24}
@@ -141,7 +157,7 @@ const Sidebar = ({
             <li className="flex items-center">
               <div className="py-4">
               <Image
-                src="/map-regular-24-2.png"
+                src="/world-regular-24.png"
                 alt="Icon3"
                 width={24}
                 height={24}
