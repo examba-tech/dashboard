@@ -1,0 +1,84 @@
+import React from 'react';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ReferenceLine, Rectangle, RectangleProps } from 'recharts';
+
+interface Segment {
+  start: number;
+  end: number;
+  color: string;
+}
+
+interface CustomizedBarProps extends RectangleProps {
+  segments: Segment[];
+}
+
+interface ChartData {
+  name: string;
+  data: number[];
+}
+
+interface ChartProps {
+  data2: ChartData[];
+}
+
+const segments: Segment[] = [
+  { start: 0, end: 100, color: '#AED6F1' },
+  { start: 101, end: 200, color: '#D4EFDF' },
+  { start: 201, end: 350, color: '#F9E79F' },
+  { start: 351, end: 500, color: '#FADBD8' },
+  { start: 501, end: 750, color: '#F1948A' },
+  { start: 750, end: 900, color: '#AB8187' },
+];
+
+const data = [{ name: 'Aggregated', value: 900 }]; // Valor máximo para abarcar todo el rango
+
+const CustomizedBar: React.FC<CustomizedBarProps> = (props) => {
+  const { x, y, width, height, segments } = props;
+  
+  return (
+    <g>
+      {segments.map((segment, index) => (
+        <Rectangle
+          key={`rect-${index}`}
+          x={x! + (segment.start / 900) * width!}
+          y={y!}
+          width={(segment.end - segment.start) / 900 * width!}
+          height={height}
+          fill={segment.color}
+        />
+      ))}
+    </g>
+  );
+};
+
+const BulletChart_SO2: React.FC<ChartProps> = ({ data2 }) => {
+  const numberToShow = data2.length > 0 && data2[0].data.length > 0 ? Number(data2[0].data[0].toFixed(2)) : undefined; 
+
+  return (
+    <BarChart
+      width={610}
+      height={100}
+      data={data}
+      layout="vertical"
+      margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+    >
+      <XAxis
+        type="number"
+        domain={[0, 900]}
+        ticks={[0, 100, 200, 350, 500, 750, 900]}
+      />
+      <YAxis type="category" dataKey="name" hide />
+      <Tooltip />
+      <Bar dataKey="value" fill="#8884d8" shape={<CustomizedBar segments={segments} />} />
+      {numberToShow !== undefined && (
+        <ReferenceLine 
+        x={numberToShow} 
+        stroke="red" 
+        strokeWidth={3} 
+        label={{ value: numberToShow.toString(), position: 'top', fill: 'red' }} 
+      />
+      )}
+    </BarChart>
+  );
+};
+
+export default BulletChart_SO2;
