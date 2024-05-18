@@ -47,7 +47,7 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
               "values": predictions
             },
             "key": "Codi_municipi",
-            "fields": ["SO2"] // Asegúrate de que este campo esté incluido en las predicciones
+            "fields": ["NO2"] // Asegúrate de que este campo esté incluido en las predicciones
           },
           "default": null,
         }
@@ -56,7 +56,7 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
     "mark": "geoshape",
     "encoding": {
       "color": {
-        "field": "SO2", 
+        "field": "NO2", 
         "type": "quantitative",
         "scale": {
           "scheme": "reds"
