@@ -15,6 +15,8 @@ interface ChartPredProps {
         SO2_AVG: Number,
         POBLACIO: Number,
         INGRESSOS_AVG: Number,
+        INGRESSOS: Number,
+        INGRESSOS_DEUMIL: Number,
         NOM_MUNICIPI: String,
     }[];
     onMunicipiSelect: (municipi: string) => void;

@@ -369,17 +369,19 @@ const HomePage = () => {
 
   const [preds, setPreds] = React.useState<
     {
-      CODI_MUNICIPAL: Number;
-      ANY: Number;
-      MES: Number;
-      DIA: Number;
-      DIA_SETMANA: Number;
-      NO_AVG: Number;
-      NO2_AVG: Number;
-      SO2_AVG: Number;
-      POBLACIO: Number;
-      INGRESSOS_AVG: Number;
-      NOM_MUNICIPI: String;
+      CODI_MUNICIPAL: Number,
+      ANY: Number,
+      MES: Number,
+      DIA: Number,
+      DIA_SETMANA: Number,
+      NO_AVG: Number,
+      NO2_AVG: Number,
+      SO2_AVG: Number,
+      POBLACIO: Number,
+      INGRESSOS_AVG: Number,
+      INGRESSOS: Number,
+      INGRESSOS_DEUMIL: Number,
+      NOM_MUNICIPI: String,
     }[]
   >([]);
 
@@ -514,6 +516,7 @@ const HomePage = () => {
         if (prediccions !== undefined) {
           setPrediccions([filterByDay(prediccions)]);
           setPreds(prediccions1);
+          console.log(prediccions);
           setPrediccions2([ultima_prediccion(prediccions)]);
           setPrediccions3([NO2_ultims_6_dies(prediccions)]);
           setPrediccions4([SO2_ultims_6_dies(prediccions)]);

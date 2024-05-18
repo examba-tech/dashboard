@@ -59,4 +59,5 @@ export interface Estatiques {
     INGRESSOS_AVG: number,
     INGRESSOS: number,
     INGRESSOS_DEUMIL: number,
+    NOM_MUNICIPI: string,
   }
