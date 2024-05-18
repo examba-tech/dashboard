@@ -55,9 +55,10 @@ interface ChartThreeProps {
     female: number;
     male: number;
   };
+  selectedDiagnostic: string;
 }
 
-const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
+const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedDiagnostic }) => {
   const seriesArray = [series.female, series.male];
   const [infoVisible, setInfoVisible] = useState(false);
 
@@ -70,7 +71,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
-          Proporció de pacients segons el sexe
+          Proporció de pacients del diagnòstic {selectedDiagnostic} segons el sexe 
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -98,7 +99,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series }) => {
               style={{ marginLeft: "-25px" }}
             >
               <p className="text-sm text-gray-800">
-              El gràfic de donut mostrat representa la proporció de visites segons el sexe. Utilitza dos segments acolorits per representar la distribució de pacients entre dues categories de gènere: &quot;Dona&quot; i &quot;Home&quot;. Abaix es veu el nom exacte de pacients de cada sexe, el qual ha estat filtrat per malaltia de prevalença on volem veure aquesta proporció (tenint l&apos;opció també de totes).
+                El gràfic de donut mostrat utilitza dos segments acolorits per representar la distribució de pacients entre dues categories de sexe: &quot;Dona&quot; i &quot;Home&quot;. A la part inferior es veu el nombre exacte de pacients de cada sexe, el qual ha estat filtrat per la malaltia on volem veure aquesta proporció (tenint l&apos;opció també de veure&apos;n el nombre total sense distingir per malaltia).
               </p>
             </div>
           )}

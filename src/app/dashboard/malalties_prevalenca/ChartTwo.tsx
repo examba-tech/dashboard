@@ -95,7 +95,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series }) => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Comparativa del nombre de pacients segons la malaltia de prevalença
+            Comparativa del nombre de pacients segons la malaltia
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -123,7 +123,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series }) => {
               style={{ marginLeft: "50px", marginTop: "-15px"}}
             >
               <p className="text-base text-gray-1000 px-2 py-2">
-              Cada barra representa una malatia de prevalença on la llargària de la barra representa el nombre de pacients d&apos;aquella malaltia. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de malalties de prevalença.
+                Cada barra representa una malatia respiratòria crònica on la llargària de la barra representa el nombre de pacients d&apos;aquella malaltia. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de malalties.
               </p>
             </div>
           )}

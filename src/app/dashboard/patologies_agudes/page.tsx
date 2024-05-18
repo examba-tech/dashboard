@@ -549,7 +549,7 @@ const HomePage = () => {
     <>
       <div>
         <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
-          Patologies Agudes
+          Visites als CAPs de la zona Metropolitana Sud degudes a patologies respiratòries agudes
           {infoVisible && (
             <div
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
@@ -590,7 +590,7 @@ const HomePage = () => {
           <br></br>
           <br></br>
           <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold">Prediccions</h1>
+            <h1 className="text-xl font-bold">Dades d&apos;interès per patologies agudes respiratòries</h1>
           </div>
           <div className="border-b border-black my-4"></div>
           <div className="flex items-center gap-4"></div>
@@ -605,6 +605,11 @@ const HomePage = () => {
               className="flex-1 flex flex-col justify-center items-center"
               style={{ marginTop: "0px" }}
             >
+            <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
+                 {selectedMunicipi === "Tots"
+                 ? "Tots els municipis"
+                 : `${selectedMunicipi}`}
+            </h5> 
               <div className="flex flex-wrap">
                 <div
                   style={{
