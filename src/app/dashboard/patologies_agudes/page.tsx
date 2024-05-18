@@ -16,6 +16,8 @@ import Filters from "@/src/app/dashboard/patologies_agudes/filters";
 import Filters_municipi from "@/src/app/dashboard/patologies_agudes/filter_municipi";
 import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 import SimpleChart from "./cuadro_preds";
+import BulletChart_NO2 from "@/src/components/charts/bullet_chart_NO2";
+import BulletChart_SO2 from "@/src/components/charts/bullet_chart_SO2";
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Dinamic[],
@@ -673,8 +675,20 @@ const HomePage = () => {
 
               <br></br>
               <br></br>
+              <br></br>
+              <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
+                 Mitjana del NO2 respecte del rang d&apos;ICQA 
+              </h5> 
               <div className="flex justify-center items-center  gap-2">
-                <ChartOne series={prediccions} selectedMunicipi={selectedMunicipi}/>
+                {/* <ChartOne series={prediccions} selectedMunicipi={selectedMunicipi}/> */}
+                <BulletChart_NO2 data2={prediccions3}/>
+              </div>
+              <br></br>
+              <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
+                 Mitjana del SO2 respecte del rang d&apos;ICQA 
+              </h5> 
+              <div className="flex justify-center items-center  gap-2">
+                <BulletChart_SO2 data2={prediccions4}/>
               </div>
             </div>
           </div>
