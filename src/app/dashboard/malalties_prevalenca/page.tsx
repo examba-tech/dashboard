@@ -283,4 +283,5 @@ const handleMunicipiSelect = (municipi: string) => {
   );
 };
 
+
 export default HomePage;
