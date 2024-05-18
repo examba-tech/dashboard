@@ -263,15 +263,12 @@ const handleMunicipiSelect = (municipi: string) => {
              <h1 className="text-xl font-bold">Anàlisi de malalties</h1>
         </div>
         <div className="border-b border-black my-4"></div>
-        <div className="flex items-center gap-4">
-            <Filter_diagnostic
-              selectedDiagnostic={selectedDiagnostic}
-              onDiagnosticChange={handleDiagnosticChange}
-            />
-        </div>
+        <h4 className="text-sm text-gray-600">(Selecciona el diagnòstic d&apos;interès per aquesta secció de l&apos;anàlisi)</h4>
         <div className="flex justify-center items-center gap-4" style={{ transform: 'scale(0.8)' }}>
           <div className="flex-1 flex flex-col justify-center items-center">
-            <ChartTwo series={info2_ICS} />
+            <ChartTwo series={info2_ICS} 
+            selectedMunicipi={selectedMunicipi}
+            onDiagnosticChange={handleDiagnosticChange}/>
           </div>
           <div className="flex-1 flex flex-col justify-center items-center">
             <ChartThree series={info_ICS} selectedDiagnostic={selectedDiagnostic}/>
@@ -285,5 +282,6 @@ const handleMunicipiSelect = (municipi: string) => {
     </>
   );
 };
+
 
 export default HomePage;
