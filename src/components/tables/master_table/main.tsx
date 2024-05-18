@@ -28,6 +28,7 @@ export default function MasterTable({ data }: { data: Interfaces.Master[] }) {
 
   return (
     <>
+    <br></br>
       <Filters
         selectedValues={selectedValues}
         onSelectedValuesChange={handleSelectedValuesChange}
