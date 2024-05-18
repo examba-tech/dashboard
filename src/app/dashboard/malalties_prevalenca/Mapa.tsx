@@ -94,8 +94,13 @@ const Mapa: React.FC<ChartPredProps> = ({predictions, onMunicipiSelect}) => {
   <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
     Predicció dels pròxims 7 dies de visites als CAPs
   </h4>
-
-  return <VegaLite spec={spec} onNewView={handleNewView} />;
+  return (
+    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+      <div className="mb-4 justify-between gap-4 sm:flex">
+      </div>
+  <VegaLite spec={spec} onNewView={handleNewView} />
+  </div>
+  )
 };
 
 export default Mapa;

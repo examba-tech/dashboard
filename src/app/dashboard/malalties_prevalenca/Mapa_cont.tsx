@@ -67,7 +67,12 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
   
   console.log(spec.transform[0].as); // Imprime el resultado de la transformación lookup
 
-  return <VegaLite spec={spec} />;
+  return (
+    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+      <div className="mb-4 justify-between gap-4 sm:flex">
+      </div>
+  <VegaLite spec={spec} />
+  </div>)
 };
 
 export default Mapa;
