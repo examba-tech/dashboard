@@ -70,6 +70,9 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-4 justify-between gap-4 sm:flex">
+      <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
+        Qualitat del NO2 dels últims 10 anys per municipis
+      </h4>
       </div>
   <VegaLite spec={spec} />
   </div>)
