@@ -162,13 +162,13 @@ const LineChartNO2: React.FC<MyLineChartProps> = ({ visits, selectedMunicipi }) 
     };
     
   return (
-    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
-      <div className="mb-4 justify-between gap-4 sm:flex relative">
+    <div className="relative col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+      <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
+          <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
             {selectedMunicipi === "Tots"
-                ? "Evolució del NO2 a l'any 2023 a tots els municipis"
-                : `Evolució del NO2 a l'any 2023 al municipi ${selectedMunicipi}`}
+               ? "Evolució del NO2 a l'any 2023 a tots els municipis"
+               : `Evolució del NO2 a l'any 2023 al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -176,9 +176,10 @@ const LineChartNO2: React.FC<MyLineChartProps> = ({ visits, selectedMunicipi }) 
               {" "}
               +info
             </span>
-          </h4>
+          </h5>
         </div>
       </div>
+        <div className="mb-2">
     <ResponsiveContainer width={575} height={175}>
       <LineChart
         data={visits}
@@ -225,7 +226,7 @@ const LineChartNO2: React.FC<MyLineChartProps> = ({ visits, selectedMunicipi }) 
     </ResponsiveContainer>
     {infoVisible && (
                 <div
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-80 h-25 rounded-lg shadow-lg"
                   onClick={toggleInfo}
                   style={{ marginLeft: "25px" }}
                 >
@@ -234,6 +235,7 @@ const LineChartNO2: React.FC<MyLineChartProps> = ({ visits, selectedMunicipi }) 
                   </p>
                 </div>
               )}
+    </div>
     </div>
   );
 };
