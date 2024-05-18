@@ -716,8 +716,8 @@ const HomePage = () => {
               />
               <br></br>
               <div className="flex justify-center items-center  gap-2">
-                <ChartThree series={info_ICS} selectedMunicipi={selectedMunicipi}/>
-                <ChartTwoEdats series={info3_ICS} selectedMunicipi={selectedMunicipi}/>
+                <ChartThree series={info_ICS} selectedMunicipi={selectedMunicipi} selectedDiagnostic={selectedDiagnostic}/>
+                <ChartTwoEdats series={info3_ICS} selectedMunicipi={selectedMunicipi} selectedDiagnostic={selectedDiagnostic}/>
               </div>
             </div>
             <div className="flex-1 flex justify-center items-center">
@@ -728,6 +728,7 @@ const HomePage = () => {
                 )}
                 average={average}
                 selectedMunicipi={selectedMunicipi}
+                selectedDiagnostic={selectedDiagnostic}
               />
             </div>
           </div>

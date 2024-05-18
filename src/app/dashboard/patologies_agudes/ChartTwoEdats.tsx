@@ -69,10 +69,11 @@ interface ChartTwoProps {
     data: number[];
   }[];
   selectedMunicipi: string;
+  selectedDiagnostic: string;
 
 }
 
-const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi}) => {
+const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, selectedDiagnostic}) => {
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -84,9 +85,14 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi}) => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            {selectedMunicipi === "Tots"
-               ? "Comparativa del nombre de visites segons les diferents franges d'edat a tots els municipis"
-               : `Comparativa del nombre de visites segons les diferents franges d'edat al municipi ${selectedMunicipi}`}
+          {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
+          ? `Comparativa del nombre de visites segons les diferents franges d'edat de tots els diagnòstics a tots els municipis`
+          : selectedDiagnostic === "Tots"
+          ? `Comparativa del nombre de visites segons les diferents franges d'edat de tots els diagnòstics al municipi ${selectedMunicipi}`
+          : selectedMunicipi === "Tots"
+          ? `Comparativa del nombre de visites segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} a tots els municipis`
+          : `Comparativa del nombre de visites segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} al municipi ${selectedMunicipi}`
+          }
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
