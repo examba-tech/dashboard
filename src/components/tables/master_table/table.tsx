@@ -9,6 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableVirtuoso, TableComponents } from "react-virtuoso";
 import * as Interfaces from "@/src/utils/interfaces";
+import { montserrat } from "@/src/components/ui/fonts";
 
 interface Data {
   date: string;
@@ -77,16 +78,14 @@ const columns: ColumnData[] = [
   },
   {
     width: 25,
-    label: "Poblacio",
+    label: "Població",
     dataKey: "poblacio",
     numeric: true,
   },
 ];
 
 const rows = (data: Interfaces.Master[]) => {
-  return data.map((document) => {
-    return createData(document);
-  });
+  return data.map((document) => createData(document));
 };
 
 const VirtuosoTableComponents: TableComponents<Data> = {
@@ -117,11 +116,15 @@ function fixedHeaderContent() {
         <TableCell
           key={column.dataKey}
           variant="head"
-          align={column.numeric || false ? "right" : "left"}
+          align={column.numeric ? "right" : "left"}
           style={{ width: column.width }}
           sx={{
             backgroundColor: "background.paper",
+            fontSize: '16px',
+            minWidth: column.width,
+            maxWidth: column.width,
           }}
+          className={montserrat.className} 
         >
           {column.label}
         </TableCell>
@@ -136,7 +139,12 @@ function rowContent(_index: number, row: Data) {
       {columns.map((column) => (
         <TableCell
           key={column.dataKey}
-          align={column.numeric || false ? "right" : "left"}
+          align={column.numeric ? "right" : "left"}
+          className={montserrat.className}
+          sx={{
+            minWidth: column.width,
+            maxWidth: column.width,
+          }}
         >
           {row[column.dataKey]}
         </TableCell>
