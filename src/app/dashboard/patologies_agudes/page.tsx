@@ -702,7 +702,7 @@ const HomePage = () => {
             <h1 className="text-xl font-bold">Anàlisi de malalties</h1>
           </div>
           <div className="border-b border-black my-4"></div>
-          <h4 className="text-sm text-gray-600">(Selecciona el diagnòstic d&apos;interès per aquesta secció de l'anàlisi)</h4>
+          <h4 className="text-sm text-gray-600">(Selecciona el diagnòstic d&apos;interès per aquesta secció de l&apos;anàlisi)</h4>
 
           <div className="flex flex-wrap justify-left items-center gap-4 pl-[-80px]">
             <div className="flex flex-col justify-center items-center">
