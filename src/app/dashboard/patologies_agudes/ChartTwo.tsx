@@ -99,7 +99,9 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi }) => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Comparativa del nombre de visites segons la seva patologia aguda al municipi {selectedMunicipi}
+            {selectedMunicipi === "Tots"
+               ? "Comparativa del nombre de visites segons la seva patologia aguda a tots els municipis"
+               : `Comparativa del nombre de visites segons la seva patologia aguda al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}

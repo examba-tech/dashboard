@@ -202,7 +202,8 @@ const HomePage = () => {
 
   return (
     <>
-        <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Prevalença de malalties respiratòries cròniques 
+        <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
+           Prevalença de malalties respiratòries cròniques dels CAPs de la zona Metropolitana Sud
         {infoVisible && (
                 <div
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
@@ -232,6 +233,10 @@ const HomePage = () => {
         <br></br>
         <br></br>
         <br></br>
+        <div className="flex items-center gap-4">
+             <h1 className="text-xl font-bold">Dades d&apos;interès per malaties respiratòries cròniques </h1>
+        </div>
+        <div className="border-b border-black my-4"></div>
         <div className="flex justify-center items-center gap-4">
           <div className="flex-1 flex flex-col justify-center items-center">
           <Mapa predictions={mapa_casos} />
@@ -243,20 +248,24 @@ const HomePage = () => {
         <br></br>
         <br></br>
         <div className="flex items-center gap-4">
+             <h1 className="text-xl font-bold">Anàlisi de malalties</h1>
+        </div>
+        <div className="border-b border-black my-4"></div>
+        <div className="flex items-center gap-4">
             <Filter_diagnostic
               selectedDiagnostic={selectedDiagnostic}
               onDiagnosticChange={handleDiagnosticChange}
             />
-          </div>
+        </div>
         <div className="flex justify-center items-center gap-4" style={{ transform: 'scale(0.8)' }}>
           <div className="flex-1 flex flex-col justify-center items-center">
             <ChartTwo series={info2_ICS} />
           </div>
           <div className="flex-1 flex flex-col justify-center items-center">
-            <ChartThree series={info_ICS} />
+            <ChartThree series={info_ICS} selectedDiagnostic={selectedDiagnostic}/>
           </div>
           <div className="flex-1 flex flex-col justify-center items-center">
-            <ChartTwoEdats series={info3_ICS} />
+            <ChartTwoEdats series={info3_ICS} selectedDiagnostic={selectedDiagnostic}/>
           </div>
         </div>
       </>
