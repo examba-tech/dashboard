@@ -55,10 +55,11 @@ interface ChartThreeProps {
     female: number;
     male: number;
   };
+  selectedMunicipi: string;
   selectedDiagnostic: string;
 }
 
-const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedDiagnostic }) => {
+const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selectedDiagnostic }) => {
   const seriesArray = [series.female, series.male];
   const [infoVisible, setInfoVisible] = useState(false);
 
@@ -71,7 +72,14 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedDiagnostic }) =
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
-          Proporció de pacients del diagnòstic {selectedDiagnostic} segons el sexe 
+          {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
+          ? `Proporció de pacients segons el sexe de tots els diagnòstics a tots els municipis`
+          : selectedDiagnostic === "Tots"
+          ? `Proporció de pacients segons el sexe de tots els diagnòstics al municipi ${selectedMunicipi}`
+          : selectedMunicipi === "Tots"
+          ? `Proporció de pacients segons el sexe del diagnòstic ${selectedDiagnostic} a tots els municipis`
+          : `Proporció de pacients segons el sexe del diagnòstic ${selectedDiagnostic} al municipi ${selectedMunicipi}`
+        }
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
