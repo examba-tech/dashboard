@@ -141,11 +141,14 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
     }
   });
 
-  // Convertir el objeto semanal en un array de objetos
-  return Object.keys(weeklyData).map((week) => ({
+  const result = Object.keys(weeklyData).map((week) => ({
     name: `Setmana ${week}`,
     data: [weeklyData[week]],
   }));
+
+  result.pop();
+
+  return result;
 };
 
 const calculateTotalCasesByWeekSos = (dinamics: Interfaces.Dinamic[]) => {
@@ -187,7 +190,7 @@ const calculateTotalCasesByWeekNos = (dinamics: Interfaces.Dinamic[]) => {
         i[week] = 0;
       }
       i[week] += 1;
-      weeklyData[week] += Number(entry.NO);
+      weeklyData[week] += Number(entry.NO2);
     }
   });
 
@@ -287,13 +290,13 @@ const ultima_prediccion = (info: Interfaces.Prediccions[]) => {
   };
 };
 
-const NO_ultims_6_dies = (info: Interfaces.Prediccions[]) => {
+const NO2_ultims_6_dies = (info: Interfaces.Prediccions[]) => {
   var totalCases = {
     dia: 0,
   };
   info.forEach((entry: Interfaces.Prediccions) => {
     if (entry.DIA == 31 && (entry.MES = 12)) {
-      totalCases.dia = entry.NO_AVG.valueOf();
+      totalCases.dia = entry.NO2_AVG.valueOf();
     }
   });
   return {
@@ -368,17 +371,19 @@ const HomePage = () => {
 
   const [preds, setPreds] = React.useState<
     {
-      CODI_MUNICIPAL: Number;
-      ANY: Number;
-      MES: Number;
-      DIA: Number;
-      DIA_SETMANA: Number;
-      NO_AVG: Number;
-      NO2_AVG: Number;
-      SO2_AVG: Number;
-      POBLACIO: Number;
-      INGRESSOS_AVG: Number;
-      NOM_MUNICIPI: String;
+      CODI_MUNICIPAL: Number,
+      ANY: Number,
+      MES: Number,
+      DIA: Number,
+      DIA_SETMANA: Number,
+      NO_AVG: Number,
+      NO2_AVG: Number,
+      SO2_AVG: Number,
+      POBLACIO: Number,
+      INGRESSOS_AVG: Number,
+      INGRESSOS: Number,
+      INGRESSOS_DEUMIL: Number,
+      NOM_MUNICIPI: String,
     }[]
   >([]);
 
@@ -507,23 +512,16 @@ const HomePage = () => {
         const prediccions =
           data2 && data2.collection ? data2.collection : undefined;
         const prediccions1 =
-          data3 && data3.collection ? data3.collection : undefined;
-        const data4 = await getMongoCollection("prediccions", params);
-        const prediccions2 =
-          data4 && data4.collection ? data4.collection : undefined;
-        const data5 = await getMongoCollection("prediccions", params);
-        const prediccions3 =
-          data5 && data5.collection ? data5.collection : undefined;
-        const data6 = await getMongoCollection("prediccions", params);
-        const prediccions4 =
-          data6 && data6.collection ? data6.collection : undefined;
+          data3 && data3.collection ? data3.collection : undefined; 
+
         setLoading(false);
         if (prediccions !== undefined) {
           setPrediccions([filterByDay(prediccions)]);
           setPreds(prediccions1);
-          setPrediccions2([ultima_prediccion(prediccions2)]);
-          setPrediccions3([NO_ultims_6_dies(prediccions3)]);
-          setPrediccions4([SO2_ultims_6_dies(prediccions4)]);
+          console.log(prediccions);
+          setPrediccions2([ultima_prediccion(prediccions)]);
+          setPrediccions3([NO2_ultims_6_dies(prediccions)]);
+          setPrediccions4([SO2_ultims_6_dies(prediccions)]);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -592,10 +590,11 @@ const HomePage = () => {
           <br></br>
           <br></br>
           <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold">Dades d&apos;interès per patologies agudes respiratòries</h1>
+            <h1 className="text-xl font-bold">Dades d&apos;interès per patologies agudes respiratòries - Resum</h1>
           </div>
           <div className="border-b border-black my-4"></div>
           <div className="flex items-center gap-4"></div>
+          <h4 className="text-sm text-gray-600">(Selecciona el municipi d&apos;interès per la resta de l&apos;anàlisi)</h4>
           <div className="flex flex-wrap justify-center items-center gap-4">
             <div className="flex justify-center items-center">
               <Mapa
@@ -607,12 +606,11 @@ const HomePage = () => {
               className="flex-1 flex flex-col justify-center items-center"
               style={{ marginTop: "0px" }}
             >
-            <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
+            <h4 className="text-xl font-semibold text-black dark:text-white pt-3">
                  {selectedMunicipi === "Tots"
-                 ? "Tots els municipis"
-                 : `${selectedMunicipi}`}
-            </h5> 
-            <br></br>
+                 ? "Valors per tots els municipis:"
+                 : `Valors pel municipi ${selectedMunicipi}:`}
+            </h4> 
               <div className="flex flex-wrap">
                 <div
                   style={{
@@ -650,7 +648,7 @@ const HomePage = () => {
                 >
                   <SimpleChart data={prediccions3}></SimpleChart>
                   <p style={{ fontSize: "13px" }}>
-                    Mitjana del valor de NO dels 6 dies anteriors
+                    Mitjana del valor de NO2 dels 6 dies anteriors
                   </p>
                 </div>
                 <div
@@ -724,23 +722,19 @@ const HomePage = () => {
             <h1 className="text-xl font-bold">Anàlisi de malalties</h1>
           </div>
           <div className="border-b border-black my-4"></div>
-          <div className="flex items-center gap-4">
-            <Filters
-              selectedDiagnostic={selectedDiagnostic}
-              onDiagnosticChange={handleDiagnosticChange}
-            />
-          </div>
+          <h4 className="text-sm text-gray-600">(Selecciona el diagnòstic d&apos;interès per aquesta secció de l&apos;anàlisi)</h4>
 
           <div className="flex flex-wrap justify-left items-center gap-4 pl-[-80px]">
             <div className="flex flex-col justify-center items-center">
               <ChartTwo
                 series={info2_ICS}
                 selectedMunicipi={selectedMunicipi}
+                onDiagnosticChange={handleDiagnosticChange}
               />
               <br></br>
               <div className="flex justify-center items-center  gap-2">
-                <ChartThree series={info_ICS} selectedMunicipi={selectedMunicipi}/>
-                <ChartTwoEdats series={info3_ICS} selectedMunicipi={selectedMunicipi}/>
+                <ChartThree series={info_ICS} selectedMunicipi={selectedMunicipi} selectedDiagnostic={selectedDiagnostic}/>
+                <ChartTwoEdats series={info3_ICS} selectedMunicipi={selectedMunicipi} selectedDiagnostic={selectedDiagnostic}/>
               </div>
             </div>
             <div className="flex-1 flex justify-center items-center">
@@ -751,6 +745,7 @@ const HomePage = () => {
                 )}
                 average={average}
                 selectedMunicipi={selectedMunicipi}
+                selectedDiagnostic={selectedDiagnostic}
               />
             </div>
           </div>

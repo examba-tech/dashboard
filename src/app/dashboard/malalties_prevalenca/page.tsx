@@ -10,7 +10,6 @@ import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
 import Mapa from "./Mapa";
 import Mapa_cont from "./Mapa_cont";
-import Filter_diagnostic from "@/src/app/dashboard/malalties_prevalenca/filter_diagnostic";
 
 const calculateTotalCasesBySex = (info: Interfaces.Estatiques[], selectedDiagnostic: string) => {
   var totalCasesBySex = {
@@ -161,17 +160,28 @@ const HomePage = () => {
 
   const [selectedDiagnostic, setSelectedDiagnostic] = React.useState<string>("ASMA"); // Valor predeterminado
 // Función para manejar el cambio de diagnóstico seleccionado
-  const handleDiagnosticChange = (diagnostic: string) => {
+  
+const handleDiagnosticChange = (diagnostic: string) => {
   setSelectedDiagnostic(diagnostic);
+};
+
+const [selectedMunicipi, setSelectedMunicipi] = React.useState<string>("Abrera");
+
+const handleMunicipiSelect = (municipi: string) => {
+  setSelectedMunicipi(municipi);
+  console.log("Municipi selected:", municipi);
 };
 
   React.useEffect(() => {
     const params = {
 
     };
+    const params2 = {
+      municipi: selectedMunicipi,
+    };
     const fetchData = async () => {
       try {
-        const data = await getMongoCollection("estatics", params);
+        const data = await getMongoCollection("estatics", params2);
         const data1 = await getMongoCollection("mapas", params);
         const estatics = data && data.collection ? data.collection : undefined;
         const mapaestatics = data1 && data1.collection ? data1.collection : undefined;
@@ -192,7 +202,7 @@ const HomePage = () => {
     };
 
     fetchData();
-  }, [selectedDiagnostic]);
+  }, [selectedDiagnostic, selectedMunicipi]);
 
   const [infoVisible, setInfoVisible] = useState(false);
 
@@ -237,9 +247,10 @@ const HomePage = () => {
              <h1 className="text-xl font-bold">Dades d&apos;interès per malaties respiratòries cròniques </h1>
         </div>
         <div className="border-b border-black my-4"></div>
+        <h4 className="text-sm text-gray-600">(Selecciona el municipi d&apos;interès per la resta de l&apos;anàlisi)</h4>
         <div className="flex justify-center items-center gap-4">
           <div className="flex-1 flex flex-col justify-center items-center">
-          <Mapa predictions={mapa_casos} />
+          <Mapa predictions={mapa_casos} onMunicipiSelect={handleMunicipiSelect}/>
           </div>
           <div className="flex-1 flex flex-col justify-center items-center">
           <Mapa_cont predictions={mapa_casos} />
@@ -251,21 +262,18 @@ const HomePage = () => {
              <h1 className="text-xl font-bold">Anàlisi de malalties</h1>
         </div>
         <div className="border-b border-black my-4"></div>
-        <div className="flex items-center gap-4">
-            <Filter_diagnostic
-              selectedDiagnostic={selectedDiagnostic}
-              onDiagnosticChange={handleDiagnosticChange}
-            />
-        </div>
+        <h4 className="text-sm text-gray-600">(Selecciona el diagnòstic d&apos;interès per aquesta secció de l&apos;anàlisi)</h4>
         <div className="flex justify-center items-center gap-4" style={{ transform: 'scale(0.8)' }}>
           <div className="flex-1 flex flex-col justify-center items-center">
-            <ChartTwo series={info2_ICS} />
+            <ChartTwo series={info2_ICS} 
+            selectedMunicipi={selectedMunicipi}
+            onDiagnosticChange={handleDiagnosticChange}/>
           </div>
           <div className="flex-1 flex flex-col justify-center items-center">
-            <ChartThree series={info_ICS} selectedDiagnostic={selectedDiagnostic}/>
+            <ChartThree series={info_ICS} selectedMunicipi={selectedMunicipi} selectedDiagnostic={selectedDiagnostic}/>
           </div>
           <div className="flex-1 flex flex-col justify-center items-center">
-            <ChartTwoEdats series={info3_ICS} selectedDiagnostic={selectedDiagnostic}/>
+            <ChartTwoEdats series={info3_ICS} selectedMunicipi={selectedMunicipi} selectedDiagnostic={selectedDiagnostic}/>
           </div>
         </div>
       </>
@@ -273,5 +281,6 @@ const HomePage = () => {
     </>
   );
 };
+
 
 export default HomePage;

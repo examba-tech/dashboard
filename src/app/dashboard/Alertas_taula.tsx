@@ -2,17 +2,19 @@ import Alert from "@mui/material/Alert";
 
 interface PredictionsAlertsProps {
   predictions: {
-    Nom_municipi: String;
-    CODI_MUNICIPAL: Number;
-    ANY: Number;
-    MES: Number;
-    DIA: Number;
-    DIA_SETMANA: Number;
-    NO_AVG: Number;
-    NO2_AVG: Number;
-    SO2_AVG: Number;
-    POBLACIO: Number;
-    INGRESSOS_AVG: Number;
+      CODI_MUNICIPAL: Number,
+      ANY: Number,
+      MES: Number,
+      DIA: Number,
+      DIA_SETMANA: Number,
+      NO_AVG: Number,
+      NO2_AVG: Number,
+      SO2_AVG: Number,
+      POBLACIO: Number,
+      INGRESSOS_AVG: Number,
+      INGRESSOS: Number,
+      INGRESSOS_DEUMIL: Number,
+      NOM_MUNICIPI: String,
   }[];
 }
 
@@ -25,7 +27,7 @@ const PredictionsAlerts: React.FC<PredictionsAlertsProps> = ({
     if (Number(pred.INGRESSOS_AVG) > Number(1.9)) {
       alerts.push(
         <Alert severity="error" style={{ marginBottom: "10px" }}>
-          Compte! El municipi <strong>{pred.Nom_municipi}</strong> té una
+          Compte! El municipi <strong>{pred.NOM_MUNICIPI}</strong> té una
           previsió d&apos;<strong>alts</strong> ingresos per la propera setmana.
         </Alert>
       );

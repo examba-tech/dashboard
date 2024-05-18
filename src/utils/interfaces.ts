@@ -57,5 +57,7 @@ export interface Estatiques {
     SO2_AVG: number,
     POBLACIO: number,
     INGRESSOS_AVG: number,
-    NOM_MUNICIPI: String,
+    INGRESSOS: number,
+    INGRESSOS_DEUMIL: number,
+    NOM_MUNICIPI: string,
   }

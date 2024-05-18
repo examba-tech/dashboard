@@ -16,7 +16,7 @@ interface ChartProps {
 }
 
 const SimpleChart: React.FC<ChartProps> = ({ data }) => {
-  const numberToShow = data.length > 0 && data[0].data.length > 0 ? data[0].data[0].toFixed(2) : null;
+  const numberToShow = data.length > 0 && data[0].data.length > 0 ? data[0].data[0].toFixed(1) : null;
   return (
     // <div className={`text-3xl font-bold my-12 ${roboto.className}`}>
     //   {numberToShow !== null && <p style={{ fontSize: '70px' }}>{numberToShow}</p>}

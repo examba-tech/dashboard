@@ -47,7 +47,7 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
               "values": predictions
             },
             "key": "Codi_municipi",
-            "fields": ["SO2"] // Asegúrate de que este campo esté incluido en las predicciones
+            "fields": ["NO2"] // Asegúrate de que este campo esté incluido en las predicciones
           },
           "default": null,
         }
@@ -56,7 +56,7 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
     "mark": "geoshape",
     "encoding": {
       "color": {
-        "field": "SO2", 
+        "field": "NO2", 
         "type": "quantitative",
         "scale": {
           "scheme": "reds"
@@ -67,7 +67,15 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
   
   console.log(spec.transform[0].as); // Imprime el resultado de la transformación lookup
 
-  return <VegaLite spec={spec} />;
+  return (
+    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+      <div className="mb-4 justify-between gap-4 sm:flex">
+      <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
+        Qualitat del NO2 dels últims 10 anys per municipis
+      </h4>
+      </div>
+  <VegaLite spec={spec} />
+  </div>)
 };
 
 export default Mapa;
