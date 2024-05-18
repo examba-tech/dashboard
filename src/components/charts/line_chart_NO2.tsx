@@ -166,7 +166,9 @@ const LineChartNO2: React.FC<MyLineChartProps> = ({ visits, selectedMunicipi }) 
       <div className="mb-4 justify-between gap-4 sm:flex relative">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Evolució NO2 al municipi {selectedMunicipi}
+          {selectedMunicipi === "Tots"
+              ? "Evolució del NO2 a l'any 2023 a tots els municipis"
+              : `Evolució del NO2 a l'any 2023 al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}

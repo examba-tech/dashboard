@@ -70,7 +70,9 @@ const Waterfall = ({ data, average, selectedMunicipi }: { data: any; average: nu
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Comparativa de visites en els mesos de 2023 al municipi {selectedMunicipi}
+          {selectedMunicipi === "Tots"
+              ? "Comparativa de visites en els mesos de 2023 a tots els municipis"
+              : `Comparativa de visites en els mesos de 2023 al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}

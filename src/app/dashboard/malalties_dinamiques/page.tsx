@@ -598,6 +598,11 @@ const HomePage = () => {
               className="flex-1 flex flex-col justify-center items-center"
               style={{ marginTop: "0px" }}
             >
+            <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
+                {selectedMunicipi === "Tots"
+                ? "Tots els municipis"
+                : `${selectedMunicipi}`}
+            </h5>
               <div style={{ display: "flex" }}>
                 <div
                   style={{
