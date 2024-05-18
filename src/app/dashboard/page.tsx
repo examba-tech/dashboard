@@ -9,17 +9,19 @@ import HomeCard from "@/src/components/ui/HomeCard";
 const Page = () => {
   const [preds, setPreds] = React.useState<
     {
-      Nom_municipi: String;
-      CODI_MUNICIPAL: Number;
-      ANY: Number;
-      MES: Number;
-      DIA: Number;
-      DIA_SETMANA: Number;
-      NO_AVG: Number;
-      NO2_AVG: Number;
-      SO2_AVG: Number;
-      POBLACIO: Number;
-      INGRESSOS_AVG: Number;
+      CODI_MUNICIPAL: Number,
+      ANY: Number,
+      MES: Number,
+      DIA: Number,
+      DIA_SETMANA: Number,
+      NO_AVG: Number,
+      NO2_AVG: Number,
+      SO2_AVG: Number,
+      POBLACIO: Number,
+      INGRESSOS_AVG: Number,
+      INGRESSOS: Number,
+      INGRESSOS_DEUMIL: Number,
+      NOM_MUNICIPI: String,
     }[]
   >([]);
   const [loading, setLoading] = React.useState(true);
