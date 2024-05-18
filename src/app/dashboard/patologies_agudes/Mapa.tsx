@@ -35,7 +35,7 @@ const Mapa: React.FC<ChartPredProps> = ({predictions, onMunicipiSelect}) => {
     const spec:any = {
       "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
       "width": 425,
-      "height": 600,
+      "height": 550,
       "data": {
         "values": data.features
       },
@@ -90,7 +90,13 @@ const Mapa: React.FC<ChartPredProps> = ({predictions, onMunicipiSelect}) => {
     Predicció dels pròxims 7 dies de visites als CAPs
   </h4>
 
-  return <VegaLite spec={spec} onNewView={handleNewView} />;
+  return (
+    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+      <div className="mb-4 justify-between gap-4 sm:flex">
+      </div>
+    <VegaLite spec={spec} onNewView={handleNewView} />
+    </div>
+  )
 };
 
 export default Mapa;
