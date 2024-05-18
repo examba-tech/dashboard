@@ -161,17 +161,28 @@ const HomePage = () => {
 
   const [selectedDiagnostic, setSelectedDiagnostic] = React.useState<string>("ASMA"); // Valor predeterminado
 // Función para manejar el cambio de diagnóstico seleccionado
-  const handleDiagnosticChange = (diagnostic: string) => {
+  
+const handleDiagnosticChange = (diagnostic: string) => {
   setSelectedDiagnostic(diagnostic);
+};
+
+const [selectedMunicipi, setSelectedMunicipi] = React.useState<string>("Abrera");
+
+const handleMunicipiSelect = (municipi: string) => {
+  setSelectedMunicipi(municipi);
+  console.log("Municipi selected:", municipi);
 };
 
   React.useEffect(() => {
     const params = {
 
     };
+    const params2 = {
+      municipi: selectedMunicipi,
+    };
     const fetchData = async () => {
       try {
-        const data = await getMongoCollection("estatics", params);
+        const data = await getMongoCollection("estatics", params2);
         const data1 = await getMongoCollection("mapas", params);
         const estatics = data && data.collection ? data.collection : undefined;
         const mapaestatics = data1 && data1.collection ? data1.collection : undefined;
@@ -192,7 +203,7 @@ const HomePage = () => {
     };
 
     fetchData();
-  }, [selectedDiagnostic]);
+  }, [selectedDiagnostic, selectedMunicipi]);
 
   const [infoVisible, setInfoVisible] = useState(false);
 
@@ -237,9 +248,10 @@ const HomePage = () => {
              <h1 className="text-xl font-bold">Dades d&apos;interès per malaties respiratòries cròniques </h1>
         </div>
         <div className="border-b border-black my-4"></div>
+        <h4 className="text-sm text-gray-600">(Selecciona el municipi d&apos;interès per la resta de l&apos;anàlisi)</h4>
         <div className="flex justify-center items-center gap-4">
           <div className="flex-1 flex flex-col justify-center items-center">
-          <Mapa predictions={mapa_casos} />
+          <Mapa predictions={mapa_casos} onMunicipiSelect={handleMunicipiSelect}/>
           </div>
           <div className="flex-1 flex flex-col justify-center items-center">
           <Mapa_cont predictions={mapa_casos} />

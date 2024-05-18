@@ -705,18 +705,14 @@ const HomePage = () => {
             <h1 className="text-xl font-bold">Anàlisi de malalties</h1>
           </div>
           <div className="border-b border-black my-4"></div>
-          <div className="flex items-center gap-4">
-            <Filters
-              selectedDiagnostic={selectedDiagnostic}
-              onDiagnosticChange={handleDiagnosticChange}
-            />
-          </div>
+          <h4 className="text-sm text-gray-600">(Selecciona el diagnòstic d&apos;interès per aquesta secció de l&apos;anàlisi)</h4>
 
           <div className="flex flex-wrap justify-left items-center gap-4 pl-[-80px]">
             <div className="flex flex-col justify-center items-center">
               <ChartTwo
                 series={info2_ICS}
                 selectedMunicipi={selectedMunicipi}
+                onDiagnosticChange={handleDiagnosticChange}
               />
               <br></br>
               <div className="flex justify-center items-center  gap-2">
