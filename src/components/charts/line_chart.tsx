@@ -169,13 +169,13 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ visits, secondVisits, selecte
   });
 
   return (
-    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
-      <div className="mb-4 justify-between gap-4 sm:flex">
+    <div className="relative col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+      <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
+          <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
             {selectedMunicipi === "Tots"
-                ? "Evolució del número de visites a l'any 2023 a tots els municipis"
-                : `Evolució del número de visites a l'any 2023 al municipi ${selectedMunicipi}`}
+               ? "Evolució del número de visites a l'any 2023 a tots els municipis"
+               : `Evolució del número de visites a l'any 2023 al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -183,12 +183,10 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ visits, secondVisits, selecte
               {" "}
               +info
             </span>
-          </h4>
+          </h5>
         </div>
       </div>
-
-      <div>
-        <div>
+        <div className="mb-2">
           <ResponsiveContainer width="100%" height={400}>
             <LineChart
               data={mergedVisits}
@@ -230,30 +228,27 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ visits, secondVisits, selecte
                 }}
                 labelStyle={{ color: "black" }}
               />
-              {infoVisible && (
-                <div
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
-                  onClick={toggleInfo}
-                  style={{ marginLeft: "25px" }}
-                >
-                  <p className="text-sm text-gray-800 px-4 py-2 text-center">
-                    Aquest gràfic de línies mostra l&apos;evolució del nombre de
+              <Line type="monotone" dataKey="data" stroke="#80CAEE" />
+              <Line type="monotone" dataKey="data2" stroke="#B22222" />
+            </LineChart>
+          </ResponsiveContainer>
+          {infoVisible && (
+            <div
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-2 py-4 w-64 h-54 rounded-lg shadow-lg"
+              onClick={toggleInfo}
+            >
+              <p className="text-sm text-gray-800">
+              Aquest gràfic de línies mostra l&apos;evolució del nombre de
                     visites l&apos;any 2023. Està dissenyat per representar
                     dades temporals on l&apos;eix x mostra els noms dels
                     períodes de temps (en aquest cas, les diferents setmanes de
                     l&apos;any), i l&apos;eix y representa la quantitat de
                     visites. A més que estarà filtrat segons el municipi
-                    seleccionat (o tots).
-                  </p>
-                </div>
-              )}
-              <Line type="monotone" dataKey="data" stroke="#80CAEE" />
-              <Line type="monotone" dataKey="data2" stroke="#B22222" />
-            </LineChart>
-          </ResponsiveContainer>
+                    seleccionat (o tots).              </p>
+            </div>
+          )}
+          </div>
         </div>
-      </div>
-    </div>
   );
 };
 

@@ -153,11 +153,11 @@ interface ChartOneProps {
   };
 
   return (
-    <div className="rounded-sm border border-stroke bg-white pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
-      <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
+    <div className="relative col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+      <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Predicció al municipi {selectedMunicipi}
+          <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
+          Predicció al municipi {selectedMunicipi}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -165,11 +165,10 @@ interface ChartOneProps {
               {" "}
               +info
             </span>
-          </h4>
+          </h5>
         </div>
       </div>
-
-      <div>
+        <div className="mb-2"></div>
         <div id="chartOne" className="pl-5 flex justify-center">
           <ReactApexChart
             options={options}
@@ -190,7 +189,6 @@ interface ChartOneProps {
           )}
         </div>
       </div>
-    </div>
   );
 };
 
