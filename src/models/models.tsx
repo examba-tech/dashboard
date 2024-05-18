@@ -82,7 +82,8 @@ const prediccionSchema = new Schema(
     SO2_AVG: Number,
     POBLACIO: Number,
     INGRESSOS_AVG: Number,
-    NOM_MUNICIPI: String,
+    INGRESSOS: Number,
+    INGRESSOS_DEUMIL: Number,
   },
   {
     bufferTimeoutMS: timeout,
