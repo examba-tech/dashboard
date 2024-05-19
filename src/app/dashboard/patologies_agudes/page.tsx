@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
+import Link from 'next/link';
 import ChartThree from "./ChartThree";
 import Mapa from "./Mapa";
 import ChartTwo from "./ChartTwo";
 import ChartTwoEdats from "./ChartTwoEdats";
-import ChartOne from "./ChartOne";
+//import ChartOne from "./ChartOne";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -603,13 +604,14 @@ const HomePage = () => {
             </div>
             <div
               className="flex-1 flex flex-col justify-center items-center"
-              style={{ marginTop: "0px" }}
+              style={{ marginTop: "0" }}
             >
-            <h4 className="text-xl font-semibold text-black dark:text-white pt-3">
+            <h4 className="text-xl font-semibold text-black dark:text-white pt-0">
                  {selectedMunicipi === "Tots"
                  ? "Valors per tots els municipis:"
                  : `Valors pel municipi ${selectedMunicipi}:`}
             </h4> 
+            <br></br>
               <div className="flex flex-wrap">
                 <div
                   style={{
@@ -673,21 +675,32 @@ const HomePage = () => {
               </div>
 
               <br></br>
-              <br></br>
-              <br></br>
-              <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
-                 Mitjana del NO2 respecte del rang d&apos;ICQA 
+              {/* <br></br>
+              <br></br> */}
+              <h5 className="text-xl font-semibold text-black dark:text-white pt-3" style={{ fontSize: "15px" }}>
+                 Mitjana del NO2 respecte el rang d&apos;ICQA del NO2
               </h5> 
               <div className="flex justify-center items-center  gap-2">
                 {/* <ChartOne series={prediccions} selectedMunicipi={selectedMunicipi}/> */}
                 <BulletChart_NO2 data2={prediccions3}/>
               </div>
               <br></br>
-              <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
-                 Mitjana del SO2 respecte del rang d&apos;ICQA 
+              <h5 className="text-xl font-semibold text-black dark:text-white pt-3" style={{ fontSize: "15px" }}>
+                 Mitjana del SO2 respecte el rang d&apos;ICQA del SO2
               </h5> 
               <div className="flex justify-center items-center  gap-2">
                 <BulletChart_SO2 data2={prediccions4}/>
+              </div>
+              <br></br>
+              <div>
+                {/* <p>Els valors de referència establerts pel rang d&apos;ICQA del NO2 i del SO2 es poden trobar a l'explicació de les estacions de contaminació corresponent.</p> */}
+                <p className="mt-4 text-black dark:text-white" style={{ fontSize: "13px" }}>
+                  Els valors de referència establerts pel rang d&apos;ICQA del NO2 i del SO2 es poden trobar a l&apos;explicació de les{' '}
+                  <Link href="/dashboard/estacions_contaminacio">
+                    <span className="text-blue-500 underline">estacions de contaminació</span>
+                  </Link>{' '}
+                  corresponent, juntament amb la informació dels contaminants de NO2 i SO2.
+                </p>
               </div>
             </div>
           </div>
@@ -711,8 +724,14 @@ const HomePage = () => {
             <div className="flex-1 flex flex-col justify-center items-center">
               <MyLineChart1 visits={sos} selectedMunicipi={selectedMunicipi}/>
               <LineChartNO2 visits={nos} selectedMunicipi={selectedMunicipi}/>
+              <p className="mt-4 text-black dark:text-white" style={{ fontSize: "13px" }}>
+              La informació dels contaminants de NO2 i SO2 es troba a l&apos;explicació de les{' '}
+              <Link href="/dashboard/estacions_contaminacio">
+                <span className="text-blue-500 underline">estacions de contaminació</span>
+              </Link>{' '}
+            </p>
             </div>
-          </div>
+          </div> 
           <br></br>
           <br></br>
           <br></br>
