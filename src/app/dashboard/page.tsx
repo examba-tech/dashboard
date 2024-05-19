@@ -28,7 +28,11 @@ const Page = () => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const params = {};
+      const params = {
+        DIA:25,
+        MES:12,
+        ANY:2022
+      };
       try {
         const data2 = await getMongoCollection("prediccions", params);
         const prediccions =

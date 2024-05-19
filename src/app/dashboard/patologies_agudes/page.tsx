@@ -463,9 +463,9 @@ const HomePage = () => {
       NOM_MUNICIPI: selectedMunicipi,
     };
     const params_pred = {
-      DIA: "27",
-      MES: "11",
-      ANY: "2015",
+      DIA: "25",
+      MES: "12",
+      ANY: "2022",
     };
     const fetchData = async () => {
       try {
@@ -509,16 +509,15 @@ const HomePage = () => {
         }
         const data2 = await getMongoCollection("prediccions", params2);
         const data3 = await getMongoCollection("prediccions", params_pred);
+        console.log(data2);
         const prediccions =
           data2 && data2.collection ? data2.collection : undefined;
         const prediccions1 =
           data3 && data3.collection ? data3.collection : undefined; 
-
         setLoading(false);
         if (prediccions !== undefined) {
           setPrediccions([filterByDay(prediccions)]);
           setPreds(prediccions1);
-          console.log(prediccions);
           setPrediccions2([ultima_prediccion(prediccions)]);
           setPrediccions3([NO2_ultims_6_dies(prediccions)]);
           setPrediccions4([SO2_ultims_6_dies(prediccions)]);
@@ -538,7 +537,7 @@ const HomePage = () => {
     selectedMunicipi,
     selectedSecondMunicipi,
   ]);
-
+  console.log(prediccions)
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {

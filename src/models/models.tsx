@@ -72,6 +72,8 @@ const estaticSchema = new Schema(
 
 const prediccionSchema = new Schema(
   {
+
+    'Unnamed: 0': Number,
     CODI_MUNICIPAL: Number,
     ANY: Number,
     MES: Number,
