@@ -67,8 +67,20 @@ const BulletChart_NO2: React.FC<ChartProps> = ({ data2 }) => {
         ticks={[0, 40, 90, 120, 230, 340, 450]}
       />
       <YAxis type="category" dataKey="name" hide />
-      <Tooltip />
+      {/* <Tooltip /> */}
       <Bar dataKey="value" fill="#8884d8" shape={<CustomizedBar segments={segments} />} />
+      <ReferenceLine 
+        x={0} 
+        stroke="black" 
+        strokeWidth={1} 
+        label={{ value: 'BO', position: 'insideBottom', dx: 0, dy:40, fill: 'black', style: { fontSize: '14px', fontWeight: 'bold'} }} 
+      />
+      <ReferenceLine 
+        x={450} 
+        stroke="black" 
+        strokeWidth={1} 
+        label={{ value: 'DOLENT', position: 'insideBottom', dx: 0, dy:40, fill: 'black', style: { fontSize: '14px', fontWeight: 'bold'} }} 
+      />
       {numberToShow !== undefined && (
         <ReferenceLine 
         x={numberToShow} 
