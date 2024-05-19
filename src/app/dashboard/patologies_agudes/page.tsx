@@ -599,6 +599,7 @@ const HomePage = () => {
               <Mapa
                 predictions={preds}
                 onMunicipiSelect={handleMunicipiSelect}
+                selectedMunicipi={selectedMunicipi}
               />
             </div>
             <div
