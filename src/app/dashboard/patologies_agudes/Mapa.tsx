@@ -31,7 +31,7 @@ const Mapa: React.FC<ChartPredProps> = ({predictions, onMunicipiSelect}) => {
     });
     const predictionsWithStringKeys = predictions.map(prediction => ({
      ...prediction,
-    CODI_MUNICIPAL: prediction.CODI_MUNICIPAL.toString()
+    CODI_MUNICIPAL: "0" + prediction.CODI_MUNICIPAL.toString()
     }));
 
     const spec:any = {
