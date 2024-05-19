@@ -24,7 +24,7 @@ const PredictionsAlerts: React.FC<PredictionsAlertsProps> = ({
   const alerts: React.ReactNode[] = [];
 
   predictions.forEach((pred) => {
-    if (Number(pred.INGRESSOS_AVG) > Number(1.9)) {
+    if (Number(pred.INGRESSOS_AVG) > Number(1.2)) {
       alerts.push(
         <Alert severity="error" style={{ marginBottom: "10px" }}>
           Compte! El municipi <strong>{pred.NOM_MUNICIPI}</strong> té una
