@@ -47,7 +47,7 @@ const HomePage = () => {
       nombre: '+info', info: <div>
         <p style={{ marginBottom: '5px', textAlign: 'justify' }}>
           En aquesta secció es troba la informació de les estacions de contaminació. Primer trobem un
-          mapa que ens permet veure la localització de cadascuna d'aquestes estacions, i es pot clicar 
+          mapa que ens permet veure la localització de cadascuna d&apos;aquestes estacions, i es pot clicar 
           per veure la informació més rellevant corresponent. A més, això va seguit d&apos;informació 
           addicional de cadascuna d&apos;aquestes estacions, i dels contaminants que finalment utilitzem
           per realitzar l&apos;estudi de l&apos;afectació respecte el nombre de visites degudes a malalties 
