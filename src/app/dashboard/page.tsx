@@ -69,7 +69,7 @@ const Page = () => {
         <HomeCard
           link="/dashboard/malalties_prevalenca"
           img_path="/pie-chart-alt-2-regular-24 (1).png"
-          text="Malalties de prevalença"
+          text="Malalties cròniques"
         />
         <HomeCard
           link="/dashboard/table"

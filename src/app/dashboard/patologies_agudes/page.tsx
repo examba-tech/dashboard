@@ -19,6 +19,8 @@ import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 import SimpleChart from "./cuadro_preds";
 import BulletChart_NO2 from "@/src/components/charts/bullet_chart_NO2";
 import BulletChart_SO2 from "@/src/components/charts/bullet_chart_SO2";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Dinamic[],
@@ -322,6 +324,34 @@ const SO2_ultims_6_dies = (info: Interfaces.Prediccions[]) => {
 };
 
 const HomePage = () => {
+  const [infoExpandida, setinfoExpandida] = useState<number[]>([]);
+  const toggleExpansion = (index: number) => {
+    if (infoExpandida.includes(index)) {
+      setinfoExpandida(infoExpandida.filter((item) => item !== index));
+    } else {
+      setinfoExpandida([...infoExpandida, index]);
+    }
+  };
+
+  const informació = [
+    {
+      nombre: '+info', info: <div>
+        <p style={{ marginBottom: '5px', textAlign: 'justify' }}>En aquesta secció es realitza 
+                un estudi sobre les patologies
+                agudes, les quals són malalties o trastorns que es desenvolupen
+                de manera ràpida i repentina, amb una durada curta i una
+                intensitat variable. Aquest tipus de patologia es caracteritza
+                per aparèixer de manera brusca i provocar símptomes aguts que
+                poden ser severes, però tendeixen a resoldre&apos;s en un
+                període relativament curt de temps. Ens hem enfocat en aquestes
+                6: Bronquiolitis Aguda, Bronquitis Aguda, Grip, Infeccions
+                Agudes de les Vies Respiratòries Superiors (TRS), Pneumònia
+                Viral i Pneumònia Bacteriana.</p>
+        {/* <p style={{ marginBottom: '5px' }}>Hola</p> */}
+      </div>
+    },
+  ];
+
   const [info_ICS, setInfo_ICS] = React.useState<{
     male: number;
     female: number;
@@ -550,7 +580,7 @@ const HomePage = () => {
       <div>
         <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
           Visites als CAPs de la zona Metropolitana Sud degudes a patologies respiratòries agudes
-          {infoVisible && (
+          {/* {infoVisible && (
             <div
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
               onClick={toggleInfo}
@@ -569,15 +599,34 @@ const HomePage = () => {
                 Viral i Pneumònia Bacteriana.
               </p>
             </div>
-          )}
-          <span
+          )} */}
+          {/* <span
             className="text-sm text-gray-400 cursor-pointer"
             onClick={toggleInfo}
           >
             {" "}
             +info
-          </span>
+          </span> */}
         </h1>
+        <ul style={{ marginLeft: '115px', marginTop: '-33px' }}>
+        {informació.map((informació, index) => (
+          <li key={index}>
+            <span onClick={() => toggleExpansion(index)}>
+              <strong style={{ color: 'gray' }} >{informació.nombre}</strong>
+              {infoExpandida.includes(index) ? (
+                <FontAwesomeIcon icon={faChevronUp} style={{  color: 'gray', marginLeft: '5px' }} />
+              ) : (
+                <FontAwesomeIcon icon={faChevronDown} style={{  color: 'gray', marginLeft: '5px' }} />
+              )}
+            </span>
+            {infoExpandida.includes(index) && (
+              <div style={{ marginLeft: '-115px', marginTop: '20px' }}>
+                <p>{informació.info}</p>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
       </div>
       {loading && (
         <Box className="flex justify-center items-center h-96">
