@@ -1,8 +1,31 @@
 "use client"
 import React, { useState } from 'react';
 import MyMapa from '../../../components/mapas/MyMapa_meteo';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 const HomePage = () => {
+  const [infoExpandida, setinfoExpandida] = useState<number[]>([]);
+  const toggleExpansion2 = (index: number) => {
+    if (infoExpandida.includes(index)) {
+      setinfoExpandida(infoExpandida.filter((item) => item !== index));
+    } else {
+      setinfoExpandida([...infoExpandida, index]);
+    }
+  };
+
+  const informació = [
+    {
+      nombre: '+info', info: <div>
+        <p style={{ marginBottom: '5px', textAlign: 'justify' }}>
+        En aquesta secció es troba la informació de les estacions de contaminació. Primer trobem un
+        mapa que ens permet veure la localització de cadascuna d&apos;aquestes estacions, i es pot clicar 
+        per veure la informació més rellevant corresponent. Després trobem informació addicional respecte
+        on s&apos;han trobat trobat les dades, entre d&apos;altres.
+        </p>
+      </div>
+    },
+  ];
 
   //const [estacionesExpandidas, setEstacionesExpandidas] = useState([]);
   const [estacionesExpandidas, setEstacionesExpandidas] = useState<number[]>([]);
@@ -31,6 +54,25 @@ const HomePage = () => {
   return (
     <div>
         <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Estacions Meteorològiques</h1>
+        <ul style={{ marginLeft: '400px', marginTop: '-33px' }}>
+        {informació.map((informació, index) => (
+          <li key={index}>
+            <span onClick={() => toggleExpansion2(index)}>
+              <strong style={{ color: 'gray' }} >{informació.nombre}</strong>
+              {infoExpandida.includes(index) ? (
+                <FontAwesomeIcon icon={faChevronUp} style={{  color: 'gray', marginLeft: '5px' }} />
+              ) : (
+                <FontAwesomeIcon icon={faChevronDown} style={{  color: 'gray', marginLeft: '5px' }} />
+              )}
+            </span>
+            {infoExpandida.includes(index) && (
+              <div style={{ marginLeft: '-398px', marginTop: '20px' }}>
+                <p>{informació.info}</p>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
         <br />
       <MyMapa />
       <br />

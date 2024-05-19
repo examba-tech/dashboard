@@ -32,6 +32,33 @@ const HomePage = () => {
       setcontaminantesExpandidos([...contaminantesExpandidos, index]);
     }
   };
+
+  const [infoExpandida, setinfoExpandida] = useState<number[]>([]);
+  const toggleExpansion3 = (index: number) => {
+    if (infoExpandida.includes(index)) {
+      setinfoExpandida(infoExpandida.filter((item) => item !== index));
+    } else {
+      setinfoExpandida([...infoExpandida, index]);
+    }
+  };
+
+  const informació = [
+    {
+      nombre: '+info', info: <div>
+        <p style={{ marginBottom: '5px', textAlign: 'justify' }}>
+          En aquesta secció es troba la informació de les estacions de contaminació. Primer trobem un
+          mapa que ens permet veure la localització de cadascuna d&apos;aquestes estacions, i es pot clicar 
+          per veure la informació més rellevant corresponent. A més, això va seguit d&apos;informació 
+          addicional de cadascuna d&apos;aquestes estacions, i dels contaminants que finalment utilitzem
+          per realitzar l&apos;estudi de l&apos;afectació respecte el nombre de visites degudes a malalties 
+          respiratòries. Al final podem veure també un petit anàlisi dels rangs establerts pels possibles valors 
+          de l&apos;ICQA dels contaminants anteriors.
+          </p>
+        {/* <p style={{ marginBottom: '5px' }}>Hola</p> */}
+      </div>
+    },
+  ];
+
   
 
   const estacionesMeteorologicas = [
@@ -161,11 +188,30 @@ const HomePage = () => {
 
   return (
     <div>
-        <h1><strong style={{ fontWeight: 'bold', fontSize: '24px'}}>ESTACIONS DE CONTAMINACIÓ:</strong></h1>
+        <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Estacions de Contaminació</h1>
+        <ul style={{ marginLeft: '400px', marginTop: '-33px' }}>
+        {informació.map((informació, index) => (
+          <li key={index}>
+            <span onClick={() => toggleExpansion3(index)}>
+              <strong style={{ color: 'gray' }} >{informació.nombre}</strong>
+              {infoExpandida.includes(index) ? (
+                <FontAwesomeIcon icon={faChevronUp} style={{  color: 'gray', marginLeft: '5px' }} />
+              ) : (
+                <FontAwesomeIcon icon={faChevronDown} style={{  color: 'gray', marginLeft: '5px' }} />
+              )}
+            </span>
+            {infoExpandida.includes(index) && (
+              <div style={{ marginLeft: '-399px', marginTop: '20px' }}>
+                <p>{informació.info}</p>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
         <br />
       <MyMapa />
       <br />
-      <h1><strong style={{ fontWeight: 'bold' , fontSize: '18px'}}>DESCRIPCIÓ DE LES ESTACIONS:</strong></h1>
+      <h1><strong style={{ fontWeight: 'bold', fontSize: '20px', textDecoration: 'underline' }}>Descripció de les estacions</strong></h1>
       <br />
       <p style={{ textAlign: 'justify' }}>Les dades diàries dels contaminants per realitzar la predicció han estat 
         recollides a partir de les diferents <span style={{ fontWeight: 'bold' }}>estacions de contaminats</span> dels municipis de 
