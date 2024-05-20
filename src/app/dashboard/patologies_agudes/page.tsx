@@ -21,7 +21,6 @@ import BulletChart_NO2 from "@/src/components/charts/bullet_chart_NO2";
 import BulletChart_SO2 from "@/src/components/charts/bullet_chart_SO2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { set } from "mongoose";
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Dinamic[],
