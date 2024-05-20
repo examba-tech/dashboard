@@ -642,6 +642,11 @@ const HomePage = () => {
       setSo2(so22);
       setNo2(no22);
     };
+    try {
+      fetchData();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   }, [selectedMunicipi]);
 
   const [mergedVisits, setMergedVisits] = React.useState<any[]>([]);
