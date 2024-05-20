@@ -357,6 +357,12 @@ const HomePage = () => {
 
   const [loading, setLoading] = React.useState(true);
 
+  React.useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
   const [info2_ICS, setInfo2_ICS] = React.useState<
     {
       name: string;
@@ -458,8 +464,6 @@ const HomePage = () => {
       Nom_municipi: String;
     }[]
   >([]);
-
-  const [visits_month, setVisits_Month] = React.useState<any[]>([]);
 
   const [average, setAverage] = React.useState(0);
 
@@ -719,239 +723,242 @@ const HomePage = () => {
           ))}
         </ul>
       </div>
-      {/* {show_loading && (
+      {loading && (
         <Box className="flex justify-center items-center h-96">
           <CircularProgress />
         </Box>
-      )} */}
-      <div className="max-w-7xl">
-        <br></br>
-        <br></br>
-        <br></br>
-        <div className="flex items-center gap-4">
-          <h1 className="text-xl font-bold">
-            Dades d&apos;interès per patologies agudes respiratòries - Resum
-          </h1>
-        </div>
-        <div className="border-b border-black my-4"></div>
-        <div className="flex items-center gap-4"></div>
-        <h4 className="text-sm text-gray-600">
-          (Selecciona el municipi d&apos;interès per la resta de l&apos;anàlisi)
-        </h4>
+      )}
+      {!loading && (
+        <div className="max-w-7xl">
+          <br></br>
+          <br></br>
+          <br></br>
+          <div className="flex items-center gap-4">
+            <h1 className="text-xl font-bold">
+              Dades d&apos;interès per patologies agudes respiratòries - Resum
+            </h1>
+          </div>
+          <div className="border-b border-black my-4"></div>
+          <div className="flex items-center gap-4"></div>
+          <h4 className="text-sm text-gray-600">
+            (Selecciona el municipi d&apos;interès per la resta de
+            l&apos;anàlisi)
+          </h4>
 
-        <div className="flex justify-center items-center gap-4">
-          <div className="flex-1 flex justify-center items-center">
-            <div className="flex justify-center items-center">
-              <Mapa
-                predictions={preds}
-                onMunicipiSelect={handleMunicipiSelect}
-              />
+          <div className="flex justify-center items-center gap-4">
+            <div className="flex-1 flex justify-center items-center">
+              <div className="flex justify-center items-center">
+                <Mapa
+                  predictions={preds}
+                  onMunicipiSelect={handleMunicipiSelect}
+                />
+              </div>
+            </div>
+            <div className="flex-1 flex flex-col justify-center items-center">
+              <div
+                className="flex-1 flex flex-col justify-center items-center"
+                style={{ marginTop: "0" }}
+              >
+                <h4 className="text-xl font-semibold text-black dark:text-white pt-0">
+                  {selectedMunicipi === "Tots"
+                    ? "Valors per tots els municipis:"
+                    : `Valors pel municipi ${selectedMunicipi}:`}
+                </h4>
+                <br></br>
+                <div className="flex flex-wrap">
+                  <div
+                    style={{
+                      width: "170px",
+                      height: "170px",
+                      backgroundColor: "white",
+                      border: "1.5px solid #dddddd",
+                      marginRight: "30px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                      padding: "10px",
+                    }}
+                    className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow"
+                  >
+                    <SimpleChart data={prediccions2}></SimpleChart>
+                    <p style={{ fontSize: "13px" }}>
+                      Predicció de la mitjana del número de visites de la
+                      propera setmana
+                    </p>
+                  </div>
+                  <div
+                    style={{
+                      width: "170px",
+                      height: "170px",
+                      backgroundColor: "white",
+                      border: "1.5px solid #dddddd",
+                      marginRight: "30px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                      padding: "10px",
+                    }}
+                    className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow"
+                  >
+                    <SimpleChart data={prediccions3}></SimpleChart>
+                    <p style={{ fontSize: "13px" }}>
+                      Mitjana del valor de NO2 dels 6 dies anteriors
+                    </p>
+                  </div>
+                  <div
+                    style={{
+                      width: "170px",
+                      height: "170px",
+                      backgroundColor: "white",
+                      border: "1.5px solid #dddddd",
+                      marginRight: "30px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                      padding: "10px",
+                    }}
+                    className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow"
+                  >
+                    {/* <p style={{ fontSize: '65px',fontWeight: 'bold', fontFamily: 'Roboto'  }}>4.14</p> */}
+                    <SimpleChart data={prediccions4}></SimpleChart>
+                    <p style={{ fontSize: "13px" }}>
+                      Mitjana del valor de SO2 dels 6 dies anteriors
+                    </p>
+                  </div>
+                </div>
+                <h5
+                  className="text-xl font-semibold text-black dark:text-white pt-3"
+                  style={{ fontSize: "15px" }}
+                >
+                  Mitjana del NO2 respecte el rang d&apos;ICQA del NO2
+                </h5>
+                <div
+                  className="flex justify-center items-center  gap-2"
+                  style={{ marginLeft: "-100px" }}
+                >
+                  {/* <ChartOne series={prediccions} selectedMunicipi={selectedMunicipi}/> */}
+                  <BulletChart_NO2 data2={prediccions3} no2Data={no2} />
+                </div>
+                <br></br>
+                <h5
+                  className="text-xl font-semibold text-black dark:text-white pt-3"
+                  style={{ fontSize: "15px" }}
+                >
+                  Mitjana del SO2 respecte el rang d&apos;ICQA del SO2
+                </h5>
+                <div
+                  className="flex justify-center items-center  gap-2"
+                  style={{ marginLeft: "-100px" }}
+                >
+                  <BulletChart_SO2 data2={prediccions4} so2Data={so2} />
+                </div>
+              </div>
+              <br></br>
+
+              <div>
+                {/* <p>Els valors de referència establerts pel rang d&apos;ICQA del NO2 i del SO2 es poden trobar a l'explicació de les estacions de contaminació corresponent.</p> */}
+                <p
+                  className="mt-4 text-black dark:text-white"
+                  style={{ fontSize: "13px" }}
+                >
+                  Els valors de referència establerts pel rang d&apos;ICQA del
+                  NO2 i del SO2 es poden trobar a l&apos;explicació de les{" "}
+                  <Link href="/dashboard/estacions_contaminacio">
+                    <span className="text-blue-500 underline">
+                      estacions de contaminació
+                    </span>
+                  </Link>{" "}
+                  corresponent, juntament amb la informació dels contaminants de
+                  NO2 i SO2.
+                </p>
+              </div>
             </div>
           </div>
-          <div className="flex-1 flex flex-col justify-center items-center">
-            <div
-              className="flex-1 flex flex-col justify-center items-center"
-              style={{ marginTop: "0" }}
-            >
-              <h4 className="text-xl font-semibold text-black dark:text-white pt-0">
-                {selectedMunicipi === "Tots"
-                  ? "Valors per tots els municipis:"
-                  : `Valors pel municipi ${selectedMunicipi}:`}
-              </h4>
-              <br></br>
-              <div className="flex flex-wrap">
-                <div
-                  style={{
-                    width: "170px",
-                    height: "170px",
-                    backgroundColor: "white",
-                    border: "1.5px solid #dddddd",
-                    marginRight: "30px",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    textAlign: "center",
-                    padding: "10px",
-                  }}
-                  className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow"
-                >
-                  <SimpleChart data={prediccions2}></SimpleChart>
-                  <p style={{ fontSize: "13px" }}>
-                    Predicció de la mitjana del número de visites de la propera
-                    setmana
-                  </p>
-                </div>
-                <div
-                  style={{
-                    width: "170px",
-                    height: "170px",
-                    backgroundColor: "white",
-                    border: "1.5px solid #dddddd",
-                    marginRight: "30px",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    textAlign: "center",
-                    padding: "10px",
-                  }}
-                  className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow"
-                >
-                  <SimpleChart data={prediccions3}></SimpleChart>
-                  <p style={{ fontSize: "13px" }}>
-                    Mitjana del valor de NO2 dels 6 dies anteriors
-                  </p>
-                </div>
-                <div
-                  style={{
-                    width: "170px",
-                    height: "170px",
-                    backgroundColor: "white",
-                    border: "1.5px solid #dddddd",
-                    marginRight: "30px",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    textAlign: "center",
-                    padding: "10px",
-                  }}
-                  className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow"
-                >
-                  {/* <p style={{ fontSize: '65px',fontWeight: 'bold', fontFamily: 'Roboto'  }}>4.14</p> */}
-                  <SimpleChart data={prediccions4}></SimpleChart>
-                  <p style={{ fontSize: "13px" }}>
-                    Mitjana del valor de SO2 dels 6 dies anteriors
-                  </p>
-                </div>
-              </div>
-              <h5
-                className="text-xl font-semibold text-black dark:text-white pt-3"
-                style={{ fontSize: "15px" }}
-              >
-                Mitjana del NO2 respecte el rang d&apos;ICQA del NO2
-              </h5>
-              <div
-                className="flex justify-center items-center  gap-2"
-                style={{ marginLeft: "-100px" }}
-              >
-                {/* <ChartOne series={prediccions} selectedMunicipi={selectedMunicipi}/> */}
-                <BulletChart_NO2 data2={prediccions3} no2Data={no2} />
-              </div>
-              <br></br>
-              <h5
-                className="text-xl font-semibold text-black dark:text-white pt-3"
-                style={{ fontSize: "15px" }}
-              >
-                Mitjana del SO2 respecte el rang d&apos;ICQA del SO2
-              </h5>
-              <div
-                className="flex justify-center items-center  gap-2"
-                style={{ marginLeft: "-100px" }}
-              >
-                <BulletChart_SO2 data2={prediccions4} so2Data={so2} />
-              </div>
-            </div>
-            <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <div className="flex items-center gap-4">
+            <h1 className="text-xl font-bold">Històric de dades</h1>
+          </div>
+          <div className="border-b border-black my-4" />
 
-            <div>
-              {/* <p>Els valors de referència establerts pel rang d&apos;ICQA del NO2 i del SO2 es poden trobar a l'explicació de les estacions de contaminació corresponent.</p> */}
+          <Filters_municipi
+            selectedMunicipi={selectedSecondMunicipi}
+            onMunicipiChange={handleSecondMunicipiSelect}
+          />
+          <div className="flex justify-center items-center gap-4">
+            <div className="flex-1 flex justify-center items-center">
+              <MyLineChart
+                mergedVisits={mergedVisits}
+                selectedMunicipi={selectedMunicipi}
+              />
+            </div>
+            <div className="flex-1 flex flex-col justify-center items-center">
+              <MyLineChart1 visits={sos} selectedMunicipi={selectedMunicipi} />
+              <LineChartNO2 visits={nos} selectedMunicipi={selectedMunicipi} />
               <p
                 className="mt-4 text-black dark:text-white"
                 style={{ fontSize: "13px" }}
               >
-                Els valors de referència establerts pel rang d&apos;ICQA del NO2
-                i del SO2 es poden trobar a l&apos;explicació de les{" "}
+                La informació dels contaminants de NO2 i SO2 es troba a
+                l&apos;explicació de les{" "}
                 <Link href="/dashboard/estacions_contaminacio">
                   <span className="text-blue-500 underline">
                     estacions de contaminació
                   </span>
                 </Link>{" "}
-                corresponent, juntament amb la informació dels contaminants de
-                NO2 i SO2.
               </p>
             </div>
           </div>
-        </div>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <div className="flex items-center gap-4">
-          <h1 className="text-xl font-bold">Històric de dades</h1>
-        </div>
-        <div className="border-b border-black my-4" />
-
-        <Filters_municipi
-          selectedMunicipi={selectedSecondMunicipi}
-          onMunicipiChange={handleSecondMunicipiSelect}
-        />
-        <div className="flex justify-center items-center gap-4">
-          <div className="flex-1 flex justify-center items-center">
-            <MyLineChart
-              mergedVisits={mergedVisits}
-              selectedMunicipi={selectedMunicipi}
-            />
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <div className="flex items-center gap-4">
+            <h1 className="text-xl font-bold">Anàlisi de malalties</h1>
           </div>
-          <div className="flex-1 flex flex-col justify-center items-center">
-            <MyLineChart1 visits={sos} selectedMunicipi={selectedMunicipi} />
-            <LineChartNO2 visits={nos} selectedMunicipi={selectedMunicipi} />
-            <p
-              className="mt-4 text-black dark:text-white"
-              style={{ fontSize: "13px" }}
-            >
-              La informació dels contaminants de NO2 i SO2 es troba a
-              l&apos;explicació de les{" "}
-              <Link href="/dashboard/estacions_contaminacio">
-                <span className="text-blue-500 underline">
-                  estacions de contaminació
-                </span>
-              </Link>{" "}
-            </p>
-          </div>
-        </div>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <div className="flex items-center gap-4">
-          <h1 className="text-xl font-bold">Anàlisi de malalties</h1>
-        </div>
-        <div className="border-b border-black my-4"></div>
-        <h4 className="text-sm text-gray-600">
-          (Selecciona el diagnòstic d&apos;interès per aquesta secció de
-          l&apos;anàlisi)
-        </h4>
+          <div className="border-b border-black my-4"></div>
+          <h4 className="text-sm text-gray-600">
+            (Selecciona el diagnòstic d&apos;interès per aquesta secció de
+            l&apos;anàlisi)
+          </h4>
 
-        <div className="flex flex-wrap justify-left items-center gap-4 pl-[-80px]">
-          <div className="flex flex-col justify-center items-center">
-            <ChartTwo
-              series={info2_ICS}
-              selectedMunicipi={selectedMunicipi}
-              onDiagnosticChange={handleDiagnosticChange}
-            />
-            <br></br>
-            <div className="flex justify-center items-center  gap-2">
-              <ChartThree
-                series={info_ICS}
+          <div className="flex flex-wrap justify-left items-center gap-4 pl-[-80px]">
+            <div className="flex flex-col justify-center items-center">
+              <ChartTwo
+                series={info2_ICS}
                 selectedMunicipi={selectedMunicipi}
-                selectedDiagnostic={selectedDiagnostic}
+                onDiagnosticChange={handleDiagnosticChange}
               />
-              <ChartTwoEdats
-                series={info3_ICS}
+              <br></br>
+              <div className="flex justify-center items-center  gap-2">
+                <ChartThree
+                  series={info_ICS}
+                  selectedMunicipi={selectedMunicipi}
+                  selectedDiagnostic={selectedDiagnostic}
+                />
+                <ChartTwoEdats
+                  series={info3_ICS}
+                  selectedMunicipi={selectedMunicipi}
+                  selectedDiagnostic={selectedDiagnostic}
+                />
+              </div>
+            </div>
+            <div className="flex-1 flex justify-center items-center">
+              <Waterfall
+                data={calculateTotalCasesByMonth(
+                  dinamics_saved,
+                  selectedDiagnostic
+                )}
+                average={average}
                 selectedMunicipi={selectedMunicipi}
                 selectedDiagnostic={selectedDiagnostic}
               />
             </div>
           </div>
-          <div className="flex-1 flex justify-center items-center">
-            <Waterfall
-              data={calculateTotalCasesByMonth(
-                dinamics_saved,
-                selectedDiagnostic
-              )}
-              average={average}
-              selectedMunicipi={selectedMunicipi}
-              selectedDiagnostic={selectedDiagnostic}
-            />
-          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
