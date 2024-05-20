@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Link from 'next/link';
+import Link from "next/link";
 import ChartThree from "./ChartThree";
 import Mapa from "./Mapa";
 import ChartTwo from "./ChartTwo";
@@ -19,8 +19,9 @@ import Waterfall from "@/src/components/charts/waterfall_comparativa_meses";
 import SimpleChart from "./cuadro_preds";
 import BulletChart_NO2 from "@/src/components/charts/bullet_chart_NO2";
 import BulletChart_SO2 from "@/src/components/charts/bullet_chart_SO2";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { set } from "mongoose";
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Dinamic[],
@@ -335,20 +336,23 @@ const HomePage = () => {
 
   const informació = [
     {
-      nombre: '+info', info: <div>
-        <p style={{ marginBottom: '5px', textAlign: 'justify' }}>En aquesta secció es realitza 
-                un estudi sobre les patologies
-                agudes, les quals són malalties o trastorns que es desenvolupen
-                de manera ràpida i repentina, amb una durada curta i una
-                intensitat variable. Aquest tipus de patologia es caracteritza
-                per aparèixer de manera brusca i provocar símptomes aguts que
-                poden ser severes, però tendeixen a resoldre&apos;s en un
-                període relativament curt de temps. Ens hem enfocat en aquestes
-                6: Bronquiolitis Aguda, Bronquitis Aguda, Grip, Infeccions
-                Agudes de les Vies Respiratòries Superiors (TRS), Pneumònia
-                Viral i Pneumònia Bacteriana.</p>
-        {/* <p style={{ marginBottom: '5px' }}>Hola</p> */}
-      </div>
+      nombre: "+info",
+      info: (
+        <div>
+          <p style={{ marginBottom: "5px", textAlign: "justify" }}>
+            En aquesta secció es realitza un estudi sobre les patologies agudes,
+            les quals són malalties o trastorns que es desenvolupen de manera
+            ràpida i repentina, amb una durada curta i una intensitat variable.
+            Aquest tipus de patologia es caracteritza per aparèixer de manera
+            brusca i provocar símptomes aguts que poden ser severes, però
+            tendeixen a resoldre&apos;s en un període relativament curt de
+            temps. Ens hem enfocat en aquestes 6: Bronquiolitis Aguda,
+            Bronquitis Aguda, Grip, Infeccions Agudes de les Vies Respiratòries
+            Superiors (TRS), Pneumònia Viral i Pneumònia Bacteriana.
+          </p>
+          {/* <p style={{ marginBottom: '5px' }}>Hola</p> */}
+        </div>
+      ),
     },
   ];
 
@@ -356,6 +360,7 @@ const HomePage = () => {
     male: number;
     female: number;
   }>({ male: 0, female: 0 });
+
   const [loading, setLoading] = React.useState(true);
 
   const [info2_ICS, setInfo2_ICS] = React.useState<
@@ -366,13 +371,6 @@ const HomePage = () => {
   >([]);
 
   const [info3_ICS, setInfo3_ICS] = React.useState<
-    {
-      name: string;
-      data: number[];
-    }[]
-  >([]);
-
-  const [prediccions, setPrediccions] = React.useState<
     {
       name: string;
       data: number[];
@@ -402,21 +400,25 @@ const HomePage = () => {
 
   const [preds, setPreds] = React.useState<
     {
-      CODI_MUNICIPAL: Number,
-      ANY: Number,
-      MES: Number,
-      DIA: Number,
-      DIA_SETMANA: Number,
-      NO_AVG: Number,
-      NO2_AVG: Number,
-      SO2_AVG: Number,
-      POBLACIO: Number,
-      INGRESSOS_AVG: Number,
-      INGRESSOS: Number,
-      INGRESSOS_DEUMIL: Number,
-      NOM_MUNICIPI: String,
+      CODI_MUNICIPAL: Number;
+      ANY: Number;
+      MES: Number;
+      DIA: Number;
+      DIA_SETMANA: Number;
+      NO_AVG: Number;
+      NO2_AVG: Number;
+      SO2_AVG: Number;
+      POBLACIO: Number;
+      INGRESSOS_AVG: Number;
+      INGRESSOS: Number;
+      INGRESSOS_DEUMIL: Number;
+      NOM_MUNICIPI: String;
     }[]
   >([]);
+
+  const [dinamics_saved, setDinamics] = React.useState<Interfaces.Dinamic[]>(
+    []
+  );
 
   const [visits, setVisits] = React.useState<
     {
@@ -472,114 +474,136 @@ const HomePage = () => {
     console.log("Municipi selected:", municipi);
   };
 
-  // const [selectedMunicipi, setSelectedMunicipi] =
-  //   React.useState<string>("Tots"); // Valor predeterminado
-
-  // Función para manejar el cambio de diagnóstico seleccionado
-
-  // const handleMunicipiChange = (municipi: string) => {
-  //   setSelectedMunicipi(municipi);
-
-  // };
-
   React.useEffect(() => {
     const params = {
       Nom_municipi: selectedMunicipi,
     };
-    const params_second = {
+    const fetchData = async () => {
+      const data_full = await getMongoCollection("dinamics", params);
+      const dinamics =
+        data_full && data_full.collection ? data_full.collection : undefined;
+
+      if (dinamics !== undefined) {
+        setDinamics(dinamics);
+        setInfo2_ICS([calculateTotalCasesByDiagnostic(dinamics)]);
+        setVisits(calculateTotalCasesByWeek(dinamics));
+        setSos(calculateTotalCasesByWeekSos(dinamics));
+        setNos(calculateTotalCasesByWeekNos(dinamics));
+        setVisits_Month(dinamics);
+      }
+    };
+    try {
+      fetchData();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }, [selectedMunicipi]);
+
+  React.useEffect(() => {
+    setInfo_ICS(calculateTotalCasesBySex(dinamics_saved, selectedDiagnostic));
+    setInfo3_ICS([
+      calculateTotalCasesByEdats(dinamics_saved, selectedDiagnostic),
+    ]);
+    const monthlyData = calculateTotalCasesByMonth(
+      dinamics_saved,
+      selectedDiagnostic
+    );
+    const totalCasesThisYear = monthlyData.reduce(
+      (acc, curr) => acc + curr.last_year,
+      0
+    );
+    const average = totalCasesThisYear / 12;
+    setAverage(average);
+  }, [dinamics_saved, selectedDiagnostic]);
+
+  React.useEffect(() => {
+    const params = {
       Nom_municipi: selectedSecondMunicipi,
     };
+    const fetchData = async () => {
+      const data_full = await getMongoCollection("dinamics", params);
+      const dinamics =
+        data_full && data_full.collection ? data_full.collection : undefined;
 
-    const params2 = {
-      NOM_MUNICIPI: selectedMunicipi,
+      if (dinamics !== undefined) {
+        setSecondVisits(calculateTotalCasesByWeek(dinamics));
+      }
     };
+    try {
+      fetchData();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }, [selectedSecondMunicipi]);
+
+  React.useEffect(() => {
     const params_pred = {
       DIA: "25",
       MES: "12",
       ANY: "2022",
     };
     const fetchData = async () => {
+      const data = await getMongoCollection("prediccions", params_pred);
+      const prediccions_dia =
+        data && data.collection ? data.collection : undefined;
+      setPreds(prediccions_dia);
+    };
+
+    try {
+      fetchData();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    const params = {
+      NOM_MUNICIPI: selectedMunicipi,
+    };
+
+    const fetchData = async () => {
       try {
-        const data_full = await getMongoCollection("dinamics", params);
-        const dinamics =
-          data_full && data_full.collection ? data_full.collection : undefined;
-
-        const data_full_second = await getMongoCollection(
-          "dinamics",
-          params_second
-        );
-        const dinamics_second =
-          data_full_second && data_full_second.collection
-            ? data_full_second.collection
-            : undefined;
-
-        if (dinamics_second !== undefined) {
-          setSecondVisits(calculateTotalCasesByWeek(dinamics_second));
-        }
-
-        if (dinamics !== undefined) {
-          setInfo_ICS(calculateTotalCasesBySex(dinamics, selectedDiagnostic));
-          setInfo2_ICS([calculateTotalCasesByDiagnostic(dinamics)]);
-          setInfo3_ICS([
-            calculateTotalCasesByEdats(dinamics, selectedDiagnostic),
-          ]);
-          setVisits(calculateTotalCasesByWeek(dinamics));
-          setSos(calculateTotalCasesByWeekSos(dinamics));
-          setNos(calculateTotalCasesByWeekNos(dinamics));
-          setVisits_Month(dinamics);
-          const monthlyData = calculateTotalCasesByMonth(
-            dinamics,
-            selectedDiagnostic
-          );
-          const totalCasesThisYear = monthlyData.reduce(
-            (acc, curr) => acc + curr.last_year,
-            0
-          );
-          const average = totalCasesThisYear / 12;
-          setAverage(average);
-        }
-        const data2 = await getMongoCollection("prediccions", params2);
-        const data3 = await getMongoCollection("prediccions", params_pred);
-        console.log(data2);
+        const data = await getMongoCollection("prediccions", params);
         const prediccions =
-          data2 && data2.collection ? data2.collection : undefined;
-        const prediccions1 =
-          data3 && data3.collection ? data3.collection : undefined; 
-        setLoading(false);
+          data && data.collection ? data.collection : undefined;
         if (prediccions !== undefined) {
-          setPrediccions([filterByDay(prediccions)]);
-          setPreds(prediccions1);
           setPrediccions2([ultima_prediccion(prediccions)]);
           setPrediccions3([NO2_ultims_6_dies(prediccions)]);
           setPrediccions4([SO2_ultims_6_dies(prediccions)]);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
-        setLoading(false);
       }
     };
 
     fetchData();
-  }, [
-    visits_month,
-    visits,
-    secondVisits,
-    selectedDiagnostic,
-    selectedMunicipi,
-    selectedSecondMunicipi,
-  ]);
-  console.log(prediccions)
-  const [infoVisible, setInfoVisible] = useState(false);
+  }, [selectedMunicipi]);
 
-  const toggleInfo = () => {
-    setInfoVisible(!infoVisible);
-  };
+  const [mergedVisits, setMergedVisits] = React.useState<any[]>([]);
+  React.useEffect(() => {
+    const condition =
+      visits &&
+      secondVisits &&
+      secondVisits.length > 0 &&
+      visits.length > 0 &&
+      visits.length === secondVisits.length;
+    if (condition) {
+      const mergedVisits_ = visits.map((visit, index) => {
+        return {
+          ...visit,
+          data2: secondVisits[index].data,
+        };
+      });
+      setMergedVisits(mergedVisits_);
+    }
+  }, [visits, secondVisits]);
 
   return (
     <>
       <div>
         <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
-          Visites als CAPs de la zona Metropolitana Sud degudes a patologies respiratòries agudes
+          Visites als CAPs de la zona Metropolitana Sud degudes a patologies
+          respiratòries agudes
           {/* {infoVisible && (
             <div
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
@@ -608,42 +632,53 @@ const HomePage = () => {
             +info
           </span> */}
         </h1>
-        <ul style={{ marginLeft: '115px', marginTop: '-33px' }}>
-        {informació.map((informació, index) => (
-          <li key={index}>
-            <span onClick={() => toggleExpansion(index)}>
-              <strong style={{ color: 'gray' }} >{informació.nombre}</strong>
-              {infoExpandida.includes(index) ? (
-                <FontAwesomeIcon icon={faChevronUp} style={{  color: 'gray', marginLeft: '5px' }} />
-              ) : (
-                <FontAwesomeIcon icon={faChevronDown} style={{  color: 'gray', marginLeft: '5px' }} />
+        <ul style={{ marginLeft: "115px", marginTop: "-33px" }}>
+          {informació.map((informació, index) => (
+            <li key={index}>
+              <span onClick={() => toggleExpansion(index)}>
+                <strong style={{ color: "gray" }}>{informació.nombre}</strong>
+                {infoExpandida.includes(index) ? (
+                  <FontAwesomeIcon
+                    icon={faChevronUp}
+                    style={{ color: "gray", marginLeft: "5px" }}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faChevronDown}
+                    style={{ color: "gray", marginLeft: "5px" }}
+                  />
+                )}
+              </span>
+              {infoExpandida.includes(index) && (
+                <div style={{ marginLeft: "-115px", marginTop: "20px" }}>
+                  <p>{informació.info}</p>
+                </div>
               )}
-            </span>
-            {infoExpandida.includes(index) && (
-              <div style={{ marginLeft: '-115px', marginTop: '20px' }}>
-                <p>{informació.info}</p>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
       </div>
-      {loading && (
+      {/* {show_loading && (
         <Box className="flex justify-center items-center h-96">
           <CircularProgress />
         </Box>
-      )}
-      {!loading && (
+      )} */}
+      {
         <div className="max-w-7xl">
           <br></br>
           <br></br>
           <br></br>
           <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold">Dades d&apos;interès per patologies agudes respiratòries - Resum</h1>
+            <h1 className="text-xl font-bold">
+              Dades d&apos;interès per patologies agudes respiratòries - Resum
+            </h1>
           </div>
           <div className="border-b border-black my-4"></div>
           <div className="flex items-center gap-4"></div>
-          <h4 className="text-sm text-gray-600">(Selecciona el municipi d&apos;interès per la resta de l&apos;anàlisi)</h4>
+          <h4 className="text-sm text-gray-600">
+            (Selecciona el municipi d&apos;interès per la resta de
+            l&apos;anàlisi)
+          </h4>
           <div className="flex flex-wrap justify-center items-center gap-4">
             <div className="flex justify-center items-center">
               <Mapa
@@ -655,12 +690,12 @@ const HomePage = () => {
               className="flex-1 flex flex-col justify-center items-center"
               style={{ marginTop: "0" }}
             >
-            <h4 className="text-xl font-semibold text-black dark:text-white pt-0">
-                 {selectedMunicipi === "Tots"
-                 ? "Valors per tots els municipis:"
-                 : `Valors pel municipi ${selectedMunicipi}:`}
-            </h4> 
-            <br></br>
+              <h4 className="text-xl font-semibold text-black dark:text-white pt-0">
+                {selectedMunicipi === "Tots"
+                  ? "Valors per tots els municipis:"
+                  : `Valors pel municipi ${selectedMunicipi}:`}
+              </h4>
+              <br></br>
               <div className="flex flex-wrap">
                 <div
                   style={{
@@ -726,29 +761,42 @@ const HomePage = () => {
               <br></br>
               {/* <br></br>
               <br></br> */}
-              <h5 className="text-xl font-semibold text-black dark:text-white pt-3" style={{ fontSize: "15px" }}>
-                 Mitjana del NO2 respecte el rang d&apos;ICQA del NO2
-              </h5> 
+              <h5
+                className="text-xl font-semibold text-black dark:text-white pt-3"
+                style={{ fontSize: "15px" }}
+              >
+                Mitjana del NO2 respecte el rang d&apos;ICQA del NO2
+              </h5>
               <div className="flex justify-center items-center  gap-2">
                 {/* <ChartOne series={prediccions} selectedMunicipi={selectedMunicipi}/> */}
-                <BulletChart_NO2 data2={prediccions3}/>
+                <BulletChart_NO2 data2={prediccions3} />
               </div>
               <br></br>
-              <h5 className="text-xl font-semibold text-black dark:text-white pt-3" style={{ fontSize: "15px" }}>
-                 Mitjana del SO2 respecte el rang d&apos;ICQA del SO2
-              </h5> 
+              <h5
+                className="text-xl font-semibold text-black dark:text-white pt-3"
+                style={{ fontSize: "15px" }}
+              >
+                Mitjana del SO2 respecte el rang d&apos;ICQA del SO2
+              </h5>
               <div className="flex justify-center items-center  gap-2">
-                <BulletChart_SO2 data2={prediccions4}/>
+                <BulletChart_SO2 data2={prediccions4} />
               </div>
               <br></br>
               <div>
                 {/* <p>Els valors de referència establerts pel rang d&apos;ICQA del NO2 i del SO2 es poden trobar a l'explicació de les estacions de contaminació corresponent.</p> */}
-                <p className="mt-4 text-black dark:text-white" style={{ fontSize: "13px" }}>
-                  Els valors de referència establerts pel rang d&apos;ICQA del NO2 i del SO2 es poden trobar a l&apos;explicació de les{' '}
+                <p
+                  className="mt-4 text-black dark:text-white"
+                  style={{ fontSize: "13px" }}
+                >
+                  Els valors de referència establerts pel rang d&apos;ICQA del
+                  NO2 i del SO2 es poden trobar a l&apos;explicació de les{" "}
                   <Link href="/dashboard/estacions_contaminacio">
-                    <span className="text-blue-500 underline">estacions de contaminació</span>
-                  </Link>{' '}
-                  corresponent, juntament amb la informació dels contaminants de NO2 i SO2.
+                    <span className="text-blue-500 underline">
+                      estacions de contaminació
+                    </span>
+                  </Link>{" "}
+                  corresponent, juntament amb la informació dels contaminants de
+                  NO2 i SO2.
                 </p>
               </div>
             </div>
@@ -768,19 +816,28 @@ const HomePage = () => {
           />
           <div className="flex justify-center items-center gap-4">
             <div className="flex-1 flex justify-center items-center">
-              <MyLineChart visits={visits} secondVisits={secondVisits} selectedMunicipi={selectedMunicipi}/>
+              <MyLineChart
+                mergedVisits={mergedVisits}
+                selectedMunicipi={selectedMunicipi}
+              />
             </div>
             <div className="flex-1 flex flex-col justify-center items-center">
-              <MyLineChart1 visits={sos} selectedMunicipi={selectedMunicipi}/>
-              <LineChartNO2 visits={nos} selectedMunicipi={selectedMunicipi}/>
-              <p className="mt-4 text-black dark:text-white" style={{ fontSize: "13px" }}>
-              La informació dels contaminants de NO2 i SO2 es troba a l&apos;explicació de les{' '}
-              <Link href="/dashboard/estacions_contaminacio">
-                <span className="text-blue-500 underline">estacions de contaminació</span>
-              </Link>{' '}
-            </p>
+              <MyLineChart1 visits={sos} selectedMunicipi={selectedMunicipi} />
+              <LineChartNO2 visits={nos} selectedMunicipi={selectedMunicipi} />
+              <p
+                className="mt-4 text-black dark:text-white"
+                style={{ fontSize: "13px" }}
+              >
+                La informació dels contaminants de NO2 i SO2 es troba a
+                l&apos;explicació de les{" "}
+                <Link href="/dashboard/estacions_contaminacio">
+                  <span className="text-blue-500 underline">
+                    estacions de contaminació
+                  </span>
+                </Link>{" "}
+              </p>
             </div>
-          </div> 
+          </div>
           <br></br>
           <br></br>
           <br></br>
@@ -789,7 +846,10 @@ const HomePage = () => {
             <h1 className="text-xl font-bold">Anàlisi de malalties</h1>
           </div>
           <div className="border-b border-black my-4"></div>
-          <h4 className="text-sm text-gray-600">(Selecciona el diagnòstic d&apos;interès per aquesta secció de l&apos;anàlisi)</h4>
+          <h4 className="text-sm text-gray-600">
+            (Selecciona el diagnòstic d&apos;interès per aquesta secció de
+            l&apos;anàlisi)
+          </h4>
 
           <div className="flex flex-wrap justify-left items-center gap-4 pl-[-80px]">
             <div className="flex flex-col justify-center items-center">
@@ -800,8 +860,16 @@ const HomePage = () => {
               />
               <br></br>
               <div className="flex justify-center items-center  gap-2">
-                <ChartThree series={info_ICS} selectedMunicipi={selectedMunicipi} selectedDiagnostic={selectedDiagnostic}/>
-                <ChartTwoEdats series={info3_ICS} selectedMunicipi={selectedMunicipi} selectedDiagnostic={selectedDiagnostic}/>
+                <ChartThree
+                  series={info_ICS}
+                  selectedMunicipi={selectedMunicipi}
+                  selectedDiagnostic={selectedDiagnostic}
+                />
+                <ChartTwoEdats
+                  series={info3_ICS}
+                  selectedMunicipi={selectedMunicipi}
+                  selectedDiagnostic={selectedDiagnostic}
+                />
               </div>
             </div>
             <div className="flex-1 flex justify-center items-center">
@@ -817,7 +885,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      )}
+      }
     </>
   );
 };
