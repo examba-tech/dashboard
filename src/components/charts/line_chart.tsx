@@ -149,24 +149,16 @@ interface VisitData {
 
 // Define el tipo de props para el componente MyLineChart
 interface MyLineChartProps {
-  visits: VisitData[];
-  secondVisits: VisitData[];
+  mergedVisits: any[];
   selectedMunicipi: string;
 }
 
-const MyLineChart: React.FC<MyLineChartProps> = ({ visits, secondVisits, selectedMunicipi }) => {
+const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicipi }) => {
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
     setInfoVisible(!infoVisible);
   };
-
-  const mergedVisits = visits.map((visit, index) => {
-    return {
-      ...visit,
-      data2: secondVisits[index].data,
-    };
-  });
 
   return (
     <div className="relative col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">

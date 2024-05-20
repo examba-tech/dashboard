@@ -39,7 +39,8 @@ const dinamicSchema = new Schema(
     SO2: Number,
     NUMERO_CASOS: Number,
     ICQA_NO2: String,
-    ICQA_SO2: String
+    ICQA_SO2: String,
+    ANY: String,
   },
   {
     bufferTimeoutMS: timeout,
@@ -62,7 +63,7 @@ const estaticSchema = new Schema(
     NO: Number,
     SO2: Number,
     ICQA_NO2: String,
-    ICQA_SO2: String
+    ICQA_SO2: String,
   },
   {
     bufferTimeoutMS: timeout,
@@ -72,8 +73,7 @@ const estaticSchema = new Schema(
 
 const prediccionSchema = new Schema(
   {
-
-    'Unnamed: 0': Number,
+    "Unnamed: 0": Number,
     CODI_MUNICIPAL: Number,
     ANY: Number,
     MES: Number,
@@ -118,18 +118,20 @@ const mapaSchema = new Schema(
   }
 );
 
-
 export const Master =
   mongoose.models.Master || mongoose.model("Master", masterSchema, "master");
 
 export const Dinamic =
-  mongoose.models.Dinamic || mongoose.model("Dinamic", dinamicSchema, "dinamics");
+  mongoose.models.Dinamic ||
+  mongoose.model("Dinamic", dinamicSchema, "dinamics");
 
 export const Estatic =
-  mongoose.models.Estatic || mongoose.model("Estatic", estaticSchema, "estatics");
+  mongoose.models.Estatic ||
+  mongoose.model("Estatic", estaticSchema, "estatics");
 
 export const Prediccion =
-  mongoose.models.Prediccion || mongoose.model("Prediccion", prediccionSchema, "prediccions");
+  mongoose.models.Prediccion ||
+  mongoose.model("Prediccion", prediccionSchema, "prediccions");
 
 export const Mapa =
   mongoose.models.Mapa || mongoose.model("Mapa", mapaSchema, "mapas");

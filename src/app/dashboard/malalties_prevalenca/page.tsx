@@ -219,8 +219,6 @@ const handleMunicipiSelect = (municipi: string) => {
           setInfo_ICS(calculateTotalCasesBySex(estatics, selectedDiagnostic));
           setInfo2_ICS([calculateTotalCasesByDiagnostic(estatics)]);
           setInfo3_ICS([calculateTotalCasesByEdats(estatics, selectedDiagnostic)]);
-          console.log([calculateTotalCasesByEdats(estatics, selectedDiagnostic)]);
-          console.log(info3_ICS);
           set_mapa_casos(mapaestatics)
         }
         setLoading(false);
