@@ -71,6 +71,32 @@ const estaticSchema = new Schema(
   }
 );
 
+const so2Schema = new Schema(
+  {
+    VALOR_SO2: Number,
+    COUNT_SO2: Number,
+    Codi_municipi: String,
+    Nom_municipi: String
+  },
+  {
+    bufferTimeoutMS: timeout,
+    maxTimeMS: timeout,
+  }
+);
+
+const no2Schema = new Schema(
+  {
+    VALOR_NO2: Number,
+    COUNT_NO2: Number,
+    Codi_municipi: String,
+    Nom_municipi: String
+  },
+  {
+    bufferTimeoutMS: timeout,
+    maxTimeMS: timeout,
+  }
+);
+
 const prediccionSchema = new Schema(
   {
     "Unnamed: 0": Number,
@@ -135,3 +161,9 @@ export const Prediccion =
 
 export const Mapa =
   mongoose.models.Mapa || mongoose.model("Mapa", mapaSchema, "mapas");
+
+export const So2 =
+  mongoose.models.So2 || mongoose.model("So2", so2Schema, "so2");
+
+export const No2 =
+  mongoose.models.No2 || mongoose.model("No2", no2Schema, "no2");

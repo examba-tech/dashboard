@@ -9,6 +9,7 @@ import {
   Rectangle,
   RectangleProps,
 } from "recharts";
+import BarChartComponent from "./barChart"; // Importa el nuevo componente
 
 interface Segment {
   start: number;
@@ -27,6 +28,12 @@ interface ChartData {
 
 interface ChartProps {
   data2: ChartData[];
+  so2Data: {
+    VALOR_SO2: Number;
+    COUNT_SO2: Number;
+    Codi_municipi: String;
+    Nom_municipi: String;
+  }[];
 }
 
 const segments: Segment[] = [
@@ -59,71 +66,74 @@ const CustomizedBar: React.FC<CustomizedBarProps> = (props) => {
   );
 };
 
-const BulletChart_SO2: React.FC<ChartProps> = ({ data2 }) => {
+const BulletChart_SO2: React.FC<ChartProps> = ({ data2, so2Data }) => {
   const numberToShow =
-    data2.length > 0 && data2[0] && data2[0].data.length > 0
+    data2.length > 0 && data2[0].data.length > 0
       ? Number(data2[0].data[0].toFixed(2))
       : undefined;
 
   return (
-    <BarChart
-      width={610}
-      height={100}
-      data={data}
-      layout="vertical"
-      margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-    >
-      <XAxis
-        type="number"
-        domain={[0, 900]}
-        ticks={[0, 100, 200, 350, 500, 750, 900]}
-      />
-      <YAxis type="category" dataKey="name" hide />
-      {/* <Tooltip /> */}
-      <Bar
-        dataKey="value"
-        fill="#8884d8"
-        shape={<CustomizedBar segments={segments} />}
-      />
-      <ReferenceLine
-        x={0}
-        stroke="black"
-        strokeWidth={1}
-        label={{
-          value: "BO",
-          position: "insideBottom",
-          dx: 0,
-          dy: 40,
-          fill: "black",
-          style: { fontSize: "14px", fontWeight: "bold" },
-        }}
-      />
-      <ReferenceLine
-        x={900}
-        stroke="black"
-        strokeWidth={1}
-        label={{
-          value: "DOLENT",
-          position: "insideBottom",
-          dx: 0,
-          dy: 40,
-          fill: "black",
-          style: { fontSize: "14px", fontWeight: "bold" },
-        }}
-      />
-      {numberToShow !== undefined && (
+    <div>
+      <BarChartComponent data={so2Data} />
+      <BarChart
+        width={500}
+        height={70}
+        data={data}
+        layout="vertical"
+        style={{ marginLeft: "60px", marginTop: "-45px" }}
+      >
+        <XAxis
+          type="number"
+          domain={[0, 900]}
+          ticks={[0, 100, 200, 350, 500, 750, 900]}
+        />
+        <YAxis type="category" dataKey="name" hide />
+        {/* <Tooltip /> */}
+        <Bar
+          dataKey="value"
+          fill="#8884d8"
+          shape={<CustomizedBar segments={segments} />}
+        />
         <ReferenceLine
-          x={numberToShow}
-          stroke="red"
-          strokeWidth={3}
+          x={0}
+          stroke="black"
+          strokeWidth={1}
           label={{
-            value: numberToShow.toString(),
-            position: "top",
-            fill: "red",
+            value: "BO",
+            position: "insideBottom",
+            dx: 0,
+            dy: 40,
+            fill: "black",
+            style: { fontSize: "14px", fontWeight: "bold" },
           }}
         />
-      )}
-    </BarChart>
+        <ReferenceLine
+          x={900}
+          stroke="black"
+          strokeWidth={1}
+          label={{
+            value: "DOLENT",
+            position: "insideBottom",
+            dx: 0,
+            dy: 40,
+            fill: "black",
+            style: { fontSize: "14px", fontWeight: "bold" },
+          }}
+        />
+        {numberToShow !== undefined && (
+          <ReferenceLine
+            x={numberToShow}
+            stroke="red"
+            strokeWidth={3}
+            label={{
+              value: numberToShow.toString(),
+              position: "top",
+              fill: "red",
+            }}
+          />
+        )}
+      </BarChart>
+    </div>
   );
 };
 

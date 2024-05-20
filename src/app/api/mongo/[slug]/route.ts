@@ -20,6 +20,10 @@ export async function GET(
     model = Models.Prediccion;
   } else if (collection_name === "mapas") {
     model = Models.Mapa;
+  } else if (collection_name === "so2") {
+    model = Models.So2;
+  } else if (collection_name === "no2") {
+    model = Models.No2;
   } else {
     return NextResponse.json(
       { message: "Invalid collection name" },
