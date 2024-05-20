@@ -929,7 +929,7 @@ const HomePage = () => {
             l&apos;anàlisi)
           </h4>
 
-          <div className="flex flex-wrap justify-left items-center gap-4 pl-[-80px]">
+          <div className="flex justify-left items-center gap-4 pl-[-80px]">
             <div className="flex flex-col justify-center items-center">
               <ChartTwo
                 series={info2_ICS}
