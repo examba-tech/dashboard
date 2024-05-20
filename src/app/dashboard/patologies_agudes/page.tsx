@@ -130,16 +130,13 @@ const calculateTotalCasesByEdats = (
 
 const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
   const weeklyData: { [key: string]: number } = {};
-  const lastYear = "2023";
+  for (let i = 1; i <= 52; i++) {
+    weeklyData[i.toString()] = 0;
+  }
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
-    const [week, , year] = entry.DATA_SETMANA.split("-").map(Number);
-
-    if (year === parseInt(lastYear)) {
-      if (!weeklyData[week]) {
-        weeklyData[week] = 0;
-      }
-
+    const [week, ,] = entry.DATA_SETMANA.split("-").map(Number);
+    if (week !== 53) {
       weeklyData[week] += Number(entry.NUMERO_CASOS);
     }
   });
@@ -148,8 +145,6 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
     name: `Setmana ${week}`,
     data: [weeklyData[week]],
   }));
-
-  result.pop();
 
   return result;
 };
