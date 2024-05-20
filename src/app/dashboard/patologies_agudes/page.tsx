@@ -21,7 +21,6 @@ import BulletChart_NO2 from "@/src/components/charts/bullet_chart_NO2";
 import BulletChart_SO2 from "@/src/components/charts/bullet_chart_SO2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { set } from "mongoose";
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Dinamic[],
@@ -448,8 +447,6 @@ const HomePage = () => {
     }[]
   >([]);
 
-  const [visits_month, setVisits_Month] = React.useState<any[]>([]);
-
   const [average, setAverage] = React.useState(0);
 
   const [selectedDiagnostic, setSelectedDiagnostic] =
@@ -474,6 +471,39 @@ const HomePage = () => {
     console.log("Municipi selected:", municipi);
   };
 
+  const [dinamics_year_saved, setDinamics_year] = React.useState<
+    Interfaces.Dinamic[]
+  >([]);
+
+  React.useEffect(() => {
+    const params = {
+      Nom_municipi: selectedMunicipi,
+      ANY: "2023",
+    };
+    const fetchData = async () => {
+      const data_full = await getMongoCollection("dinamics", params);
+      const dinamics =
+        data_full && data_full.collection ? data_full.collection : undefined;
+
+      if (dinamics !== undefined) {
+        setDinamics_year(dinamics);
+        console.log("success");
+      }
+    };
+    try {
+      fetchData();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }, [selectedMunicipi]);
+
+  React.useEffect(() => {
+    console.log(calculateTotalCasesByWeek(dinamics_year_saved));
+    setVisits(calculateTotalCasesByWeek(dinamics_year_saved));
+    setSos(calculateTotalCasesByWeekSos(dinamics_year_saved));
+    setNos(calculateTotalCasesByWeekNos(dinamics_year_saved));
+  }, [dinamics_year_saved]);
+
   React.useEffect(() => {
     const params = {
       Nom_municipi: selectedMunicipi,
@@ -485,11 +515,6 @@ const HomePage = () => {
 
       if (dinamics !== undefined) {
         setDinamics(dinamics);
-        setInfo2_ICS([calculateTotalCasesByDiagnostic(dinamics)]);
-        setVisits(calculateTotalCasesByWeek(dinamics));
-        setSos(calculateTotalCasesByWeekSos(dinamics));
-        setNos(calculateTotalCasesByWeekNos(dinamics));
-        setVisits_Month(dinamics);
       }
     };
     try {
@@ -498,6 +523,10 @@ const HomePage = () => {
       console.error("Error fetching data:", error);
     }
   }, [selectedMunicipi]);
+
+  React.useEffect(() => {
+    setInfo2_ICS([calculateTotalCasesByDiagnostic(dinamics_saved)]);
+  }, [dinamics_saved]);
 
   React.useEffect(() => {
     setInfo_ICS(calculateTotalCasesBySex(dinamics_saved, selectedDiagnostic));
@@ -519,6 +548,7 @@ const HomePage = () => {
   React.useEffect(() => {
     const params = {
       Nom_municipi: selectedSecondMunicipi,
+      ANY: "2023",
     };
     const fetchData = async () => {
       const data_full = await getMongoCollection("dinamics", params);
@@ -875,7 +905,7 @@ const HomePage = () => {
             <div className="flex-1 flex justify-center items-center">
               <Waterfall
                 data={calculateTotalCasesByMonth(
-                  visits_month,
+                  dinamics_saved,
                   selectedDiagnostic
                 )}
                 average={average}
