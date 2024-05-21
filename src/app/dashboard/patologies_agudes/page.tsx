@@ -669,6 +669,14 @@ const HomePage = () => {
     }
   }, [visits, secondVisits]);
 
+  const [beginDate, setBeginDate] = React.useState(null);
+  const [endDate, setEndDate] = React.useState(null);
+
+  React.useEffect(() => {
+    console.log("Begin date:", beginDate);
+    console.log("End date:", endDate);
+  }, [beginDate, endDate]);
+
   return (
     <>
       <div>
@@ -880,16 +888,21 @@ const HomePage = () => {
           </div>
           <div className="border-b border-black my-4" />
           <div>
-            <div className="pb-10 flex justify-center items-center">
+            <div className="pb-5">
               <Filters_municipi
                 selectedMunicipi={selectedSecondMunicipi}
                 onMunicipiChange={handleSecondMunicipiSelect}
               />
             </div>
-            <div className="pb-10 text-center">
+            <div className="pb-10 pl-2">
               Selecciona un rang de dates:
-              <div className="pt-4 flex justify-center items-center">
-                <MonthRange />
+              <div className="pt-4">
+                <MonthRange
+                  beginDate={beginDate}
+                  endDate={endDate}
+                  setBeginDate={setBeginDate}
+                  setEndDate={setEndDate}
+                />
               </div>
             </div>
           </div>
