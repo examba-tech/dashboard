@@ -131,19 +131,21 @@ const calculateTotalCasesByEdats = (
 
 const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
   const weeklyData: { [key: string]: number } = {};
-  for (let i = 1; i <= 52; i++) {
-    weeklyData[i.toString()] = 0;
-  }
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
     const week = entry.SETMANA;
     if (week !== 53) {
-      weeklyData[week.toString()] += Number(entry.NUMERO_CASOS);
+      const date = new Date(entry.DATA);
+      const dateString = date.toLocaleDateString("en");
+      if (weeklyData[dateString] === undefined) {
+        weeklyData[dateString] = 0;
+      }
+      weeklyData[dateString] += Number(entry.NUMERO_CASOS);
     }
   });
 
   const result = Object.keys(weeklyData).map((week) => ({
-    name: `Setmana ${week}`,
+    name: week,
     data: [weeklyData[week]],
   }));
 
