@@ -21,6 +21,7 @@ import BulletChart_NO2 from "@/src/components/charts/bullet_chart_NO2";
 import BulletChart_SO2 from "@/src/components/charts/bullet_chart_SO2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import MonthRange from "@/src/components/ui/filters/month-picker";
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Dinamic[],
@@ -685,16 +686,7 @@ const HomePage = () => {
                 agudes, les quals són malalties o trastorns que es desenvolupen
                 de manera ràpida i repentina, amb una durada curta i una
                 intensitat variable. Aquest tipus de patologia es caracteritza
-                per aparèixer de manera brusca i provocar símptomes aguts que
-                poden ser severes, però tendeixen a resoldre&apos;s en un
-                període relativament curt de temps. Ens hem enfocat en aquestes
-                6: Bronquiolitis Aguda, Bronquitis Aguda, Grip, Infeccions
-                Agudes de les Vies Respiratòries Superiors (TRS), Pneumònia
-                Viral i Pneumònia Bacteriana.
-              </p>
-            </div>
-          )} */}
-          {/* <span
+                       per aparèixer de manera brusca i provocar símptomes aguts que                 poden ser severes, però tendeixen a resoldre&apos;s en une                període relativament curt de temps. Ens hem enfocat en aquestesu                6: Bronquiolitis Aguda, Bronquitis Aguda, Grip, Infeccions                 Agudes de les Vies Respiratòries Superiors (TRS), Pneumònia                 Viral i Pneumònia Bacteriana./* <span
             className="text-sm text-gray-400 cursor-pointer"
             onClick={toggleInfo}
           >
@@ -887,12 +879,21 @@ const HomePage = () => {
             <h1 className="text-xl font-bold">Històric de dades</h1>
           </div>
           <div className="border-b border-black my-4" />
-
-          <Filters_municipi
-            selectedMunicipi={selectedSecondMunicipi}
-            onMunicipiChange={handleSecondMunicipiSelect}
-          />
-          <div className="flex justify-center items-center gap-4">
+          <div>
+            <div className="pb-10 flex justify-center items-center">
+              <Filters_municipi
+                selectedMunicipi={selectedSecondMunicipi}
+                onMunicipiChange={handleSecondMunicipiSelect}
+              />
+            </div>
+            <div className="pb-10 text-center">
+              Selecciona un rang de dates:
+              <div className="pt-4 flex justify-center items-center">
+                <MonthRange />
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center items-center gap-4 pt-5">
             <div className="flex-1 flex justify-center items-center">
               <MyLineChart
                 mergedVisits={mergedVisits}
