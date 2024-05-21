@@ -26,21 +26,21 @@ const masterSchema = new Schema(
 
 const dinamicSchema = new Schema(
   {
-    DATA_SETMANA: String,
-    Codi_municipi: Number,
+    DATA: Date,
+    SETMANA: Number,
+    ANY: Number,
+    Codi_municipi: String,
     FranjaEdat: String,
     Sexe: String,
     DIAGNOSTIC: String,
     Nom_municipi: String,
-    Latitud: Number,
-    Longitud: Number,
     NO: Number,
     NO2: Number,
     SO2: Number,
     NUMERO_CASOS: Number,
     ICQA_NO2: String,
     ICQA_SO2: String,
-    ANY: String,
+    POBLACIO: Number,
   },
   {
     bufferTimeoutMS: timeout,
@@ -76,7 +76,7 @@ const so2Schema = new Schema(
     VALOR_SO2: Number,
     COUNT_SO2: Number,
     Codi_municipi: String,
-    Nom_municipi: String
+    Nom_municipi: String,
   },
   {
     bufferTimeoutMS: timeout,
@@ -89,7 +89,7 @@ const no2Schema = new Schema(
     VALOR_NO2: Number,
     COUNT_NO2: Number,
     Codi_municipi: String,
-    Nom_municipi: String
+    Nom_municipi: String,
   },
   {
     bufferTimeoutMS: timeout,
@@ -149,7 +149,7 @@ export const Master =
 
 export const Dinamic =
   mongoose.models.Dinamic ||
-  mongoose.model("Dinamic", dinamicSchema, "dinamics");
+  mongoose.model("Dinamic", dinamicSchema, "dinamics2"); // TODO: Change to dinamics
 
 export const Estatic =
   mongoose.models.Estatic ||

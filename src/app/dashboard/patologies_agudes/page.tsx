@@ -136,9 +136,9 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
   }
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
-    const [week, ,] = entry.DATA_SETMANA.split("-").map(Number);
+    const week = entry.SETMANA;
     if (week !== 53) {
-      weeklyData[week] += Number(entry.NUMERO_CASOS);
+      weeklyData[week.toString()] += Number(entry.NUMERO_CASOS);
     }
   });
 
@@ -156,7 +156,8 @@ const calculateTotalCasesByWeekSos = (dinamics: Interfaces.Dinamic[]) => {
   const lastYear = "2023";
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
-    const [week, , year] = entry.DATA_SETMANA.split("-").map(Number);
+    const week = entry.SETMANA.toString();
+    const year = entry.ANY;
 
     if (year === parseInt(lastYear)) {
       if (!weeklyData[week]) {
@@ -181,7 +182,8 @@ const calculateTotalCasesByWeekNos = (dinamics: Interfaces.Dinamic[]) => {
   const lastYear = "2023";
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
-    const [week, , year] = entry.DATA_SETMANA.split("-").map(Number);
+    const week = entry.SETMANA.toString();
+    const year = entry.ANY;
 
     if (year === parseInt(lastYear)) {
       if (!weeklyData[week]) {
@@ -211,10 +213,9 @@ const calculateTotalCasesByMonth = (
     if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
       return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
     }
-
-    const dateParts = entry.DATA_SETMANA.split("-");
-    const month = parseInt(dateParts[1]);
-    const year = parseInt(dateParts[2]);
+    const date = new Date(entry.DATA);
+    const month = date.getMonth() + 1;
+    const year = entry.ANY;
 
     if (year === last_year) {
       const key = `${month}`;
