@@ -22,6 +22,7 @@ import BulletChart_SO2 from "@/src/components/charts/bullet_chart_SO2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import MonthRange from "@/src/components/ui/filters/month-picker";
+import dayjs from "dayjs";
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Dinamic[],
@@ -133,7 +134,7 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
   const weeklyData: { [key: string]: number } = {};
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
-    const week = entry.SETMANA;
+    const week = entry.SETMANA.valueOf();
     if (week !== 53) {
       const date = new Date(entry.DATA);
       const dateString = date.toLocaleDateString("en");
@@ -144,10 +145,13 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
     }
   });
 
-  const result = Object.keys(weeklyData).map((week) => ({
-    name: week,
-    data: [weeklyData[week]],
-  }));
+  const result = Object.keys(weeklyData)
+    .map((week) => ({ name: week, data: [weeklyData[week]] }))
+    .sort((a, b) => {
+      const dateA = new Date(a.name);
+      const dateB = new Date(b.name);
+      return dateA.getTime() - dateB.getTime();
+    });
 
   return result;
 };
@@ -497,10 +501,14 @@ const HomePage = () => {
     Interfaces.Dinamic[]
   >([]);
 
+  const [beginDate, setBeginDate] = React.useState(dayjs("2023-01-01"));
+  const [endDate, setEndDate] = React.useState(dayjs("2023-12-31"));
+
   React.useEffect(() => {
     const params = {
       Nom_municipi: selectedMunicipi,
-      ANY: "2023",
+      beginDate: beginDate.format("YYYY-MM-DD"),
+      endDate: endDate.format("YYYY-MM-DD"),
     };
     const fetchData = async () => {
       const data_full = await getMongoCollection("dinamics", params);
@@ -517,10 +525,9 @@ const HomePage = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  }, [selectedMunicipi]);
+  }, [selectedMunicipi, beginDate, endDate]);
 
   React.useEffect(() => {
-    console.log(calculateTotalCasesByWeek(dinamics_year_saved));
     setVisits(calculateTotalCasesByWeek(dinamics_year_saved));
     setSos(calculateTotalCasesByWeekSos(dinamics_year_saved));
     setNos(calculateTotalCasesByWeekNos(dinamics_year_saved));
@@ -529,6 +536,8 @@ const HomePage = () => {
   React.useEffect(() => {
     const params = {
       Nom_municipi: selectedMunicipi,
+      beginDate: beginDate.format("YYYY-MM-DD"),
+      endDate: endDate.format("YYYY-MM-DD"),
     };
     const fetchData = async () => {
       const data_full = await getMongoCollection("dinamics", params);
@@ -544,7 +553,7 @@ const HomePage = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  }, [selectedMunicipi]);
+  }, [selectedMunicipi, beginDate, endDate]);
 
   React.useEffect(() => {
     setInfo2_ICS([calculateTotalCasesByDiagnostic(dinamics_saved)]);
@@ -570,7 +579,8 @@ const HomePage = () => {
   React.useEffect(() => {
     const params = {
       Nom_municipi: selectedSecondMunicipi,
-      ANY: "2023",
+      beginDate: beginDate.format("YYYY-MM-DD"),
+      endDate: endDate.format("YYYY-MM-DD"),
     };
     const fetchData = async () => {
       const data_full = await getMongoCollection("dinamics", params);
@@ -586,7 +596,7 @@ const HomePage = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  }, [selectedSecondMunicipi]);
+  }, [selectedSecondMunicipi, beginDate, endDate]);
 
   React.useEffect(() => {
     const params_pred = {
@@ -656,29 +666,19 @@ const HomePage = () => {
   const [mergedVisits, setMergedVisits] = React.useState<any[]>([]);
   React.useEffect(() => {
     const condition =
-      visits &&
-      secondVisits &&
-      secondVisits.length > 0 &&
-      visits.length > 0 &&
-      visits.length === secondVisits.length;
+      visits && secondVisits && secondVisits.length > 0 && visits.length > 0;
     if (condition) {
       const mergedVisits_ = visits.map((visit, index) => {
         return {
           ...visit,
-          data2: secondVisits[index].data,
+          data2: secondVisits[index]
+            ? secondVisits[index].data
+            : [secondVisits[0].data],
         };
       });
       setMergedVisits(mergedVisits_);
     }
   }, [visits, secondVisits]);
-
-  const [beginDate, setBeginDate] = React.useState(null);
-  const [endDate, setEndDate] = React.useState(null);
-
-  React.useEffect(() => {
-    console.log("Begin date:", beginDate);
-    console.log("End date:", endDate);
-  }, [beginDate, endDate]);
 
   return (
     <>

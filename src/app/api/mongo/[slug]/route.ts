@@ -33,7 +33,15 @@ export async function GET(
   const searchParams = request.nextUrl.searchParams;
   let mongoQuery: { [key: string]: any } = {};
   searchParams.forEach((value, key) => {
-    mongoQuery[key] = value;
+    if (key.endsWith("Date")) {
+      if (!mongoQuery["DATA"]) mongoQuery["DATA"] = {};
+      if (key == "beginDate")
+        mongoQuery["DATA"]["$gte"] = new Date(value).toISOString();
+      if (key == "endDate")
+        mongoQuery["DATA"]["$lte"] = new Date(value).toISOString();
+    } else {
+      mongoQuery[key] = value;
+    }
   });
 
   try {
