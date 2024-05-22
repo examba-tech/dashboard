@@ -23,6 +23,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import MonthRange from "@/src/components/ui/filters/month-picker";
 import dayjs from "dayjs";
+import '@/src/app/dashboard/estilo_info.css'; 
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Dinamic[],
@@ -686,39 +687,21 @@ const HomePage = () => {
         <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
           Visites als CAPs de la zona Metropolitana Sud degudes a patologies
           respiratòries agudes
-          {/* {infoVisible && (
-            <div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
-              onClick={toggleInfo}
-              style={{ marginLeft: "25px" }}
-            >
-              <p className="text-sm text-gray-800 px-4 py-2 text-center">
-                En aquesta secció es realitza un estudi sobre les patologies
-                agudes, les quals són malalties o trastorns que es desenvolupen
-                de manera ràpida i repentina, amb una durada curta i una
-                intensitat variable. Aquest tipus de patologia es caracteritza
-                       per aparèixer de manera brusca i provocar símptomes aguts que                 poden ser severes, però tendeixen a resoldre&apos;s en une                període relativament curt de temps. Ens hem enfocat en aquestesu                6: Bronquiolitis Aguda, Bronquitis Aguda, Grip, Infeccions                 Agudes de les Vies Respiratòries Superiors (TRS), Pneumònia                 Viral i Pneumònia Bacteriana./* <span
-            className="text-sm text-gray-400 cursor-pointer"
-            onClick={toggleInfo}
-          >
-            {" "}
-            +info
-          </span> */}
         </h1>
         <ul style={{ marginLeft: "0px", marginTop: "10px" }}>
           {informació.map((informació, index) => (
             <li key={index}>
-              <span onClick={() => toggleExpansion(index)}>
+              <span onClick={() => toggleExpansion(index)} className="icon-container">
                 <strong style={{ color: "gray" }}>{informació.nombre}</strong>
                 {infoExpandida.includes(index) ? (
                   <FontAwesomeIcon
                     icon={faChevronUp}
-                    style={{ color: "gray", marginLeft: "5px" }}
+                    className="icon"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faChevronDown}
-                    style={{ color: "gray", marginLeft: "5px" }}
+                    className="icon"
                   />
                 )}
               </span>
