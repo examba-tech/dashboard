@@ -80,7 +80,11 @@ const Mapa: React.FC<ChartPredProps> = ({predictions, onMunicipiSelect}) => {
         "strokeWidth": {
           "condition": {"selection": "municipi", "value": 3},
           "value": 1
-        }
+        },
+        tooltip: [
+          { field: "properties.nommuni", type: "nominal", title: "municipi:" },
+          { field: "Numero_Casos", type: "quantitative", title: "pacients:" }
+        ]
       }
     };
     const handleNewView = (view: View) => {

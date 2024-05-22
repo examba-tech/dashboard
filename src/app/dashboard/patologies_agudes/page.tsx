@@ -168,10 +168,12 @@ const calculateTotalCasesByWeekSos = (dinamics: Interfaces.Dinamic[]) => {
   });
 
   // Convertir el objeto semanal en un array de objetos
-  return Object.keys(weeklyData).map((week) => ({
-    name: `Setmana${week}`,
+  const result = Object.keys(weeklyData).map((week) => ({
+    name: `Setmana ${week}`,
     data: [weeklyData[week] / i[week]],
   }));
+  result.pop();
+  return result;
 };
 
 const calculateTotalCasesByWeekNos = (dinamics: Interfaces.Dinamic[]) => {
@@ -193,10 +195,12 @@ const calculateTotalCasesByWeekNos = (dinamics: Interfaces.Dinamic[]) => {
   });
 
   // Convertir el objeto semanal en un array de objetos
-  return Object.keys(weeklyData).map((week) => ({
-    name: `Setmana${week}`,
+  const result = Object.keys(weeklyData).map((week) => ({
+    name: `Setmana ${week}`,
     data: [weeklyData[week] / i[week]],
   }));
+  result.pop();
+  return result;
 };
 
 const calculateTotalCasesByMonth = (

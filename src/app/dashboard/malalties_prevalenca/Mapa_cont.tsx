@@ -62,7 +62,11 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
           "scheme": "reds"
         },
       }
-    }
+    },
+    tooltip: [
+      { field: "Codi_municipi", type: "nominal", title: "municipi:" },
+      { field: "NO2", type: "quantitative", title: "valor:" }
+    ]
   };
   
   console.log(spec.transform[0].as); // Imprime el resultado de la transformación lookup

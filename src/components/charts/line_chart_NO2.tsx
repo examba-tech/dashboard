@@ -160,7 +160,7 @@ const LineChartNO2: React.FC<MyLineChartProps> = ({ visits, selectedMunicipi }) 
     const toggleInfo = () => {
       setInfoVisible(!infoVisible);
     };
-    
+  console.log(visits);
   return (
     <div className="relative col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-3 justify-between gap-4 sm:flex">
@@ -194,21 +194,20 @@ const LineChartNO2: React.FC<MyLineChartProps> = ({ visits, selectedMunicipi }) 
         <XAxis dataKey="name" tick={{ fontSize: 10 }}/>
         <YAxis tick={{ fontSize: 10 }}/>
         <Tooltip
-              formatter={(value, name) => (
-                <span style={{ color: "black" }}>
-                  {"count:"}{" "}
-                  <span style={{ color: "black", fontWeight: "bold" }}>
-                    {value}
-                  </span>
-                </span>
-              )}
-              labelFormatter={(label) =>
-                new Date(label).toLocaleDateString("es-ES", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })
-              }
+              formatter={(value, name) => {
+                let displayName = name;
+                if (name === "data[0]") displayName = "";
+                return [
+                  <span style={{ color: "black" }}>
+                    {"valor:"}{" "}
+                    <span style={{ color: "black", fontWeight: "bold" }}>
+                      {value}
+                    </span>
+                  </span>,
+                  displayName,
+                ];
+              }}
+              labelFormatter={(label) => label}
               contentStyle={{
                 backgroundColor: "rgba(400, 400, 400, 1)",
                 borderColor: "#ccc",
