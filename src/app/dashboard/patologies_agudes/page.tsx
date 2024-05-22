@@ -709,7 +709,7 @@ const HomePage = () => {
             +info
           </span> */}
         </h1>
-        <ul style={{ marginLeft: "115px", marginTop: "-33px" }}>
+        <ul style={{ marginLeft: "0px", marginTop: "10px" }}>
           {informació.map((informació, index) => (
             <li key={index}>
               <span onClick={() => toggleExpansion(index)}>
@@ -727,7 +727,7 @@ const HomePage = () => {
                 )}
               </span>
               {infoExpandida.includes(index) && (
-                <div style={{ marginLeft: "-115px", marginTop: "20px" }}>
+                <div style={{ marginLeft: "0px", marginTop: "10px" }}>
                   <p>{informació.info}</p>
                 </div>
               )}

@@ -54,7 +54,7 @@ const HomePage = () => {
   return (
     <div>
         <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Estacions Meteorològiques</h1>
-        <ul style={{ marginLeft: '400px', marginTop: '-33px' }}>
+        <ul style={{ marginLeft: '0px', marginTop: '10px' }}>
         {informació.map((informació, index) => (
           <li key={index}>
             <span onClick={() => toggleExpansion2(index)}>
@@ -66,7 +66,7 @@ const HomePage = () => {
               )}
             </span>
             {infoExpandida.includes(index) && (
-              <div style={{ marginLeft: '-398px', marginTop: '20px' }}>
+              <div style={{ marginLeft: '0px', marginTop: '10px' }}>
                 <p>{informació.info}</p>
               </div>
             )}
