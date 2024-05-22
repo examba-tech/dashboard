@@ -52,7 +52,7 @@ const Page = () => {
       <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
         Descàrrega de Dades
       </h1>
-      <ul style={{ marginLeft: '320px', marginTop: '-33px' }}>
+      <ul style={{ marginLeft: '0px', marginTop: '10px' }}>
         {informació.map((informació, index) => (
           <li key={index}>
             <span onClick={() => toggleExpansion(index)}>
@@ -64,7 +64,7 @@ const Page = () => {
               )}
             </span>
             {infoExpandida.includes(index) && (
-              <div style={{ marginLeft: '-318px', marginTop: '20px' }}>
+              <div style={{ marginLeft: '0px', marginTop: '10px' }}>
                 <p>{informació.info}</p>
               </div>
             )}
