@@ -55,7 +55,7 @@ const PredictionsAlerts: React.FC<PredictionsAlertsProps> = ({ predictions }) =>
         <div>
             <h1 style={{ fontSize: "1.7rem", fontWeight: "bold" }}>
               <div className="overflow-y-auto" style={{ maxHeight: "200px", overflowY: "auto" }}>
-                <p>Alertes de risc d'execssiu nombre de visites de patologies respiratòries agudes a causa de la contaminació als CAPs pel dia {formattedDate}🚨</p>
+                <p>Alertes de risc d&apos;execssiu nombre de visites de patologies respiratòries agudes a causa de la contaminació als CAPs pel dia {formattedDate}🚨</p>
               </div>
             </h1>
             <br />
@@ -64,19 +64,19 @@ const PredictionsAlerts: React.FC<PredictionsAlertsProps> = ({ predictions }) =>
       </div>
 
       <div>
-        <h2 style={{ fontSize: "1.3rem", fontWeight: "bold", marginBottom: "10px" }}>Alertes d'alt risc</h2>
+        <h2 style={{ fontSize: "1.3rem", fontWeight: "bold", marginBottom: "10px" }}>Alertes d&apos;alt risc</h2>
         {errorAlerts}
-        <p>El llindar d'ingressos cada deu mil habitants considerat per a aquesta mena d'alertes d'alt risc és de &gt; 0.005</p>
+        <p>El llindar d&apos;ingressos cada deu mil habitants considerat per a aquesta mena d&apos;alertes d&apos;alt risc és de &gt; 0.005</p>
         <br></br>
 
         <h2 style={{ fontSize: "1.3rem", fontWeight: "bold", marginTop: "20px", marginBottom: "10px" }}>Alertes de risc moderat</h2>
         {warningAlerts}
-        <p>El llindar d'ingressos cada deu mil habitants considerat per a aquesta mena d'alertes de risc moderat és de &gt; 0.003</p>
+        <p>El llindar d&apos;ingressos cada deu mil habitants considerat per a aquesta mena d&apos;alertes de risc moderat és de &gt; 0.003</p>
         <br></br>
 
         <h2 style={{ fontSize: "1.3rem", fontWeight: "bold", marginTop: "20px", marginBottom: "10px" }}>Notícies positives 🙂</h2>
         {successAlerts}
-        <p>El llindar d'ingressos cada deu mil habitants considerat per a aquests avisos positius és de ≤ 0 (ESTA MAL EVIDENTEMENTE) ❌</p>
+        <p>El llindar d&apos;ingressos cada deu mil habitants considerat per a aquests avisos positius és de ≤ 0 (ESTA MAL EVIDENTEMENTE) ❌</p>
       </div>
     </div>
   );
