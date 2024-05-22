@@ -21,6 +21,8 @@ import BulletChart_NO2 from "@/src/components/charts/bullet_chart_NO2";
 import BulletChart_SO2 from "@/src/components/charts/bullet_chart_SO2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import MonthRange from "@/src/components/ui/filters/month-picker";
+import dayjs from "dayjs";
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Dinamic[],
@@ -130,21 +132,26 @@ const calculateTotalCasesByEdats = (
 
 const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
   const weeklyData: { [key: string]: number } = {};
-  for (let i = 1; i <= 52; i++) {
-    weeklyData[i.toString()] = 0;
-  }
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
-    const [week, ,] = entry.DATA_SETMANA.split("-").map(Number);
+    const week = entry.SETMANA.valueOf();
     if (week !== 53) {
-      weeklyData[week] += Number(entry.NUMERO_CASOS);
+      const date = new Date(entry.DATA);
+      const dateString = date.toLocaleDateString("en");
+      if (weeklyData[dateString] === undefined) {
+        weeklyData[dateString] = 0;
+      }
+      weeklyData[dateString] += Number(entry.NUMERO_CASOS);
     }
   });
 
-  const result = Object.keys(weeklyData).map((week) => ({
-    name: `Setmana ${week}`,
-    data: [weeklyData[week]],
-  }));
+  const result = Object.keys(weeklyData)
+    .map((week) => ({ name: week, data: [weeklyData[week]] }))
+    .sort((a, b) => {
+      const dateA = new Date(a.name);
+      const dateB = new Date(b.name);
+      return dateA.getTime() - dateB.getTime();
+    });
 
   return result;
 };
@@ -155,7 +162,8 @@ const calculateTotalCasesByWeekSos = (dinamics: Interfaces.Dinamic[]) => {
   const lastYear = "2023";
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
-    const [week, , year] = entry.DATA_SETMANA.split("-").map(Number);
+    const week = entry.SETMANA.toString();
+    const year = entry.ANY;
 
     if (year === parseInt(lastYear)) {
       if (!weeklyData[week]) {
@@ -182,7 +190,8 @@ const calculateTotalCasesByWeekNos = (dinamics: Interfaces.Dinamic[]) => {
   const lastYear = "2023";
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
-    const [week, , year] = entry.DATA_SETMANA.split("-").map(Number);
+    const week = entry.SETMANA.toString();
+    const year = entry.ANY;
 
     if (year === parseInt(lastYear)) {
       if (!weeklyData[week]) {
@@ -214,10 +223,9 @@ const calculateTotalCasesByMonth = (
     if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
       return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
     }
-
-    const dateParts = entry.DATA_SETMANA.split("-");
-    const month = parseInt(dateParts[1]);
-    const year = parseInt(dateParts[2]);
+    const date = new Date(entry.DATA);
+    const month = date.getMonth() + 1;
+    const year = entry.ANY;
 
     if (year === last_year) {
       const key = `${month}`;
@@ -497,10 +505,14 @@ const HomePage = () => {
     Interfaces.Dinamic[]
   >([]);
 
+  const [beginDate, setBeginDate] = React.useState(dayjs("2023-01-01"));
+  const [endDate, setEndDate] = React.useState(dayjs("2023-12-31"));
+
   React.useEffect(() => {
     const params = {
       Nom_municipi: selectedMunicipi,
-      ANY: "2023",
+      beginDate: beginDate.format("YYYY-MM-DD"),
+      endDate: endDate.format("YYYY-MM-DD"),
     };
     const fetchData = async () => {
       const data_full = await getMongoCollection("dinamics", params);
@@ -517,10 +529,9 @@ const HomePage = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  }, [selectedMunicipi]);
+  }, [selectedMunicipi, beginDate, endDate]);
 
   React.useEffect(() => {
-    console.log(calculateTotalCasesByWeek(dinamics_year_saved));
     setVisits(calculateTotalCasesByWeek(dinamics_year_saved));
     setSos(calculateTotalCasesByWeekSos(dinamics_year_saved));
     setNos(calculateTotalCasesByWeekNos(dinamics_year_saved));
@@ -529,6 +540,8 @@ const HomePage = () => {
   React.useEffect(() => {
     const params = {
       Nom_municipi: selectedMunicipi,
+      beginDate: beginDate.format("YYYY-MM-DD"),
+      endDate: endDate.format("YYYY-MM-DD"),
     };
     const fetchData = async () => {
       const data_full = await getMongoCollection("dinamics", params);
@@ -544,7 +557,7 @@ const HomePage = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  }, [selectedMunicipi]);
+  }, [selectedMunicipi, beginDate, endDate]);
 
   React.useEffect(() => {
     setInfo2_ICS([calculateTotalCasesByDiagnostic(dinamics_saved)]);
@@ -570,7 +583,8 @@ const HomePage = () => {
   React.useEffect(() => {
     const params = {
       Nom_municipi: selectedSecondMunicipi,
-      ANY: "2023",
+      beginDate: beginDate.format("YYYY-MM-DD"),
+      endDate: endDate.format("YYYY-MM-DD"),
     };
     const fetchData = async () => {
       const data_full = await getMongoCollection("dinamics", params);
@@ -586,7 +600,7 @@ const HomePage = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  }, [selectedSecondMunicipi]);
+  }, [selectedSecondMunicipi, beginDate, endDate]);
 
   React.useEffect(() => {
     const params_pred = {
@@ -656,16 +670,14 @@ const HomePage = () => {
   const [mergedVisits, setMergedVisits] = React.useState<any[]>([]);
   React.useEffect(() => {
     const condition =
-      visits &&
-      secondVisits &&
-      secondVisits.length > 0 &&
-      visits.length > 0 &&
-      visits.length === secondVisits.length;
+      visits && secondVisits && secondVisits.length > 0 && visits.length > 0;
     if (condition) {
       const mergedVisits_ = visits.map((visit, index) => {
         return {
           ...visit,
-          data2: secondVisits[index].data,
+          data2: secondVisits[index]
+            ? secondVisits[index].data
+            : [secondVisits[0].data],
         };
       });
       setMergedVisits(mergedVisits_);
@@ -689,16 +701,7 @@ const HomePage = () => {
                 agudes, les quals són malalties o trastorns que es desenvolupen
                 de manera ràpida i repentina, amb una durada curta i una
                 intensitat variable. Aquest tipus de patologia es caracteritza
-                per aparèixer de manera brusca i provocar símptomes aguts que
-                poden ser severes, però tendeixen a resoldre&apos;s en un
-                període relativament curt de temps. Ens hem enfocat en aquestes
-                6: Bronquiolitis Aguda, Bronquitis Aguda, Grip, Infeccions
-                Agudes de les Vies Respiratòries Superiors (TRS), Pneumònia
-                Viral i Pneumònia Bacteriana.
-              </p>
-            </div>
-          )} */}
-          {/* <span
+                       per aparèixer de manera brusca i provocar símptomes aguts que                 poden ser severes, però tendeixen a resoldre&apos;s en une                període relativament curt de temps. Ens hem enfocat en aquestesu                6: Bronquiolitis Aguda, Bronquitis Aguda, Grip, Infeccions                 Agudes de les Vies Respiratòries Superiors (TRS), Pneumònia                 Viral i Pneumònia Bacteriana./* <span
             className="text-sm text-gray-400 cursor-pointer"
             onClick={toggleInfo}
           >
@@ -891,12 +894,26 @@ const HomePage = () => {
             <h1 className="text-xl font-bold">Històric de dades</h1>
           </div>
           <div className="border-b border-black my-4" />
-
-          <Filters_municipi
-            selectedMunicipi={selectedSecondMunicipi}
-            onMunicipiChange={handleSecondMunicipiSelect}
-          />
-          <div className="flex justify-center items-center gap-4">
+          <div>
+            <div className="pb-5">
+              <Filters_municipi
+                selectedMunicipi={selectedSecondMunicipi}
+                onMunicipiChange={handleSecondMunicipiSelect}
+              />
+            </div>
+            <div className="pb-10 pl-2">
+              Selecciona un rang de dates:
+              <div className="pt-4">
+                <MonthRange
+                  beginDate={beginDate}
+                  endDate={endDate}
+                  setBeginDate={setBeginDate}
+                  setEndDate={setEndDate}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center items-center gap-4 pt-5">
             <div className="flex-1 flex justify-center items-center">
               <MyLineChart
                 mergedVisits={mergedVisits}
