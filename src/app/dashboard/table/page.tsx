@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import '@/src/app/dashboard/estilo_info.css'; 
 
 const Page = () => {
   const [infoExpandida, setinfoExpandida] = useState<number[]>([]);
@@ -55,12 +56,12 @@ const Page = () => {
       <ul style={{ marginLeft: '0px', marginTop: '10px' }}>
         {informació.map((informació, index) => (
           <li key={index}>
-            <span onClick={() => toggleExpansion(index)}>
+            <span onClick={() => toggleExpansion(index)} className="icon-container">
               <strong style={{ color: 'gray' }} >{informació.nombre}</strong>
               {infoExpandida.includes(index) ? (
-                <FontAwesomeIcon icon={faChevronUp} style={{  color: 'gray', marginLeft: '5px' }} />
+                <FontAwesomeIcon icon={faChevronUp} className="icon" />
               ) : (
-                <FontAwesomeIcon icon={faChevronDown} style={{  color: 'gray', marginLeft: '5px' }} />
+                <FontAwesomeIcon icon={faChevronDown} className="icon" />
               )}
             </span>
             {infoExpandida.includes(index) && (
