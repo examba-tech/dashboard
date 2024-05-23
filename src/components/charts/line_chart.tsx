@@ -9,12 +9,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-// Define el tipo de datos para las visitas
-interface VisitData {
-  name: string;
-  data: number[];
-}
-
 // Define el tipo de props para el componente MyLineChart
 interface MyLineChartProps {
   mergedVisits: any[];
@@ -22,6 +16,7 @@ interface MyLineChartProps {
 }
 
 const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicipi }) => {
+  console.log(mergedVisits);
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -34,8 +29,8 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
             {selectedMunicipi === "Tots"
-               ? "Evolució del número de visites a l'any 2023 a tots els municipis"
-               : `Evolució del número de visites a l'any 2023 al municipi ${selectedMunicipi}`}
+               ? "Evolució del número de visites a tots els municipis"
+               : `Evolució del número de visites al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -105,7 +100,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
             >
               <p className="text-sm text-gray-800">
               Aquest gràfic de línies mostra l&apos;evolució del nombre de
-                    visites l&apos;any 2023. Està dissenyat per representar
+                    visites. Està dissenyat per representar
                     dades temporals on l&apos;eix x mostra els noms dels
                     períodes de temps (en aquest cas, les diferents setmanes de
                     l&apos;any), i l&apos;eix y representa la quantitat de
