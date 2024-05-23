@@ -4,6 +4,7 @@ import MyMapa from '../../../components/mapas/MyMapa_cont';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import Image from "next/image";
+import '@/src/app/dashboard/estilo_info.css'; 
 
 
 
@@ -189,19 +190,19 @@ const HomePage = () => {
   return (
     <div>
         <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>Estacions de Contaminació</h1>
-        <ul style={{ marginLeft: '400px', marginTop: '-33px' }}>
+        <ul style={{ marginLeft: '0px', marginTop: '10px' }}>
         {informació.map((informació, index) => (
           <li key={index}>
-            <span onClick={() => toggleExpansion3(index)}>
+            <span onClick={() => toggleExpansion3(index)} className="icon-container">
               <strong style={{ color: 'gray' }} >{informació.nombre}</strong>
               {infoExpandida.includes(index) ? (
-                <FontAwesomeIcon icon={faChevronUp} style={{  color: 'gray', marginLeft: '5px' }} />
+                <FontAwesomeIcon icon={faChevronUp} className="icon" />
               ) : (
-                <FontAwesomeIcon icon={faChevronDown} style={{  color: 'gray', marginLeft: '5px' }} />
+                <FontAwesomeIcon icon={faChevronDown} className="icon" />
               )}
             </span>
             {infoExpandida.includes(index) && (
-              <div style={{ marginLeft: '-399px', marginTop: '20px' }}>
+              <div style={{ marginLeft: '0px', marginTop: '10px' }}>
                 <p>{informació.info}</p>
               </div>
             )}
@@ -230,12 +231,12 @@ const HomePage = () => {
       <ul style={{ listStyleType: 'disc',marginLeft: '50px' }}>
         {estacionesMeteorologicas.map((estacion, index) => (
           <li key={index}>
-            <span onClick={() => toggleExpansion(index)}>
+            <span onClick={() => toggleExpansion(index)} className="icon-container">
               <strong style={{ fontWeight: 'bold' }}>{estacion.nombre}</strong>
               {estacionesExpandidas.includes(index) ? (
-                <FontAwesomeIcon icon={faChevronUp} style={{ marginLeft: '5px' }} />
+                <FontAwesomeIcon icon={faChevronUp} className="icon2" />
               ) : (
-                <FontAwesomeIcon icon={faChevronDown} style={{ marginLeft: '5px' }} />
+                <FontAwesomeIcon icon={faChevronDown} className="icon2" />
               )}
             </span>
             {estacionesExpandidas.includes(index) && (
@@ -254,12 +255,12 @@ const HomePage = () => {
       <ul style={{ listStyleType: 'disc',marginLeft: '50px' }}>
         {contaminantes.map((contaminante, index) => (
           <li key={index}>
-            <span onClick={() => toggleExpansion2(index)}>
+            <span onClick={() => toggleExpansion2(index)} className="icon-container">
               <strong style={{ fontWeight: 'bold' }}>{contaminante.nombre}</strong>
               {contaminantesExpandidos.includes(index) ? (
-                <FontAwesomeIcon icon={faChevronUp} style={{ marginLeft: '5px' }} />
+                <FontAwesomeIcon icon={faChevronUp} className="icon2" />
               ) : (
-                <FontAwesomeIcon icon={faChevronDown} style={{ marginLeft: '5px' }} />
+                <FontAwesomeIcon icon={faChevronDown} className="icon2" />
               )}
             </span>
             {contaminantesExpandidos.includes(index) && (

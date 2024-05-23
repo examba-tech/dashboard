@@ -3,7 +3,6 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Date from "@/src/components/ui/filters/date";
 import MultipleSelectChip from "@/src/components/ui/filters/select";
 import { montserrat } from "@/src/components/ui/fonts";
 

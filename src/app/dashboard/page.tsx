@@ -56,7 +56,7 @@ const Page = () => {
             className="overflow-y-auto"
             style={{ maxHeight: "200px", overflowY: "auto" }}
           >
-            HOLA DE NOU! 👋🏼
+            Hola de nou! 👋🏼
           </div>
         </h1>
       </div>

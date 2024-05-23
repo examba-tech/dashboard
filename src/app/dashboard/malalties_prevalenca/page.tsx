@@ -12,6 +12,7 @@ import Mapa from "./Mapa";
 import Mapa_cont from "./Mapa_cont";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import '@/src/app/dashboard/estilo_info.css'; 
 
 const calculateTotalCasesBySex = (info: Interfaces.Estatiques[], selectedDiagnostic: string) => {
   var totalCasesBySex = {
@@ -241,38 +242,20 @@ const handleMunicipiSelect = (municipi: string) => {
     <>
         <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
            Pacients als CAPs de la zona Metropolitana Sud degudes a malalties respiratòries cròniques al 2023
-        {/* {infoVisible && (
-                <div
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
-                onClick={toggleInfo}
-                style={{ marginLeft: "25px" }}
-                >
-                  <p className="text-sm text-gray-800 px-4 py-2 text-center">
-                  En aquesta secció es realitza un estudi sobre les malalties de prevalença, les quals són presents en una població durant un període de temps específic. Es defineix per la quantitat total de persones que tenen la malaltia en un moment determinat en relació amb el nombre total de persones en aquella població. En el nostre cas, la variable temporal no la considerem sinó que ens enfoquem més en la comparativa i en la correlació que pugui haver entre les variables. Ens hem centrat en les següents 7 malalties: Asma, Bronquitis Crònica, MPOC Mixte (Malaltia Pulmonar Obstructiva Crònica), Bronquiectàsies, Emfisema, Neoplàsia Pulmonar i Fibrosi Pulmonar.
-                  </p>
-                </div>
-              )}
-            <span
-                  className="text-sm text-gray-400 cursor-pointer"
-                  onClick={toggleInfo}
-                >
-                  {" "}
-                  +info
-                </span> */}
         </h1>
-        <ul style={{ marginLeft: '270px', marginTop: '-33px' }}>
+        <ul style={{ marginLeft: '0px', marginTop: '10px' }}>
         {informació.map((informació, index) => (
           <li key={index}>
-            <span onClick={() => toggleExpansion(index)}>
+            <span onClick={() => toggleExpansion(index)} className="icon-container">
               <strong style={{ color: 'gray' }} >{informació.nombre}</strong>
               {infoExpandida.includes(index) ? (
-                <FontAwesomeIcon icon={faChevronUp} style={{  color: 'gray', marginLeft: '5px' }} />
+                <FontAwesomeIcon icon={faChevronUp} className="icon" />
               ) : (
-                <FontAwesomeIcon icon={faChevronDown} style={{  color: 'gray', marginLeft: '5px' }} />
+                <FontAwesomeIcon icon={faChevronDown} className="icon" />
               )}
             </span>
             {infoExpandida.includes(index) && (
-              <div style={{ marginLeft: '-270px', marginTop: '20px' }}>
+              <div style={{ marginLeft: '0px', marginTop: '10px' }}>
                 <p>{informació.info}</p>
               </div>
             )}
