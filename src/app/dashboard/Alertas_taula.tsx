@@ -1,4 +1,6 @@
 import Alert from "@mui/material/Alert";
+import { useState } from "react";
+import { buttonVariants } from "@/src/components/ui/Button";
 
 interface PredictionsAlertsProps {
   predictions: {
@@ -19,30 +21,55 @@ interface PredictionsAlertsProps {
 }
 
 const PredictionsAlerts: React.FC<PredictionsAlertsProps> = ({ predictions }) => {
+  
+  const [closedAlerts, setClosedAlerts] = useState<string[]>([]);
+
+  const handleClose = (municipi: string) => {
+    setClosedAlerts([...closedAlerts, municipi]);
+  };
+
+  const handleReset = () => {
+    setClosedAlerts([]);
+  };
+
   const errorAlerts: React.ReactNode[] = [];
   const warningAlerts: React.ReactNode[] = [];
   const successAlerts: React.ReactNode[] = [];
 
-   // Extract the date from the first prediction
-   const { DIA, MES, ANY } = predictions[0];
-   const formattedDate = `${Number(DIA)}/${Number(MES)}/${Number(ANY)}`;
+  // Extract the date from the first prediction
+  const { DIA, MES, ANY } = predictions[0];
+  const formattedDate = `${Number(DIA)}/${Number(MES)}/${Number(ANY)}`;
 
   predictions.forEach((pred) => {
+    if (closedAlerts.includes(pred.NOM_MUNICIPI.toString())) return;
+
     if (Number(pred.INGRESSOS_DEUMIL) > 0.005) {
       errorAlerts.push(
-        <Alert severity="error" style={{ marginBottom: "10px" }}>
+        <Alert 
+          severity="error" 
+          style={{ marginBottom: "10px" }} 
+          onClose={() => handleClose(pred.NOM_MUNICIPI.toString())}
+        >
           Crític! El municipi <strong>{pred.NOM_MUNICIPI}</strong> té una previsió <strong>alta</strong> d&apos;ingresos per la propera setmana.
         </Alert>
       );
     } else if (Number(pred.INGRESSOS_DEUMIL) > 0.003) {
       warningAlerts.push(
-        <Alert severity="warning" style={{ marginBottom: "10px" }}>
+        <Alert 
+          severity="warning" 
+          style={{ marginBottom: "10px" }} 
+          onClose={() => handleClose(pred.NOM_MUNICIPI.toString())}
+        >
           Compte! El municipi <strong>{pred.NOM_MUNICIPI}</strong> té una previsió <strong>mitja</strong> d&apos;ingresos per la propera setmana.
         </Alert>
       );
     } else if (Number(pred.INGRESSOS_DEUMIL) <= 0) {
       successAlerts.push(
-        <Alert severity="success" style={{ marginBottom: "10px" }}>
+        <Alert 
+          severity="success" 
+          style={{ marginBottom: "10px" }} 
+          onClose={() => handleClose(pred.NOM_MUNICIPI.toString())}
+        >
           Bones notícies! El municipi <strong>{pred.NOM_MUNICIPI}</strong> té una previsió <strong>molt baixa</strong> d&apos;ingresos per la propera setmana.
         </Alert>
       );
@@ -53,31 +80,52 @@ const PredictionsAlerts: React.FC<PredictionsAlertsProps> = ({ predictions }) =>
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-            <h1 style={{ fontSize: "1.7rem", fontWeight: "bold" }}>
-              <div className="overflow-y-auto" style={{ maxHeight: "200px", overflowY: "auto" }}>
-                <p>Alertes de risc d&apos;execssiu nombre de visites de patologies respiratòries agudes a causa de la contaminació als CAPs pel dia {formattedDate}🚨</p>
-              </div>
-            </h1>
-            <br />
-            <br />
+          <h1 style={{ fontSize: "1.7rem", fontWeight: "bold" }}>
+            <div className="overflow-y-auto" style={{ maxHeight: "200px", overflowY: "auto" }}>
+              <p>Alertes de risc d&apos;execssiu nombre de visites de patologies respiratòries agudes a causa de la contaminació als CAPs pel dia {formattedDate}🚨</p>
+            </div>
+          </h1>
+          <br />
+          <br />
         </div>
       </div>
 
       <div>
         <h2 style={{ fontSize: "1.3rem", fontWeight: "bold", marginBottom: "10px" }}>Alertes d&apos;alt risc</h2>
-        {errorAlerts}
+        {errorAlerts.length > 0 ? errorAlerts : <p>No hi ha alertes d&apos;alt risc.</p>}
         <p>El llindar d&apos;ingressos cada deu mil habitants considerat per a aquesta mena d&apos;alertes d&apos;alt risc és de &gt; 0.005</p>
-        <br></br>
+        <br />
 
         <h2 style={{ fontSize: "1.3rem", fontWeight: "bold", marginTop: "20px", marginBottom: "10px" }}>Alertes de risc moderat</h2>
-        {warningAlerts}
+        {warningAlerts.length > 0 ? warningAlerts : <p>No hi ha alertes de risc moderat.</p>}
         <p>El llindar d&apos;ingressos cada deu mil habitants considerat per a aquesta mena d&apos;alertes de risc moderat és de &gt; 0.003</p>
-        <br></br>
+        <br />
 
         <h2 style={{ fontSize: "1.3rem", fontWeight: "bold", marginTop: "20px", marginBottom: "10px" }}>Notícies positives 🙂</h2>
-        {successAlerts}
+        {successAlerts.length > 0 ? successAlerts : <p>No hi ha notícies positives.</p>}
         <p>El llindar d&apos;ingressos cada deu mil habitants considerat per a aquests avisos positius és de ≤ 0 (ESTA MAL EVIDENTEMENTE) ❌</p>
       </div>
+      <br />
+
+      {/* <button
+        onClick={handleReset}
+        onMouseDown={(e) => e.preventDefault()}
+        className={buttonVariants({ className: "w-full max-w-xs", variant: "outline" })}
+        style={{ marginTop: "20px" }}
+      >
+        Mostrar totes les alertes
+      </button> */}
+
+      <div className="flex justify-center mt-5">
+        <button
+          onClick={handleReset}
+          onMouseDown={(e) => e.preventDefault()}
+          className={buttonVariants({ className: "w-full max-w-xs", variant: "outline" })}
+        >
+          Mostrar totes les alertes
+        </button>
+      </div>
+
     </div>
   );
 };
