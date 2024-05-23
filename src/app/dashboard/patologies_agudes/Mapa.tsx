@@ -77,6 +77,10 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect }) => {
         condition: { selection: "municipi", value: 3 },
         value: 1,
       },
+      tooltip: [
+        { field: "properties.nommuni", type: "nominal", title: "municipi:" },
+        { field: "INGRESSOS_AVG", type: "quantitative", title: "visites:" }
+      ]
     },
   };
   const handleNewView = (view: View) => {
