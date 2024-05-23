@@ -23,7 +23,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import MonthRange from "@/src/components/ui/filters/month-picker";
 import dayjs from "dayjs";
-import '@/src/app/dashboard/estilo_info.css'; 
+import "@/src/app/dashboard/estilo_info.css";
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Dinamic[],
@@ -132,7 +132,9 @@ const calculateTotalCasesByEdats = (
 };
 
 const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
+  console.log("example", dinamics[0]);
   const weeklyData: { [key: string]: number } = {};
+  const pobData: { [key: string]: number } = {};
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
     const week = entry.SETMANA.valueOf();
@@ -142,12 +144,19 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
       if (weeklyData[dateString] === undefined) {
         weeklyData[dateString] = 0;
       }
+      if (pobData[dateString] === undefined) {
+        pobData[dateString] = 0;
+      }
       weeklyData[dateString] += Number(entry.NUMERO_CASOS);
+      pobData[dateString] = Number(entry.POBLACIO);
     }
   });
 
   const result = Object.keys(weeklyData)
-    .map((week) => ({ name: week, data: [weeklyData[week]] }))
+    .map((week) => ({
+      name: week,
+      data: [(weeklyData[week] / pobData[week]) * 10000],
+    }))
     .sort((a, b) => {
       const dateA = new Date(a.name);
       const dateB = new Date(b.name);
@@ -160,25 +169,23 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
 const calculateTotalCasesByWeekSos = (dinamics: Interfaces.Dinamic[]) => {
   const weeklyData: { [key: string]: number } = {};
   const i: { [key: string]: number } = {};
-  const lastYear = "2023";
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
-    const week = entry.SETMANA.toString();
-    const year = entry.ANY;
+    const date = new Date(entry.DATA);
+    const dateString = date.toLocaleDateString("en");
 
-    if (year === parseInt(lastYear)) {
-      if (!weeklyData[week]) {
-        weeklyData[week] = 0;
-        i[week] = 0;
-      }
-      i[week] += 1;
-      weeklyData[week] += Number(entry.SO2);
+    if (!weeklyData[dateString]) {
+      weeklyData[dateString] = 0;
+      i[dateString] = 0;
     }
+
+    i[dateString] += 1;
+    weeklyData[dateString] += Number(entry.SO2);
   });
 
   // Convertir el objeto semanal en un array de objetos
   return Object.keys(weeklyData).map((week) => ({
-    name: `Setmana ${week}`,
+    name: week,
     data: [weeklyData[week] / i[week]],
   }));
 };
@@ -186,25 +193,22 @@ const calculateTotalCasesByWeekSos = (dinamics: Interfaces.Dinamic[]) => {
 const calculateTotalCasesByWeekNos = (dinamics: Interfaces.Dinamic[]) => {
   const weeklyData: { [key: string]: number } = {};
   const i: { [key: string]: number } = {};
-  const lastYear = "2023";
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
-    const week = entry.SETMANA.toString();
-    const year = entry.ANY;
+    const date = new Date(entry.DATA);
+    const dateString = date.toLocaleDateString("en");
 
-    if (year === parseInt(lastYear)) {
-      if (!weeklyData[week]) {
-        weeklyData[week] = 0;
-        i[week] = 0;
-      }
-      i[week] += 1;
-      weeklyData[week] += Number(entry.NO2);
+    if (!weeklyData[dateString]) {
+      weeklyData[dateString] = 0;
+      i[dateString] = 0;
     }
+    i[dateString] += 1;
+    weeklyData[dateString] += Number(entry.NO2);
   });
 
   // Convertir el objeto semanal en un array de objetos
   return Object.keys(weeklyData).map((week) => ({
-    name: `Setmana ${week}`,
+    name: week,
     data: [weeklyData[week] / i[week]],
   }));
 };
@@ -214,7 +218,6 @@ const calculateTotalCasesByMonth = (
   selectedDiagnostic: string
 ) => {
   const monthlyData: { [key: string]: { last_year: number } } = {};
-  const last_year = 2023;
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
     if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
@@ -222,17 +225,14 @@ const calculateTotalCasesByMonth = (
     }
     const date = new Date(entry.DATA);
     const month = date.getMonth() + 1;
-    const year = entry.ANY;
 
-    if (year === last_year) {
-      const key = `${month}`;
+    const key = `${month}`;
 
-      if (!monthlyData[key]) {
-        monthlyData[key] = { last_year: 0 };
-      }
-
-      monthlyData[key].last_year += Number(entry.NUMERO_CASOS);
+    if (!monthlyData[key]) {
+      monthlyData[key] = { last_year: 0 };
     }
+
+    monthlyData[key].last_year += Number(entry.NUMERO_CASOS);
   });
 
   return Object.entries(monthlyData).map(([month, data]) => ({
@@ -451,11 +451,11 @@ const HomePage = () => {
   >([]);
 
   const [secondsos, setSecondSos] = React.useState<
-  {
-    name: string;
-    data: number[];
-  }[]
->([]);
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
 
   const [nos, setNos] = React.useState<
     {
@@ -465,11 +465,11 @@ const HomePage = () => {
   >([]);
 
   const [secondnos, setSecondNos] = React.useState<
-  {
-    name: string;
-    data: number[];
-  }[]
->([]);
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
 
   const [so2, setSo2] = React.useState<
     {
@@ -603,6 +603,7 @@ const HomePage = () => {
         data_full && data_full.collection ? data_full.collection : undefined;
 
       if (dinamics !== undefined) {
+        console.log("dinamics", dinamics);
         setSecondVisits(calculateTotalCasesByWeek(dinamics));
         setSecondSos(calculateTotalCasesByWeekSos(dinamics));
         setSecondNos(calculateTotalCasesByWeekNos(dinamics));
@@ -701,15 +702,11 @@ const HomePage = () => {
   React.useEffect(() => {
     const condition =
       sos && secondsos && secondsos.length > 0 && sos.length > 0;
-    console.log("Second:")
-    console.log(secondsos)
     if (condition) {
       const mergedSos_ = sos.map((sos, index) => {
         return {
           ...sos,
-          data2: secondsos[index]
-            ? secondsos[index].data
-            : [secondsos[0].data],
+          data2: secondsos[index] ? secondsos[index].data : [secondsos[0].data],
         };
       });
       setMergedSos(mergedSos_);
@@ -724,14 +721,12 @@ const HomePage = () => {
       const mergedNos_ = nos.map((nos, index) => {
         return {
           ...nos,
-          data2: secondnos[index]
-            ? secondnos[index].data
-            : [secondnos[0].data],
+          data2: secondnos[index] ? secondnos[index].data : [secondnos[0].data],
         };
       });
       setMergedNos(mergedNos_);
     }
-  }, [sos, secondsos]);
+  }, [nos, secondnos]);
 
   return (
     <>
@@ -743,18 +738,15 @@ const HomePage = () => {
         <ul style={{ marginLeft: "0px", marginTop: "10px" }}>
           {informació.map((informació, index) => (
             <li key={index}>
-              <span onClick={() => toggleExpansion(index)} className="icon-container">
+              <span
+                onClick={() => toggleExpansion(index)}
+                className="icon-container"
+              >
                 <strong style={{ color: "gray" }}>{informació.nombre}</strong>
                 {infoExpandida.includes(index) ? (
-                  <FontAwesomeIcon
-                    icon={faChevronUp}
-                    className="icon"
-                  />
+                  <FontAwesomeIcon icon={faChevronUp} className="icon" />
                 ) : (
-                  <FontAwesomeIcon
-                    icon={faChevronDown}
-                    className="icon"
-                  />
+                  <FontAwesomeIcon icon={faChevronDown} className="icon" />
                 )}
               </span>
               {infoExpandida.includes(index) && (
@@ -952,8 +944,14 @@ const HomePage = () => {
               />
             </div>
             <div className="flex-1 flex flex-col justify-center items-center">
-              <MyLineChart1 mergedSos={mergedSos} selectedMunicipi={selectedMunicipi} />
-              <LineChartNO2 mergedNos={mergedNos} selectedMunicipi={selectedMunicipi} />
+              <MyLineChart1
+                mergedSos={mergedSos}
+                selectedMunicipi={selectedMunicipi}
+              />
+              <LineChartNO2
+                mergedNos={mergedNos}
+                selectedMunicipi={selectedMunicipi}
+              />
               <p
                 className="mt-4 text-black dark:text-white"
                 style={{ fontSize: "13px" }}

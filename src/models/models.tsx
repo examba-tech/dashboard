@@ -149,7 +149,7 @@ export const Master =
 
 export const Dinamic =
   mongoose.models.Dinamic ||
-  mongoose.model("Dinamic", dinamicSchema, "dinamics2"); // TODO: Change to dinamics
+  mongoose.model("Dinamic", dinamicSchema, "dinamics");
 
 export const Estatic =
   mongoose.models.Estatic ||
