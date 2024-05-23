@@ -13,7 +13,7 @@ const BarChartComponentNo: React.FC<BarChartProps> = ({ data }) => {
   return (
     <BarChart
       width={500}
-      height={100}  // Ajusta la altura para el gráfico de barras
+      height={100}
       data={data}
     >
       <XAxis

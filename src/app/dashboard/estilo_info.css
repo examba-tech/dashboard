@@ -1,0 +1,41 @@
+.icon {
+    color: gray;
+    margin-left: 5px;
+    font-size: 16px;
+  }
+  
+  .icon-container {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .info-content {
+    margin-left: 0px;
+    margin-top: 10px;
+  }
+  
+  .station-list {
+    list-style-type: disc;
+    margin-left: 50px;
+  }
+
+
+.icon2 {
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+/* .icon-container {
+    display: flex;
+    align-items: center;
+} */
+
+.icon2 {
+    width: 1em;
+    height: 1em;
+    transition: transform 0.2s ease-in-out;
+}
+
+
+
