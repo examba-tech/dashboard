@@ -450,12 +450,26 @@ const HomePage = () => {
     }[]
   >([]);
 
+  const [secondsos, setSecondSos] = React.useState<
+  {
+    name: string;
+    data: number[];
+  }[]
+>([]);
+
   const [nos, setNos] = React.useState<
     {
       name: string;
       data: number[];
     }[]
   >([]);
+
+  const [secondnos, setSecondNos] = React.useState<
+  {
+    name: string;
+    data: number[];
+  }[]
+>([]);
 
   const [so2, setSo2] = React.useState<
     {
@@ -590,6 +604,8 @@ const HomePage = () => {
 
       if (dinamics !== undefined) {
         setSecondVisits(calculateTotalCasesByWeek(dinamics));
+        setSecondSos(calculateTotalCasesByWeekSos(dinamics));
+        setSecondNos(calculateTotalCasesByWeekNos(dinamics));
       }
     };
     try {
@@ -680,6 +696,42 @@ const HomePage = () => {
       setMergedVisits(mergedVisits_);
     }
   }, [visits, secondVisits]);
+
+  const [mergedSos, setMergedSos] = React.useState<any[]>([]);
+  React.useEffect(() => {
+    const condition =
+      sos && secondsos && secondsos.length > 0 && sos.length > 0;
+    console.log("Second:")
+    console.log(secondsos)
+    if (condition) {
+      const mergedSos_ = sos.map((sos, index) => {
+        return {
+          ...sos,
+          data2: secondsos[index]
+            ? secondsos[index].data
+            : [secondsos[0].data],
+        };
+      });
+      setMergedSos(mergedSos_);
+    }
+  }, [sos, secondsos]);
+
+  const [mergedNos, setMergedNos] = React.useState<any[]>([]);
+  React.useEffect(() => {
+    const condition =
+      nos && secondnos && secondnos.length > 0 && nos.length > 0;
+    if (condition) {
+      const mergedNos_ = nos.map((nos, index) => {
+        return {
+          ...nos,
+          data2: secondnos[index]
+            ? secondnos[index].data
+            : [secondnos[0].data],
+        };
+      });
+      setMergedNos(mergedNos_);
+    }
+  }, [sos, secondsos]);
 
   return (
     <>
@@ -900,8 +952,8 @@ const HomePage = () => {
               />
             </div>
             <div className="flex-1 flex flex-col justify-center items-center">
-              <MyLineChart1 visits={sos} selectedMunicipi={selectedMunicipi} />
-              <LineChartNO2 visits={nos} selectedMunicipi={selectedMunicipi} />
+              <MyLineChart1 mergedSos={mergedSos} selectedMunicipi={selectedMunicipi} />
+              <LineChartNO2 mergedNos={mergedNos} selectedMunicipi={selectedMunicipi} />
               <p
                 className="mt-4 text-black dark:text-white"
                 style={{ fontSize: "13px" }}
