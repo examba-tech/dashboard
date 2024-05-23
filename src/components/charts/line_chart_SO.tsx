@@ -149,11 +149,12 @@ interface VisitData {
 
 // Define el tipo de props para el componente MyLineChart
 interface MyLineChartProps {
-  visits: VisitData[];
+  mergedSos: any[];
   selectedMunicipi: string;
 }
 
-const MyLineChart: React.FC<MyLineChartProps> = ({ visits, selectedMunicipi }) => {
+const MyLineChart: React.FC<MyLineChartProps> = ({ mergedSos, selectedMunicipi }) => {
+  console.log(mergedSos)
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -180,7 +181,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ visits, selectedMunicipi }) =
         <div className="mb-2">
     <ResponsiveContainer width={575} height={175}>
       <LineChart
-        data={visits}
+        data={mergedSos}
         margin={{
           top: 5,
           right: 30,
@@ -218,7 +219,8 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ visits, selectedMunicipi }) =
               }}
               labelStyle={{ color: "black" }}
             />
-        <Line type="monotone" dataKey="data[0]" stroke="#80CAEE" />
+        <Line type="monotone" dataKey="data" stroke="#80CAEE" />
+        <Line type="monotone" dataKey="data2" stroke="#B22222" />
       </LineChart>
     </ResponsiveContainer>
     {infoVisible && (
