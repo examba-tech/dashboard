@@ -61,14 +61,20 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
               <XAxis dataKey="name" tick={{ fontSize: 10 }} />
               <YAxis tick={{ fontSize: 10 }} />
               <Tooltip
-                formatter={(value, name) => (
-                  <span style={{ color: "black" }}>
-                    {"count:"}{" "}
-                    <span style={{ color: "black", fontWeight: "bold" }}>
-                      {value}
-                    </span>
-                  </span>
-                )}
+                formatter={(value, name) => {
+                  let displayName = name;
+                  if (name === "data") displayName = "municipi 1";
+                  if (name === "data2") displayName = "municipi 2";
+                  return [
+                    <span key="value" style={{ color: "black" }}>
+                      {"visites:"}{" "}
+                      <span style={{ color: "black", fontWeight: "bold" }}>
+                        {value}
+                      </span>
+                    </span>,
+                    displayName,
+                  ];
+                }}
                 labelFormatter={(label) =>
                   new Date(label).toLocaleDateString("es-ES", {
                     year: "numeric",
