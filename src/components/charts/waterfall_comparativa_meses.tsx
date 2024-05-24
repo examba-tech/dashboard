@@ -10,7 +10,17 @@ import {
   ReferenceLine,
 } from "recharts";
 
-const Waterfall = ({ data, average, selectedMunicipi, selectedDiagnostic }: { data: any; average: number; selectedMunicipi: string; selectedDiagnostic: string }) => {
+const Waterfall = ({
+  data,
+  average,
+  selectedMunicipi,
+  selectedDiagnostic,
+}: {
+  data: any;
+  average: number;
+  selectedMunicipi: string;
+  selectedDiagnostic: string;
+}) => {
   const monthNames = [
     "Gen",
     "Feb",
@@ -51,33 +61,18 @@ const Waterfall = ({ data, average, selectedMunicipi, selectedDiagnostic }: { da
     setInfoVisible(!infoVisible);
   };
 
-  // const CustomTooltip = ({ active, payload, label }) => {
-  //   if (active && payload && payload.length) {
-  //     return (
-  //       <div className="custom-tooltip bg-white p-2 border border-gray-200 rounded shadow-lg">
-  //         <p className="label text-gray-800">
-  //           {`${label}: `}
-  //           <span className="font-bold">{payload[0].value}</span>
-  //         </p>
-  //       </div>
-  //     );
-  //   }
-  //   return null;
-  // };
-
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow relative">
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-          {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
-          ? `Comparativa de visites en els mesos de 2023 de tots els diagnòstics a tots els municipis`
-          : selectedDiagnostic === "Tots"
-          ? `Comparativa de visites en els mesos de 2023 de tots els diagnòstics al municipi ${selectedMunicipi}`
-          : selectedMunicipi === "Tots"
-          ? `Comparativa de visites en els mesos de 2023 del diagnòstic ${selectedDiagnostic} a tots els municipis`
-          : `Comparativa de visites en els mesos de 2023 del diagnòstic ${selectedDiagnostic} al municipi ${selectedMunicipi}`
-        }
+            {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
+              ? `Comparativa de visites de tots els diagnòstics a tots els municipis`
+              : selectedDiagnostic === "Tots"
+              ? `Comparativa de visites de tots els diagnòstics al municipi ${selectedMunicipi}`
+              : selectedMunicipi === "Tots"
+              ? `Comparativa de visites del diagnòstic ${selectedDiagnostic} a tots els municipis`
+              : `Comparativa de visites del diagnòstic ${selectedDiagnostic} al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -104,25 +99,37 @@ const Waterfall = ({ data, average, selectedMunicipi, selectedDiagnostic }: { da
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" tick={{ fontSize: 13 }} angle={-90} textAnchor="end" dx={-5}/>
+              <XAxis
+                dataKey="name"
+                tick={{ fontSize: 13 }}
+                angle={-90}
+                textAnchor="end"
+                dx={-5}
+              />
               <YAxis tickFormatter={(value) => value} />
-              <Tooltip/>
+              <Tooltip />
               <ReferenceLine y={average} stroke="#000" />
               <Bar dataKey="last_year" fill="fill" />
             </BarChart>
           </ResponsiveContainer>
         </div>
         {infoVisible && (
-            <div
+          <div
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-64 h-54 rounded-lg shadow-lg"
             onClick={toggleInfo}
             style={{ marginLeft: "25px" }}
-            >
-              <p className="text-sm text-gray-800 px-4 py-2 text-center">
-              El gràfic compara el nombre de casos registrats els mesos de 2023, representats per barres verticals. Cada barra correspon a un mes específic, amb l&apos;eix horitzontal mostrant els noms dels mesos. L&apos;alçada de cada barra reflecteix la quantitat de casos registrats per a aquest mes en particular. A més, s&apos;hi ha inclòs una línia de referència horitzontal que indica la mitjana de casos durant aquest període.
-              </p>
-            </div>
-          )}
+          >
+            <p className="text-sm text-gray-800 px-4 py-2 text-center">
+              El gràfic compara el nombre de casos registrats els mesos de 2023,
+              representats per barres verticals. Cada barra correspon a un mes
+              específic, amb l&apos;eix horitzontal mostrant els noms dels
+              mesos. L&apos;alçada de cada barra reflecteix la quantitat de
+              casos registrats per a aquest mes en particular. A més, s&apos;hi
+              ha inclòs una línia de referència horitzontal que indica la
+              mitjana de casos durant aquest període.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
