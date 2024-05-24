@@ -1,5 +1,6 @@
 "use client";
 import data from "./Filtered_MC.json";
+import React, { useState } from "react";
 import { VegaLite, Vega } from "react-vega";
 import { View } from "vega";
 
@@ -23,6 +24,12 @@ interface ChartPredProps {
 }
 
 const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect }) => {
+  const [infoVisible, setInfoVisible] = useState(false);
+
+  const toggleInfo = () => {
+    setInfoVisible(!infoVisible);
+  };
+
   data.features.forEach((feature) => {
     if (!feature.properties || feature.properties.codimuni === undefined) {
       console.error("Falta codimuni o properties en:", feature);
@@ -103,9 +110,26 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect }) => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
           Predicció dels pròxims 7 dies de visites als CAPs
+          <span
+              className="text-sm text-gray-400 cursor-pointer"
+              onClick={toggleInfo}
+            >
+              {" "}
+              +info
+            </span>
         </h4>
       </div>
       <VegaLite spec={spec} onNewView={handleNewView} />
+      {infoVisible && (
+            <div
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-2 py-4 w-64 h-54 rounded-lg shadow-lg"
+              onClick={toggleInfo}
+            >
+              <p className="text-sm text-gray-800">
+              Afegir text
+              </p>
+            </div>
+          )}
     </div>
   );
 };

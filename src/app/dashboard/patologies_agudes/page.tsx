@@ -166,6 +166,35 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
   return result;
 };
 
+const calculateTotalCasesByWeekSos2 = (dinamics: Interfaces.Dinamic[]) => {
+  const weeklyData: { [key: string]: number } = {};
+  const i: { [key: string]: number } = {};
+
+  dinamics.forEach((entry: Interfaces.Dinamic) => {
+    const week = entry.SETMANA.valueOf();
+    if (week !== 53) {
+      const date = new Date(entry.DATA);
+      const dateString = date.toLocaleDateString("en");
+      if (weeklyData[dateString] === undefined) {
+        weeklyData[dateString] = 0;
+        i[dateString] = 0;
+      }
+      i[dateString] += 1;
+      weeklyData[dateString] += Number(entry.SO2);
+    }
+  });
+
+  const result = Object.keys(weeklyData)
+    .map((week) => ({ name: week, data: [weeklyData[week] / i[week]] }))
+    .sort((a, b) => {
+      const dateA = new Date(a.name);
+      const dateB = new Date(b.name);
+      return dateA.getTime() - dateB.getTime();
+    });
+
+  return result;
+};
+
 const calculateTotalCasesByWeekSos = (dinamics: Interfaces.Dinamic[]) => {
   const weeklyData: { [key: string]: number } = {};
   const i: { [key: string]: number } = {};
@@ -188,6 +217,35 @@ const calculateTotalCasesByWeekSos = (dinamics: Interfaces.Dinamic[]) => {
     name: week,
     data: [weeklyData[week] / i[week]],
   }));
+};
+
+const calculateTotalCasesByWeekNos2 = (dinamics: Interfaces.Dinamic[]) => {
+  const weeklyData: { [key: string]: number } = {};
+  const i: { [key: string]: number } = {};
+
+  dinamics.forEach((entry: Interfaces.Dinamic) => {
+    const week = entry.SETMANA.valueOf();
+    if (week !== 53) {
+      const date = new Date(entry.DATA);
+      const dateString = date.toLocaleDateString("en");
+      if (weeklyData[dateString] === undefined) {
+        weeklyData[dateString] = 0;
+        i[dateString] = 0;
+      }
+      i[dateString] += 1;
+      weeklyData[dateString] += Number(entry.NO2);
+    }
+  });
+
+  const result = Object.keys(weeklyData)
+    .map((week) => ({ name: week, data: [weeklyData[week] / i[week]] }))
+    .sort((a, b) => {
+      const dateA = new Date(a.name);
+      const dateB = new Date(b.name);
+      return dateA.getTime() - dateB.getTime();
+    });
+
+  return result;
 };
 
 const calculateTotalCasesByWeekNos = (dinamics: Interfaces.Dinamic[]) => {
@@ -544,8 +602,8 @@ const HomePage = () => {
 
   React.useEffect(() => {
     setVisits(calculateTotalCasesByWeek(dinamics_year_saved));
-    setSos(calculateTotalCasesByWeekSos(dinamics_year_saved));
-    setNos(calculateTotalCasesByWeekNos(dinamics_year_saved));
+    setSos(calculateTotalCasesByWeekSos2(dinamics_year_saved));
+    setNos(calculateTotalCasesByWeekNos2(dinamics_year_saved));
   }, [dinamics_year_saved]);
 
   React.useEffect(() => {

@@ -9,22 +9,14 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-// Define el tipo de datos para las visitas
-interface VisitData {
-  name: string;
-  data: number[];
-}
-
 // Define el tipo de props para el componente MyLineChart
 interface MyLineChartProps {
   mergedVisits: any[];
   selectedMunicipi: string;
 }
 
-const MyLineChart: React.FC<MyLineChartProps> = ({
-  mergedVisits,
-  selectedMunicipi,
-}) => {
+const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicipi }) => {
+
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -37,8 +29,8 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
             {selectedMunicipi === "Tots"
-              ? "Evolució del número de visites a tots els municipis"
-              : `Evolució del número de visites al municipi ${selectedMunicipi}`}
+               ? "Evolució del número de visites a tots els municipis"
+               : `Evolució del número de visites al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -108,14 +100,14 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
           >
             <p className="text-sm text-gray-800">
               Aquest gràfic de línies mostra l&apos;evolució del nombre de
-              visites. Està dissenyat per representar dades temporals on
-              l&apos;eix x mostra els noms dels períodes de temps (en aquest
-              cas, les diferents setmanes de l&apos;any), i l&apos;eix y
-              representa la quantitat de visites. A més que estarà filtrat
-              segons el municipi seleccionat (o tots).{" "}
-            </p>
-          </div>
-        )}
+                    visites. Està dissenyat per representar
+                    dades temporals on l&apos;eix x mostra els noms dels
+                    períodes de temps (en aquest cas, les diferents setmanes de
+                    l&apos;any), i l&apos;eix y representa la quantitat de
+                    visites. A més que estarà filtrat segons el municipi
+                    seleccionat (o tots).              </p>
+            </div>
+          )}
       </div>
     </div>
   );

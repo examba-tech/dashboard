@@ -21,11 +21,7 @@ interface MyLineChartProps {
   selectedMunicipi: string;
 }
 
-const MyLineChart: React.FC<MyLineChartProps> = ({
-  mergedNos,
-  selectedMunicipi,
-}) => {
-  console.log(mergedNos);
+const MyLineChart: React.FC<MyLineChartProps> = ({ mergedNos, selectedMunicipi }) => {
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -37,8 +33,8 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
             {selectedMunicipi === "Tots"
-              ? "Evolució del NO2 a tots els municipis"
-              : `Evolució del NO2 al municipi ${selectedMunicipi}`}
+               ? "Evolució del NO2 a tots els municipis"
+               : `Evolució del NO2 al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -49,24 +45,25 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
           </h5>
         </div>
       </div>
-      <div className="mb-2">
-        <ResponsiveContainer width={575} height={175}>
-          <LineChart
-            data={mergedNos}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fontSize: 10 }} />
-            <YAxis tick={{ fontSize: 10 }} />
-            <Tooltip
+        <div className="mb-2">
+    <ResponsiveContainer width={575} height={175}>
+      <LineChart
+        data={mergedNos}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" tick={{ fontSize: 10 }}/>
+        <YAxis tick={{ fontSize: 10 }}/>
+        <Tooltip
               formatter={(value, name) => {
                 let displayName = name;
-                if (name === "data[0]") displayName = "";
+                if (name === "data") displayName = "municipi 1";
+                if (name === "data2") displayName = "municipi 2";
                 return [
                   <span key="value" style={{ color: "black" }}>
                     {"valor:"}{" "}
@@ -80,7 +77,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
               labelFormatter={(label) =>
                 new Date(label).toLocaleDateString("es-ES", {
                   year: "numeric",
-                  month: "numeric",
+                  month: "short",
                   day: "numeric",
                 })
               }
@@ -96,29 +93,22 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
               }}
               labelStyle={{ color: "black" }}
             />
-            <Line type="monotone" dataKey="data" stroke="#80CAEE" />
-            <Line type="monotone" dataKey="data2" stroke="#B22222" />
-          </LineChart>
-        </ResponsiveContainer>
-        {infoVisible && (
-          <div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-80 h-25 rounded-lg shadow-lg"
-            onClick={toggleInfo}
-            style={{ marginLeft: "25px" }}
-          >
-            <p className="text-sm text-gray-800 px-4 py-2 text-center">
-              Aquest gràfic mostra l&apos;evolució de NO2. Sabem que aquest és
-              un gas incolor i d&apos;olor forta i sufocant. En una atmósfera
-              humida es transforma en àcid sulfúric i causa la deposició àcida.
-              A partir de concentracions majors a 0.1 ppm es produeix una
-              important reducció de la visibilitat. Pot provocar irritació i
-              inflamació del sistema respiratori, afeccions i insuficiències
-              pulmonars, alteració del metabolisme de les proteïnes i mal de
-              cap.
-            </p>
-          </div>
-        )}
-      </div>
+        <Line type="monotone" dataKey="data" stroke="#80CAEE" />
+        <Line type="monotone" dataKey="data2" stroke="#B22222" />
+      </LineChart>
+    </ResponsiveContainer>
+    {infoVisible && (
+                <div
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-80 h-25 rounded-lg shadow-lg"
+                  onClick={toggleInfo}
+                  style={{ marginLeft: "25px" }}
+                >
+                  <p className="text-sm text-gray-800 px-4 py-2 text-center">
+                  Aquest gràfic mostra l&apos;evolució de NO2 al llarg d&apos;un temps concret. Sabem que aquest és un gas incolor i d&apos;olor forta i sufocant. En una atmósfera humida es transforma en àcid sulfúric i causa la deposició àcida. A partir de concentracions majors a 0.1 ppm es produeix una important reducció de la visibilitat. Pot provocar irritació i inflamació del sistema respiratori, afeccions i insuficiències pulmonars, alteració del metabolisme de les proteïnes i mal de cap.
+                  </p>
+                </div>
+              )}
+    </div>
     </div>
   );
 };
