@@ -10,12 +10,6 @@ import {
   Legend,
 } from "recharts";
 
-// Define el tipo de datos para las visitas
-interface VisitData {
-  name: string;
-  data: number[];
-}
-
 // Define el tipo de props para el componente MyLineChart
 interface MyLineChartProps {
   mergedVisits: any[];
@@ -23,7 +17,9 @@ interface MyLineChartProps {
   selectedSecondMunicipi: string;
 }
 
+
 const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicipi, selectedSecondMunicipi }) => {
+
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -36,8 +32,8 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
             {selectedMunicipi === "Tots"
-               ? "Evolució del número de visites a l'any 2023 a tots els municipis"
-               : `Evolució del número de visites a l'any 2023 al municipi ${selectedMunicipi}`}
+               ? "Evolució del número de visites a tots els municipis"
+               : `Evolució del número de visites al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -48,16 +44,36 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
           </h5>
         </div>
       </div>
-        <div className="mb-2">
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart
-              data={mergedVisits}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
+      <div className="mb-2">
+        <ResponsiveContainer width="100%" height={400}>
+          <LineChart
+            data={mergedVisits}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" tick={{ fontSize: 10 }} />
+            <YAxis tick={{ fontSize: 10 }} />
+            <Tooltip
+              formatter={(value, name) => {
+                let displayName = name;
+                if (name === "data") displayName = "municipi 1";
+                if (name === "data2") displayName = "municipi 2";
+                return [
+                  <span key="value" style={{ color: "black" }}>
+                    {"visites:"}{" "}
+                    <span style={{ color: "black", fontWeight: "bold" }}>
+                      {value}
+                    </span>
+                  </span>,
+                  displayName,
+                ];
               }}
+
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" tick={{ fontSize: 10 }} />
@@ -108,8 +124,9 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
               onClick={toggleInfo}
             >
               <p className="text-sm text-gray-800">
+
               Aquest gràfic de línies mostra l&apos;evolució del nombre de
-                    visites l&apos;any 2023. Està dissenyat per representar
+                    visites. Està dissenyat per representar
                     dades temporals on l&apos;eix x mostra els noms dels
                     períodes de temps (en aquest cas, les diferents setmanes de
                     l&apos;any), i l&apos;eix y representa la quantitat de
@@ -117,8 +134,8 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
                     seleccionat (o tots).              </p>
             </div>
           )}
-          </div>
-        </div>
+      </div>
+    </div>
   );
 };
 
