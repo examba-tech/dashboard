@@ -21,8 +21,11 @@ interface MyLineChartProps {
   selectedMunicipi: string;
 }
 
-const MyLineChart: React.FC<MyLineChartProps> = ({ mergedSos, selectedMunicipi }) => {
-  console.log(mergedSos)
+const MyLineChart: React.FC<MyLineChartProps> = ({
+  mergedSos,
+  selectedMunicipi,
+}) => {
+  console.log(mergedSos);
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -46,21 +49,21 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedSos, selectedMunicipi }
           </h5>
         </div>
       </div>
-        <div className="mb-2">
-    <ResponsiveContainer width={575} height={175}>
-      <LineChart
-        data={mergedSos}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" tick={{ fontSize: 10 }}/>
-        <YAxis tick={{ fontSize: 10 }}/>
-        <Tooltip
+      <div className="mb-2">
+        <ResponsiveContainer width={575} height={175}>
+          <LineChart
+            data={mergedSos}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" tick={{ fontSize: 10 }} />
+            <YAxis tick={{ fontSize: 10 }} />
+            <Tooltip
               formatter={(value, name) => {
                 let displayName = name;
                 if (name === "data") displayName = "municipi 1";

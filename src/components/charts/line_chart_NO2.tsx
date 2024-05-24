@@ -22,7 +22,6 @@ interface MyLineChartProps {
 }
 
 const MyLineChart: React.FC<MyLineChartProps> = ({ mergedNos, selectedMunicipi }) => {
-  console.log(mergedNos)
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
