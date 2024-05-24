@@ -165,7 +165,7 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
   const result = Object.keys(weeklyData)
     .map((week) => ({
       name: week,
-      data: [(weeklyData[week] / pobData[week]) * 10000],
+      data: [(weeklyData[week] / pobData[week]) * 100],
     }))
     .sort((a, b) => {
       const dateA = new Date(a.name);
@@ -316,8 +316,8 @@ const ultima_prediccion = (info: Interfaces.Prediccions[]) => {
     dia: 0,
   };
   info.forEach((entry: Interfaces.Prediccions) => {
-    if (entry.DIA == 31 && (entry.MES = 12)) {
-      totalCases.dia = entry.INGRESSOS_AVG.valueOf();
+    if (entry.DIA == 25 && (entry.MES = 12)) {
+      totalCases.dia = entry.INGRESSOS_DEUMIL.valueOf();
     }
   });
   return {
@@ -829,7 +829,7 @@ const HomePage = () => {
                     : `Valors pel municipi ${selectedMunicipi}:`}
                 </h4>
                 <br></br>
-                <div className="flex flex-wrap">
+                <div className = "flex">
                   <div
                     style={{
                       width: "170px",
