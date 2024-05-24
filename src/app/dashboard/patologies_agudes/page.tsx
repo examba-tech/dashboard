@@ -23,7 +23,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import MonthRange from "@/src/components/ui/filters/month-picker";
 import dayjs from "dayjs";
+import '@/src/app/dashboard/estilo_info.css'; 
+import MyLineChart_vis_NO2 from '@/src/components/charts/line_chart_visitas_NO2'
+import MyLineChart_vis_SO2 from '@/src/components/charts/line_chart_visitas_SO2'
 import "@/src/app/dashboard/estilo_info.css";
+
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Dinamic[],
@@ -933,12 +937,14 @@ const HomePage = () => {
                 selectedMunicipi={selectedMunicipi}
                 beginDate={beginDate}
                 endDate={endDate}
+                selectedSecondMunicipi={selectedSecondMunicipi}
               />
               <LineChartNO2
                 mergedNos={mergedNos}
                 selectedMunicipi={selectedMunicipi}
                 beginDate={beginDate}
                 endDate={endDate}
+                selectedSecondMunicipi={selectedSecondMunicipi}
               />
               <p
                 className="mt-4 text-black dark:text-white"
@@ -954,6 +960,34 @@ const HomePage = () => {
               </p>
             </div>
           </div>
+
+
+          
+
+          <div className="flex justify-center items-center gap-4 pt-5">
+           
+              <MyLineChart_vis_NO2
+                  mergedVisits={mergedVisits}
+                  mergedNos={mergedNos}
+                  selectedMunicipi={selectedMunicipi}
+                />
+                <MyLineChart_vis_SO2
+                  mergedVisits={mergedVisits}
+                  mergedSos={mergedSos}
+                  selectedMunicipi={selectedMunicipi}
+                />
+            
+            </div>
+            {/* <div className="mt-70 flex justify-center">
+           
+              <MyLineChart_vis_SO2
+                  mergedVisits={mergedVisits}
+                  mergedSos={mergedSos}
+                  selectedMunicipi={selectedMunicipi}
+                />
+            
+            </div> */}
+         
           <br></br>
           <br></br>
           <br></br>

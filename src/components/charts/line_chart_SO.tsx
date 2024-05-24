@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 import dayjs from "dayjs";
 
@@ -16,6 +17,7 @@ interface MyLineChartProps {
   selectedMunicipi: string;
   beginDate: dayjs.Dayjs;
   endDate: dayjs.Dayjs;
+  selectedSecondMunicipi: string;
 
 }
 
@@ -23,7 +25,8 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
   mergedSos,
   selectedMunicipi,
   beginDate, 
-  endDate
+  endDate,
+  selectedSecondMunicipi
 }) => {
   const roundedMergedSos = mergedSos.map((sos) => {
     const roundedSos = { ...sos };
@@ -31,6 +34,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
       roundedSos.data2[0] = parseFloat(sos.data2[0].toFixed(1));
     return roundedSos;
   });
+
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -79,7 +83,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
                 if (name === "data2") displayName = "municipi 2";
                 return [
                   <span key="value" style={{ color: "black" }}>
-                    {"valor:"}{" "}
+                    {/* {"valor:"}{" "} */}
                     <span style={{ color: "black", fontWeight: "bold" }}>
                       {value}
                     </span>
@@ -106,8 +110,13 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
               }}
               labelStyle={{ color: "black" }}
             />
-        <Line type="monotone" dataKey="data" stroke="#80CAEE" />
-        <Line type="monotone" dataKey="data2" stroke="#B22222" />
+        {/* rojo oscuro */}
+        <Line type="monotone" dataKey="data" stroke="#B03A2E" name={selectedMunicipi}/>
+        {/* rojo claro */}
+        <Line type="monotone" dataKey="data2" stroke="#F5B7B1" name={selectedSecondMunicipi}/>
+
+        <Legend verticalAlign="top" height={36} />
+
       </LineChart>
     </ResponsiveContainer>
     {infoVisible && (
