@@ -41,9 +41,11 @@ const calculateTotalCasesBySex = (
     }
 
     if (entry.Sexe == "H") {
-      totalCasesBySex.male += entry.NUMERO_CASOS.valueOf();
+      totalCasesBySex.male +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.Sexe == "D") {
-      totalCasesBySex.female += entry.NUMERO_CASOS.valueOf();
+      totalCasesBySex.female +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     }
   });
   return totalCasesBySex;
@@ -62,19 +64,22 @@ const calculateTotalCasesByDiagnostic = (info: Interfaces.Dinamic[]) => {
   info.forEach((entry: Interfaces.Dinamic) => {
     if (entry.DIAGNOSTIC == "INFECCIONS_AGUDES_TRS") {
       totalCasesByDiagnostic.INFECCIONS_AGUDES_TRS +=
-        entry.NUMERO_CASOS.valueOf();
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.DIAGNOSTIC == "BRONQUITIS_AGUDA") {
-      totalCasesByDiagnostic.BRONQUITIS_AGUDA += entry.NUMERO_CASOS.valueOf();
+      totalCasesByDiagnostic.BRONQUITIS_AGUDA +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.DIAGNOSTIC == "GRIP") {
-      totalCasesByDiagnostic.GRIP += entry.NUMERO_CASOS.valueOf();
+      totalCasesByDiagnostic.GRIP +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.DIAGNOSTIC == "BRONQUIOLITIS_AGUDA") {
       totalCasesByDiagnostic.BRONQUIOLITIS_AGUDA +=
-        entry.NUMERO_CASOS.valueOf();
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.DIAGNOSTIC == "PNEUMONIA_BACTERIANA") {
       totalCasesByDiagnostic.PNEUMONIA_BACTERIANA +=
-        entry.NUMERO_CASOS.valueOf();
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.DIAGNOSTIC == "PNEUMONIA_VIRICA") {
-      totalCasesByDiagnostic.PNEUMONIA_VIRICA += entry.NUMERO_CASOS.valueOf();
+      totalCasesByDiagnostic.PNEUMONIA_VIRICA +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     }
   });
   return {
@@ -107,15 +112,20 @@ const calculateTotalCasesByEdats = (
       return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
     }
     if (entry.FranjaEdat == "15-44") {
-      totalCasesByEdats.de_15_44 += entry.NUMERO_CASOS.valueOf();
+      totalCasesByEdats.de_15_44 +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.FranjaEdat == "45-64") {
-      totalCasesByEdats.de_45_64 += entry.NUMERO_CASOS.valueOf();
+      totalCasesByEdats.de_45_64 +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.FranjaEdat == "65-74") {
-      totalCasesByEdats.de_65_74 += entry.NUMERO_CASOS.valueOf();
+      totalCasesByEdats.de_65_74 +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.FranjaEdat == ">75") {
-      totalCasesByEdats.mes_75 += entry.NUMERO_CASOS.valueOf();
+      totalCasesByEdats.mes_75 +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.FranjaEdat == "<15") {
-      totalCasesByEdats.menys_15 += entry.NUMERO_CASOS.valueOf();
+      totalCasesByEdats.menys_15 +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     }
   });
 
@@ -283,61 +293,22 @@ const calculateTotalCasesByMonth = (
     }
     const date = new Date(entry.DATA);
     const month = date.getMonth() + 1;
+    const year = date.getFullYear();
 
-    const key = `${month}`;
+    const key = `${month}-${year}`;
 
     if (!monthlyData[key]) {
       monthlyData[key] = { last_year: 0 };
     }
 
-    monthlyData[key].last_year += Number(entry.NUMERO_CASOS);
+    monthlyData[key].last_year +=
+      (Number(entry.NUMERO_CASOS) / entry.POBLACIO.valueOf()) * 10000;
   });
 
   return Object.entries(monthlyData).map(([month, data]) => ({
-    name: `Month ${month}`,
+    name: month,
     last_year: data.last_year,
   }));
-};
-
-const filterByDay = (info: Interfaces.Prediccions[]) => {
-  var totalCasesByDay = {
-    dia1: 0,
-    dia2: 0,
-    dia3: 0,
-    dia4: 0,
-    dia5: 0,
-    dia6: 0,
-    dia7: 0,
-  };
-  info.forEach((entry: Interfaces.Prediccions) => {
-    if (entry.DIA == 25 && (entry.MES = 12)) {
-      totalCasesByDay.dia1 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 26 && (entry.MES = 12)) {
-      totalCasesByDay.dia2 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 27 && (entry.MES = 12)) {
-      totalCasesByDay.dia3 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 28 && (entry.MES = 12)) {
-      totalCasesByDay.dia4 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 29 && (entry.MES = 12)) {
-      totalCasesByDay.dia5 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 30 && (entry.MES = 12)) {
-      totalCasesByDay.dia6 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 31 && (entry.MES = 12)) {
-      totalCasesByDay.dia7 = entry.INGRESSOS_AVG.valueOf();
-    }
-  });
-  return {
-    name: "Prediccions",
-    data: [
-      totalCasesByDay.dia1,
-      totalCasesByDay.dia2,
-      totalCasesByDay.dia3,
-      totalCasesByDay.dia4,
-      totalCasesByDay.dia5,
-      totalCasesByDay.dia6,
-      totalCasesByDay.dia7,
-    ],
-  };
 };
 
 const ultima_prediccion = (info: Interfaces.Prediccions[]) => {

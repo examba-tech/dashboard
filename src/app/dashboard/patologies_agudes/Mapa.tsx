@@ -55,7 +55,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect }) => {
             values: predictionsWithStringKeys,
           },
           key: "CODI_MUNICIPAL",
-          fields: ["INGRESSOS_AVG", "municipi"],
+          fields: ["INGRESSOS_DEUMIL", "municipi"],
         },
         default: null,
       },
@@ -72,7 +72,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect }) => {
     },
     encoding: {
       color: {
-        field: "INGRESSOS_AVG",
+        field: "INGRESSOS_DEUMIL",
         type: "quantitative",
         scale: { scheme: "blues" },
       },
@@ -86,7 +86,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect }) => {
       },
       tooltip: [
         { field: "properties.nommuni", type: "nominal", title: "municipi:" },
-        { field: "INGRESSOS_AVG", type: "quantitative", title: "visites:" }
+        { field: "INGRESSOS_DEUMIL", type: "quantitative", title: "visites:" }
       ]
     },
   };
