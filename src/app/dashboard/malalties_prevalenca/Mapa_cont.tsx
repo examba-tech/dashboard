@@ -74,7 +74,7 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
     },
   };
   
-  console.log(spec.transform[0].as); // Imprime el resultado de la transformación lookup
+  console.log(spec.transform[0].as);
 
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
