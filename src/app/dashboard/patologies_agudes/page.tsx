@@ -205,29 +205,6 @@ const calculateTotalCasesByWeekSos2 = (dinamics: Interfaces.Dinamic[]) => {
   return result;
 };
 
-const calculateTotalCasesByWeekSos = (dinamics: Interfaces.Dinamic[]) => {
-  const weeklyData: { [key: string]: number } = {};
-  const i: { [key: string]: number } = {};
-
-  dinamics.forEach((entry: Interfaces.Dinamic) => {
-    const date = new Date(entry.DATA);
-    const dateString = date.toLocaleDateString("en");
-
-    if (!weeklyData[dateString]) {
-      weeklyData[dateString] = 0;
-      i[dateString] = 0;
-    }
-
-    i[dateString] += 1;
-    weeklyData[dateString] += Number(entry.SO2);
-  });
-
-  // Convertir el objeto semanal en un array de objetos
-  return Object.keys(weeklyData).map((week) => ({
-    name: week,
-    data: [weeklyData[week] / i[week]],
-  }));
-};
 
 const calculateTotalCasesByWeekNos2 = (dinamics: Interfaces.Dinamic[]) => {
   const weeklyData: { [key: string]: number } = {};
@@ -258,34 +235,11 @@ const calculateTotalCasesByWeekNos2 = (dinamics: Interfaces.Dinamic[]) => {
   return result;
 };
 
-const calculateTotalCasesByWeekNos = (dinamics: Interfaces.Dinamic[]) => {
-  const weeklyData: { [key: string]: number } = {};
-  const i: { [key: string]: number } = {};
-
-  dinamics.forEach((entry: Interfaces.Dinamic) => {
-    const date = new Date(entry.DATA);
-    const dateString = date.toLocaleDateString("en");
-
-    if (!weeklyData[dateString]) {
-      weeklyData[dateString] = 0;
-      i[dateString] = 0;
-    }
-    i[dateString] += 1;
-    weeklyData[dateString] += Number(entry.NO2);
-  });
-
-  // Convertir el objeto semanal en un array de objetos
-  return Object.keys(weeklyData).map((week) => ({
-    name: week,
-    data: [weeklyData[week] / i[week]],
-  }));
-};
-
 const calculateTotalCasesByMonth = (
   dinamics: Interfaces.Dinamic[],
   selectedDiagnostic: string
 ) => {
-  const monthlyData: { [key: string]: { last_year: number } } = {};
+  const monthlyData: { [key: string]: { visites: number } } = {};
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
     if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
@@ -298,16 +252,16 @@ const calculateTotalCasesByMonth = (
     const key = `${month}-${year}`;
 
     if (!monthlyData[key]) {
-      monthlyData[key] = { last_year: 0 };
+      monthlyData[key] = { visites: 0 };
     }
 
-    monthlyData[key].last_year +=
+    monthlyData[key].visites +=
       (Number(entry.NUMERO_CASOS) / entry.POBLACIO.valueOf()) * 10000;
   });
 
   return Object.entries(monthlyData).map(([month, data]) => ({
     name: month,
-    last_year: data.last_year,
+    visites: data.visites,
   }));
 };
 
@@ -371,17 +325,15 @@ const HomePage = () => {
       nombre: "+info",
       info: (
         <div>
-          <p style={{ marginBottom: "5px", textAlign: "justify" }}>
-            En aquesta secció es realitza un estudi sobre les patologies agudes,
-            les quals són malalties o trastorns que es desenvolupen de manera
-            ràpida i repentina, amb una durada curta i una intensitat variable.
-            Aquest tipus de patologia es caracteritza per aparèixer de manera
-            brusca i provocar símptomes aguts que poden ser severes, però
-            tendeixen a resoldre&apos;s en un període relativament curt de
-            temps. Ens hem enfocat en aquestes 6: Bronquiolitis Aguda,
-            Bronquitis Aguda, Grip, Infeccions Agudes de les Vies Respiratòries
-            Superiors (TRS), Pneumònia Viral i Pneumònia Bacteriana.
-          </p>
+          <p style={{ marginBottom: "5px", textAlign: "justify" }}></p>
+            En aquesta secció es realitza un estudi sobre les patologies agudes. Ens hem enfocat en aquestes 6: 
+            <li>- Bronquiolitis Aguda </li>
+            <li>- Bronquitis Aguda</li>
+            <li>- Grip</li>
+            <li>- Infeccions Agudes de les Vies Respiratòries
+            Superiors (TRS)</li>
+            <li>- Pneumònia Viral</li>
+            <li>- Pneumònia Bacteriana</li>
           {/* <p style={{ marginBottom: '5px' }}>Hola</p> */}
         </div>
       ),
@@ -613,7 +565,7 @@ const HomePage = () => {
       selectedDiagnostic
     );
     const totalCasesThisYear = monthlyData.reduce(
-      (acc, curr) => acc + curr.last_year,
+      (acc, curr) => acc + curr.visites,
       0
     );
     const average = totalCasesThisYear / 12;
@@ -634,8 +586,8 @@ const HomePage = () => {
       if (dinamics !== undefined) {
         console.log("dinamics", dinamics);
         setSecondVisits(calculateTotalCasesByWeek(dinamics));
-        setSecondSos(calculateTotalCasesByWeekSos(dinamics));
-        setSecondNos(calculateTotalCasesByWeekNos(dinamics));
+        setSecondSos(calculateTotalCasesByWeekSos2(dinamics));
+        setSecondNos(calculateTotalCasesByWeekNos2(dinamics));
       }
     };
     try {
@@ -761,7 +713,7 @@ const HomePage = () => {
     <>
       <div>
         <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
-          Visites als CAPs de la zona Metropolitana Sud degudes a patologies
+          Visites als CAPs de la regió Metropolitana Sud degudes a patologies
           respiratòries agudes
         </h1>
         <ul style={{ marginLeft: "0px", marginTop: "10px" }}>
@@ -815,6 +767,7 @@ const HomePage = () => {
                 <Mapa
                   predictions={preds}
                   onMunicipiSelect={handleMunicipiSelect}
+                  selectedMunicipi={selectedMunicipi}
                 />
               </div>
             </div>
@@ -823,7 +776,7 @@ const HomePage = () => {
                 className="flex-1 flex flex-col justify-center items-center"
                 style={{ marginTop: "0" }}
               >
-                <h4 className="text-xl font-semibold text-black dark:text-white pt-0">
+                <h4 className="text-lg font-semibold text-black dark:text-white pt-0">
                   {selectedMunicipi === "Tots"
                     ? "Valors per tots els municipis:"
                     : `Valors pel municipi ${selectedMunicipi}:`}
@@ -845,9 +798,9 @@ const HomePage = () => {
                     className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow"
                   >
                     <SimpleChart data={prediccions2}></SimpleChart>
-                    <p style={{ fontSize: "13px" }}>
+                    <p style={{ fontSize: "10px" }}>
                       Predicció de la mitjana del número de visites de la
-                      propera setmana
+                      propera setmana cada 10.000 habitants
                     </p>
                   </div>
                   <div
@@ -970,16 +923,22 @@ const HomePage = () => {
               <MyLineChart
                 mergedVisits={mergedVisits}
                 selectedMunicipi={selectedMunicipi}
+                beginDate={beginDate}
+                endDate={endDate}
               />
             </div>
             <div className="flex-1 flex flex-col justify-center items-center">
               <MyLineChart1
                 mergedSos={mergedSos}
                 selectedMunicipi={selectedMunicipi}
+                beginDate={beginDate}
+                endDate={endDate}
               />
               <LineChartNO2
                 mergedNos={mergedNos}
                 selectedMunicipi={selectedMunicipi}
+                beginDate={beginDate}
+                endDate={endDate}
               />
               <p
                 className="mt-4 text-black dark:text-white"
@@ -1014,6 +973,8 @@ const HomePage = () => {
                 series={info2_ICS}
                 selectedMunicipi={selectedMunicipi}
                 onDiagnosticChange={handleDiagnosticChange}
+                beginDate={beginDate}
+                endDate={endDate}
               />
               <br></br>
               <div className="flex justify-center items-center  gap-2">
@@ -1021,11 +982,15 @@ const HomePage = () => {
                   series={info_ICS}
                   selectedMunicipi={selectedMunicipi}
                   selectedDiagnostic={selectedDiagnostic}
+                  beginDate={beginDate}
+                  endDate={endDate}
                 />
                 <ChartTwoEdats
                   series={info3_ICS}
                   selectedMunicipi={selectedMunicipi}
                   selectedDiagnostic={selectedDiagnostic}
+                  beginDate={beginDate}
+                  endDate={endDate}
                 />
               </div>
             </div>
@@ -1038,6 +1003,8 @@ const HomePage = () => {
                 average={average}
                 selectedMunicipi={selectedMunicipi}
                 selectedDiagnostic={selectedDiagnostic}
+                beginDate={beginDate}
+                endDate={endDate}
               />
             </div>
           </div>

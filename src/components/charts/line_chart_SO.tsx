@@ -8,37 +8,46 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import dayjs from "dayjs";
 
-// Define el tipo de datos para las visitas
-interface VisitData {
-  name: string;
-  data: number[];
-}
 
-// Define el tipo de props para el componente MyLineChart
 interface MyLineChartProps {
   mergedSos: any[];
   selectedMunicipi: string;
+  beginDate: dayjs.Dayjs;
+  endDate: dayjs.Dayjs;
+
 }
 
 const MyLineChart: React.FC<MyLineChartProps> = ({
   mergedSos,
   selectedMunicipi,
+  beginDate, 
+  endDate
 }) => {
-  console.log(mergedSos);
+  const roundedMergedSos = mergedSos.map((sos) => {
+    const roundedSos = { ...sos };
+      roundedSos.data[0] = parseFloat(sos.data[0].toFixed(1));
+      roundedSos.data2[0] = parseFloat(sos.data2[0].toFixed(1));
+    return roundedSos;
+  });
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
     setInfoVisible(!infoVisible);
   };
+
+  const formattedBeginDate = beginDate.format('DD-MM-YYYY');
+  const formattedEndDate = endDate.format('DD-MM-YYYY');
+
   return (
     <div className="relative col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
+          <h5 className="text-lg font-semibold text-black dark:text-white pt-3">
             {selectedMunicipi === "Tots"
-               ? "Evolució del SO2 a tots els municipis"
-               : `Evolució del SO2 al municipi ${selectedMunicipi}`}
+               ? `Evolució del SO2 des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
+               : `Evolució del SO2 des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -52,7 +61,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
       <div className="mb-2">
         <ResponsiveContainer width={575} height={175}>
           <LineChart
-            data={mergedSos}
+            data={roundedMergedSos}
             margin={{
               top: 5,
               right: 30,

@@ -8,14 +8,22 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import dayjs from "dayjs";
 
-// Define el tipo de props para el componente MyLineChart
 interface MyLineChartProps {
   mergedVisits: any[];
   selectedMunicipi: string;
+  beginDate: dayjs.Dayjs;
+  endDate: dayjs.Dayjs;
 }
 
-const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicipi }) => {
+const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicipi, beginDate, endDate }) => {
+  const roundedMergedVisits = mergedVisits.map((visit) => {
+    const roundedVisit = { ...visit };
+      roundedVisit.data[0] = parseFloat(visit.data[0].toFixed(1));
+      roundedVisit.data2[0] = parseFloat(visit.data2[0].toFixed(1));
+    return roundedVisit;
+  });
 
   const [infoVisible, setInfoVisible] = useState(false);
 
@@ -23,14 +31,17 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
     setInfoVisible(!infoVisible);
   };
 
+  const formattedBeginDate = beginDate.format('DD-MM-YYYY');
+  const formattedEndDate = endDate.format('DD-MM-YYYY');
+
   return (
     <div className="relative col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
+          <h5 className="text-lg font-semibold text-black dark:text-white pt-3">
             {selectedMunicipi === "Tots"
-               ? "Evolució del número de visites a tots els municipis"
-               : `Evolució del número de visites al municipi ${selectedMunicipi}`}
+               ? `Evolució del número de visites cada 10.000 habitants des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
+               : `Evolució del número de visites cada 10.000 habitants des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -44,7 +55,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
       <div className="mb-2">
         <ResponsiveContainer width="100%" height={400}>
           <LineChart
-            data={mergedVisits}
+            data={roundedMergedVisits}
             margin={{
               top: 5,
               right: 30,

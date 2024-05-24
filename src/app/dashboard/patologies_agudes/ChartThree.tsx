@@ -1,6 +1,7 @@
 import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
 import React, { useState } from "react";
+import dayjs from "dayjs";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
@@ -57,10 +58,15 @@ interface ChartThreeProps {
   };
   selectedMunicipi: string;
   selectedDiagnostic: string;
+  beginDate: dayjs.Dayjs;
+  endDate: dayjs.Dayjs;
 }
 
-const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selectedDiagnostic}) => {
-  const seriesArray = [series.female, series.male];
+const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selectedDiagnostic, beginDate, endDate}) => {
+  const roundedSeries = {
+    female: parseFloat(series.female.toFixed(1)),
+    male: parseFloat(series.male.toFixed(1)),
+  };
 
   const [infoVisible, setInfoVisible] = useState(false);
 
@@ -68,18 +74,21 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selec
     setInfoVisible(!infoVisible);
   };
 
+  const formattedBeginDate = beginDate.format('DD-MM-YYYY');
+  const formattedEndDate = endDate.format('DD-MM-YYYY');
+
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
+          <h3 className="text-lg font-semibold text-black dark:text-white pt-3">
           {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
-          ? `Proporció de visites segons el sexe de tots els diagnòstics a tots els municipis`
+          ? `Proporció de visites cada 10.000 habitants segons el sexe de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
           : selectedDiagnostic === "Tots"
-          ? `Proporció de visites segons el sexe de tots els diagnòstics al municipi ${selectedMunicipi}`
+          ? `Proporció de visites cada 10.000 habitants segons el sexe de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`
           : selectedMunicipi === "Tots"
-          ? `Proporció de visites segons el sexe del diagnòstic ${selectedDiagnostic} a tots els municipis`
-          : `Proporció de visites segons el sexe del diagnòstic ${selectedDiagnostic} al municipi ${selectedMunicipi}`
+          ? `Proporció de visites cada 10.000 habitants segons el sexe del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
+          : `Proporció de visites cada 10.000 habitants segons el sexe del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`
         }
             <span
               className="text-sm text-gray-400 cursor-pointer"
@@ -88,7 +97,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selec
               {" "}
               +info
             </span>
-          </h5>
+          </h3>
         </div>
       </div>
 
@@ -96,7 +105,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selec
         <div id="chartThree" className="mx-auto flex justify-center relative">
           <ReactApexChart
             options={options}
-            series={seriesArray}
+            series={[roundedSeries.female, roundedSeries.male]}
             type="donut"
             height={250}
             width={50}
@@ -113,28 +122,6 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selec
           )}
         </div>
       </div>
-      {/*
-      <div className="flex flex-wrap items-center justify-center gap-y-3">
-        <div className="w-full px-8 sm:w-1/2">
-          <div className="flex w-full items-center">
-          <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary bg-[#0FADCF]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Dona: </span>
-              <span> {seriesArray[0]} </span>
-            </p>
-          </div>
-        </div>
-        <div className="w-full px-8 sm:w-1/2">
-          <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#3C50E0]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Home: </span>
-              <span> {seriesArray[1]} </span>
-            </p>
-          </div>
-        </div>
-      </div>
-        */}
     </div>
   );
 };

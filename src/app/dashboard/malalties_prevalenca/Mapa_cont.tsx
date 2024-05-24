@@ -69,7 +69,7 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
       },
       tooltip: [
         { field: "properties.nommuni", type: "nominal", title: "municipi:" },
-        { field: "NO2", type: "quantitative", title: "valor:" }
+        { field: "NO2", type: "quantitative", title: "valor:", format: ".1f" }
       ]
     },
   };
@@ -93,11 +93,11 @@ const Mapa: React.FC<ChartPredProps> = ({predictions}) => {
   <VegaLite spec={spec} />
   {infoVisible && (
             <div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-2 py-4 w-64 h-54 rounded-lg shadow-lg"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-4 w-64 h-54 rounded-lg shadow-lg"
               onClick={toggleInfo}
             >
               <p className="text-sm text-gray-800">
-              Afegir text
+              Mapa de la qualitat dels nivells de NO2 dels darrers 10 anys, dividit per municipis. Cada municipi està colorejat utilitzant una paleta de colors que indica el valor de NO2, això permet identificar fàcilment les àrees més afectades per aquest contaminant, obtenir informació sobre la qualitat de l&apos;aire i relacionar-ho amb el mapa anterior per a veure la relació entre el nombre de pacients i la qualitat de l&apos;aire de cada municipi.
               </p>
             </div>
           )}
