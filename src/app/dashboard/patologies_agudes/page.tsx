@@ -253,47 +253,6 @@ const calculateTotalCasesByMonth = (
   }));
 };
 
-const filterByDay = (info: Interfaces.Prediccions[]) => {
-  var totalCasesByDay = {
-    dia1: 0,
-    dia2: 0,
-    dia3: 0,
-    dia4: 0,
-    dia5: 0,
-    dia6: 0,
-    dia7: 0,
-  };
-  info.forEach((entry: Interfaces.Prediccions) => {
-    if (entry.DIA == 25 && (entry.MES = 12)) {
-      totalCasesByDay.dia1 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 26 && (entry.MES = 12)) {
-      totalCasesByDay.dia2 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 27 && (entry.MES = 12)) {
-      totalCasesByDay.dia3 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 28 && (entry.MES = 12)) {
-      totalCasesByDay.dia4 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 29 && (entry.MES = 12)) {
-      totalCasesByDay.dia5 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 30 && (entry.MES = 12)) {
-      totalCasesByDay.dia6 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 31 && (entry.MES = 12)) {
-      totalCasesByDay.dia7 = entry.INGRESSOS_AVG.valueOf();
-    }
-  });
-  return {
-    name: "Prediccions",
-    data: [
-      totalCasesByDay.dia1,
-      totalCasesByDay.dia2,
-      totalCasesByDay.dia3,
-      totalCasesByDay.dia4,
-      totalCasesByDay.dia5,
-      totalCasesByDay.dia6,
-      totalCasesByDay.dia7,
-    ],
-  };
-};
-
 const ultima_prediccion = (info: Interfaces.Prediccions[]) => {
   var totalCases = {
     dia: 0,
