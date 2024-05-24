@@ -108,8 +108,6 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
                     seleccionat (o tots).              </p>
             </div>
           )}
-          </div>
-        )}
       </div>
     </div>
   );
