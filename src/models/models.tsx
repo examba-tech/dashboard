@@ -104,7 +104,8 @@ const prediccionSchema = new Schema(
     ANY: Number,
     MES: Number,
     DIA: Number,
-    DIA_SETMANA: Number,
+    TM: Number,
+    RS24h: Number,
     NO_AVG: Number,
     NO2_AVG: Number,
     SO2_AVG: Number,
@@ -149,7 +150,7 @@ export const Master =
 
 export const Dinamic =
   mongoose.models.Dinamic ||
-  mongoose.model("Dinamic", dinamicSchema, "dinamics2"); // TODO: Change to dinamics
+  mongoose.model("Dinamic", dinamicSchema, "dinamics");
 
 export const Estatic =
   mongoose.models.Estatic ||

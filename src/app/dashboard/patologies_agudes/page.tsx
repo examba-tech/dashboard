@@ -26,6 +26,8 @@ import dayjs from "dayjs";
 import '@/src/app/dashboard/estilo_info.css'; 
 import MyLineChart_vis_NO2 from '@/src/components/charts/line_chart_visitas_NO2'
 import MyLineChart_vis_SO2 from '@/src/components/charts/line_chart_visitas_SO2'
+import "@/src/app/dashboard/estilo_info.css";
+
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Dinamic[],
@@ -43,9 +45,11 @@ const calculateTotalCasesBySex = (
     }
 
     if (entry.Sexe == "H") {
-      totalCasesBySex.male += entry.NUMERO_CASOS.valueOf();
+      totalCasesBySex.male +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.Sexe == "D") {
-      totalCasesBySex.female += entry.NUMERO_CASOS.valueOf();
+      totalCasesBySex.female +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     }
   });
   return totalCasesBySex;
@@ -64,19 +68,22 @@ const calculateTotalCasesByDiagnostic = (info: Interfaces.Dinamic[]) => {
   info.forEach((entry: Interfaces.Dinamic) => {
     if (entry.DIAGNOSTIC == "INFECCIONS_AGUDES_TRS") {
       totalCasesByDiagnostic.INFECCIONS_AGUDES_TRS +=
-        entry.NUMERO_CASOS.valueOf();
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.DIAGNOSTIC == "BRONQUITIS_AGUDA") {
-      totalCasesByDiagnostic.BRONQUITIS_AGUDA += entry.NUMERO_CASOS.valueOf();
+      totalCasesByDiagnostic.BRONQUITIS_AGUDA +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.DIAGNOSTIC == "GRIP") {
-      totalCasesByDiagnostic.GRIP += entry.NUMERO_CASOS.valueOf();
+      totalCasesByDiagnostic.GRIP +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.DIAGNOSTIC == "BRONQUIOLITIS_AGUDA") {
       totalCasesByDiagnostic.BRONQUIOLITIS_AGUDA +=
-        entry.NUMERO_CASOS.valueOf();
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.DIAGNOSTIC == "PNEUMONIA_BACTERIANA") {
       totalCasesByDiagnostic.PNEUMONIA_BACTERIANA +=
-        entry.NUMERO_CASOS.valueOf();
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.DIAGNOSTIC == "PNEUMONIA_VIRICA") {
-      totalCasesByDiagnostic.PNEUMONIA_VIRICA += entry.NUMERO_CASOS.valueOf();
+      totalCasesByDiagnostic.PNEUMONIA_VIRICA +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     }
   });
   return {
@@ -109,15 +116,20 @@ const calculateTotalCasesByEdats = (
       return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
     }
     if (entry.FranjaEdat == "15-44") {
-      totalCasesByEdats.de_15_44 += entry.NUMERO_CASOS.valueOf();
+      totalCasesByEdats.de_15_44 +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.FranjaEdat == "45-64") {
-      totalCasesByEdats.de_45_64 += entry.NUMERO_CASOS.valueOf();
+      totalCasesByEdats.de_45_64 +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.FranjaEdat == "65-74") {
-      totalCasesByEdats.de_65_74 += entry.NUMERO_CASOS.valueOf();
+      totalCasesByEdats.de_65_74 +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.FranjaEdat == ">75") {
-      totalCasesByEdats.mes_75 += entry.NUMERO_CASOS.valueOf();
+      totalCasesByEdats.mes_75 +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     } else if (entry.FranjaEdat == "<15") {
-      totalCasesByEdats.menys_15 += entry.NUMERO_CASOS.valueOf();
+      totalCasesByEdats.menys_15 +=
+        (entry.NUMERO_CASOS.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     }
   });
 
@@ -134,7 +146,9 @@ const calculateTotalCasesByEdats = (
 };
 
 const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
+  console.log("example", dinamics[0]);
   const weeklyData: { [key: string]: number } = {};
+  const pobData: { [key: string]: number } = {};
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
     const week = entry.SETMANA.valueOf();
@@ -144,12 +158,48 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
       if (weeklyData[dateString] === undefined) {
         weeklyData[dateString] = 0;
       }
+      if (pobData[dateString] === undefined) {
+        pobData[dateString] = 0;
+      }
       weeklyData[dateString] += Number(entry.NUMERO_CASOS);
+      pobData[dateString] = Number(entry.POBLACIO);
     }
   });
 
   const result = Object.keys(weeklyData)
-    .map((week) => ({ name: week, data: [weeklyData[week]] }))
+    .map((week) => ({
+      name: week,
+      data: [(weeklyData[week] / pobData[week]) * 100],
+    }))
+    .sort((a, b) => {
+      const dateA = new Date(a.name);
+      const dateB = new Date(b.name);
+      return dateA.getTime() - dateB.getTime();
+    });
+
+  return result;
+};
+
+const calculateTotalCasesByWeekSos2 = (dinamics: Interfaces.Dinamic[]) => {
+  const weeklyData: { [key: string]: number } = {};
+  const i: { [key: string]: number } = {};
+
+  dinamics.forEach((entry: Interfaces.Dinamic) => {
+    const week = entry.SETMANA.valueOf();
+    if (week !== 53) {
+      const date = new Date(entry.DATA);
+      const dateString = date.toLocaleDateString("en");
+      if (weeklyData[dateString] === undefined) {
+        weeklyData[dateString] = 0;
+        i[dateString] = 0;
+      }
+      i[dateString] += 1;
+      weeklyData[dateString] += Number(entry.SO2);
+    }
+  });
+
+  const result = Object.keys(weeklyData)
+    .map((week) => ({ name: week, data: [weeklyData[week] / i[week]] }))
     .sort((a, b) => {
       const dateA = new Date(a.name);
       const dateB = new Date(b.name);
@@ -162,51 +212,75 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
 const calculateTotalCasesByWeekSos = (dinamics: Interfaces.Dinamic[]) => {
   const weeklyData: { [key: string]: number } = {};
   const i: { [key: string]: number } = {};
-  const lastYear = "2023";
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
-    const week = entry.SETMANA.toString();
-    const year = entry.ANY;
+    const date = new Date(entry.DATA);
+    const dateString = date.toLocaleDateString("en");
 
-    if (year === parseInt(lastYear)) {
-      if (!weeklyData[week]) {
-        weeklyData[week] = 0;
-        i[week] = 0;
-      }
-      i[week] += 1;
-      weeklyData[week] += Number(entry.SO2);
+    if (!weeklyData[dateString]) {
+      weeklyData[dateString] = 0;
+      i[dateString] = 0;
     }
+
+    i[dateString] += 1;
+    weeklyData[dateString] += Number(entry.SO2);
   });
 
   // Convertir el objeto semanal en un array de objetos
   return Object.keys(weeklyData).map((week) => ({
-    name: `Setmana ${week}`,
+    name: week,
     data: [weeklyData[week] / i[week]],
   }));
+};
+
+const calculateTotalCasesByWeekNos2 = (dinamics: Interfaces.Dinamic[]) => {
+  const weeklyData: { [key: string]: number } = {};
+  const i: { [key: string]: number } = {};
+
+  dinamics.forEach((entry: Interfaces.Dinamic) => {
+    const week = entry.SETMANA.valueOf();
+    if (week !== 53) {
+      const date = new Date(entry.DATA);
+      const dateString = date.toLocaleDateString("en");
+      if (weeklyData[dateString] === undefined) {
+        weeklyData[dateString] = 0;
+        i[dateString] = 0;
+      }
+      i[dateString] += 1;
+      weeklyData[dateString] += Number(entry.NO2);
+    }
+  });
+
+  const result = Object.keys(weeklyData)
+    .map((week) => ({ name: week, data: [weeklyData[week] / i[week]] }))
+    .sort((a, b) => {
+      const dateA = new Date(a.name);
+      const dateB = new Date(b.name);
+      return dateA.getTime() - dateB.getTime();
+    });
+
+  return result;
 };
 
 const calculateTotalCasesByWeekNos = (dinamics: Interfaces.Dinamic[]) => {
   const weeklyData: { [key: string]: number } = {};
   const i: { [key: string]: number } = {};
-  const lastYear = "2023";
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
-    const week = entry.SETMANA.toString();
-    const year = entry.ANY;
+    const date = new Date(entry.DATA);
+    const dateString = date.toLocaleDateString("en");
 
-    if (year === parseInt(lastYear)) {
-      if (!weeklyData[week]) {
-        weeklyData[week] = 0;
-        i[week] = 0;
-      }
-      i[week] += 1;
-      weeklyData[week] += Number(entry.NO2);
+    if (!weeklyData[dateString]) {
+      weeklyData[dateString] = 0;
+      i[dateString] = 0;
     }
+    i[dateString] += 1;
+    weeklyData[dateString] += Number(entry.NO2);
   });
 
   // Convertir el objeto semanal en un array de objetos
   return Object.keys(weeklyData).map((week) => ({
-    name: `Setmana ${week}`,
+    name: week,
     data: [weeklyData[week] / i[week]],
   }));
 };
@@ -216,7 +290,6 @@ const calculateTotalCasesByMonth = (
   selectedDiagnostic: string
 ) => {
   const monthlyData: { [key: string]: { last_year: number } } = {};
-  const last_year = 2023;
 
   dinamics.forEach((entry: Interfaces.Dinamic) => {
     if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
@@ -224,64 +297,22 @@ const calculateTotalCasesByMonth = (
     }
     const date = new Date(entry.DATA);
     const month = date.getMonth() + 1;
-    const year = entry.ANY;
+    const year = date.getFullYear();
 
-    if (year === last_year) {
-      const key = `${month}`;
+    const key = `${month}-${year}`;
 
-      if (!monthlyData[key]) {
-        monthlyData[key] = { last_year: 0 };
-      }
-
-      monthlyData[key].last_year += Number(entry.NUMERO_CASOS);
+    if (!monthlyData[key]) {
+      monthlyData[key] = { last_year: 0 };
     }
+
+    monthlyData[key].last_year +=
+      (Number(entry.NUMERO_CASOS) / entry.POBLACIO.valueOf()) * 10000;
   });
 
   return Object.entries(monthlyData).map(([month, data]) => ({
-    name: `Month ${month}`,
+    name: month,
     last_year: data.last_year,
   }));
-};
-
-const filterByDay = (info: Interfaces.Prediccions[]) => {
-  var totalCasesByDay = {
-    dia1: 0,
-    dia2: 0,
-    dia3: 0,
-    dia4: 0,
-    dia5: 0,
-    dia6: 0,
-    dia7: 0,
-  };
-  info.forEach((entry: Interfaces.Prediccions) => {
-    if (entry.DIA == 25 && (entry.MES = 12)) {
-      totalCasesByDay.dia1 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 26 && (entry.MES = 12)) {
-      totalCasesByDay.dia2 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 27 && (entry.MES = 12)) {
-      totalCasesByDay.dia3 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 28 && (entry.MES = 12)) {
-      totalCasesByDay.dia4 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 29 && (entry.MES = 12)) {
-      totalCasesByDay.dia5 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 30 && (entry.MES = 12)) {
-      totalCasesByDay.dia6 = entry.INGRESSOS_AVG.valueOf();
-    } else if (entry.DIA == 31 && (entry.MES = 12)) {
-      totalCasesByDay.dia7 = entry.INGRESSOS_AVG.valueOf();
-    }
-  });
-  return {
-    name: "Prediccions",
-    data: [
-      totalCasesByDay.dia1,
-      totalCasesByDay.dia2,
-      totalCasesByDay.dia3,
-      totalCasesByDay.dia4,
-      totalCasesByDay.dia5,
-      totalCasesByDay.dia6,
-      totalCasesByDay.dia7,
-    ],
-  };
 };
 
 const ultima_prediccion = (info: Interfaces.Prediccions[]) => {
@@ -289,8 +320,8 @@ const ultima_prediccion = (info: Interfaces.Prediccions[]) => {
     dia: 0,
   };
   info.forEach((entry: Interfaces.Prediccions) => {
-    if (entry.DIA == 31 && (entry.MES = 12)) {
-      totalCases.dia = entry.INGRESSOS_AVG.valueOf();
+    if (entry.DIA == 25 && (entry.MES = 12)) {
+      totalCases.dia = entry.INGRESSOS_DEUMIL.valueOf();
     }
   });
   return {
@@ -453,11 +484,11 @@ const HomePage = () => {
   >([]);
 
   const [secondsos, setSecondSos] = React.useState<
-  {
-    name: string;
-    data: number[];
-  }[]
->([]);
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
 
   const [nos, setNos] = React.useState<
     {
@@ -467,11 +498,11 @@ const HomePage = () => {
   >([]);
 
   const [secondnos, setSecondNos] = React.useState<
-  {
-    name: string;
-    data: number[];
-  }[]
->([]);
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
 
   const [so2, setSo2] = React.useState<
     {
@@ -546,8 +577,8 @@ const HomePage = () => {
 
   React.useEffect(() => {
     setVisits(calculateTotalCasesByWeek(dinamics_year_saved));
-    setSos(calculateTotalCasesByWeekSos(dinamics_year_saved));
-    setNos(calculateTotalCasesByWeekNos(dinamics_year_saved));
+    setSos(calculateTotalCasesByWeekSos2(dinamics_year_saved));
+    setNos(calculateTotalCasesByWeekNos2(dinamics_year_saved));
   }, [dinamics_year_saved]);
 
   React.useEffect(() => {
@@ -605,6 +636,7 @@ const HomePage = () => {
         data_full && data_full.collection ? data_full.collection : undefined;
 
       if (dinamics !== undefined) {
+        console.log("dinamics", dinamics);
         setSecondVisits(calculateTotalCasesByWeek(dinamics));
         setSecondSos(calculateTotalCasesByWeekSos(dinamics));
         setSecondNos(calculateTotalCasesByWeekNos(dinamics));
@@ -703,15 +735,11 @@ const HomePage = () => {
   React.useEffect(() => {
     const condition =
       sos && secondsos && secondsos.length > 0 && sos.length > 0;
-    console.log("Second:")
-    console.log(secondsos)
     if (condition) {
       const mergedSos_ = sos.map((sos, index) => {
         return {
           ...sos,
-          data2: secondsos[index]
-            ? secondsos[index].data
-            : [secondsos[0].data],
+          data2: secondsos[index] ? secondsos[index].data : [secondsos[0].data],
         };
       });
       setMergedSos(mergedSos_);
@@ -726,14 +754,12 @@ const HomePage = () => {
       const mergedNos_ = nos.map((nos, index) => {
         return {
           ...nos,
-          data2: secondnos[index]
-            ? secondnos[index].data
-            : [secondnos[0].data],
+          data2: secondnos[index] ? secondnos[index].data : [secondnos[0].data],
         };
       });
       setMergedNos(mergedNos_);
     }
-  }, [sos, secondsos]);
+  }, [nos, secondnos]);
 
   return (
     <>
@@ -745,18 +771,15 @@ const HomePage = () => {
         <ul style={{ marginLeft: "0px", marginTop: "10px" }}>
           {informació.map((informació, index) => (
             <li key={index}>
-              <span onClick={() => toggleExpansion(index)} className="icon-container">
+              <span
+                onClick={() => toggleExpansion(index)}
+                className="icon-container"
+              >
                 <strong style={{ color: "gray" }}>{informació.nombre}</strong>
                 {infoExpandida.includes(index) ? (
-                  <FontAwesomeIcon
-                    icon={faChevronUp}
-                    className="icon"
-                  />
+                  <FontAwesomeIcon icon={faChevronUp} className="icon" />
                 ) : (
-                  <FontAwesomeIcon
-                    icon={faChevronDown}
-                    className="icon"
-                  />
+                  <FontAwesomeIcon icon={faChevronDown} className="icon" />
                 )}
               </span>
               {infoExpandida.includes(index) && (
@@ -810,7 +833,7 @@ const HomePage = () => {
                     : `Valors pel municipi ${selectedMunicipi}:`}
                 </h4>
                 <br></br>
-                <div className="flex flex-wrap">
+                <div className = "flex">
                   <div
                     style={{
                       width: "170px",
@@ -954,6 +977,7 @@ const HomePage = () => {
                 selectedSecondMunicipi={selectedSecondMunicipi}
               />
             </div>
+
             <div className="flex-2 flex flex-col justify-center items-center">
               <MyLineChart1 
                 mergedSos={mergedSos} 

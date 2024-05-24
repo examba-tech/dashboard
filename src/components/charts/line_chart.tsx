@@ -36,8 +36,8 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
             {selectedMunicipi === "Tots"
-               ? "Evolució del número de visites a l'any 2023 a tots els municipis"
-               : `Evolució del número de visites a l'any 2023 al municipi ${selectedMunicipi}`}
+               ? "Evolució del número de visites a tots els municipis"
+               : `Evolució del número de visites al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
