@@ -24,6 +24,8 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import MonthRange from "@/src/components/ui/filters/month-picker";
 import dayjs from "dayjs";
 import '@/src/app/dashboard/estilo_info.css'; 
+import MyLineChart_vis_NO2 from '@/src/components/charts/line_chart_visitas_NO2'
+import MyLineChart_vis_SO2 from '@/src/components/charts/line_chart_visitas_SO2'
 
 const calculateTotalCasesBySex = (
   info: Interfaces.Dinamic[],
@@ -949,11 +951,20 @@ const HomePage = () => {
               <MyLineChart
                 mergedVisits={mergedVisits}
                 selectedMunicipi={selectedMunicipi}
+                selectedSecondMunicipi={selectedSecondMunicipi}
               />
             </div>
-            <div className="flex-1 flex flex-col justify-center items-center">
-              <MyLineChart1 mergedSos={mergedSos} selectedMunicipi={selectedMunicipi} />
-              <LineChartNO2 mergedNos={mergedNos} selectedMunicipi={selectedMunicipi} />
+            <div className="flex-2 flex flex-col justify-center items-center">
+              <MyLineChart1 
+                mergedSos={mergedSos} 
+                selectedMunicipi={selectedMunicipi} 
+                selectedSecondMunicipi={selectedSecondMunicipi}
+              />
+              <LineChartNO2 
+                mergedNos={mergedNos} 
+                selectedMunicipi={selectedMunicipi} 
+                selectedSecondMunicipi={selectedSecondMunicipi}
+              />
               <p
                 className="mt-4 text-black dark:text-white"
                 style={{ fontSize: "13px" }}
@@ -968,6 +979,34 @@ const HomePage = () => {
               </p>
             </div>
           </div>
+
+
+          
+
+          <div className="flex justify-center items-center gap-4 pt-5">
+           
+              <MyLineChart_vis_NO2
+                  mergedVisits={mergedVisits}
+                  mergedNos={mergedNos}
+                  selectedMunicipi={selectedMunicipi}
+                />
+                <MyLineChart_vis_SO2
+                  mergedVisits={mergedVisits}
+                  mergedSos={mergedSos}
+                  selectedMunicipi={selectedMunicipi}
+                />
+            
+            </div>
+            {/* <div className="mt-70 flex justify-center">
+           
+              <MyLineChart_vis_SO2
+                  mergedVisits={mergedVisits}
+                  mergedSos={mergedSos}
+                  selectedMunicipi={selectedMunicipi}
+                />
+            
+            </div> */}
+         
           <br></br>
           <br></br>
           <br></br>
@@ -1021,3 +1060,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
