@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 
 // Define el tipo de datos para las visitas
@@ -19,9 +20,10 @@ interface VisitData {
 interface MyLineChartProps {
   mergedVisits: any[];
   selectedMunicipi: string;
+  selectedSecondMunicipi: string;
 }
 
-const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicipi }) => {
+const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicipi, selectedSecondMunicipi }) => {
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -67,7 +69,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
                   if (name === "data2") displayName = "municipi 2";
                   return [
                     <span key="value" style={{ color: "black" }}>
-                      {"visites:"}{" "}
+                      {/* {"visites:"}{" "} */}
                       <span style={{ color: "black", fontWeight: "bold" }}>
                         {value}
                       </span>
@@ -94,9 +96,11 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
                 }}
                 labelStyle={{ color: "black" }}
               />
-              <Line type="monotone" dataKey="data" stroke="#80CAEE" />
-              <Line type="monotone" dataKey="data2" stroke="#B22222" />
-            </LineChart>
+          
+              <Line type="monotone" dataKey="data" stroke="#2471A3" name={selectedMunicipi} />
+              <Line type="monotone" dataKey="data2" stroke="#85C1E9" name={selectedSecondMunicipi} />
+              <Legend verticalAlign="top" height={36} />
+              </LineChart>
           </ResponsiveContainer>
           {infoVisible && (
             <div
@@ -119,3 +123,4 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
 };
 
 export default MyLineChart;
+
