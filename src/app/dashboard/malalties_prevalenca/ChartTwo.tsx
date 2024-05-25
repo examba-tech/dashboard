@@ -95,7 +95,6 @@ const ChartTwo: React.FC<ChartTwoProps> = ({
     },
     xaxis: {
       categories: [
-        "TOTS",
         "ASMA",
         "BRONQUITIS_CRONICA",
         "MPOC_MIXTE",
