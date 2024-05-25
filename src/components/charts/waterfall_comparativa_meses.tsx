@@ -9,17 +9,22 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
+import dayjs from "dayjs";
 
 const Waterfall = ({
   data,
   average,
   selectedMunicipi,
   selectedDiagnostic,
+  beginDate,
+  endDate
 }: {
   data: any;
   average: number;
   selectedMunicipi: string;
   selectedDiagnostic: string;
+  beginDate: dayjs.Dayjs;
+  endDate: dayjs.Dayjs;
 }) => {
   const monthNames = [
     "Gen",
@@ -37,16 +42,16 @@ const Waterfall = ({
   ];
 
   const adjustValue = (value: number) => {
-    return value;
+    return parseFloat(value.toFixed(1));
   };
 
   const getFillColor = (entry: any) => {
-    return entry.last_year > average ? "#3056D3" : "#80CAEE";
+    return entry.visites > average ? "#3056D3" : "#80CAEE";
   };
 
   const adjustedData = data.map((entry: any) => ({
     ...entry,
-    last_year: adjustValue(entry.last_year),
+    visites: adjustValue(entry.visites),
   }));
 
   const chartData = adjustedData.map((entry: any, index: number) => ({
@@ -61,18 +66,21 @@ const Waterfall = ({
     setInfoVisible(!infoVisible);
   };
 
+  const formattedBeginDate = beginDate.format('DD-MM-YYYY');
+  const formattedEndDate = endDate.format('DD-MM-YYYY');
+
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow relative">
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
-          <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
+          <h4 className="text-lg font-semibold text-black dark:text-white pl-5 pt-3">
             {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
-              ? `Comparativa de visites de tots els diagnòstics a tots els municipis`
+              ? `Comparativa de visites cada 10.000 habitants de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
               : selectedDiagnostic === "Tots"
-              ? `Comparativa de visites de tots els diagnòstics al municipi ${selectedMunicipi}`
+              ? `Comparativa de visites cada 10.000 habitants de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`
               : selectedMunicipi === "Tots"
-              ? `Comparativa de visites del diagnòstic ${selectedDiagnostic} a tots els municipis`
-              : `Comparativa de visites del diagnòstic ${selectedDiagnostic} al municipi ${selectedMunicipi}`}
+              ? `Comparativa de visites cada 10.000 habitants del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
+              : `Comparativa de visites cada 10.000 habitants del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -107,9 +115,9 @@ const Waterfall = ({
                 dx={-5}
               />
               <YAxis tickFormatter={(value) => value} />
-              <Tooltip />
+              <Tooltip/>
               <ReferenceLine y={average} stroke="#000" />
-              <Bar dataKey="last_year" fill="fill" />
+              <Bar dataKey="visites" fill="fill" />
             </BarChart>
           </ResponsiveContainer>
         </div>

@@ -140,15 +140,17 @@ const HomePage = () => {
     {
       nombre: '+info', info: <div>
         <p style={{ marginBottom: '5px', textAlign: 'justify' }}>
-          En aquesta secció es realitza un estudi sobre les malalties de prevalença, 
-          les quals són presents en una població durant un període de temps específic. 
-          Es defineix per la quantitat total de persones que tenen la malaltia en un 
-          moment determinat en relació amb el nombre total de persones en aquella població. 
-          En el nostre cas, la variable temporal no la considerem sinó que ens enfoquem 
-          més en la comparativa i en la correlació que pugui haver entre les variables. 
-          Ens hem centrat en les següents 7 malalties: Asma, Bronquitis Crònica, MPOC Mixte 
-          (Malaltia Pulmonar Obstructiva Crònica), Bronquiectàsies, Emfisema, Neoplàsia Pulmonar 
-          i Fibrosi Pulmonar.</p>
+          En aquesta secció es realitza un estudi sobre les malalties de prevalença,
+          on ens enfoquem més en la comparativa i en la correlació que pugui haver entre les variables. 
+          Ens hem centrat en les següents 7 malalties: 
+          <li>- Asma</li>
+          <li>- Bronquitis Crònica</li>
+          <li>- MPOC Mixte (Malaltia Pulmonar Obstructiva Crònica)</li>
+          <li>- Bronquiectàsies</li>
+          <li>- Emfisema</li>
+          <li>- Neoplàsia Pulmonar</li>
+          <li>- Fibrosi Pulmonar</li>
+          </p>
         {/* <p style={{ marginBottom: '5px' }}>Hola</p> */}
       </div>
     },
@@ -241,7 +243,7 @@ const handleMunicipiSelect = (municipi: string) => {
   return (
     <>
         <h1 style={{ fontSize: "2rem", fontWeight: "bold" }}>
-           Pacients als CAPs de la zona Metropolitana Sud degudes a malalties respiratòries cròniques al 2023
+           Pacients als CAPs de la regió Metropolitana Sud degudes a malalties respiratòries cròniques al 2023
         </h1>
         <ul style={{ marginLeft: '0px', marginTop: '10px' }}>
         {informació.map((informació, index) => (

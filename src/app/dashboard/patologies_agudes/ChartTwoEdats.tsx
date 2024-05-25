@@ -1,6 +1,7 @@
 import { ApexOptions } from "apexcharts";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
+import dayjs from "dayjs";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
@@ -70,28 +71,37 @@ interface ChartTwoProps {
   }[];
   selectedMunicipi: string;
   selectedDiagnostic: string;
-
+  beginDate: dayjs.Dayjs;
+  endDate: dayjs.Dayjs;
 }
 
-const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, selectedDiagnostic}) => {
+const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, selectedDiagnostic, beginDate, endDate}) => {
+  const roundedSeries = series.map(serie => ({
+    ...serie,
+    data: serie.data.map(value => parseFloat(value.toFixed(1))),
+  }));
+
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
     setInfoVisible(!infoVisible);
   };
 
+  const formattedBeginDate = beginDate.format('DD-MM-YYYY');
+  const formattedEndDate = endDate.format('DD-MM-YYYY');
+
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
-          <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
+          <h4 className="text-lg font-semibold text-black dark:text-white pl-5 pt-3">
           {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
-          ? `Comparativa del nombre de visites segons les diferents franges d'edat de tots els diagnòstics a tots els municipis`
+          ? `Comparativa del nombre de visites cada 10.000 habitants segons les diferents franges d'edat de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
           : selectedDiagnostic === "Tots"
-          ? `Comparativa del nombre de visites segons les diferents franges d'edat de tots els diagnòstics al municipi ${selectedMunicipi}`
+          ? `Comparativa del nombre de visites cada 10.000 habitants segons les diferents franges d'edat de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`
           : selectedMunicipi === "Tots"
-          ? `Comparativa del nombre de visites segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} a tots els municipis`
-          : `Comparativa del nombre de visites segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} al municipi ${selectedMunicipi}`
+          ? `Comparativa del nombre de visites cada 10.000 habitants segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
+          : `Comparativa del nombre de visites cada 10.000 habitants segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`
           }
             <span
               className="text-sm text-gray-400 cursor-pointer"
@@ -108,7 +118,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, selectedD
         <div id="chartTwo" className="pb-15 flex justify-center relative">
           <ReactApexChart
             options={options}
-            series={series}
+            series={roundedSeries}
             type="bar"
             height={225}
             width={350}

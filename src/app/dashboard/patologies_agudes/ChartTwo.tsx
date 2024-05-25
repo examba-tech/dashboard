@@ -1,6 +1,7 @@
 import { ApexOptions } from "apexcharts";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
+import dayjs from "dayjs";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
@@ -12,9 +13,16 @@ interface ChartTwoProps {
   }[];
   selectedMunicipi: string;
   onDiagnosticChange: (diagnostic: string) => void;
+  beginDate: dayjs.Dayjs;
+  endDate: dayjs.Dayjs;
 }
 
-const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnosticChange }) => {
+const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnosticChange, beginDate, endDate }) => {
+  const roundedSeries = series.map(serie => ({
+    ...serie,
+    data: serie.data.map(value => parseFloat(value.toFixed(1))),
+  }));
+
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -25,6 +33,9 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnos
     const diagnostic = config.w.config.xaxis.categories[config.dataPointIndex];
     onDiagnosticChange(diagnostic);
   };
+
+  const formattedBeginDate = beginDate.format('DD-MM-YYYY');
+  const formattedEndDate = endDate.format('DD-MM-YYYY');
 
   const options: ApexOptions = {
     colors: ["#3C50E0", "#80CAEE"],
@@ -107,8 +118,8 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnos
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
-          <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Comparativa del nombre de visites segons la seva patologia aguda al municipi {selectedMunicipi}
+          <h4 className="text-lg font-semibold text-black dark:text-white pl-5 pt-3">
+            Comparativa del nombre de visites cada 10.000 habitants segons la seva patologia aguda des del {formattedBeginDate} al {formattedEndDate} al municipi {selectedMunicipi}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -124,7 +135,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnos
         <div id="chartTwo" className="pb-15 flex justify-center relative">
           <ReactApexChart
             options={options}
-            series={series}
+            series={roundedSeries}
             type="bar"
             height={250}
             width={700}

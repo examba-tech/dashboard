@@ -118,11 +118,11 @@ const Mapa: React.FC<ChartPredProps> = ({predictions, onMunicipiSelect}) => {
   <VegaLite spec={spec} onNewView={handleNewView} />
   {infoVisible && (
             <div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-2 py-4 w-64 h-54 rounded-lg shadow-lg"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-4 w-64 h-54 rounded-lg shadow-lg"
               onClick={toggleInfo}
             >
               <p className="text-sm text-gray-800">
-              Afegir text
+              Mapa dividit segons els municipis, on cada municipi està colorejat en funció del nombre de pacients registrats degut a alguna malaltia respiratòria crònica al 2023, permetent així identificar fàcilment les àrees amb més casos, facilitant l&apos;anàlisi i la presa de decisions basada en dades.
               </p>
             </div>
           )}

@@ -9,35 +9,41 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import dayjs from "dayjs";
 
-// Define el tipo de datos para las visitas
-interface VisitData {
-  name: string;
-  data: number[];
-}
-
-// Define el tipo de props para el componente MyLineChart
 interface MyLineChartProps {
   mergedVisits: any[];
   selectedMunicipi: string;
+  beginDate: dayjs.Dayjs;
+  endDate: dayjs.Dayjs;
   selectedSecondMunicipi: string;
 }
 
-const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicipi, selectedSecondMunicipi }) => {
+const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicipi, beginDate, endDate, selectedSecondMunicipi }) => {
+  const roundedMergedVisits = mergedVisits.map((visit) => {
+    const roundedVisit = { ...visit };
+      roundedVisit.data[0] = parseFloat(visit.data[0].toFixed(1));
+      roundedVisit.data2[0] = parseFloat(visit.data2[0].toFixed(1));
+    return roundedVisit;
+  });
+
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
     setInfoVisible(!infoVisible);
   };
 
+  const formattedBeginDate = beginDate.format('DD-MM-YYYY');
+  const formattedEndDate = endDate.format('DD-MM-YYYY');
+
   return (
     <div className="relative col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
+          <h5 className="text-lg font-semibold text-black dark:text-white pt-3">
             {selectedMunicipi === "Tots"
-               ? "Evolució del número de visites a tots els municipis"
-               : `Evolució del número de visites al municipi ${selectedMunicipi}`}
+               ? `Evolució del número de visites cada 10.000 habitants des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
+               : `Evolució del número de visites cada 10.000 habitants des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -48,34 +54,34 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
           </h5>
         </div>
       </div>
-        <div className="mb-2">
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart
-              data={mergedVisits}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" tick={{ fontSize: 10 }} />
-              <YAxis tick={{ fontSize: 10 }} />
-              <Tooltip
-                formatter={(value, name) => {
-                  let displayName = name;
-                  if (name === "data") displayName = "municipi 1";
-                  if (name === "data2") displayName = "municipi 2";
-                  return [
-                    <span key="value" style={{ color: "black" }}>
-                      {/* {"visites:"}{" "} */}
-                      <span style={{ color: "black", fontWeight: "bold" }}>
-                        {value}
-                      </span>
-                    </span>,
-                    displayName,
-                  ];
+      <div className="mb-2">
+        <ResponsiveContainer width="100%" height={400}>
+          <LineChart
+            data={roundedMergedVisits}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" tick={{ fontSize: 10 }} />
+            <YAxis tick={{ fontSize: 10 }} />
+            <Tooltip
+              formatter={(value, name) => {
+                let displayName = name;
+                if (name === "data") displayName = "municipi 1";
+                if (name === "data2") displayName = "municipi 2";
+                return [
+                  <span key="value" style={{ color: "black" }}>
+                    {"visites:"}{" "}
+                    <span style={{ color: "black", fontWeight: "bold" }}>
+                      {value}
+                    </span>
+                  </span>,
+                  displayName,
+                ];
                 }}
                 labelFormatter={(label) =>
                   new Date(label).toLocaleDateString("es-ES", {
