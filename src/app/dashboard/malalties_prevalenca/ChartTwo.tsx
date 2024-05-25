@@ -14,14 +14,22 @@ interface ChartTwoProps {
   onDiagnosticChange: (diagnostic: string) => void;
 }
 
-const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnosticChange }) => {
+const ChartTwo: React.FC<ChartTwoProps> = ({
+  series,
+  selectedMunicipi,
+  onDiagnosticChange,
+}) => {
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
     setInfoVisible(!infoVisible);
   };
 
-  const handleDataPointSelection = (event: any, chartContext: any, config: any) => {
+  const handleDataPointSelection = (
+    event: any,
+    chartContext: any,
+    config: any
+  ) => {
     const diagnostic = config.w.config.xaxis.categories[config.dataPointIndex];
     onDiagnosticChange(diagnostic);
   };
@@ -86,15 +94,17 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnos
       enabled: false,
     },
     xaxis: {
-      categories: ["ASMA", 
-      "BRONQUITIS_CRONICA", 
-      "MPOC_MIXTE", 
-      "BRONQUIECTASIES", 
-      "OTHER", 
-      "NEOPLASIA_PULMONAR", 
-      "ENFISEMA", 
-      "FIBROSI_PULMONAR", 
-      "AGENTS_EXTERNS"],
+      categories: [
+        "ASMA",
+        "BRONQUITIS_CRONICA",
+        "MPOC_MIXTE",
+        "BRONQUIECTASIES",
+        "OTHER",
+        "NEOPLASIA_PULMONAR",
+        "ENFISEMA",
+        "FIBROSI_PULMONAR",
+        "AGENTS_EXTERNS",
+      ],
     },
     legend: {
       position: "top",
@@ -116,7 +126,9 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnos
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            Comparativa del nombre de pacients dels diagnòstics al municipi {selectedMunicipi}
+            {selectedMunicipi == "Tots"
+              ? "Pacients cada 10000 habitants segons el diagnòstic"
+              : `Pacients cada 10000 habitants segons el diagnòstic al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -141,10 +153,13 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnos
             <div
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-84 h-74 rounded-lg shadow-lg"
               onClick={toggleInfo}
-              style={{ marginTop: "-10px"}}
+              style={{ marginTop: "-10px" }}
             >
               <p className="text-sm text-gray-800">
-              Cada barra representa una patologia aguda on la llargària de la barra representa el nombre de pacients d&apos;aquella patologia en un moment concret del temps. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de patologies agudes.
+                Cada barra representa una patologia aguda on la llargària de la
+                barra representa el nombre de pacients d&apos;aquella patologia
+                en un moment concret del temps. L&apos;eix x és el nombre de
+                pacients i l&apos;eix y els diferent tipus de patologies agudes.
               </p>
             </div>
           )}

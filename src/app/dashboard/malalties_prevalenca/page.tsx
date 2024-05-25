@@ -229,7 +229,7 @@ const HomePage = () => {
   };
 
   const [selectedMunicipi, setSelectedMunicipi] =
-    React.useState<string>("Abrera");
+    React.useState<string>("Tots");
 
   const handleMunicipiSelect = (municipi: string) => {
     setSelectedMunicipi(municipi);

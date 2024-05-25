@@ -75,11 +75,11 @@ const Waterfall = ({
         <div>
           <h4 className="text-lg font-semibold text-black dark:text-white pl-5 pt-3">
             {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
-              ? `Comparativa de visites cada 10.000 habitants de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
+              ? `Comparativa de visites cada 10.000 habitants de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate}`
               : selectedDiagnostic === "Tots"
               ? `Comparativa de visites cada 10.000 habitants de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`
               : selectedMunicipi === "Tots"
-              ? `Comparativa de visites cada 10.000 habitants del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
+              ? `Comparativa de visites cada 10.000 habitants del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate}`
               : `Comparativa de visites cada 10.000 habitants del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
