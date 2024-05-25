@@ -169,7 +169,7 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
   const result = Object.keys(weeklyData)
     .map((week) => ({
       name: week,
-      data: [(weeklyData[week] / pobData[week]) * 100],
+      data: [parseFloat(((weeklyData[week] / pobData[week]) * 100).toFixed(1))],
     }))
     .sort((a, b) => {
       const dateA = new Date(a.name);
@@ -199,7 +199,10 @@ const calculateTotalCasesByWeekSos2 = (dinamics: Interfaces.Dinamic[]) => {
   });
 
   const result = Object.keys(weeklyData)
-    .map((week) => ({ name: week, data: [weeklyData[week] / i[week]] }))
+    .map((week) => ({
+      name: week,
+      data: [parseFloat((weeklyData[week] / i[week]).toFixed(1))],
+    }))
     .sort((a, b) => {
       const dateA = new Date(a.name);
       const dateB = new Date(b.name);
@@ -229,7 +232,10 @@ const calculateTotalCasesByWeekNos2 = (dinamics: Interfaces.Dinamic[]) => {
   });
 
   const result = Object.keys(weeklyData)
-    .map((week) => ({ name: week, data: [weeklyData[week] / i[week]] }))
+    .map((week) => ({
+      name: week,
+      data: [parseFloat((weeklyData[week] / i[week]).toFixed(1))],
+    }))
     .sort((a, b) => {
       const dateA = new Date(a.name);
       const dateB = new Date(b.name);
@@ -996,23 +1002,8 @@ const HomePage = () => {
                 endDate={endDate}
                 selectedSecondMunicipi={selectedSecondMunicipi}
               />
-              <p
-                className="mt-4 text-black dark:text-white"
-                style={{ fontSize: "13px" }}
-              >
-                La informació dels contaminants de NO2 i SO2 es troba a
-                l&apos;explicació de les{" "}
-                <Link href="/dashboard/estacions_contaminacio">
-                  <span className="text-blue-500 underline">
-                    estacions de contaminació
-                  </span>
-                </Link>{" "}
-              </p>
             </div>
           </div>
-
-
-          
 
           <div className="flex justify-center items-center gap-4 pt-5">
            
@@ -1032,15 +1023,18 @@ const HomePage = () => {
                 />
             
             </div>
-            {/* <div className="mt-70 flex justify-center">
-           
-              <MyLineChart_vis_SO2
-                  mergedVisits={mergedVisits}
-                  mergedSos={mergedSos}
-                  selectedMunicipi={selectedMunicipi}
-                />
-            
-            </div> */}
+            <p
+                className="mt-4 text-black dark:text-white"
+                style={{ fontSize: "13px" }}
+              >
+                La informació dels contaminants de NO2 i SO2 es troba a
+                l&apos;explicació de les{" "}
+                <Link href="/dashboard/estacions_contaminacio">
+                  <span className="text-blue-500 underline">
+                    estacions de contaminació
+                  </span>
+                </Link>{" "}
+              </p>
          
           <br></br>
           <br></br>

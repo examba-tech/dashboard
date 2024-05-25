@@ -28,12 +28,6 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
   endDate,
   selectedSecondMunicipi
 }) => {
-  const roundedMergedSos = mergedSos.map((sos) => {
-    const roundedSos = { ...sos };
-      roundedSos.data[0] = parseFloat(sos.data[0].toFixed(1));
-      roundedSos.data2[0] = parseFloat(sos.data2[0].toFixed(1));
-    return roundedSos;
-  });
 
   const [infoVisible, setInfoVisible] = useState(false);
 
@@ -65,7 +59,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
       <div className="mb-2">
         <ResponsiveContainer width={575} height={175}>
           <LineChart
-            data={roundedMergedSos}
+            data={mergedSos}
             margin={{
               top: 5,
               right: 30,

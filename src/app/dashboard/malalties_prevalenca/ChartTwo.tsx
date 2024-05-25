@@ -27,6 +27,13 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnos
   };
 
   const options: ApexOptions = {
+    yaxis: {
+      labels: {
+        style: {
+          fontSize: "7px", // Tamaño de la letra del eje y
+        },
+      },
+    },
     colors: ["#3C50E0", "#80CAEE"],
     chart: {
       fontFamily: "Satoshi, sans-serif",

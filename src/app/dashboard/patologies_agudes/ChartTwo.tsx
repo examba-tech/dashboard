@@ -38,6 +38,13 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnos
   const formattedEndDate = endDate.format('DD-MM-YYYY');
 
   const options: ApexOptions = {
+    yaxis: {
+      labels: {
+        style: {
+          fontSize: "8px", // Tamaño de la letra del eje y
+        },
+      },
+    },
     colors: ["#3C50E0", "#80CAEE"],
     chart: {
       fontFamily: "Satoshi, sans-serif",

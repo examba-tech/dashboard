@@ -22,12 +22,6 @@ interface MyLineChartProps {
 }
 
 const MyLineChart: React.FC<MyLineChartProps> = ({ mergedNos, selectedMunicipi, selectedSecondMunicipi, beginDate, endDate }) => {
-  const roundedMergedNo2 = mergedNos.map((nos) => {
-    const roundedNos = { ...nos };
-      roundedNos.data[0] = parseFloat(nos.data[0].toFixed(1));
-      roundedNos.data2[0] = parseFloat(nos.data2[0].toFixed(1));
-    return roundedNos;
-  });
   
   const [infoVisible, setInfoVisible] = useState(false);
 
@@ -45,7 +39,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedNos, selectedMunicipi, 
           <h5 className="text-lg font-semibold text-black dark:text-white pt-3">
             {selectedMunicipi === "Tots"
                ? `Evolució del NO2 des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
-               : `Evolució del des del ${formattedBeginDate} al ${formattedEndDate} NO2 al municipi ${selectedMunicipi}`}
+               : `Evolució del NO2 des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -59,7 +53,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedNos, selectedMunicipi, 
         <div className="mb-2">
     <ResponsiveContainer width={575} height={175}>
       <LineChart
-        data={roundedMergedNo2}
+        data={mergedNos}
         margin={{
           top: 5,
           right: 30,
