@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import dayjs from "dayjs";
 
 // Define el tipo de datos para las visitas y NO2
 interface DataPoint {
@@ -27,6 +28,8 @@ interface MyLineChartProps {
   mergedVisits: DataPoint[];
   mergedNos: DataPoint[];
   selectedMunicipi: string;
+  beginDate: dayjs.Dayjs;
+  endDate: dayjs.Dayjs;
 }
 
 // Función para combinar los datos de mergedVisits y mergedNos en un solo array
@@ -38,12 +41,15 @@ const combineData = (visits: DataPoint[], nos: DataPoint[]): CombinedDataPoint[]
   }));
 };
 
-const MyLineChart_vis_NO2: React.FC<MyLineChartProps> = ({ mergedVisits, mergedNos, selectedMunicipi }) => {
+const MyLineChart_vis_NO2: React.FC<MyLineChartProps> = ({ mergedVisits, mergedNos, selectedMunicipi, beginDate, endDate }) => {
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
     setInfoVisible(!infoVisible);
   };
+
+  const formattedBeginDate = beginDate.format('DD-MM-YYYY');
+  const formattedEndDate = endDate.format('DD-MM-YYYY');
 
   // Combina los datos
   const combinedData = combineData(mergedVisits, mergedNos);
@@ -52,10 +58,10 @@ const MyLineChart_vis_NO2: React.FC<MyLineChartProps> = ({ mergedVisits, mergedN
     <div className="relative col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
+          <h5 className="text-lg font-semibold text-black dark:text-white pt-3">
             {selectedMunicipi === "Tots"
-               ? "Evolució del número de visites i NO2 a l'any 2023 a tots els municipis"
-               : `Evolució del número de visites i NO2 a l'any 2023 al municipi ${selectedMunicipi}`}
+               ? `Evolució del número de visites cada 10.000 habitants i valor del NO2 des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
+               : `Evolució del número de visites cada 10.000 habitants i valor del NO2 des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}

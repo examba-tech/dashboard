@@ -713,6 +713,18 @@ const HomePage = () => {
     }
   }, [nos, secondnos]);
 
+  const [infoVisible, setInfoVisible] = useState(false);
+
+  const toggleInfo = () => {
+    setInfoVisible(!infoVisible);
+  };
+
+  const [infoVisible2, setInfoVisible2] = useState(false);
+
+  const toggleInfo2 = () => {
+    setInfoVisible2(!infoVisible2);
+  };
+
   return (
     <>
       <div>
@@ -847,11 +859,19 @@ const HomePage = () => {
                     </p>
                   </div>
                 </div>
+                
                 <h5
                   className="text-xl font-semibold text-black dark:text-white pt-3"
                   style={{ fontSize: "15px" }}
                 >
                   Mitjana del NO2 respecte el rang d&apos;ICQA del NO2
+                  <span
+                        className="text-sm text-gray-400 cursor-pointer"
+                        onClick={toggleInfo}
+                      >
+                        {" "}
+                        +info
+                      </span>
                 </h5>
                 <div
                   className="flex justify-center items-center  gap-2"
@@ -859,6 +879,17 @@ const HomePage = () => {
                 >
                   {/* <ChartOne series={prediccions} selectedMunicipi={selectedMunicipi}/> */}
                   <BulletChart_NO2 data2={prediccions3} no2Data={no2} />
+                  {infoVisible && (
+            <div
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-84 h-74 rounded-lg shadow-lg"
+              onClick={toggleInfo}
+              style={{ marginTop: "-10px"}}
+            >
+              <p className="text-sm text-gray-800">
+              Cada barra representa una patologia aguda on la llargària de la barra representa el nombre de pacients d&apos;aquella patologia en un moment concret del temps. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de patologies agudes.
+              </p>
+            </div>
+          )}
                 </div>
                 <br></br>
                 <h5
@@ -866,16 +897,34 @@ const HomePage = () => {
                   style={{ fontSize: "15px" }}
                 >
                   Mitjana del SO2 respecte el rang d&apos;ICQA del SO2
+                  <span
+                        className="text-sm text-gray-400 cursor-pointer"
+                        onClick={toggleInfo2}
+                      >
+                        {" "}
+                        +info
+                      </span>
                 </h5>
                 <div
                   className="flex justify-center items-center  gap-2"
                   style={{ marginLeft: "-100px" }}
                 >
                   <BulletChart_SO2 data2={prediccions4} so2Data={so2} />
+                  {infoVisible && (
+            <div
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-84 h-74 rounded-lg shadow-lg"
+              onClick={toggleInfo2}
+              style={{ marginTop: "-10px"}}
+            >
+              <p className="text-sm text-gray-800">
+              Cada barra representa una patologia aguda on la llargària de la barra representa el nombre de pacients d&apos;aquella patologia en un moment concret del temps. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de patologies agudes.
+              </p>
+            </div>
+          )}
                 </div>
               </div>
               <br></br>
-
+              
               <div>
                 {/* <p>Els valors de referència establerts pel rang d&apos;ICQA del NO2 i del SO2 es poden trobar a l'explicació de les estacions de contaminació corresponent.</p> */}
                 <p
@@ -971,11 +1020,15 @@ const HomePage = () => {
                   mergedVisits={mergedVisits}
                   mergedNos={mergedNos}
                   selectedMunicipi={selectedMunicipi}
+                  beginDate={beginDate}
+                  endDate={endDate}
                 />
                 <MyLineChart_vis_SO2
                   mergedVisits={mergedVisits}
                   mergedSos={mergedSos}
                   selectedMunicipi={selectedMunicipi}
+                  beginDate={beginDate}
+                  endDate={endDate}
                 />
             
             </div>
