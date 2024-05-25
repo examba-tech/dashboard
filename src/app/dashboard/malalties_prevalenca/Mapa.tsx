@@ -94,7 +94,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect }) => {
       },
       tooltip: [
         { field: "properties.nommuni", type: "nominal", title: "municipi:" },
-        { field: "Numero_Casos", type: "quantitative", title: "pacients:" },
+        { field: "Numero_Casos", type: "quantitative", title: "pacients:", format: ".1f" },
       ],
     },
   };
@@ -115,9 +115,10 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect }) => {
 
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
-      <div className="mb-4 justify-between gap-4 sm:flex">
-        <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-          Distribució del nombre de pacients per municipis
+      <div className="mx-auto relative">
+      <div className="mb-4">
+        <h4 className="text-lg font-semibold text-black dark:text-white pl-5 pr-5 pt-3">
+          Distribució del nombre de pacients per municipis del 2023
           <span
             className="text-sm text-gray-400 cursor-pointer"
             onClick={toggleInfo}
@@ -127,6 +128,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect }) => {
           </span>
         </h4>
       </div>
+      
       <VegaLite spec={spec} onNewView={handleNewView} />
       {infoVisible && (
         <div
@@ -135,13 +137,14 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect }) => {
         >
           <p className="text-sm text-gray-800">
             Mapa dividit segons els municipis, on cada municipi està colorejat
-            en funció del nombre de pacients registrats degut a alguna malaltia
-            respiratòria crònica al 2023, permetent així identificar fàcilment
-            les àrees amb més casos, facilitant l&apos;anàlisi i la presa de
+            en funció del nombre de pacients registrats degut a malalties
+            respiratòries cròniques al 2023, permetent així identificar fàcilment
+            les àrees amb més casos, facilitant l&apos;anàlisi comparativa i la presa de
             decisions basada en dades.
           </p>
         </div>
       )}
+    </div>
     </div>
   );
 };

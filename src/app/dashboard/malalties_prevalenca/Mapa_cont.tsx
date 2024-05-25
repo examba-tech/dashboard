@@ -81,9 +81,10 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions }) => {
 
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
-      <div className="mb-4 justify-between gap-4 sm:flex">
-        <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-          Qualitat del NO2 dels últims 10 anys per municipis
+      <div className="mx-auto relative">
+      <div className="mb-4">
+        <h4 className="text-lg font-semibold text-black dark:text-white pl-5 pr-5 pt-3">
+          Mitjana dels valors del NO2 per municipis dels últims 10 anys 
           <span
             className="text-sm text-gray-400 cursor-pointer"
             onClick={toggleInfo}
@@ -100,16 +101,16 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions }) => {
           onClick={toggleInfo}
         >
           <p className="text-sm text-gray-800">
-            Mapa de la qualitat dels nivells de NO2 dels darrers 10 anys,
-            dividit per municipis. Cada municipi està colorejat utilitzant una
+            Mapa de la qualitat dels nivells de NO2 de la mitjana dels darrers 10 anys de cada municipi. Cada municipi està colorejat utilitzant una
             paleta de colors que indica el valor de NO2, això permet identificar
             fàcilment les àrees més afectades per aquest contaminant, obtenir
             informació sobre la qualitat de l&apos;aire i relacionar-ho amb el
             mapa anterior per a veure la relació entre el nombre de pacients i
-            la qualitat de l&apos;aire de cada municipi.
+            la qualitat de l&apos;aire de cada municipi dels darrers 10 anys.
           </p>
         </div>
       )}
+    </div>
     </div>
   );
 };

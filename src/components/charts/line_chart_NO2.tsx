@@ -118,7 +118,9 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedNos, selectedMunicipi, 
                   style={{ marginLeft: "25px" }}
                 >
                   <p className="text-sm text-gray-800 px-4 py-2 text-center">
-                  Aquest gràfic mostra l&apos;evolució de NO2 al llarg d&apos;un temps concret. Sabem que aquest és un gas incolor i d&apos;olor forta i sufocant. En una atmósfera humida es transforma en àcid sulfúric i causa la deposició àcida. A partir de concentracions majors a 0.1 ppm es produeix una important reducció de la visibilitat. Pot provocar irritació i inflamació del sistema respiratori, afeccions i insuficiències pulmonars, alteració del metabolisme de les proteïnes i mal de cap.
+                  Aquest gràfic de línies mostra l&apos;evolució del valor de NO2 pel rang de temps seleccionat. Està dissenyat per representar
+                    dades temporals on l&apos;eix x mostra el període de temps, i l&apos;eix y representa el valor de NO2 pel municipi
+                    seleccionat (o bé tots). Quan es selecciona el segon municipi permet la comparació entre ambdós.
                   </p>
                 </div>
               )}

@@ -17,6 +17,10 @@ const SignUp: React.FC = () => {
 
   return (
     <div className="justify-center">
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
       <div className="rounded-sm border border-stroke bg-white shadow-default p-4 sm:p-12.5 max-w-lg mx-auto dark:border-strokedark dark:bg-boxdark">
         <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
           Vols recuperar la teva contrasenya?
@@ -61,25 +65,11 @@ const SignUp: React.FC = () => {
           {message && (
             <p className="text-center text-green-600 mt-1">{message}</p>
           )}
-          <br></br>
-          <br></br>
-          <div className="flex justify-center mt-6 mb-6">
-            <Link
-              href="/"
-              className={buttonVariants({
-                className: "w-full max-w-xs",
-                variant: "link",
-              })}
-            >
-              <input
-                type="button"
-                value="Torna a l'inici"
-                className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90 mb-6"
-              />
-            </Link>
-          </div>
+
         </form>
       </div>
+    <br></br>
+    <br></br>
     </div>
   );
 };

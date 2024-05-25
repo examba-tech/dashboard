@@ -125,7 +125,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnos
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
-          <h4 className="text-lg font-semibold text-black dark:text-white pl-5 pt-3">
+          <h4 className="text-sm font-semibold text-black dark:text-white pl-5 pr-5 pt-3">
             Comparativa del nombre de visites cada 10.000 habitants segons la seva patologia aguda des del {formattedBeginDate} al {formattedEndDate} al municipi {selectedMunicipi}
             <span
               className="text-sm text-gray-400 cursor-pointer"
@@ -154,7 +154,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnos
               style={{ marginTop: "-10px"}}
             >
               <p className="text-sm text-gray-800">
-              Cada barra representa una patologia aguda on la llargària de la barra representa el nombre de pacients d&apos;aquella patologia en un moment concret del temps. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de patologies agudes.
+              En aquest gràfic cada barra representa una patologia aguda on la llargària de la barra representa el nombre de visites cada 10.000 habitants d&apos;aquella patologia en el rang de temps seleccionat. L&apos;eix x és el nombre de visites i l&apos;eix y els diferent tipus de patologies agudes.
               </p>
             </div>
           )}

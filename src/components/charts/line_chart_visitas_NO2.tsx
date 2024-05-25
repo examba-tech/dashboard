@@ -133,16 +133,15 @@ const MyLineChart_vis_NO2: React.FC<MyLineChartProps> = ({ mergedVisits, mergedN
         </ResponsiveContainer>
         {infoVisible && (
           <div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-2 py-4 w-64 h-54 rounded-lg shadow-lg"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-4 w-64 h-54 rounded-lg shadow-lg"
             onClick={toggleInfo}
           >
             <p className="text-sm text-gray-800">
               Aquest gràfic de línies mostra l&apos;evolució del nombre de
-              visites i el nivell de NO2 l&apos;any 2023. Està dissenyat per representar
-              dades temporals on l&apos;eix x mostra els noms dels
-              períodes de temps (en aquest cas, les diferents setmanes de
-              l&apos;any), i l&apos;eix y representa la quantitat de
-              visites i el nivell de NO2. A més, està filtrat segons el municipi
+              visites i el nivell de NO2 del rang de temps seleccionat. Està dissenyat per representar
+              dades temporals on l&apos;eix x mostra el
+              període de temps i l&apos;eix y representa la quantitat de
+              visites per cada 10.000 habitants i el nivell de NO2 representat per diferent colors als diferents eixos. A més, està filtrat segons el municipi
               seleccionat (o tots). L&apos;eix esquerra és respecte al nombre de visites
               i l&apos;eix dret respecte al nivell de NO2, per tal de poder observar i comparar més 
               clarament l&apos;evolució d&apos;ambdues línies.

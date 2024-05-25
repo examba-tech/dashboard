@@ -59,7 +59,7 @@ const PredictionsAlerts: React.FC<PredictionsAlertsProps> = ({ predictions }) =>
           style={{ marginBottom: "10px" }} 
           onClose={() => handleClose(pred.NOM_MUNICIPI.toString())}
         >
-          Compte! El municipi <strong>{pred.NOM_MUNICIPI}</strong> té una previsió <strong>mitja</strong> de visites per la propera setmana.
+          Compte! El municipi <strong>{pred.NOM_MUNICIPI}</strong> té una previsió <strong>moderada</strong> de visites per la propera setmana.
         </Alert>
       );
     } 
@@ -69,9 +69,11 @@ const PredictionsAlerts: React.FC<PredictionsAlertsProps> = ({ predictions }) =>
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h1 style={{ fontSize: "1.7rem", fontWeight: "bold" }}>
+          <br></br>
+          <br></br>
+          <h1 style={{ fontSize: "1.3rem", fontWeight: "bold" }}>
             <div className="overflow-y-auto" style={{ maxHeight: "200px", overflowY: "auto" }}>
-              <p>Alertes de risc del nombre de visites de patologies respiratòries agudes a causa de la contaminació als municipis per la propera setmana🚨</p>
+              <p>Alertes de risc del nombre de visites de patologies respiratòries agudes a causa de la contaminació als municipis per la propera setmana 🚨</p>
             </div>
           </h1>
           <br />
@@ -80,14 +82,14 @@ const PredictionsAlerts: React.FC<PredictionsAlertsProps> = ({ predictions }) =>
       </div>
 
       <div>
-        <h2 style={{ fontSize: "1.3rem", fontWeight: "bold", marginBottom: "10px" }}>Alertes d&apos;alt risc</h2>
-        <p>El llindar de visites cada deu mil habitants considerat per a aquesta mena d&apos;alertes d&apos;alt risc és de &gt; 10</p>
+        <h2 style={{ fontSize: "1.2rem", fontWeight: "bold", marginBottom: "10px" }}>Alertes d&apos;alt risc</h2>
+        <p>El llindar de visites cada 10 mil habitants considerat per a aquesta mena d&apos;alertes d&apos;alt risc és <strong>major a 10</strong> visites</p>
         <br></br>
         {errorAlerts.length > 0 ? errorAlerts : <p>No hi ha alertes d&apos;alt risc.</p>}
         <br />
 
-        <h2 style={{ fontSize: "1.3rem", fontWeight: "bold", marginTop: "20px", marginBottom: "10px" }}>Alertes de risc moderat</h2>
-        <p>El llindar de visites cada deu mil habitants considerat per a aquesta mena d&apos;alertes de risc moderat és de &gt; 8</p>
+        <h2 style={{ fontSize: "1.2rem", fontWeight: "bold", marginTop: "20px", marginBottom: "10px" }}>Alertes de risc moderat</h2>
+        <p>El llindar de visites cada 10 mil habitants considerat per a aquesta mena d&apos;alertes de risc moderat és major a 8 visites i menor a 10</p>
         <br></br>
         {warningAlerts.length > 0 ? warningAlerts : <p>No hi ha alertes de risc moderat.</p>}
         <br />

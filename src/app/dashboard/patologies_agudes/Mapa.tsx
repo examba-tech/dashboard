@@ -76,6 +76,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
         field: "INGRESSOS_DEUMIL",
         type: "quantitative",
         scale: { scheme: "blues" },
+        title: "Visites x10.000 habitants"
       },
       stroke: {
         condition: { selection: "municipi", value: "black" },
@@ -941,32 +942,38 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
 
 
   return (
-    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
-      <div className="mb-4 justify-between gap-4 sm:flex">
-        <h4 className="text-lg font-semibold text-black dark:text-white pl-5 pt-3">
-          Predicció dels pròxims 7 dies de la mitjana de visites als CAPs cada 10.000 habitants
-          <span
-              className="text-sm text-gray-400 cursor-pointer"
-              onClick={toggleInfo}
-            >
-              {" "}
-              +info
-            </span>
-        </h4>
-      </div>
-      <VegaLite spec={spec} onNewView={handleNewView} />
-      {renderAdditionalInfo()}
-      {infoVisible && (
-            <div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-4 w-64 h-54 rounded-lg shadow-lg"
-              onClick={toggleInfo}
-            >
-              <p className="text-sm text-gray-800">
-                Mapa interactiu dividit segons els municipis, on cada municipi està colorejat en funció de la mitjana de visites previstes per als pròxims 7 dies. En seleccionar un municipi concret al mapa, la selecció afecta la visualització de la resta de gràfics, permetent una anàlisi detallada i interactiva de les dades. Aquesta representació visual facilita la identificació de tendències i patrons en les visites per municipi.
-              </p>
-            </div>
-          )}
+<div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
+  <div className="mx-auto relative">
+    <div className="mb-4">
+      <h4 className="text-lg font-semibold text-black dark:text-white pl-5 pt-3">
+        Predicció dels pròxims 7 dies de la mitjana de visites als CAPs cada 10.000 habitants
+        <span
+          className="text-sm text-gray-400 cursor-pointer"
+          onClick={toggleInfo}
+        >
+          {" "}
+          +info
+        </span>
+      </h4>
     </div>
+    <div className="flex justify-center">
+      <VegaLite spec={spec} onNewView={handleNewView} />
+      {infoVisible && (
+        <div
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-4 w-64 h-54 rounded-lg shadow-lg"
+          onClick={toggleInfo}
+        >
+          <p className="text-sm text-gray-800">
+            Mapa interactiu dividit segons els municipis, on cada municipi està colorejat en funció de la mitjana de visites previstes per als pròxims 7 dies. En seleccionar un municipi concret al mapa, la selecció afecta la visualització de la resta de gràfics, permetent una anàlisi detallada i interactiva de les dades.
+          </p>
+        </div>
+      )}
+    </div>
+  </div>
+
+  {renderAdditionalInfo()}
+</div>
+
   );
 };
 

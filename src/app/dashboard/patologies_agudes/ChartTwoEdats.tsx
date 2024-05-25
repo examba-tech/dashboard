@@ -94,7 +94,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, selectedD
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
-          <h4 className="text-lg font-semibold text-black dark:text-white pl-5 pt-3">
+          <h4 className="text-sm font-semibold text-black dark:text-white pl-5 pr-5 pt-3">
           {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
           ? `Comparativa del nombre de visites cada 10.000 habitants segons les diferents franges d'edat de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate}`
           : selectedDiagnostic === "Tots"
@@ -129,8 +129,8 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, selectedD
               onClick={toggleInfo}
               style={{ marginTop: "-10px" , marginLeft: "10px" }}
             >
-              <p className="text-sm text-gray-800 px-4 py-2">
-              Cada barra representa una franja d’edat on la llargària de la barra representa el nombre de visites degut a aquella patologia en un moment concret del temps. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de franges d&apos;edat.
+              <p className="text-sm text-gray-800 px-4 py-4">
+              En aquest gràfic cada barra representa una franja d’edat on la seva llargària representa el nombre de visites cada 10.000 habitants degut a aquella patologia en un rang concret del temps. L&apos;eix x és el nombre de visites i l&apos;eix y els diferent tipus de franges d&apos;edat.
               </p>
             </div>
           )}

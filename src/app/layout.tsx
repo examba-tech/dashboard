@@ -18,6 +18,7 @@ export default function RootLayout({
   const inLogin =
     pathname === "/" ||
     pathname === "/auth/signup" ||
+    pathname === "/contrasenya" ||
     pathname === "/Terms_Privacidad_Contact";
 
 return (

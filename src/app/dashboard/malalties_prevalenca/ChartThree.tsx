@@ -60,6 +60,12 @@ interface ChartThreeProps {
 }
 
 const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selectedDiagnostic }) => {
+
+  const roundedSeries = {
+    female: parseFloat(series.female.toFixed(1)),
+    male: parseFloat(series.male.toFixed(1)),
+  };
+
   const seriesArray = [series.female, series.male];
   const [infoVisible, setInfoVisible] = useState(false);
 
@@ -73,12 +79,12 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selec
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
           {selectedDiagnostic === "TOTS" && selectedMunicipi === "Tots"
-          ? `Proporció de pacients segons el sexe de tots els diagnòstics`
+          ? `Proporció de pacients segons el sexe de tots els diagnòstics al 2023`
           : selectedDiagnostic === "TOTS"
-          ? `Proporció de pacients segons el sexe de tots els diagnòstics al municipi ${selectedMunicipi}`
+          ? `Proporció de pacients segons el sexe de tots els diagnòstics al municipi ${selectedMunicipi} al 2023`
           : selectedMunicipi === "Tots"
-          ? `Pacients cada 10000 habitants segons el sexe del diagnòstic ${selectedDiagnostic}`
-          : `Pacients cada 10000 habitants segons el sexe del diagnòstic ${selectedDiagnostic} al municipi ${selectedMunicipi}`
+          ? `Pacients cada 10000 habitants segons el sexe del diagnòstic ${selectedDiagnostic} al 2023`
+          : `Pacients cada 10000 habitants segons el sexe del diagnòstic ${selectedDiagnostic} al municipi ${selectedMunicipi} al 2023`
         }
             <span
               className="text-sm text-gray-400 cursor-pointer"
@@ -95,19 +101,19 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selec
         <div id="chartThree" className="mx-auto flex justify-center">
           <ReactApexChart
             options={options}
-            series={seriesArray}
+            series={[roundedSeries.female, roundedSeries.male]}
             type="donut"
             height={350}
             width={350}
           />
           {infoVisible && (
             <div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-2 py-4 w-64 h-54 rounded-lg shadow-lg"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-4 w-64 h-54 rounded-lg shadow-lg"
               onClick={toggleInfo}
               style={{ marginLeft: "-25px" }}
             >
-              <p className="text-sm text-gray-800">
-                El gràfic de donut mostrat utilitza dos segments acolorits per representar la distribució de pacients entre dues categories de sexe: &quot;Dona&quot; i &quot;Home&quot;. A la part inferior es veu el nombre exacte de pacients de cada sexe, el qual ha estat filtrat per la malaltia on volem veure aquesta proporció (tenint l&apos;opció també de veure&apos;n el nombre total sense distingir per malaltia).
+              <p className="text-base text-gray-1000 px-4 py-2">
+              Aquest gràfic representa la proporció de visites a 2023 segons el sexe. Utilitza dos segments acolorits per representar la distribució de pacients entre dues categories de sexe: &quot;Dona&quot; i &quot;Home&quot;. Aquests valors estan filtrats per malaltia respiratòria crònica i municipi.
               </p>
             </div>
           )}
@@ -118,3 +124,4 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selec
 };
 
 export default ChartThree;
+
