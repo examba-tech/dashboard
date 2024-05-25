@@ -29,6 +29,15 @@ const SignIn = () => (
           />
       <p className="text-sm mt-1">
         Has oblidat la teva contrasenya?{" "}
+        <Link
+          href="/contrasenya"
+          className={buttonVariants({
+            variant: "link",
+            size: "text",
+          })}
+        >
+          Recupera-la
+        </Link>
       </p>
       </div>
   
