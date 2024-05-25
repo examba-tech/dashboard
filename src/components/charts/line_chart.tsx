@@ -20,12 +20,6 @@ interface MyLineChartProps {
 }
 
 const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicipi, beginDate, endDate, selectedSecondMunicipi }) => {
-  const roundedMergedVisits = mergedVisits.map((visit) => {
-    const roundedVisit = { ...visit };
-      roundedVisit.data[0] = parseFloat(visit.data[0].toFixed(1));
-      roundedVisit.data2[0] = parseFloat(visit.data2[0].toFixed(1));
-    return roundedVisit;
-  });
 
   const [infoVisible, setInfoVisible] = useState(false);
 
@@ -57,7 +51,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
       <div className="mb-2">
         <ResponsiveContainer width="100%" height={400}>
           <LineChart
-            data={roundedMergedVisits}
+            data={mergedVisits}
             margin={{
               top: 5,
               right: 30,

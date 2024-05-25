@@ -55,7 +55,7 @@ const SignUp: React.FC = () => {
           />
           
           <label className="block font-medium text-black dark:text-white mb-2.5">
-            Contrassenya
+            Contrasenya
           </label>
           <input
             type="password"
