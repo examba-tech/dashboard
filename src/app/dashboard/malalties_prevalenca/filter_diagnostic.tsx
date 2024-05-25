@@ -24,7 +24,7 @@ const Filter_diagnostic: React.FC<FiltersProps> = ({
           "NEOPLASIA_PULMONAR",
           "ENFISEMA",
           "FIBROSI_PULMONAR",
-          "AGENTS_EXTERNS"
+          "AGENTS_EXTERNS",
         ]}
         label="Selecciona un diagnòstic"
         which_column="DIAGNOSTIC"

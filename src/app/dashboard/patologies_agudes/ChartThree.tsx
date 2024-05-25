@@ -83,11 +83,11 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selec
         <div>
           <h3 className="text-lg font-semibold text-black dark:text-white pt-3">
           {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
-          ? `Proporció de visites cada 10.000 habitants segons el sexe de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
+          ? `Proporció de visites cada 10.000 habitants segons el sexe de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate}`
           : selectedDiagnostic === "Tots"
           ? `Proporció de visites cada 10.000 habitants segons el sexe de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`
           : selectedMunicipi === "Tots"
-          ? `Proporció de visites cada 10.000 habitants segons el sexe del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
+          ? `Proporció de visites cada 10.000 habitants segons el sexe del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate}`
           : `Proporció de visites cada 10.000 habitants segons el sexe del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`
         }
             <span
