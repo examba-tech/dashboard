@@ -337,14 +337,14 @@ const HomePage = () => {
         <div>
           <p style={{ marginBottom: "5px", textAlign: "justify" }}></p>
             En aquesta secció es realitza un estudi sobre les patologies agudes. Ens hem enfocat en aquestes 6: 
-            <li>- Bronquiolitis Aguda </li>
-            <li>- Bronquitis Aguda</li>
-            <li>- Grip</li>
-            <li>- Infeccions Agudes de les Vies Respiratòries
+            <li style={{ marginLeft: "30px"}}>- Bronquiolitis Aguda </li>
+            <li style={{ marginLeft: "30px"}}>- Bronquitis Aguda</li>
+            <li style={{ marginLeft: "30px"}}>- Grip</li>
+            <li style={{ marginLeft: "30px"}}>- Infeccions Agudes de les Vies Respiratòries
             Superiors (TRS)</li>
-            <li>- Pneumònia Viral</li>
-            <li>- Pneumònia Bacteriana</li>
-          {/* <p style={{ marginBottom: '5px' }}>Hola</p> */}
+            <li style={{ marginLeft: "30px"}}>- Pneumònia Viral</li>
+            <li style={{ marginLeft: "30px"}}>- Pneumònia Bacteriana</li>
+          Cal destacar que tots els gràfics d&apos;aquesta secció estan normalitzats per població per a facilitar la comparació i l&apos;ànalisi realitzat.
         </div>
       ),
     },
@@ -821,8 +821,8 @@ const HomePage = () => {
                   >
                     <SimpleChart data={prediccions2}></SimpleChart>
                     <p style={{ fontSize: "10px" }}>
-                      Predicció de la mitjana del número de visites de la
-                      propera setmana cada 10.000 habitants
+                      Predicció de la mitjana del número de visites cada 10.000 habitants de la
+                      propera setmana
                     </p>
                   </div>
                   <div
@@ -840,7 +840,7 @@ const HomePage = () => {
                     className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow"
                   >
                     <SimpleChart data={prediccions3}></SimpleChart>
-                    <p style={{ fontSize: "13px" }}>
+                    <p style={{ fontSize: "12px" }}>
                       Mitjana del valor de NO2 dels 6 dies anteriors
                     </p>
                   </div>
@@ -860,7 +860,7 @@ const HomePage = () => {
                   >
                     {/* <p style={{ fontSize: '65px',fontWeight: 'bold', fontFamily: 'Roboto'  }}>4.14</p> */}
                     <SimpleChart data={prediccions4}></SimpleChart>
-                    <p style={{ fontSize: "13px" }}>
+                    <p style={{ fontSize: "12px" }}>
                       Mitjana del valor de SO2 dels 6 dies anteriors
                     </p>
                   </div>
@@ -880,19 +880,18 @@ const HomePage = () => {
                       </span>
                 </h5>
                 <div
-                  className="flex justify-center items-center  gap-2"
-                  style={{ marginLeft: "-100px" }}
+                  className="mx-auto flex justify-center relative"
+                  style={{ marginLeft: "-30px" }}
                 >
-                  {/* <ChartOne series={prediccions} selectedMunicipi={selectedMunicipi}/> */}
                   <BulletChart_NO2 data2={prediccions3} no2Data={no2} />
                   {infoVisible && (
             <div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-84 h-74 rounded-lg shadow-lg"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-104 h-74 rounded-lg shadow-lg"
               onClick={toggleInfo}
               style={{ marginTop: "-10px"}}
             >
               <p className="text-sm text-gray-800">
-              Cada barra representa una patologia aguda on la llargària de la barra representa el nombre de pacients d&apos;aquella patologia en un moment concret del temps. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de patologies agudes.
+              En aquestes dues visualitzacions es pot veure el valor de NO2 (o SO2 respectivament) respecte tots els possibles. Aquesta escala distribueix els valors segons el rang d&apos;ICQA dels contaminants. A més, sobre el gràfic de l&apos;escala es presenta un histograma que il·lustra la distribució dels nivells de contaminació durant l&apos;any anterior específicament per a aquest municipi. És important destacar que en situacions on es registrin valors atípics, mai abans observats, la precisió del nostre model predictiu es podria veure afectada. Segons l&apos;ICQA superar els 120 µg/m³ de NO2 i els 350 µg/m³ de SO2 en una hora ja es considera que la qualitat de l&apos;aire és desfavorable.
               </p>
             </div>
           )}
@@ -903,30 +902,12 @@ const HomePage = () => {
                   style={{ fontSize: "15px" }}
                 >
                   Mitjana del SO2 respecte el rang d&apos;ICQA del SO2
-                  <span
-                        className="text-sm text-gray-400 cursor-pointer"
-                        onClick={toggleInfo2}
-                      >
-                        {" "}
-                        +info
-                      </span>
                 </h5>
                 <div
                   className="flex justify-center items-center  gap-2"
                   style={{ marginLeft: "-100px" }}
                 >
                   <BulletChart_SO2 data2={prediccions4} so2Data={so2} />
-                  {infoVisible && (
-            <div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-2 w-84 h-74 rounded-lg shadow-lg"
-              onClick={toggleInfo2}
-              style={{ marginTop: "-10px"}}
-            >
-              <p className="text-sm text-gray-800">
-              Cada barra representa una patologia aguda on la llargària de la barra representa el nombre de pacients d&apos;aquella patologia en un moment concret del temps. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de patologies agudes.
-              </p>
-            </div>
-          )}
                 </div>
               </div>
               <br></br>

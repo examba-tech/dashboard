@@ -49,7 +49,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
         </div>
       </div>
       <div className="mb-2">
-        <ResponsiveContainer width="100%" height={400}>
+        <ResponsiveContainer width="100%" height={405}>
           <LineChart
             data={mergedVisits}
             margin={{
@@ -108,17 +108,16 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
           </ResponsiveContainer>
           {infoVisible && (
             <div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-2 py-4 w-64 h-54 rounded-lg shadow-lg"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-4 w-64 h-54 rounded-lg shadow-lg"
               onClick={toggleInfo}
             >
               <p className="text-sm text-gray-800">
               Aquest gràfic de línies mostra l&apos;evolució del nombre de
-                    visites l&apos;any 2023. Està dissenyat per representar
-                    dades temporals on l&apos;eix x mostra els noms dels
-                    períodes de temps (en aquest cas, les diferents setmanes de
-                    l&apos;any), i l&apos;eix y representa la quantitat de
-                    visites. A més que estarà filtrat segons el municipi
-                    seleccionat (o tots).              </p>
+                    visites pel rang de temps seleccionat. Està dissenyat per representar
+                    dades temporals on l&apos;eix x mostra el període de temps, i l&apos;eix y representa la quantitat de
+                    visites per cada 10.000 habitants pel municipi
+                    seleccionat (o bé tots). Quan es selecciona el segon municipi permet la comparació entre ambdós.
+                    </p>
             </div>
           )}
           </div>

@@ -167,17 +167,17 @@ const HomePage = () => {
       info: (
         <div>
           <p style={{ marginBottom: "5px", textAlign: "justify" }}>
-            En aquesta secció es realitza un estudi sobre les malalties de
-            prevalença, on ens enfoquem més en la comparativa i en la correlació
+            En aquesta secció es realitza un estudi sobre les malalties respiratòries cròniques, on ens enfoquem més en la comparativa i en la correlació
             que pugui haver entre les variables. Ens hem centrat en les següents
             7 malalties:
-            <li>- Asma</li>
-            <li>- Bronquitis Crònica</li>
-            <li>- MPOC Mixte (Malaltia Pulmonar Obstructiva Crònica)</li>
-            <li>- Bronquiectàsies</li>
-            <li>- Emfisema</li>
-            <li>- Neoplàsia Pulmonar</li>
-            <li>- Fibrosi Pulmonar</li>
+            <li style={{ marginLeft: "30px"}}>- Asma</li>
+            <li style={{ marginLeft: "30px"}}>- Bronquitis Crònica</li>
+            <li style={{ marginLeft: "30px"}}>- MPOC Mixte (Malaltia Pulmonar Obstructiva Crònica)</li>
+            <li style={{ marginLeft: "30px"}}>- Bronquiectàsies</li>
+            <li style={{ marginLeft: "30px"}}>- Emfisema</li>
+            <li style={{ marginLeft: "30px"}}>- Neoplàsia Pulmonar</li>
+            <li style={{ marginLeft: "30px"}}>- Fibrosi Pulmonar</li>
+            Cal destacar que tots els gràfics d&apos;aquesta secció estan normalitzats per població per a facilitar la comparació i l&apos;ànalisi realitzat.
           </p>
           {/* <p style={{ marginBottom: '5px' }}>Hola</p> */}
         </div>
@@ -229,7 +229,7 @@ const HomePage = () => {
   >([]);
 
   const [selectedDiagnostic, setSelectedDiagnostic] =
-    React.useState<string>("TOTS"); // Valor predeterminado
+    React.useState<string>("ASMA"); // Valor predeterminado
   // Función para manejar el cambio de diagnóstico seleccionado
 
   const handleDiagnosticChange = (diagnostic: string) => {
@@ -321,7 +321,7 @@ const HomePage = () => {
           <br></br>
           <div className="flex items-center gap-4">
             <h1 className="text-xl font-bold">
-              Dades d&apos;interès per malaties respiratòries cròniques{" "}
+              Dades d&apos;interès per malaties respiratòries cròniques - Resum{" "}
             </h1>
           </div>
           <div className="border-b border-black my-4"></div>

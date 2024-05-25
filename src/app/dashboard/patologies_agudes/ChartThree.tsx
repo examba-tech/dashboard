@@ -81,7 +81,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selec
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark flex-grow">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h3 className="text-lg font-semibold text-black dark:text-white pt-3">
+          <h3 className="text-sm font-semibold text-black dark:text-white pt-3">
           {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
           ? `Proporció de visites cada 10.000 habitants segons el sexe de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate}`
           : selectedDiagnostic === "Tots"
@@ -112,11 +112,11 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selec
           />
           {infoVisible && (
             <div
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-2 py-4 w-64 h-54 rounded-lg shadow-lg"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-4 w-64 h-54 rounded-lg shadow-lg"
               onClick={toggleInfo}
             >
               <p className="text-sm text-gray-800">
-              El gràfic de donut mostrat representa la proporció de visites segons el sexe. Utilitza dos segments acolorits per representar la distribució de visites entre dues categories de gènere: &quot;Dona&quot; i &quot;Home&quot;. Abaix es veu el nom exacte de pacients de cada sexe, el qual ha estat filtrat per patologia aguda i moment del temps on volem veure aquesta proporció (tenint l&apos;opció també de tot l&apos;històric).
+              Aquest gràfic representa la proporció de visites segons el sexe. Utilitza dos segments acolorits per representar la distribució de visites cada 10.000 habitants entre dues categories de sexe: &quot;Dona&quot; i &quot;Home&quot;. Aquests valors estan filtrats per patologia aguda, municipi i rang del temps on volem veure aquesta proporció (tenint l&apos;opció també de tot l&apos;històric).
               </p>
             </div>
           )}

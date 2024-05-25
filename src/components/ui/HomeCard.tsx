@@ -13,7 +13,7 @@ const HomeCard = ({
   return (
     <Link href={link}>
       <div
-        className="option-box flex flex-col justify-center items-center rounded-lg border border-primary bg-blue-100 p-4 text-black transition hover:bg-opacity-90 mr-4 cursor-pointer"
+        className="option-box flex flex-col justify-center items-center bg-blue-100 p-4 text-black transition hover:bg-opacity-90 shadow-lg mr-4 cursor-pointer"
         style={{ height: "200px", width: "200px" }}
       >
         <div className="mb-1">
@@ -25,7 +25,7 @@ const HomeCard = ({
             className="w-8 h-8 ml-5 mr-2 opacity-1"
           />
         </div>
-        <p className="text-center text-2xl font-bold">{text}</p>
+        <p className="text-center text-xl font-bold">{text}</p>
       </div>
     </Link>
   );

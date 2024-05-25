@@ -78,6 +78,11 @@ interface ChartTwoProps {
 
 
 const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, selectedDiagnostic }) => {
+  const roundedSeries = series.map(serie => ({
+    ...serie,
+    data: serie.data.map(value => parseFloat(value.toFixed(1))),
+  }));
+
   const [infoVisible, setInfoVisible] = useState(false);
 
   const toggleInfo = () => {
@@ -90,12 +95,12 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, selectedD
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
             {selectedDiagnostic === "TOTS" && selectedMunicipi === "Tots"
-          ? `Pacients cada 10000 habitants segons les diferents franges d'edat de tots els diagnòstics`
+          ? `Pacients cada 10000 habitants segons les diferents franges d'edat de tots els diagnòstics al 2023`
           : selectedDiagnostic === "TOTS"
-          ? `Pacients cada 10000 habitants segons les diferents franges d'edat de tots els diagnòstics al municipi ${selectedMunicipi}`
+          ? `Pacients cada 10000 habitants segons les diferents franges d'edat de tots els diagnòstics al municipi ${selectedMunicipi} al 2023`
           : selectedMunicipi === "Tots"
-          ? `Pacients cada 10000 habitants segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic}`
-          : `Pacients cada 10000 habitants segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} al municipi ${selectedMunicipi}`
+          ? `Pacients cada 10000 habitants segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} al 2023`
+          : `Pacients cada 10000 habitants segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} al municipi ${selectedMunicipi} al 2023`
           }
             <span
               className="text-sm text-gray-400 cursor-pointer"
@@ -112,7 +117,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, selectedD
         <div id="chartTwo" className="pb-15 flex justify-center relative">
           <ReactApexChart
             options={options}
-            series={series}
+            series={roundedSeries}
             type="bar"
             height={350}
             width={550}
@@ -124,7 +129,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, selectedD
             style={{ marginTop: "-20px", marginLeft: "10px" }}
           >
             <p className="text-base text-gray-1000 px-4 py-2">
-              Cada barra representa una franja d&apos;edat on la llargària de la barra representa el nombre de pacients que pateixen aquella malaltia. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de franges d&apos;edat. Aquests valors han estat filtrats per la malaltia crònica seleccionada (tenint l&apos;opció també de veure&apos;n el nombre total sense distingir per malaltia).
+            En aquest gràfic cada barra representa una franja d’edat on la seva llargària representa el nombre de pacients degut a aquella patologia al 2023. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de franges d&apos;edat.
             </p>
           </div>
           )}

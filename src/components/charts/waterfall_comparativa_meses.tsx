@@ -73,14 +73,14 @@ const Waterfall = ({
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark flex-grow relative">
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
-          <h4 className="text-lg font-semibold text-black dark:text-white pl-5 pt-3">
+          <h4 className="text-sm font-semibold text-black dark:text-white pl-5 pr-5 pt-3">
             {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
-              ? `Comparativa de visites cada 10.000 habitants de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate}`
+              ? `Evolució del nombre de visites cada 10.000 habitants de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate}`
               : selectedDiagnostic === "Tots"
-              ? `Comparativa de visites cada 10.000 habitants de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`
+              ? `Evolució del nombre de visites cada 10.000 habitants de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`
               : selectedMunicipi === "Tots"
-              ? `Comparativa de visites cada 10.000 habitants del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate}`
-              : `Comparativa de visites cada 10.000 habitants del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`}
+              ? `Evolució del nombre de visites cada 10.000 habitants del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate}`
+              : `Evolució del nombre de visites cada 10.000 habitants del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -128,13 +128,10 @@ const Waterfall = ({
             style={{ marginLeft: "25px" }}
           >
             <p className="text-sm text-gray-800 px-4 py-2 text-center">
-              El gràfic compara el nombre de casos registrats els mesos de 2023,
-              representats per barres verticals. Cada barra correspon a un mes
+              El gràfic mostra el nombre de visites cada 10.000 habitants durant el rang de temps seleccionat. Cada barra correspon a un mes
               específic, amb l&apos;eix horitzontal mostrant els noms dels
-              mesos. L&apos;alçada de cada barra reflecteix la quantitat de
-              casos registrats per a aquest mes en particular. A més, s&apos;hi
-              ha inclòs una línia de referència horitzontal que indica la
-              mitjana de casos durant aquest període.
+              mesos. L&apos;alçada de cada barra reflecteix el nombre de visites per a aquest mes en particular. A més, s&apos;inclou una línea horitzontal que representa la mitjana; si la barra està pintada de blau fosc, indica que les visites estan per sobre de la mitjana, i en blau clar si estan per sota.
+
             </p>
           </div>
         )}

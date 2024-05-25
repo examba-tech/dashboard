@@ -124,8 +124,9 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
                   style={{ marginLeft: "25px" }}
                 >
                   <p className="text-sm text-gray-800 px-4 py-2 text-center">
-                  Aquest gràfic mostra l&apos;evolució de SO2 al llarg d&apos;un temps concret. Sabem que aquest és un gas incolor i d&apos;olor forta i sufocant. En una atmósfera humida es transforma en àcid sulfúric i causa la deposició àcida. A partir de concentracions majors a 0.1 ppm es produeix una important reducció de la visibilitat. Pot provocar irritació i inflamació del sistema respiratori, afeccions i insuficiències pulmonars, alteració del metabolisme de les proteïnes i mal de cap.
-                  </p>
+                  Aquest gràfic de línies mostra l&apos;evolució del valor de SO2 pel rang de temps seleccionat. Està dissenyat per representar
+                    dades temporals on l&apos;eix x mostra el període de temps, i l&apos;eix y representa el valor de SO2 pel municipi
+                    seleccionat (o bé tots). Quan es selecciona el segon municipi permet la comparació entre ambdós.</p>
                 </div>
               )}
     </div>
