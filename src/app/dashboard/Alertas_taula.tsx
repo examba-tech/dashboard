@@ -100,7 +100,7 @@ const PredictionsAlerts: React.FC<PredictionsAlertsProps> = ({ predictions }) =>
           onMouseDown={(e) => e.preventDefault()}
           className={buttonVariants({ className: "w-full max-w-xs", variant: "outline" })}
         >
-          Mostrar totes les alertes
+          Recuperar alertes esborrades
         </button>
       </div>
 

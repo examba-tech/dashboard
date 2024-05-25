@@ -87,7 +87,7 @@ const Sidebar = ({
                   href="/dashboard"
                   className={`block py-2 px-4 hover:bg-gray-700 w-full`}
                 >
-                  Pàgina principal
+                  Pàgina Principal
                 </Link>
               )}
             </li>
@@ -125,7 +125,7 @@ const Sidebar = ({
                   href="/dashboard/malalties_prevalenca"
                   className={`block py-2 px-4 hover:bg-gray-700 w-full`}
                 >
-                  Malalties cròniques
+                  Malalties Cròniques
                 </Link>
               )}
             </li>
@@ -216,7 +216,7 @@ const Sidebar = ({
                     isVisible ? "" : "opacity-0"
                   }`}
                 >
-                  Log out
+                  Log Out
                 </span>
               </Link>
             )}

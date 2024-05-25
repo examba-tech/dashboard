@@ -96,11 +96,11 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, selectedD
         <div>
           <h4 className="text-lg font-semibold text-black dark:text-white pl-5 pt-3">
           {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
-          ? `Comparativa del nombre de visites cada 10.000 habitants segons les diferents franges d'edat de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
+          ? `Comparativa del nombre de visites cada 10.000 habitants segons les diferents franges d'edat de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate}`
           : selectedDiagnostic === "Tots"
           ? `Comparativa del nombre de visites cada 10.000 habitants segons les diferents franges d'edat de tots els diagnòstics des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`
           : selectedMunicipi === "Tots"
-          ? `Comparativa del nombre de visites cada 10.000 habitants segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate} a tots els municipis`
+          ? `Comparativa del nombre de visites cada 10.000 habitants segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate}`
           : `Comparativa del nombre de visites cada 10.000 habitants segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`
           }
             <span

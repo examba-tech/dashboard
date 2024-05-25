@@ -898,7 +898,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
       return (
         <div className="additional-info ml-4">
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
-          <p>080667,Castellví de Rosanes</p>
+          <p>080667, Castellví de Rosanes</p>
           <ul>
           <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
@@ -912,7 +912,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
       return (
         <div className="additional-info ml-4">
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
-          <p>082896,Torrelles de Llobregat</p>
+          <p>082896, Torrelles de Llobregat</p>
           <ul>
           <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
@@ -921,7 +921,22 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           </ul>
         </div>
       );
-    }  
+    }
+    if (selectedMunicipi === "Subirats") {
+      return (
+        <div className="additional-info ml-4">
+          <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
+          <p>082732, Subirats</p>
+          <ul>
+          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
+            <li>- 3 Consultoris</li>
+            <li>- 1 estació de contaminants de 083054, Vilafranca del Penedès</li>
+            <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
+          </ul>
+        </div>
+      );
+    }
+    
   }
 
 
