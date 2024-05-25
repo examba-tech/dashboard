@@ -84,7 +84,11 @@ const MyLineChart_vis_SO2: React.FC<MyLineChartProps> = ({ mergedVisits, mergedS
             }} 
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fontSize: 10 }} />
+            <XAxis
+              dataKey="name"
+              tick={{ fontSize: 10 }}
+              tickFormatter={(tick) => dayjs(tick).format('DD/MM/YYYY')}
+            />
             {/* <YAxis tick={{ fontSize: 10 }} /> */}
             <YAxis yAxisId="left" tick={{ fontSize: 10 }} stroke="#2471A3"/>
             <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 10 }} stroke="#B03A2E"/>
