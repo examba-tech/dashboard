@@ -43,6 +43,7 @@ export interface Estatiques {
   SO2: number;
   ICQA_NO2: string;
   ICQA_SO2: string;
+  POBLACIO: number;
 }
 
 export interface Prediccions {

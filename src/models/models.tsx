@@ -64,6 +64,7 @@ const estaticSchema = new Schema(
     SO2: Number,
     ICQA_NO2: String,
     ICQA_SO2: String,
+    POBLACIO: Number,
   },
   {
     bufferTimeoutMS: timeout,
