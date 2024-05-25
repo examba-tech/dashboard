@@ -89,9 +89,9 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, selectedD
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
-            {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
+            {selectedDiagnostic === "TOTS" && selectedMunicipi === "Tots"
           ? `Pacients cada 10000 habitants segons les diferents franges d'edat de tots els diagnòstics`
-          : selectedDiagnostic === "Tots"
+          : selectedDiagnostic === "TOTS"
           ? `Pacients cada 10000 habitants segons les diferents franges d'edat de tots els diagnòstics al municipi ${selectedMunicipi}`
           : selectedMunicipi === "Tots"
           ? `Pacients cada 10000 habitants segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic}`

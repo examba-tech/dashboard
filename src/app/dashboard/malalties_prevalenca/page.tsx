@@ -43,6 +43,7 @@ const calculateTotalCasesBySex = (
 
 const calculateTotalCasesByDiagnostic = (info: Interfaces.Estatiques[]) => {
   var totalCasesByDiagnostic = {
+    TOTS: 0,
     ASMA: 0,
     BRONQUITIS_CRONICA: 0,
     MPOC_MIXTE: 0,
@@ -82,11 +83,15 @@ const calculateTotalCasesByDiagnostic = (info: Interfaces.Estatiques[]) => {
     } else if (entry.DIAGNOSTIC == "AGENTS_EXTERNS") {
       totalCasesByDiagnostic.AGENTS_EXTERNS +=
         (entry.Numero_Casos.valueOf() / entry.POBLACIO.valueOf()) * 10000;
+    } else if (entry.DIAGNOSTIC == "TOTS") {
+      totalCasesByDiagnostic.TOTS +=
+        (entry.Numero_Casos.valueOf() / entry.POBLACIO.valueOf()) * 10000;
     }
   });
   return {
     name: "Visites",
     data: [
+      totalCasesByDiagnostic.TOTS,
       totalCasesByDiagnostic.ASMA,
       totalCasesByDiagnostic.BRONQUITIS_CRONICA,
       totalCasesByDiagnostic.MPOC_MIXTE,
@@ -221,7 +226,7 @@ const HomePage = () => {
   >([]);
 
   const [selectedDiagnostic, setSelectedDiagnostic] =
-    React.useState<string>("ASMA"); // Valor predeterminado
+    React.useState<string>("TOTS"); // Valor predeterminado
   // Función para manejar el cambio de diagnóstico seleccionado
 
   const handleDiagnosticChange = (diagnostic: string) => {

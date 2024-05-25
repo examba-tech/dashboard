@@ -72,9 +72,9 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selec
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white pt-3">
-          {selectedDiagnostic === "Tots" && selectedMunicipi === "Tots"
+          {selectedDiagnostic === "TOTS" && selectedMunicipi === "Tots"
           ? `Proporció de pacients segons el sexe de tots els diagnòstics`
-          : selectedDiagnostic === "Tots"
+          : selectedDiagnostic === "TOTS"
           ? `Proporció de pacients segons el sexe de tots els diagnòstics al municipi ${selectedMunicipi}`
           : selectedMunicipi === "Tots"
           ? `Pacients cada 10000 habitants segons el sexe del diagnòstic ${selectedDiagnostic}`
