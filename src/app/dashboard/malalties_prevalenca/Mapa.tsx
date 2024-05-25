@@ -21,6 +21,9 @@ interface ChartPredProps {
     NO: Number;
     SO2: Number;
     Numero_Casos: Number;
+    ICQA_NO2: Number;
+    ICQA_SO2: Number;
+    total_poblacio: Number;
   }[];
   onMunicipiSelect: (municipi: string) => void;
 }
@@ -38,6 +41,10 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect }) => {
   });
   const predictionsWithStringKeys = predictions.map((prediction) => ({
     ...prediction,
+    Numero_Casos:
+      (prediction.Numero_Casos.valueOf() /
+        prediction.total_poblacio.valueOf()) *
+      10000,
     Codi_municipi: prediction.Codi_municipi.toString(),
   }));
 

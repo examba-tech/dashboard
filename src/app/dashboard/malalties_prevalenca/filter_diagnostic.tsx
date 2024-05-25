@@ -16,7 +16,6 @@ const Filter_diagnostic: React.FC<FiltersProps> = ({
         selectedValue={selectedDiagnostic}
         onSelectedValueChange={(column, value) => onDiagnosticChange(value)}
         options={[
-          "TOTS",
           "ASMA",
           "BRONQUITIS_CRONICA",
           "MPOC_MIXTE",

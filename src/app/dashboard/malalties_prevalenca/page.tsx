@@ -222,6 +222,9 @@ const HomePage = () => {
       NO: Number;
       SO2: Number;
       Numero_Casos: Number;
+      ICQA_NO2: Number;
+      ICQA_SO2: Number;
+      total_poblacio: Number;
     }[]
   >([]);
 
