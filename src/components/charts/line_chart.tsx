@@ -66,7 +66,11 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fontSize: 10 }} />
+            <XAxis
+              dataKey="name"
+              tick={{ fontSize: 10 }}
+              tickFormatter={(tick) => dayjs(tick).format('DD/MM/YYYY')}
+            />
             <YAxis tick={{ fontSize: 10 }} />
             <Tooltip
               formatter={(value, name) => {
