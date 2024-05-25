@@ -21,27 +21,41 @@ export default function RootLayout({
     pathname === "/contrasenya" ||
     pathname === "/Terms_Privacidad_Contact";
 
-  return (
-    <html
-      lang="en"
-      className={cn(
-        "bg-white text-slate-900 antialiased light",
-        montserrat.className
-      )}
+return (
+  <html
+    lang="en"
+    className={cn(
+      "bg-white text-slate-900 antialiased light",
+      montserrat.className
+    )}
+  >
+    <body
+      className={`min-h-screen pt-12 bg-slate-50 antialiased ${
+        !inLogin ? (isVisible ? "ml-64" : "ml-16") : ""
+      } transition-width duration-300`}
     >
-      <body
-        className={`min-h-screen pt-12 bg-slate-50 antialiased ${
-          !inLogin ? (isVisible ? "ml-64" : "ml-16") : ""
-        } transition-width duration-300`}
-      >
-        {!inLogin && (
-          <Sidebar isVisible={isVisible} setIsVisible={setIsVisible} />
-        )}
-        <div className="container max-w-7xl mx-auto h-full pt-10 min-h-screen">
-          {children}
+      {!inLogin && (
+        <Sidebar isVisible={isVisible} setIsVisible={setIsVisible} />
+      )}
+      <div className="container max-w-7xl mx-auto h-full pt-10 min-h-screen">
+        {children}
+      </div>
+      <Footer />
+      {/* Agregar icono de usuario */}
+      {!inLogin && (
+        <div className="fixed top-4 right-4">
+          <button
+            onClick={() => {
+              // Redireccionar a la página de perfil que da la opción de darse de baja
+              window.location.href = "/dashboard/perfil_baja";
+            }}
+            className="bg-transparent border-none text-gray-600 hover:text-gray-800 focus:outline-none"
+          >
+            <img src={"/user-circle-solid-24.png"} alt="User Icon" className="w-12 h-12" />
+          </button>
         </div>
-        <Footer />
-      </body>
-    </html>
+      )}
+    </body>
+  </html>
   );
 }
