@@ -929,6 +929,7 @@ const HomePage = () => {
                 selectedMunicipi={selectedMunicipi}
                 beginDate={beginDate}
                 endDate={endDate}
+                selectedSecondMunicipi={selectedSecondMunicipi}
               />
             </div>
             <div className="flex-1 flex flex-col justify-center items-center">

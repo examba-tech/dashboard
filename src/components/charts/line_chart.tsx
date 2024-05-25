@@ -16,9 +16,10 @@ interface MyLineChartProps {
   selectedMunicipi: string;
   beginDate: dayjs.Dayjs;
   endDate: dayjs.Dayjs;
+  selectedSecondMunicipi: string;
 }
 
-const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicipi, beginDate, endDate }) => {
+const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicipi, beginDate, endDate, selectedSecondMunicipi }) => {
   const roundedMergedVisits = mergedVisits.map((visit) => {
     const roundedVisit = { ...visit };
       roundedVisit.data[0] = parseFloat(visit.data[0].toFixed(1));
