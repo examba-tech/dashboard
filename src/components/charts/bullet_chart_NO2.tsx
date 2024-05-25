@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BarChart,
   Bar,
   XAxis,
   YAxis,
-  Tooltip,
   ReferenceLine,
   Rectangle,
   RectangleProps,
 } from "recharts";
-import BarChartComponentNo from "./barChartNo"; // Importa el nuevo componente
+import BarChartComponentNo from "./barChartNo"; 
 
 interface Segment {
   start: number;
@@ -38,11 +37,11 @@ interface ChartProps {
 
 const segments: Segment[] = [
   { start: 0, end: 40, color: "#AED6F1" },
-  { start: 41, end: 90, color: "#D4EFDF" },
-  { start: 91, end: 120, color: "#F9E79F" },
-  { start: 121, end: 230, color: "#FADBD8" },
-  { start: 231, end: 340, color: "#F1948A" },
-  { start: 341, end: 450, color: "#AB8187" },
+  { start: 40, end: 90, color: "#D4EFDF" },
+  { start: 90, end: 120, color: "#F9E79F" },
+  { start: 120, end: 230, color: "#FADBD8" },
+  { start: 230, end: 340, color: "#F1948A" },
+  { start: 340, end: 450, color: "#AB8187" },
 ];
 
 const data = [{ name: "Aggregated", value: 450 }]; // Valor máximo para abarcar todo el rango
@@ -67,6 +66,8 @@ const CustomizedBar: React.FC<CustomizedBarProps> = (props) => {
 };
 
 const BulletChart_NO2: React.FC<ChartProps> = ({ data2, no2Data }) => {
+  const [zoomed, setZoomed] = useState(false);
+
   const numberToShow =
     data2.length > 0 && data2[0].data.length > 0
       ? Number(data2[0].data[0].toFixed(2))
@@ -74,7 +75,34 @@ const BulletChart_NO2: React.FC<ChartProps> = ({ data2, no2Data }) => {
 
   return (
     <div>
-      <BarChartComponentNo data={no2Data} />
+      <div style={{ position: "relative" }}>
+        <button
+          onClick={() => setZoomed(!zoomed)}
+          style={{
+            position: "absolute",
+            right: 0,
+            zIndex: 1,
+            background: "white",
+            border: "1px solid black",
+            padding: "5px",
+            cursor: "pointer",
+          }}
+        >
+          {zoomed ? "Normal" : "Zoom"}
+        </button>
+        <div style={{
+          position: "relative",
+          background: zoomed ? "white" : "transparent",
+          padding: zoomed ? "20px" : "0",
+          transform: zoomed ? "scale(1.5)" : "scale(1)",
+          transformOrigin: "top left",
+          zIndex: zoomed ? 1 : 0,
+          right: zoomed ? "500px" : "0", 
+          transition: "right 0.3s ease-in-out, transform 0.3s ease-in-out",
+        }}>
+          <BarChartComponentNo data={no2Data} zoomed={zoomed} /> 
+        </div>
+      </div>
       <BarChart
         width={500}
         height={70}
@@ -88,7 +116,6 @@ const BulletChart_NO2: React.FC<ChartProps> = ({ data2, no2Data }) => {
           ticks={[0, 40, 90, 120, 230, 340, 450]}
         />
         <YAxis type="category" dataKey="name" hide />
-        {/* <Tooltip /> */}
         <Bar
           dataKey="value"
           fill="#8884d8"
@@ -100,9 +127,9 @@ const BulletChart_NO2: React.FC<ChartProps> = ({ data2, no2Data }) => {
           strokeWidth={1}
           label={{
             value: "BO",
-            position: "insideBottom",
-            dx: 0,
-            dy: 40,
+            position: "insideBottomRight", 
+            dx: 22, 
+            dy: 40, 
             fill: "black",
             style: { fontSize: "14px", fontWeight: "bold" },
           }}
@@ -113,9 +140,9 @@ const BulletChart_NO2: React.FC<ChartProps> = ({ data2, no2Data }) => {
           strokeWidth={1}
           label={{
             value: "DOLENT",
-            position: "insideBottom",
-            dx: 0,
-            dy: 40,
+            position: "insideBottomRight", 
+            dx: 10, 
+            dy: 40, 
             fill: "black",
             style: { fontSize: "14px", fontWeight: "bold" },
           }}
