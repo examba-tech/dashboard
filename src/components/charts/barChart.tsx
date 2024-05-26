@@ -36,7 +36,10 @@ const BarChartComponent: React.FC<BarChartProps> = ({ data, zoomed }) => {
         domain={zoomed ? [0, 200] : [0, 900]} // Ajuste del dominio en función del zoom
         ticks={zoomed ? [0, 100, 200] : [100, 200, 350, 500, 750]} // Ajuste de los ticks en función del zoom
       />
-      <YAxis dataKey="COUNT_SO2" />
+      <YAxis 
+        dataKey="COUNT_SO2" 
+        domain={[0, 1000]} // Fijar escala
+      />
       <Tooltip content={<CustomTooltip />} />
       <Bar dataKey="COUNT_SO2" fill="#163a66" />
       
