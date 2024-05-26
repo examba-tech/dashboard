@@ -114,7 +114,7 @@ const Waterfall = ({
                 textAnchor="end"
                 dx={-5}
               />
-              <YAxis tickFormatter={(value) => value} />
+              <YAxis tickFormatter={(value) => value} domain={[0, 700]}/>
               <Tooltip/>
               <ReferenceLine y={average} stroke="#000" />
               <Bar dataKey="visites" fill="fill" />

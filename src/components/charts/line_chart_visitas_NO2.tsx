@@ -89,9 +89,9 @@ const MyLineChart_vis_NO2: React.FC<MyLineChartProps> = ({ mergedVisits, mergedN
               tick={{ fontSize: 10 }}
               tickFormatter={(tick) => dayjs(tick).format('DD/MM/YYYY')}
             />
-            {/* <YAxis tick={{ fontSize: 10 }} /> */}
-            <YAxis yAxisId="left" tick={{ fontSize: 10 }} stroke="#2471A3"/>
-            <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 10 }} stroke="#B03A2E"/>
+            <YAxis yAxisId="left" tick={{ fontSize: 10 }} stroke="#2471A3" domain={[0, 4]}/>
+            <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 10 }} stroke="#B03A2E" domain={[0, 100]}/>
+            
             <Tooltip
               formatter={(value, name) => {
                 let displayName = name;

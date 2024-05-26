@@ -49,7 +49,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
         </div>
       </div>
       <div className="mb-2">
-        <ResponsiveContainer width="100%" height={405}>
+        <ResponsiveContainer width="100%" height={419}>
           <LineChart
             data={mergedVisits}
             margin={{
@@ -65,7 +65,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
               tick={{ fontSize: 10 }}
               tickFormatter={(tick) => dayjs(tick).format('DD/MM/YYYY')}
             />
-            <YAxis tick={{ fontSize: 10 }} />
+            <YAxis tick={{ fontSize: 10 }} domain={[0, 4]} /> {/* Fijar la escala */}
             <Tooltip
               formatter={(value, name) => {
                 let displayName = name;

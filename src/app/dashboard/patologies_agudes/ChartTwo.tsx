@@ -39,6 +39,8 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnos
 
   const options: ApexOptions = {
     yaxis: {
+      min: 0,
+      max: 3000,
       labels: {
         style: {
           fontSize: "8px", // Tamaño de la letra del eje y
