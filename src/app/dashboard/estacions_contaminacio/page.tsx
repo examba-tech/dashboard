@@ -48,14 +48,13 @@ const HomePage = () => {
       nombre: '+info', info: <div>
         <p style={{ marginBottom: '5px', textAlign: 'justify' }}>
           En aquesta secció es troba la informació de les estacions de contaminació. Primer trobem un
-          mapa que ens permet veure la localització de cadascuna d&apos;aquestes estacions, i es pot clicar 
+          mapa que ens permet veure la localització de cadascuna d&apos;aquestes estacions, les quals es poden seleccionar 
           per veure la informació més rellevant corresponent. A més, això va seguit d&apos;informació 
           addicional de cadascuna d&apos;aquestes estacions, i dels contaminants que finalment utilitzem
           per realitzar l&apos;estudi de l&apos;afectació respecte el nombre de visites degudes a malalties 
           respiratòries. Al final podem veure també un petit anàlisi dels rangs establerts pels possibles valors 
           de l&apos;ICQA dels contaminants anteriors.
           </p>
-        {/* <p style={{ marginBottom: '5px' }}>Hola</p> */}
       </div>
     },
   ];
@@ -65,7 +64,7 @@ const HomePage = () => {
   const estacionesMeteorologicas = [
     { nombre: 'Estació de Cubelles', info: <p style={{ textAlign: 'justify' }}>L&apos;estació es troba al centre de Cubelles, 
       al carrer Major. Consisteix en una estació suburbana, que es troba també bastant 
-      a prop del Riu Foix, i la carretera més porpera és la C-31.</p>},
+      a prop del Riu Foix, i la carretera més propera és la C-31.</p>},
     { nombre: 'Estació de Cornellà', info:  <p style={{ textAlign: 'justify' }}> L&apos;estació està rodejada de 2 escoles, 
       1 institut i una piscina municipal (és més o menys cèntrica). Toca les vies del tren, 
       i l’A-2 queda a 1.5km aprox. A més es troba situada a menys de 2km d&apos;un polígon industrial
@@ -146,9 +145,9 @@ const HomePage = () => {
   const contaminantes = [
     {
       nombre: 'NO2, Diòxid de Nitrogen', info: <div>
-        <p style={{ marginBottom: '5px', textAlign: 'justify' }}>El diòxid de nitrogen és Gas format per dos àtoms d’oxigen 
+        <p style={{ marginBottom: '5px', textAlign: 'justify' }}>El diòxid de nitrogen és un gas format per dos àtoms d’oxigen 
           i un de nitrogen. És un dels elements del boirum fotoquímic 
-          i precursor de l’àcid nítric, que ès un dels constituents de 
+          i precursor de l’àcid nítric, que és un dels constituents de 
           la pluja àcida. L&apos;NO2 en presència de la llum ultraviolada és
           la font principal de l&apos;ozó troposfèric.</p>
         <p style={{ marginBottom: '5px' }}>El seu origen es troba en el trànsit (tant terrestre,
@@ -210,9 +209,12 @@ const HomePage = () => {
         ))}
       </ul>
         <br />
+      <br></br>
+      <br></br>
       <MyMapa />
       <br />
-      <h1><strong style={{ fontWeight: 'bold', fontSize: '20px', textDecoration: 'underline' }}>Descripció de les estacions</strong></h1>
+      <br></br>
+      <h1><strong style={{ fontWeight: 'bold', fontSize: '20px' }}>Descripció de les estacions</strong></h1>
       <br />
       <p style={{ textAlign: 'justify' }}>Les dades diàries dels contaminants per realitzar la predicció han estat 
         recollides a partir de les diferents <span style={{ fontWeight: 'bold' }}>estacions de contaminats</span> dels municipis de 

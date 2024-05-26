@@ -24,7 +24,7 @@ const Page = () => {
     {
       nombre: '+info', info: <div>
         <p style={{ marginBottom: '5px', textAlign: 'justify' }}>
-          Taula de dades que permet filtrar per codi municipal, i descarregar-les en format &quot;.csv&quot;</p>
+          Taula de les prediccions de visites de patologies respiratòries agudes que permet filtrar per codi municipal, i descarregar-les en format &quot;.csv&quot;</p>
         {/* <p style={{ marginBottom: '5px' }}>Hola</p> */}
       </div>
     },
