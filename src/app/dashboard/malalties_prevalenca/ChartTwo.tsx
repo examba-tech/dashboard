@@ -154,7 +154,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({
             options={options}
             series={roundedSeries}
             type="bar"
-            height={350}
+            height={347}
             width={500}
           />
           {infoVisible && (

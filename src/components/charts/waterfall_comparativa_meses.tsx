@@ -94,10 +94,10 @@ const Waterfall = ({
 
       <div>
         <div>
-          <ResponsiveContainer width={500} height={590}>
+          <ResponsiveContainer width={500} height={640}>
             <BarChart
               width={500}
-              height={500}
+              height={550}
               data={chartData}
               margin={{
                 top: 5,
