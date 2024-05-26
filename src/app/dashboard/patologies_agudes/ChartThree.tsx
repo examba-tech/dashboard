@@ -107,7 +107,7 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selec
             options={options}
             series={[roundedSeries.female, roundedSeries.male]}
             type="donut"
-            height={250}
+            height={272}
             width={50}
           />
           {infoVisible && (
