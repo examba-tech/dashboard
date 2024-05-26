@@ -972,6 +972,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
   </div>
 
   {renderAdditionalInfo()}
+  <br></br>
 </div>
 
   );

@@ -403,9 +403,9 @@ const HomePage = () => {
             (Selecciona el municipi d&apos;interès per la resta de
             l&apos;anàlisi)
           </h4>
-          <div className="flex items-center gap-4" style= {{marginLeft: "-90px"}}>
+          <div className="flex items-center gap-4" style= {{marginLeft: "0px"}}>
             <div className="flex-1 flex flex-col items-center" style= {{width: "800px"}}>
-              <Mapa predictions={mapa_casos} onMunicipiSelect={handleMunicipiSelect} />
+              <Mapa predictions={mapa_casos} onMunicipiSelect={handleMunicipiSelect} selectedMunicipi={selectedMunicipi}/>
             </div>
             <div className="flex flex-col gap-4">
               <div
