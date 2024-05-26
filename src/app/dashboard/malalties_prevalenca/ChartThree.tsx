@@ -124,3 +124,4 @@ const ChartThree: React.FC<ChartThreeProps> = ({ series, selectedMunicipi, selec
 };
 
 export default ChartThree;
+
