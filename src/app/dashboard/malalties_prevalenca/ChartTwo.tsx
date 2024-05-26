@@ -42,6 +42,8 @@ const ChartTwo: React.FC<ChartTwoProps> = ({
 
   const options: ApexOptions = {
     yaxis: {
+      min: 0,
+      max: 4000,
       labels: {
         style: {
           fontSize: "7px", // Tamaño de la letra del eje y

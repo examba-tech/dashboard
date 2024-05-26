@@ -51,6 +51,10 @@ const options: ApexOptions = {
   xaxis: {
     categories: ["<15", "15-44", "45-64", "65-74", ">75"],
   },
+  yaxis: {
+    min: 0,
+    max: 600,
+  },
   legend: {
     position: "top",
     horizontalAlign: "left",
@@ -95,12 +99,12 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, selectedD
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
             {selectedDiagnostic === "TOTS" && selectedMunicipi === "Tots"
-          ? `Pacients cada 10000 habitants segons les diferents franges d'edat de tots els diagnòstics al 2023`
+          ? `Pacients cada 10.000 habitants segons les diferents franges d'edat de tots els diagnòstics al 2023`
           : selectedDiagnostic === "TOTS"
-          ? `Pacients cada 10000 habitants segons les diferents franges d'edat de tots els diagnòstics al municipi ${selectedMunicipi} al 2023`
+          ? `Pacients cada 10.000 habitants segons les diferents franges d'edat de tots els diagnòstics al municipi ${selectedMunicipi} al 2023`
           : selectedMunicipi === "Tots"
-          ? `Pacients cada 10000 habitants segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} al 2023`
-          : `Pacients cada 10000 habitants segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} al municipi ${selectedMunicipi} al 2023`
+          ? `Pacients cada 10.000 habitants segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} al 2023`
+          : `Pacients cada 10.000 habitants segons les diferents franges d'edat del diagnòstic ${selectedDiagnostic} al municipi ${selectedMunicipi} al 2023`
           }
             <span
               className="text-sm text-gray-400 cursor-pointer"

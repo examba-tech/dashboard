@@ -24,6 +24,11 @@ const CustomTooltip: React.FC<TooltipProps<any, any>> = ({ active, payload, labe
 };
 
 const BarChartComponentNo: React.FC<BarChartProps> = ({ data, zoomed }) => {
+
+  // if (!data || data.length === 0) {
+  //   return null; // O renderizar un componente de carga
+  // }
+
   return (
     <BarChart
       width={560}
@@ -36,7 +41,10 @@ const BarChartComponentNo: React.FC<BarChartProps> = ({ data, zoomed }) => {
         domain={zoomed ? [0, 200] : [0, 450]} // Ajuste del dominio en función del zoom
         ticks={zoomed ? [0, 40, 90, 120, 230] : [40, 90, 120, 230, 340]} // Ajuste de los ticks en función del zoom
       />
-      <YAxis dataKey="COUNT_NO2" />
+      <YAxis 
+        dataKey="COUNT_NO2" 
+        domain={[0, 60]} // Fijar escala
+      />
       <Tooltip content={<CustomTooltip />} />
       <Bar dataKey="COUNT_NO2" fill="#163a66" />
       

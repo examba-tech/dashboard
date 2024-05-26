@@ -976,6 +976,7 @@ const HomePage = () => {
                 endDate={endDate}
                 selectedSecondMunicipi={selectedSecondMunicipi}
               />
+              <br></br>
               <LineChartNO2
                 mergedNos={mergedNos}
                 selectedMunicipi={selectedMunicipi}
