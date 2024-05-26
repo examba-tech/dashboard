@@ -42,6 +42,8 @@ const ChartTwo: React.FC<ChartTwoProps> = ({
 
   const options: ApexOptions = {
     yaxis: {
+      min: 0,
+      max: 4000,
       labels: {
         style: {
           fontSize: "7px", // Tamaño de la letra del eje y
@@ -133,8 +135,8 @@ const ChartTwo: React.FC<ChartTwoProps> = ({
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white pl-5 pt-3">
             {selectedMunicipi == "Tots"
-              ? "Nombre de pacients cada 10.000 habitants segons el diagnòstic al 2023"
-              : `Nombre de pacients cada 10.000 habitants segons el diagnòstic al municipi ${selectedMunicipi} al 2023`}
+              ? "Pacients cada 10.000 habitants segons el diagnòstic al 2023"
+              : `Pacients cada 10.000 habitants segons el diagnòstic al municipi ${selectedMunicipi} al 2023`}
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
@@ -162,7 +164,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({
               style={{ marginTop: "-10px" }}
             >
               <p className="text-base text-gray-1000 px-4 py-2">
-              En aquest gràfic cada barra representa una malaltia respiratòria crònica on la llargària de la barra representa el nombre de pacients d&apos;aquella patologia a 2023. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de patologies agudes.
+              En aquest gràfic cada barra representa una malaltia respiratòria crònica on la llargària de la barra representa el nombre de pacients d&apos;aquella patologia a 2023. L&apos;eix x és el nombre de pacients i l&apos;eix y els diferent tipus de malatia crònica.
               </p>
             </div>
           )}

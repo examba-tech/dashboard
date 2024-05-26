@@ -10,6 +10,8 @@ import Box from "@mui/material/Box";
 import * as Interfaces from "@/src/utils/interfaces";
 import Mapa from "./Mapa";
 import Mapa_cont from "./Mapa_cont";
+import Mapa_SO2 from "./Mapa_SO2";
+import SimpleChart from "./cuadros";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import "@/src/app/dashboard/estilo_info.css";
@@ -205,6 +207,27 @@ const HomePage = () => {
     }[]
   >([]);
 
+  const [mapa1, setMapa1] = React.useState<
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
+
+  const [mapa2, setMapa2] = React.useState<
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
+
+  const [mapa3, setMapa3] = React.useState<
+    {
+      name: string;
+      data: number[];
+    }[]
+  >([]);
+
   const [mapa_casos, set_mapa_casos] = React.useState<
     {
       Codi_municipi: String;
@@ -244,6 +267,46 @@ const HomePage = () => {
     console.log("Municipi selected:", municipi);
   };
 
+  const caja = (info: Interfaces.Mapa[]) => {
+    var totalCases = {
+      dia: 0,
+    };
+    info.forEach((entry: Interfaces.Mapa) => {
+        totalCases.dia = (entry.Numero_Casos.valueOf() / entry.total_poblacio.valueOf()) * 10000;
+    });
+
+    return {
+      name: "Ingressos",
+      data: [totalCases.dia],
+    };
+  };
+
+  const caja2 = (info: Interfaces.Mapa[]) => {
+    var totalCases = {
+      dia: 0,
+    };
+    info.forEach((entry: Interfaces.Mapa) => {
+        totalCases.dia = entry.NO2.valueOf();
+    });
+    return {
+      name: "Ingressos",
+      data: [totalCases.dia],
+    };
+  };
+
+  const caja3 = (info: Interfaces.Mapa[]) => {
+    var totalCases = {
+      dia: 0,
+    };
+    info.forEach((entry: Interfaces.Mapa) => {
+        totalCases.dia = entry.SO2.valueOf();
+    });
+    return {
+      name: "Ingressos",
+      data: [totalCases.dia],
+    };
+  };
+
   React.useEffect(() => {
     const params = {};
     const params2 = {
@@ -253,9 +316,13 @@ const HomePage = () => {
       try {
         const data = await getMongoCollection("estatics", params2);
         const data1 = await getMongoCollection("mapas", params);
+        const data2 = await getMongoCollection("mapas", params2);
+
         const estatics = data && data.collection ? data.collection : undefined;
         const mapaestatics =
           data1 && data1.collection ? data1.collection : undefined;
+        const mapaestatics2 =
+          data2 && data2.collection ? data2.collection : undefined;
 
         if (estatics !== undefined) {
           setInfo_ICS(calculateTotalCasesBySex(estatics, selectedDiagnostic));
@@ -264,12 +331,17 @@ const HomePage = () => {
             calculateTotalCasesByEdats(estatics, selectedDiagnostic),
           ]);
           set_mapa_casos(mapaestatics);
+          setMapa1([caja(mapaestatics2)]);
+          setMapa2([caja2(mapaestatics2)]);
+          setMapa3([caja3(mapaestatics2)]);
         }
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
         setLoading(false);
       }
+    
+      
     };
 
     fetchData();
@@ -280,6 +352,8 @@ const HomePage = () => {
   const toggleInfo = () => {
     setInfoVisible(!infoVisible);
   };
+
+
 
   return (
     <>
@@ -329,21 +403,86 @@ const HomePage = () => {
             (Selecciona el municipi d&apos;interès per la resta de
             l&apos;anàlisi)
           </h4>
+          <div className="flex items-center gap-4" style= {{marginLeft: "-90px"}}>
+            <div className="flex-1 flex flex-col items-center" style= {{width: "800px"}}>
+              <Mapa predictions={mapa_casos} onMunicipiSelect={handleMunicipiSelect} />
+            </div>
+            <div className="flex flex-col gap-4">
+              <div
+                style={{
+                  width: "400px",
+                  height: "170px",
+                  backgroundColor: "white",
+                  border: "1.5px solid #dddddd",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textAlign: "center",
+                  padding: "10px",
+                  marginRight: "100px",
+                }}
+                className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark"
+              >
+                <SimpleChart data={mapa1} />
+                <p style={{ fontSize: "12px" }}>
+                  Nombre de pacients al 2023 al municipi {selectedMunicipi}
+                </p>
+              </div>
+              <div
+                style={{
+                  width: "400px",
+                  height: "170px",
+                  backgroundColor: "white",
+                  border: "1.5px solid #dddddd",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textAlign: "center",
+                  padding: "10px",
+                  marginRight: "100px",
+                }}
+                className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark"
+              >
+                <SimpleChart data={mapa2} />
+                <p style={{ fontSize: "12px" }}>
+                  Mitjana del valor de NO2 dels últims 10 anys al municipi {selectedMunicipi}
+                </p>
+              </div>
+              <div
+                style={{
+                  width: "400px",
+                  height: "170px",
+                  backgroundColor: "white",
+                  border: "1.5px solid #dddddd",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textAlign: "center",
+                  padding: "10px",
+                  marginRight: "100px",
+                }}
+                className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark"
+              >
+                <SimpleChart data={mapa3} />
+                <p style={{ fontSize: "12px" }}>
+                  Mitjana del valor de SO2 dels últims 10 anys al municipi {selectedMunicipi}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <br></br>
+          <br></br>
+          
           <div className="flex justify-center items-center gap-4">
             <div className="flex-1 flex flex-col justify-center items-center">
-              <Mapa
-                predictions={mapa_casos}
-                onMunicipiSelect={handleMunicipiSelect}
-              />
-            </div>
+                <Mapa_cont predictions={mapa_casos} />
+              </div>
             <div className="flex-1 flex flex-col justify-center items-center">
-              <Mapa_cont predictions={mapa_casos} />
-            </div>
+                <Mapa_SO2 predictions={mapa_casos} />
+              </div>
           </div>
           <br></br>
           <br></br>
           <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold">Anàlisi de malalties</h1>
+            <h1 className="text-xl font-bold">Anàlisi de malalties respiratòries cròniques</h1>
           </div>
           <div className="border-b border-black my-4"></div>
           <h4 className="text-sm text-gray-600">
