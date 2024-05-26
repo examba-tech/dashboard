@@ -49,6 +49,10 @@ const options: ApexOptions = {
   xaxis: {
     categories: ["<15", "15-44", "45-64", "65-74", ">75"],
   },
+  yaxis: {
+    min: 0,
+    max: 1400,
+  },
   legend: {
     position: "top",
     horizontalAlign: "left",
