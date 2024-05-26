@@ -1,7 +1,34 @@
+"use client";
 import Image from "next/image";
+import React, { useState } from 'react';
 
 const Settings = () => {
-  return (
+    const [messageVisible1, setMessageVisible1] = useState(false);
+    const [messageVisible2, setMessageVisible2] = useState(false);
+    const [messageVisible3, setMessageVisible3] = useState(false);
+    const [messageVisible4, setMessageVisible4] = useState(false);
+
+    const handleButtonClick1 = () => {
+        setMessageVisible1(true);
+        setTimeout(() => setMessageVisible1(false), 6000); // Ocultar mensaje después de 5 segundos
+    };
+
+    const handleButtonClick2 = () => {
+        setMessageVisible2(true);
+        setTimeout(() => setMessageVisible2(false), 6000); // Ocultar mensaje después de 5 segundos
+    };
+
+    const handleButtonClick3 = () => {
+        setMessageVisible3(true);
+        setTimeout(() => setMessageVisible3(false), 4000); // Ocultar mensaje después de 5 segundos
+    };
+
+    const handleButtonClick4 = () => {
+        setMessageVisible4(true);
+        setTimeout(() => setMessageVisible4(false), 4000); // Ocultar mensaje después de 5 segundos
+    };
+
+    return (
       <div className="mx-auto max-w-270">
         <div className="grid grid-cols-5 gap-8">
           <div className="col-span-5 xl:col-span-3">
@@ -51,7 +78,7 @@ const Settings = () => {
                             type="text"
                             name="fullName"
                             id="fullName"
-                            placeholder="Mateu Acedo"
+                            placeholder="Mateu Andrés"
                             //defaultValue="Mateu"
                             />
 
@@ -134,7 +161,7 @@ const Settings = () => {
                         type="email"
                         name="emailAddress"
                         id="emailAddress"
-                        placeholder="mateu.ics@gmail.com"
+                        placeholder="mateuandres.ics@gmail.com"
                         //defaultValue="devidjond45@gmail.com"
                       />
                     </div>
@@ -169,7 +196,7 @@ const Settings = () => {
                         type="text"
                         name="Username"
                         id="Username"
-                        placeholder="MateuAcedoICS"
+                        placeholder="MateuAndresICS"
                         //defaultValue="devidjhon24"
                         />
                     </div>
@@ -234,10 +261,18 @@ const Settings = () => {
                     <button
                       className="flex justify-center rounded bg-primary px-6 py-2 font-medium text-white hover:bg-opacity-90"
                       type="submit"
+                      onClick={handleButtonClick3}
                     >
                       Guardar
                     </button>
                   </div>
+                  <br></br>
+                  {messageVisible3 && (
+                  <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <strong className="font-bold">Correcte!</strong>
+                    <span className="block sm:inline"> La teva informació ja està actualizada.</span>
+                  </div>
+                    )}
                 </form>
               </div>
             </div>
@@ -252,14 +287,15 @@ const Settings = () => {
               <div className="p-7">
                 <form action="#">
                   <div className="mb-4 flex items-center gap-3">
-                    <div className="h-14 w-14 rounded-full">
+                    {/* <div className="h-14 w-14 rounded-full">
                       <Image
                         src={"/images/user/user-03.png"}
                         width={55}
                         height={55}
                         alt="User"
                       />
-                    </div>
+                    </div> */}
+                    <img src={"/user-rectangle-solid-24.png"} alt="User Icon" className="w-16 h-16" />
                     <div>
                       <span className="mb-1.5 text-black dark:text-white">
                         Edita la teva foto de perfil 
@@ -276,10 +312,19 @@ const Settings = () => {
                   </div>
 
                   <div className="relative mb-5.5 block w-full cursor-pointer appearance-none bg-gray px-4 py-4 dark:bg-meta-4 sm:py-7.5">
-                    <button className="text-sm bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:text-primary transition duration-200 ease-in-out">
+                    <button className="text-sm bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:text-primary transition duration-200 ease-in-out"
+                    onClick={handleButtonClick1}
+                    >
                         Donar de baixa el meu rol
                     </button>
                   </div>
+                  {messageVisible1 && (
+                  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong className="font-bold">Gràcies!</strong>
+                    <span className="block sm:inline"> El teu rol s'ha donat de baixa correctament. Esperem que hagis gaudit dels nostres serveis!</span>
+                  </div>
+                    )}
+
                 <br></br>
                   <div className="relative">
                       <span className="absolute left-5 top-3">
@@ -308,10 +353,19 @@ const Settings = () => {
                       />
                     </div>
                   <div className="relative mb-5.5 block w-full cursor-pointer appearance-none bg-gray px-4 py-4 dark:bg-meta-4 sm:py-7.5">
-                    <button className="text-sm bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:text-primary transition duration-200 ease-in-out">
+                    <button className="text-sm bg-gray-100 py-2 px-4 rounded-lg shadow-md hover:text-primary transition duration-200 ease-in-out"
+                    onClick={handleButtonClick2}
+                    >
                         Donar-me d&apos;alta en un rol
                     </button>
                   </div>
+                  {messageVisible2 && (
+                  <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <strong className="font-bold">Correcte!</strong>
+                    <span className="block sm:inline"> Has donat d&apos;alta el teu nou rol. Esperem que gaudeixis dels nostres serveis!</span>
+                  </div>
+                    )}
+
                   <br></br>
                   <div className="flex justify-end gap-4.5">
                     <button
@@ -323,17 +377,25 @@ const Settings = () => {
                     <button
                       className="flex justify-center rounded bg-primary px-6 py-2 font-medium text-white hover:bg-opacity-90"
                       type="submit"
+                      onClick={handleButtonClick4}
                     >
                       Guardar
                     </button>
                   </div>
+                  <br></br>
+                  {messageVisible4 && (
+                  <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <strong className="font-bold">Correcte!</strong>
+                    <span className="block sm:inline"> La teva informació ja està actualizada.</span>
+                  </div>
+                    )}
                 </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-  );
+    );
 };
 
 export default Settings;
