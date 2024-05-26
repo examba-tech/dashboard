@@ -49,7 +49,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
         </div>
       </div>
       <div className="mb-2">
-        <ResponsiveContainer width="100%" height={419}>
+        <ResponsiveContainer width="100%" height={480}>
           <LineChart
             data={mergedVisits}
             margin={{
