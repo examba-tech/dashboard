@@ -50,7 +50,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect }) => {
 
   const spec: any = {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-    width: 425,
+    width: 450,
     height: 600,
     data: {
       values: data.features,
@@ -80,6 +80,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect }) => {
     },
     encoding: {
       color: {
+        title: "Pacients",
         field: "Numero_Casos",
         type: "quantitative",
         scale: { scheme: "blues" },
@@ -118,7 +119,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect }) => {
       <div className="mx-auto relative">
       <div className="mb-4">
         <h4 className="text-lg font-semibold text-black dark:text-white pl-5 pr-5 pt-3">
-          Distribució del nombre de pacients per municipis del 2023
+          Distribució del nombre de pacients per municipis al 2023
           <span
             className="text-sm text-gray-400 cursor-pointer"
             onClick={toggleInfo}

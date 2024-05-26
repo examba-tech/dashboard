@@ -55,7 +55,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions }) => {
             values: predictions,
           },
           key: "Codi_municipi",
-          fields: ["NO2"], // Asegúrate de que este campo esté incluido en las predicciones
+          fields: ["SO2"], // Asegúrate de que este campo esté incluido en las predicciones
         },
         default: null,
       },
@@ -64,7 +64,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions }) => {
     mark: "geoshape",
     encoding: {
       color: {
-        field: "NO2",
+        field: "SO2",
         type: "quantitative",
         scale: {
           scheme: "purples",
@@ -72,7 +72,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions }) => {
       },
       tooltip: [
         { field: "properties.nommuni", type: "nominal", title: "municipi:" },
-        { field: "NO2", type: "quantitative", title: "valor:", format: ".1f" },
+        { field: "SO2", type: "quantitative", title: "valor:", format: ".1f" },
       ],
     },
   };
@@ -84,7 +84,7 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions }) => {
       <div className="mx-auto relative">
       <div className="mb-4">
         <h4 className="text-lg font-semibold text-black dark:text-white pl-5 pr-5 pt-3">
-          Mitjana dels valors del NO2 per municipis dels últims 10 anys 
+          Mitjana dels valors del SO2 per municipis dels últims 10 anys 
           <span
             className="text-sm text-gray-400 cursor-pointer"
             onClick={toggleInfo}
@@ -101,8 +101,8 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions }) => {
           onClick={toggleInfo}
         >
           <p className="text-sm text-gray-800">
-            Mapa de la qualitat dels nivells de NO2 de la mitjana dels darrers 10 anys de cada municipi. Cada municipi està colorejat utilitzant una
-            paleta de colors que indica el valor de NO2, això permet identificar
+            Mapa de la qualitat dels nivells de SO2 de la mitjana dels darrers 10 anys de cada municipi. Cada municipi està colorejat utilitzant una
+            paleta de colors que indica el valor de SO2, això permet identificar
             fàcilment les àrees més afectades per aquest contaminant, obtenir
             informació sobre la qualitat de l&apos;aire i relacionar-ho amb el
             mapa anterior per a veure la relació entre el nombre de pacients i

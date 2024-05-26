@@ -773,7 +773,7 @@ const HomePage = () => {
           <br></br>
           <div className="flex items-center gap-4">
             <h1 className="text-xl font-bold">
-              Dades d&apos;interès per patologies agudes respiratòries - Resum
+              Dades d&apos;interès per patologies respiratòries agudes - Resum
             </h1>
           </div>
           <div className="border-b border-black my-4"></div>
@@ -936,7 +936,7 @@ const HomePage = () => {
           <br></br>
           <br></br>
           <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold">Històric de dades</h1>
+            <h1 className="text-xl font-bold">Històric de dades de patologies respiratòries agudes</h1>
           </div>
           <div className="border-b border-black my-4" />
           <div>
@@ -1023,7 +1023,7 @@ const HomePage = () => {
           <br></br>
           <br></br>
           <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold">Anàlisi de malalties</h1>
+            <h1 className="text-xl font-bold">Anàlisi de patologies respiratòries agudes</h1>
           </div>
           <div className="border-b border-black my-4"></div>
           <h4 className="text-sm text-gray-600">

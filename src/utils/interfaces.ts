@@ -62,3 +62,24 @@ export interface Prediccions {
   INGRESSOS_DEUMIL: number;
   NOM_MUNICIPI: string;
 }
+
+export interface Mapa {
+    Codi_municipi: string;
+    municipi: string;
+    Latitud: number;
+    Longitud: number;
+    valor: number;
+    TN: number;
+    TX: number;
+    TM: number;
+    HRM: number;
+    PPT: number;
+    RS24h: number;
+    NO2: number;
+    NO: number;
+    SO2: number;
+    Numero_Casos: number;
+    ICQA_NO2: number;
+    ICQA_SO2: number;
+    total_poblacio: number;
+}

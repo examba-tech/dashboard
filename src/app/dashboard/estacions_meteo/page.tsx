@@ -19,8 +19,8 @@ const HomePage = () => {
     {
       nombre: '+info', info: <div>
         <p style={{ marginBottom: '5px', textAlign: 'justify' }}>
-        En aquesta secció es troba la informació de les estacions de contaminació. Primer trobem un
-        mapa que ens permet veure la localització de cadascuna d&apos;aquestes estacions, i es pot clicar 
+        En aquesta secció es troba la informació de les estacions meteorològiques. Primer trobem un
+        mapa que ens permet veure la localització de cadascuna d&apos;aquestes estacions, les quals es poden seleccionar 
         per veure la informació més rellevant corresponent. Després trobem informació addicional respecte
         on s&apos;han trobat trobat les dades, entre d&apos;altres.
         </p>
@@ -77,7 +77,9 @@ const HomePage = () => {
         <br />
       <MyMapa />
       <br />
-      <h1><strong style={{ fontWeight: 'bold', fontSize: '20px', textDecoration: 'underline' }}>Descripció de les estacions</strong></h1>
+      <br></br>
+      <br></br>
+      <h1><strong style={{ fontWeight: 'bold', fontSize: '20px' }}>Descripció de les estacions</strong></h1>
       <br />
       <p style={{ textAlign: 'justify' }}>Les dades diàries respecte dels diferents factors meteorològics per realitzar la 
         predicció han estat recollides gràcies a diferents peticions fetes al Servei 
