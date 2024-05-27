@@ -22,7 +22,7 @@ export default function Filters({
           id="panel1-header"
           className={`${montserrat.className} md:text-center`}
         >
-          Filters
+          Filtres
         </AccordionSummary>
         <AccordionDetails>
           <div className="flex flex-row">

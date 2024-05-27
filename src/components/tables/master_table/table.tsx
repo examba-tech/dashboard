@@ -72,7 +72,7 @@ const columns: ColumnData[] = [
   },
   {
     width: 25,
-    label: "Ingressos",
+    label: "Visites",
     dataKey: "ingressos",
     numeric: true,
   },
