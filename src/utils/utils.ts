@@ -6,9 +6,16 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function convertToCSV(data: any[]) {
-  const headers = Object.keys(data[0]);
+  const headers = Object.keys(data[0]).slice(0, -2);
+  let headers2 = headers.map((header) => {
+    if (header === "INGRESSOS") {
+      return "VISITES";
+    } else {
+      return header;
+    }
+  });
   const csvContent =
-    headers.join(",") +
+    headers2.join(",") +
     "\n" +
     data
       .map((row) =>
