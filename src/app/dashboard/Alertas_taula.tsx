@@ -1,6 +1,7 @@
 import Alert from "@mui/material/Alert";
 import { useState } from "react";
 import { buttonVariants } from "@/src/components/ui/Button";
+import Link from "next/link";
 
 interface PredictionsAlertsProps {
   predictions: {
@@ -49,7 +50,7 @@ const PredictionsAlerts: React.FC<PredictionsAlertsProps> = ({ predictions }) =>
           style={{ marginBottom: "10px" }} 
           onClose={() => handleClose(pred.NOM_MUNICIPI.toString())}
         >
-          Crític! El municipi <strong>{pred.NOM_MUNICIPI}</strong> té una previsió <strong>alta</strong> de visites per la propera setmana.
+          Crític! El municipi <Link href={`/dashboard/patologies_agudes`}><strong>{pred.NOM_MUNICIPI}</strong></Link> té una previsió <strong>alta</strong> de visites per la propera setmana.
         </Alert>
       );
     } else if (Number(pred.INGRESSOS_DEUMIL) > 8) {
@@ -59,7 +60,7 @@ const PredictionsAlerts: React.FC<PredictionsAlertsProps> = ({ predictions }) =>
           style={{ marginBottom: "10px" }} 
           onClose={() => handleClose(pred.NOM_MUNICIPI.toString())}
         >
-          Compte! El municipi <strong>{pred.NOM_MUNICIPI}</strong> té una previsió <strong>moderada</strong> de visites per la propera setmana.
+          Compte! El municipi <Link href={`/dashboard/patologies_agudes`}><strong>{pred.NOM_MUNICIPI}</strong></Link> té una previsió <strong>moderada</strong> de visites per la propera setmana.
         </Alert>
       );
     } 
