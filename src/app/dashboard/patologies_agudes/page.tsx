@@ -169,7 +169,7 @@ const calculateTotalCasesByWeek = (dinamics: Interfaces.Dinamic[]) => {
   const result = Object.keys(weeklyData)
     .map((week) => ({
       name: week,
-      data: [parseFloat(((weeklyData[week] / pobData[week]) * 100).toFixed(1))],
+      data: [parseFloat(((weeklyData[week] / pobData[week]) * 1000).toFixed(1))],
     }))
     .sort((a, b) => {
       const dateA = new Date(a.name);

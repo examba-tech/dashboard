@@ -90,8 +90,37 @@ const MyLineChart_vis_SO2: React.FC<MyLineChartProps> = ({ mergedVisits, mergedS
               tickFormatter={(tick) => dayjs(tick).format('DD/MM/YYYY')}
             />
             {/* <YAxis tick={{ fontSize: 10 }} /> */}
-            <YAxis yAxisId="left" tick={{ fontSize: 10 }} stroke="#2471A3" domain={[0, 4]}/>
-            <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 10 }} stroke="#B03A2E" domain={[0, 30]}/>
+            {/* <YAxis yAxisId="left" tick={{ fontSize: 10 }} stroke="#2471A3" domain={[0, 4]}/> */}
+            <YAxis
+              yAxisId="left"
+              tick={{ fontSize: 10 }}
+              stroke="#2471A3"
+              domain={[0, 4]}
+              label={{
+                value: "Visites",
+                fontSize: 12,
+                fill: "#2471A3",
+                dx: 30,
+                dy:-178
+
+              }}
+            />
+            {/* <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 10 }} stroke="#B03A2E" domain={[0, 30]}/> */}
+            <YAxis
+              yAxisId="right"
+              orientation="right"
+              tick={{ fontSize: 10 }}
+              stroke="#B03A2E"
+              domain={[0, 30]}
+              label={{
+                value: "SO2",
+                fontSize: 12,
+                fill: "#B03A2E",
+                dx: -30,
+                dy:-178
+              }}
+            />
+
             <Tooltip
               formatter={(value, name) => {
                 let displayName = name;
