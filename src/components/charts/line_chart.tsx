@@ -65,7 +65,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({ mergedVisits, selectedMunicip
               tick={{ fontSize: 10 }}
               tickFormatter={(tick) => dayjs(tick).format('DD/MM/YYYY')}
             />
-            <YAxis tick={{ fontSize: 10 }} domain={[0, 4]} /> {/* Fijar la escala */}
+            <YAxis tick={{ fontSize: 10 }} domain={[0, 40]} /> {/* Fijar la escala */}
             <Tooltip
               formatter={(value, name) => {
                 let displayName = name;

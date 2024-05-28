@@ -93,7 +93,7 @@ const MyLineChart_vis_NO2: React.FC<MyLineChartProps> = ({ mergedVisits, mergedN
               yAxisId="left"
               tick={{ fontSize: 10 }}
               stroke="#2471A3"
-              domain={[0, 4]}
+              domain={[0, 40]}
               label={{
                 value: "Visites",
                 fontSize: 12,

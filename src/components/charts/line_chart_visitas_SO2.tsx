@@ -89,13 +89,11 @@ const MyLineChart_vis_SO2: React.FC<MyLineChartProps> = ({ mergedVisits, mergedS
               tick={{ fontSize: 10 }}
               tickFormatter={(tick) => dayjs(tick).format('DD/MM/YYYY')}
             />
-            {/* <YAxis tick={{ fontSize: 10 }} /> */}
-            {/* <YAxis yAxisId="left" tick={{ fontSize: 10 }} stroke="#2471A3" domain={[0, 4]}/> */}
             <YAxis
               yAxisId="left"
               tick={{ fontSize: 10 }}
               stroke="#2471A3"
-              domain={[0, 4]}
+              domain={[0, 40]}
               label={{
                 value: "Visites",
                 fontSize: 12,
@@ -105,7 +103,6 @@ const MyLineChart_vis_SO2: React.FC<MyLineChartProps> = ({ mergedVisits, mergedS
 
               }}
             />
-            {/* <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 10 }} stroke="#B03A2E" domain={[0, 30]}/> */}
             <YAxis
               yAxisId="right"
               orientation="right"
