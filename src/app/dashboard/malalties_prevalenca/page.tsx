@@ -424,7 +424,7 @@ const HomePage = () => {
               >
                 <SimpleChart data={mapa1} />
                 <p style={{ fontSize: "12px" }}>
-                  Nombre de pacients al 2023 al municipi {selectedMunicipi}
+                  Nombre de pacients cada 10.000 habitants al 2023 al municipi {selectedMunicipi}
                 </p>
               </div>
               <div
@@ -482,7 +482,12 @@ const HomePage = () => {
           <br></br>
           <br></br>
           <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold">Anàlisi de malalties respiratòries cròniques</h1>
+            <h1 className="text-xl font-bold">
+            {selectedMunicipi === "Tots"
+          ? `Anàlisi de malalties respiratòries cròniques de tots els municipis`
+          : `Anàlisi de malalties respiratòries cròniques del municipi ${selectedMunicipi}`
+          }
+            </h1>
           </div>
           <div className="border-b border-black my-4"></div>
           <h4 className="text-sm text-gray-600">
