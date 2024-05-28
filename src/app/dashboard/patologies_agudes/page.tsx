@@ -336,7 +336,7 @@ const HomePage = () => {
       info: (
         <div>
           <p style={{ marginBottom: "5px", textAlign: "justify" }}></p>
-            En aquesta secció es realitza un estudi sobre les patologies agudes. Ens hem enfocat en aquestes 6: 
+            En aquesta secció es realitza un estudi sobre les patologies respiratòries agudes. Ens hem enfocat en aquestes 6: 
             <li style={{ marginLeft: "30px"}}>- Bronquiolitis Aguda </li>
             <li style={{ marginLeft: "30px"}}>- Bronquitis Aguda</li>
             <li style={{ marginLeft: "30px"}}>- Grip</li>
@@ -345,6 +345,8 @@ const HomePage = () => {
             <li style={{ marginLeft: "30px"}}>- Pneumònia Viral</li>
             <li style={{ marginLeft: "30px"}}>- Pneumònia Bacteriana</li>
           Cal destacar que tots els gràfics d&apos;aquesta secció estan normalitzats per població per a facilitar la comparació i l&apos;ànalisi realitzat.
+          <div className="py-1"/>
+          Les prediccions del nombre de visites per patologies respiratòries agudes han sigut realtzades a partir de dades meteorològiques i de contaminació.
         </div>
       ),
     },
@@ -725,12 +727,6 @@ const HomePage = () => {
     setInfoVisible(!infoVisible);
   };
 
-  const [infoVisible2, setInfoVisible2] = useState(false);
-
-  const toggleInfo2 = () => {
-    setInfoVisible2(!infoVisible2);
-  };
-
   return (
     <>
       <div>
@@ -936,7 +932,12 @@ const HomePage = () => {
           <br></br>
           <br></br>
           <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold">Històric de dades de patologies respiratòries agudes</h1>
+            <h1 className="text-xl font-bold">
+            {selectedMunicipi === "Tots"
+          ? `Històric de dades de patologies respiratòries agudes de tots els municipis`
+          : `Històric de dades de patologies respiratòries agudes del municipi ${selectedMunicipi}`
+          }
+            </h1>
           </div>
           <div className="border-b border-black my-4" />
           <div>
@@ -1023,7 +1024,12 @@ const HomePage = () => {
           <br></br>
           <br></br>
           <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold">Anàlisi de patologies respiratòries agudes</h1>
+            <h1 className="text-xl font-bold">
+            {selectedMunicipi === "Tots"
+          ? `Anàlisi de patologies respiratòries agudes de tots els municipis`
+          : `Anàlisi de patologies respiratòries agudes del municipi ${selectedMunicipi}`
+          }
+            </h1>
           </div>
           <div className="border-b border-black my-4"></div>
           <h4 className="text-sm text-gray-600">

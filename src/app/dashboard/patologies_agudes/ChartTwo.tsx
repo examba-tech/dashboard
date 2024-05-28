@@ -128,7 +128,10 @@ const ChartTwo: React.FC<ChartTwoProps> = ({ series, selectedMunicipi, onDiagnos
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-sm font-semibold text-black dark:text-white pl-5 pr-5 pt-3">
-            Comparativa del nombre de visites cada 10.000 habitants segons la seva patologia aguda des del {formattedBeginDate} al {formattedEndDate} al municipi {selectedMunicipi}
+          {selectedMunicipi === "Tots"
+          ? `Comparativa del nombre de visites cada 10.000 habitants segons la seva patologia aguda des del ${formattedBeginDate} al ${formattedEndDate}`
+          : `Comparativa del nombre de visites cada 10.000 habitants segons la seva patologia aguda des del ${formattedBeginDate} al ${formattedEndDate} al municipi ${selectedMunicipi}`
+        } 
             <span
               className="text-sm text-gray-400 cursor-pointer"
               onClick={toggleInfo}
