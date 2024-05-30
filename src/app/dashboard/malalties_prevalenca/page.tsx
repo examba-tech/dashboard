@@ -496,21 +496,21 @@ const HomePage = () => {
             className="flex justify-center items-center gap-4"
             style={{ transform: "scale(0.8)" }}
           >
-            <div className="flex-1 flex flex-col justify-center items-center">
+            <div className="flex-1 flex flex-row justify-center items-center chart-container">
               <ChartTwo
                 series={info2_ICS}
                 selectedMunicipi={selectedMunicipi}
                 onDiagnosticChange={handleDiagnosticChange}
               />
             </div>
-            <div className="flex-1 flex flex-col justify-center items-center">
+            <div className="flex-1 flex flex-row justify-center items-center chart-container">
               <ChartThree
                 series={info_ICS}
                 selectedMunicipi={selectedMunicipi}
                 selectedDiagnostic={selectedDiagnostic}
               />
             </div>
-            <div className="flex-1 flex flex-col justify-center items-center">
+            <div className="flex-1 flex flex-row justify-center items-center chart-container">
               <ChartTwoEdats
                 series={info3_ICS}
                 selectedMunicipi={selectedMunicipi}
