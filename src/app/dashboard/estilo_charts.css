@@ -1,0 +1,30 @@
+.chart-container {
+    width: 100%;
+    height: 100%; /* Ajusta según sea necesario */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch; /* Asegura que los elementos hijos se estiren */
+    gap: 16px;
+    padding-top: 20px;
+  }
+  
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribuye el espacio uniformemente */
+    height: 100%; /* Asegura que se estire completamente */
+  }
+  
+  .flex-item {
+    flex: 1; /* Asegura que los elementos se estiren uniformemente */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
