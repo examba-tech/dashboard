@@ -122,7 +122,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080018, Abrera</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Equip d&apos;Atenció Primària</li>
               <li>- 2 Consultoris</li>
               <li>- 1 Punt d&apos;Atenció continuada</li>
@@ -138,7 +137,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080137, Avinyonet del Penedès</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 4 Consultoris</li>
               <li>- 4 estacions de contaminants de 083054, Vilafranca del Penedès</li>
               <li>-Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -152,7 +150,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080207, Begues</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Equip d&apos;Atenció Primària</li>
               <li>- 1 estació de contaminants de 080898, Gavà</li>
               <li>- Agafa les dades de l&apos;estació meteorològica: D3, Vallirana</li>
@@ -166,7 +163,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080272, les Cabanyes</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Equip d&apos;Atenció Primària</li>
               <li>- 1 Punt d&apos;Atenció continuada</li>
               <li>- 1 estació de contaminants de 083054, Vilafranca del Penedès</li>
@@ -181,7 +177,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080431, Canyelles</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Consultori</li>
               <li>- 1 estació de contaminants de 082515, Santa Margarida i els Monjos</li>
               <li>- Agafa les dades de l&apos;estació meteorològica: XU, Canyelles</li>
@@ -195,7 +190,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080569, Castelldefels</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Equip d&apos;Atenció Primària</li>
               <li>- 1 Punt d&apos;Atenció continuada</li>
               <li>- SDPI</li>
@@ -211,7 +205,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080581, Castellet i la Gornal</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 3 Consultoris</li>
               <li>- 2 estacions de contaminants de 080749, Cubelles</li>
               <li>- Agafa les dades de l&apos;estació meteorològica: YR, Vilanova i la Geltrú</li>
@@ -225,7 +218,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080654, Castellví de la Marca</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Consultori</li>
               <li>- 1 estació de contaminants de 082515, Santa Margarida i els Monjos</li>
               <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -239,7 +231,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080689, Cervelló</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Consultori</li>
               <li>- 1 estació de contaminants de 082634, Sant Vicenç dels Horts</li>
               <li>- Agafa les dades de l&apos;estació meteorològica: D3, Vallirana</li>
@@ -253,7 +244,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080692, Collbató</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Consultori</li>
               <li>- 1 estació de contaminants de 081141, Martorell</li>
               <li>- Agafa les dades de l&apos;estació meteorològica: XC, Castellbisbal</li>
@@ -267,7 +257,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080728, Corbera de Llobregat</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Equip d&apos;Atenció Primària</li>
               <li>- 1 Punt d&apos;Atenció continuada</li>
               <li>- 1 estació de contaminants de 81960, Sant Andreu de la Barca</li>
@@ -282,7 +271,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080734, Cornellà de Llobregat</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Equip d&apos;Atenció Primària</li>
               <li>- 2 Consultoris</li>
               <li>- 1 estació de contaminants de 081017, l&apos;Hospitalet de Llobregat</li>
@@ -297,7 +285,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080749, Cubelles</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Equip d&apos;Atenció Primària</li>
               <li>- 1 Punt d&apos;Atenció continuada</li>
               <li>- 1 estació de contaminants de 080749, Cubelles</li>
@@ -312,7 +299,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080765, Esparreguera</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Equip d&apos;Atenció Primària</li>
               <li>- 1 Punt d&apos;Atenció continuada</li>
               <li>- 1 estació de contaminants de 081141, Martorell</li>
@@ -327,7 +313,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080771, Esplugues de Llobregat</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 2 Equips d&apos;Atenció Primària</li>
               <li>- 2 Punts d&apos;Atenció continuada</li>
               <li>- 1 estació de contaminants de 081017, l&apos;Hospitalet de Llobregat</li>
@@ -342,7 +327,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080850, Font-rubí</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Consultori</li>
               <li>- 1 estació de contaminants de 083054, Vilafranca del Penedès</li>
               <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -356,7 +340,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080898, Gavà</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Equip d&apos;Atenció Primària</li>
               <li>- 1 Punt d&apos;Atenció continuada</li>
               <li>- 1 estació de contaminants de 080898, Gavà</li>
@@ -371,7 +354,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080919, Gelida</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Consultori</li>
               <li>- 2 estacions de contaminants de 081017, l&apos;Hospitalet de Llobregat</li>
               <li>- Agafa les dades de l&apos;estació meteorològica: D3, Vallirana</li>
@@ -385,7 +367,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>080945, la Granada</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Consultori</li>
               <li>- 1 estació de contaminants de 083054, Vilafranca del Penedès</li>
               <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -399,7 +380,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>081017, l&apos;Hospitalet de Llobregat</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 10 Equips d&apos;Atenció Primària</li>
               <li>- 2 Consultoris</li>
               <li>- 2 CUAP</li>
@@ -416,7 +396,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>081141, Martorell</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Equip d&apos;Atenció Primària</li>
               <li>- 1 estació de contaminants de 081141, Martorell</li>
               <li>- Agafa les dades de l&apos;estació meteorològica: XC, Castellbisbal</li>
@@ -430,7 +409,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
             <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
             <p>081228, Mediona</p>
             <ul>
-            <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
               <li>- 1 Consultori</li>
               <li>- 1 estació de contaminants de 080749, Cubelles</li>
               <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -444,7 +422,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>081234, Molins de Rei</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Equip d&apos;Atenció Primària</li>
             <li>- 1 Punt d&apos;Atenció continuada</li>
             <li>- 1 estació de contaminants de 081574, Pallejà</li>
@@ -459,7 +436,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>081458, Olèrdola</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 3 Consultoris</li>
             <li>- 2 estacions de contaminants de  083054, Vilafranca del Penedès</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -473,7 +449,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>081461, Olesa de Bonesvalls</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
             <li>- 1 estació de contaminants de 083054, Vilafranca del Penedès</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -487,7 +462,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>081483, Olivella</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
             <li>- 1 estació de contaminants de 083054, Vilafranca del Penedès</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -501,7 +475,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>081542, Pacs del Penedès</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
             <li>- 1 estació contaminants de 083054, Vilafranca del Penedès</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -515,7 +488,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>081574, Pallejà</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Equip d&apos;Atenció Primària</li>
             <li>- 1 Punt d&apos;Atenció continuada</li>
             <li>- 2 estacions de contaminants de 081574, Pallejà</li>
@@ -530,7 +502,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>081640, el Pla del Penedès</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
             <li>- 1 estació de contaminants de 083054, Vilafranca del Penedès</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -561,7 +532,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>081688, Pontons</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
             <li>- 1 estació de contaminants de 082515, Santa Margarida i els Monjos</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -575,7 +545,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082009, Sant Boi de Llobregat</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 2 Equips d&apos;Atenció Primària</li>
             <li>- 1 estació de  contaminants de 083015, Viladecans</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: XL, El Prat de Llobregat </li>
@@ -589,7 +558,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082068, Sant Cugat Sesgarrigues</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
             <li>- 1 estació de contaminants de 083054, Vilafranca del Penedès</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -603,7 +571,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082114, Sant Feliu de Llobregat</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Equip d&apos;Atenció Primària</li>
             <li>- 1 Punt d&apos;Atenció continuada</li>
             <li>- 1 estació de contaminants de 082634, Sant Vicenç dels Horts</li>
@@ -618,7 +585,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082172, Sant Joan Despí</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Equip d&apos;Atenció Primària</li>
             <li>- 1 estació de contaminants de 081017, l&apos;Hospitalet de Llobregat</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: XL, El Prat de Llobregat </li>
@@ -632,7 +598,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082212, Sant Just Desvern</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Equip d&apos;Atenció Primària</li>
             <li>- 1 estació de contaminants de 081017, l&apos;Hospitalet de Llobregat</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: XL, El Prat de Llobregat </li>
@@ -646,7 +611,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082227, Sant Llorenç d&apos;Hortons</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 3 Consultoris</li>
             <li>- 1 estació de contaminants de 081141, Martorell</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: XC, Castellbisbal</li>
@@ -660,7 +624,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082270, Sant Martí Sarroca</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 3 Consultoris</li>
             <li>- 1 estació de contaminants de 082515, Santa Margarida i els Monjos</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -674,7 +637,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082310, Sant Pere de Ribes</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Equip d&apos;Atenció Primària</li>
             <li>- 1 Consultori</li>
             <li>- 1 Punt d&apos;Atenció continuada</li>
@@ -690,7 +652,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082325, Sant Pere de Riudebitlles</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
             <li>- 1 estació de contaminants de 083054, Vilafranca del Penedès</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -704,7 +665,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082362, Sant Quintí de Mediona</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
             <li>- 1 estació de contaminants de 083054, Vilafranca del Penedès</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -718,7 +678,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082401, Sant Sadurní d&apos;Anoia</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Equip d&apos;Atenció Primària</li>
             <li>- 1 Punt d&apos;Atenció continuada</li>
             <li>- 1 estació de contaminants de 083054, Vilafranca del Penedès</li>
@@ -733,7 +692,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082515, Santa Margarida i els Monjos</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 2 Consultoris</li>
             <li>- 1 estació de contaminants de 082515, Santa Margarida i els Monjos</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: XU, Canyelles</li>
@@ -747,7 +705,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082634, Sant Vicenç dels Horts</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 2 Equips d&apos;Atenció Primària</li>
             <li>- 1 Consultori</li>
             <li>- CUAP</li>
@@ -764,7 +721,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082704, Sitges</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Equip d&apos;Atenció Primària</li>
             <li>- 1 Punt d&apos;Atenció continuada</li>
             <li>- 3 estacions de contaminants de 083073, Vilanova i la Geltrú</li>
@@ -779,7 +735,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082877, Torrelavit</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
             <li>- 1 estació de contaminants de 083054, Vilafranca del Penedès</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -793,7 +748,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082883, Torrelles de Foix</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
             <li>- 1 estació de contaminants de 082515, Santa Margarida i els Monjos</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -807,7 +761,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082956, Vallirana</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Equip d&apos;Atenció Primària</li>
             <li>- 1 Punt d&apos;Atenció continuada</li>
             <li>- 2 estacions de contaminants de 082634, Sant Vicenç dels Horts</li>
@@ -851,7 +804,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>083041, Vilobí del Penedès</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
             <li>- 1 estació de contaminants de 083054, Vilafranca del Penedès</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
@@ -879,7 +831,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>081960, Sant Andreu de la Barca</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Equip d&apos;Atenció Primària</li>
             <li>- 1 Consultori</li>
             <li>- CUAP</li>
@@ -895,7 +846,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082080, Sant Esteve Sesrovires</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
             <li>- 1 estació de contaminants de 081141,Martorell</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: XC, Castellbisbal</li>
@@ -909,7 +859,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>080667, Castellví de Rosanes</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
             <li>- 1 estació de contaminants de 081141,Martorell</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: XC, Castellbisbal</li>
@@ -923,7 +872,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082896, Torrelles de Llobregat</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 1 Consultori</li>
             <li>- 1 estació de contaminants de 082634,Sant Vicenç dels Horts</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: D3, Vallirana</li>
@@ -937,7 +885,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions, onMunicipiSelect, selecte
           <h4 className="text-lg font-bold mt-4">Informació Addicional:</h4>
           <p>082732, Subirats</p>
           <ul>
-          <li style={{ color: 'red', textAlign: 'center'}}>Compte! Aquest municipi no conté estacions de contaminació ni meteorològiques pròpies, les nostres prediccions poden no ser del tot acurades! </li>
             <li>- 3 Consultoris</li>
             <li>- 1 estació de contaminants de 083054, Vilafranca del Penedès</li>
             <li>- Agafa les dades de l&apos;estació meteorològica: W4, Vilafranca del Penedès - La Granada</li>
