@@ -27,6 +27,7 @@ import '@/src/app/dashboard/estilo_info.css';
 import MyLineChart_vis_NO2 from '@/src/components/charts/line_chart_visitas_NO2'
 import MyLineChart_vis_SO2 from '@/src/components/charts/line_chart_visitas_SO2'
 import "@/src/app/dashboard/estilo_info.css";
+//import "@/src/app/dashboard/estilo_charts.css"
 
 
 const calculateTotalCasesBySex = (
@@ -959,7 +960,7 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-          <div className="flex justify-center items-center gap-4 pt-5">
+          {/* <div className="flex justify-center items-center gap-4 pt-5">
             <div className="flex-1 flex justify-center items-center">
               <MyLineChart
                 mergedVisits={mergedVisits}
@@ -986,17 +987,88 @@ const HomePage = () => {
                 selectedSecondMunicipi={selectedSecondMunicipi}
               />
             </div>
+          </div> */}
+          {/* <div className="flex justify-center items-stretch gap-4 pt-5">
+            <div className="flex-1 flex justify-center items-center">
+              <MyLineChart
+                mergedVisits={mergedVisits}
+                selectedMunicipi={selectedMunicipi}
+                beginDate={beginDate}
+                endDate={endDate}
+                selectedSecondMunicipi={selectedSecondMunicipi}
+              />
+            </div>
+            <div className="flex-1 flex flex-col justify-center items-center">
+              <MyLineChart1
+                mergedSos={mergedSos}
+                selectedMunicipi={selectedMunicipi}
+                beginDate={beginDate}
+                endDate={endDate}
+                selectedSecondMunicipi={selectedSecondMunicipi}
+              />
+              <div className="h-4" />
+              <LineChartNO2
+                mergedNos={mergedNos}
+                selectedMunicipi={selectedMunicipi}
+                beginDate={beginDate}
+                endDate={endDate}
+                selectedSecondMunicipi={selectedSecondMunicipi}
+              />
+            </div>
+          </div> */}
+          
+          <div className="flex justify-center items-stretch gap-4 pt-5">
+            <div className="flex-1 flex chart-container">
+              <MyLineChart
+                mergedVisits={mergedVisits}
+                selectedMunicipi={selectedMunicipi}
+                beginDate={beginDate}
+                endDate={endDate}
+                selectedSecondMunicipi={selectedSecondMunicipi}
+              />
+            </div>
+            <div className="flex-1 flex flex-col chart-container gap-4 max-w-[600px]">
+              <MyLineChart1
+                mergedSos={mergedSos}
+                selectedMunicipi={selectedMunicipi}
+                beginDate={beginDate}
+                endDate={endDate}
+                selectedSecondMunicipi={selectedSecondMunicipi}
+              />
+              {/* <div className="h-4" /> */}
+              <LineChartNO2
+                mergedNos={mergedNos}
+                selectedMunicipi={selectedMunicipi}
+                beginDate={beginDate}
+                endDate={endDate}
+                selectedSecondMunicipi={selectedSecondMunicipi}
+              />
+            </div>
           </div>
 
-          <div className="flex justify-center items-center gap-4 pt-5">
-           
-              <MyLineChart_vis_NO2
+
+
+          {/* <div className="flex justify-center items-center gap-4 pt-5"> */}
+          {/* <div className="flex-1 flex flex-row chart-container gap-2"> */}
+          <div className="flex justify-center items-stretch gap-4 pt-5">
+            <div className="flex-1 flex chart-container">
+                <MyLineChart_vis_NO2
                   mergedVisits={mergedVisits}
                   mergedNos={mergedNos}
                   selectedMunicipi={selectedMunicipi}
                   beginDate={beginDate}
                   endDate={endDate}
                 />
+              </div>
+              {/* <MyLineChart_vis_NO2
+                  mergedVisits={mergedVisits}
+                  mergedNos={mergedNos}
+                  selectedMunicipi={selectedMunicipi}
+                  beginDate={beginDate}
+                  endDate={endDate}
+                /> */}
+                {/* <div className="w-6" /> */}
+              <div className="flex-1 flex chart-container  max-w-[600px]">
                 <MyLineChart_vis_SO2
                   mergedVisits={mergedVisits}
                   mergedSos={mergedSos}
@@ -1004,7 +1076,14 @@ const HomePage = () => {
                   beginDate={beginDate}
                   endDate={endDate}
                 />
-            
+              </div>
+                {/* <MyLineChart_vis_SO2
+                  mergedVisits={mergedVisits}
+                  mergedSos={mergedSos}
+                  selectedMunicipi={selectedMunicipi}
+                  beginDate={beginDate}
+                  endDate={endDate}
+                /> */}
             </div>
             <p
                 className="mt-4 text-black dark:text-white"
@@ -1037,8 +1116,10 @@ const HomePage = () => {
             l&apos;anàlisi)
           </h4>
 
-          <div className="flex justify-left items-center gap-4 pl-[-80px]">
-            <div className="flex flex-col justify-center items-center">
+          {/* <div className="flex justify-left items-center gap-4 pl-[-80px]"> */}
+          <div className="flex justify-center items-stretch gap-3 pt-5">
+            {/* <div className="flex flex-col justify-center items-center"> */}
+            <div className="flex-1 flex flex-col chart-container">
               <ChartTwo
                 series={info2_ICS}
                 selectedMunicipi={selectedMunicipi}
@@ -1046,8 +1127,11 @@ const HomePage = () => {
                 beginDate={beginDate}
                 endDate={endDate}
               />
-              <br></br>
-              <div className="flex justify-center items-center  gap-2">
+              {/* <br></br> */}
+              <div className="h-4" />
+              {/* <div className="flex justify-center items-center  gap-2"> */}
+              <div className="flex-1 flex flex-row chart-container">
+                {/* <div style={{ marginRight: '10px' }}> */}
                 <ChartThree
                   series={info_ICS}
                   selectedMunicipi={selectedMunicipi}
@@ -1055,6 +1139,9 @@ const HomePage = () => {
                   beginDate={beginDate}
                   endDate={endDate}
                 />
+                {/* </div> */}
+                {/* <div style={{ marginLeft: '10px' }}> */}
+                <div className="w-8" />
                 <ChartTwoEdats
                   series={info3_ICS}
                   selectedMunicipi={selectedMunicipi}
@@ -1062,9 +1149,11 @@ const HomePage = () => {
                   beginDate={beginDate}
                   endDate={endDate}
                 />
+                {/* </div> */}
               </div>
             </div>
-            <div className="flex-1 flex justify-center items-center">
+            {/* <div className="flex-1 flex justify-center items-center"> */}
+            <div className="flex-1 flex chart-container gap-2">
               <Waterfall
                 data={calculateTotalCasesByMonth(
                   dinamics_saved,
@@ -1085,3 +1174,34 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+
+
+
+// <div className="flex justify-center items-stretch gap-4 pt-5">
+// <div className="flex-1 flex chart-container">
+//   <MyLineChart
+//     mergedVisits={mergedVisits}
+//     selectedMunicipi={selectedMunicipi}
+//     beginDate={beginDate}
+//     endDate={endDate}
+//     selectedSecondMunicipi={selectedSecondMunicipi}
+//   />
+// </div>
+// <div className="flex-1 flex flex-col chart-container">
+//   <MyLineChart1
+//     mergedSos={mergedSos}
+//     selectedMunicipi={selectedMunicipi}
+//     beginDate={beginDate}
+//     endDate={endDate}
+//     selectedSecondMunicipi={selectedSecondMunicipi}
+//   />
+//   <div className="h-4" />
+//   <LineChartNO2
+//     mergedNos={mergedNos}
+//     selectedMunicipi={selectedMunicipi}
+//     beginDate={beginDate}
+//     endDate={endDate}
+//     selectedSecondMunicipi={selectedSecondMunicipi}
+//   />
+// </div>
