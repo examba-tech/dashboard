@@ -41,12 +41,10 @@ return (
         {children}
       </div>
       <Footer />
-      {/* Agregar icono de usuario */}
       {!inLogin && (
         <div className="fixed top-4 right-4">
           <button
             onClick={() => {
-              // Redireccionar a la página de perfil que da la opción de darse de baja
               window.location.href = "/dashboard/perfil_baja";
             }}
             className="bg-transparent border-none text-gray-600 hover:text-gray-800 focus:outline-none"

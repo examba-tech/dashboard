@@ -35,7 +35,6 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions }) => {
   data.features.forEach((feature) => {
     if (!feature.properties || feature.properties.codimuni === undefined) {
       console.error("Falta codimuni o properties en:", feature);
-      // Puedes optar por eliminar estos elementos, asignarles un valor predeterminado o simplemente tomar nota para investigar más.
     }
   });
 
@@ -49,13 +48,13 @@ const Mapa: React.FC<ChartPredProps> = ({ predictions }) => {
     },
     transform: [
       {
-        lookup: "properties.codimuni", // Asegúrate de que este campo exista en tu data de geometría
+        lookup: "properties.codimuni",
         from: {
           data: {
             values: predictions,
           },
           key: "Codi_municipi",
-          fields: ["SO2"], // Asegúrate de que este campo esté incluido en las predicciones
+          fields: ["SO2"],
         },
         default: null,
       },

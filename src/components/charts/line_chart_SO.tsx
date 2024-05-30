@@ -73,7 +73,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
               tick={{ fontSize: 10 }}
               tickFormatter={(tick) => dayjs(tick).format('DD/MM/YYYY')}
             />
-            <YAxis tick={{ fontSize: 10 }} domain={[0, 30]} /> {/* Fijar la escala */}
+            <YAxis tick={{ fontSize: 10 }} domain={[0, 30]} /> 
             <Tooltip
               formatter={(value, name) => {
                 let displayName = name;
@@ -81,7 +81,6 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
                 if (name === "data2") displayName = "municipi 2";
                 return [
                   <span key="value" style={{ color: "black" }}>
-                    {/* {"valor:"}{" "} */}
                     <span style={{ color: "black", fontWeight: "bold" }}>
                       {value}
                     </span>
@@ -108,9 +107,7 @@ const MyLineChart: React.FC<MyLineChartProps> = ({
               }}
               labelStyle={{ color: "black" }}
             />
-        {/* rojo oscuro */}
         <Line type="monotone" dataKey="data" stroke="#B03A2E" name={selectedMunicipi}/>
-        {/* rojo claro */}
         <Line type="monotone" dataKey="data2" stroke="#F5B7B1" name={selectedSecondMunicipi}/>
 
         <Legend verticalAlign="top" height={36} />

@@ -16,15 +16,15 @@ const SignUp: React.FC = () => {
         <Link 
           onClick={handleLogout}
           style={{
-            position: 'fixed', // Posición fija en la pantalla
-            top: '20px', // 20 píxeles desde la parte superior
-            left: '20px', // 20 píxeles desde la parte izquierda
-            padding: '10px 20px', // Espaciado interno del botón
-            fontSize: '16px', // Tamaño de fuente del texto
-            border: 'none', // Sin borde
-            borderRadius: '5px', // Bordes redondeados
-            cursor: 'pointer', // Cursor en forma de puntero
-            textDecoration: 'none' // Elimina la decoración de texto por defecto
+            position: 'fixed', 
+            top: '20px',
+            left: '20px',
+            padding: '10px 20px',
+            fontSize: '16px',
+            border: 'none', 
+            borderRadius: '5px', 
+            cursor: 'pointer',
+            textDecoration: 'none' 
           }}
           href="/" 
           className={buttonVariants({

@@ -46,7 +46,7 @@ const ChartTwo: React.FC<ChartTwoProps> = ({
       max: 4000,
       labels: {
         style: {
-          fontSize: "7px", // Tamaño de la letra del eje y
+          fontSize: "7px", 
         },
       },
     },

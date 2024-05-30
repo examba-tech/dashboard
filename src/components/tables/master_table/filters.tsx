@@ -26,7 +26,6 @@ export default function Filters({
         </AccordionSummary>
         <AccordionDetails>
           <div className="flex flex-row">
-            {/* <Date /> */}
             <MultipleSelectChip
               selectedValues={selectedValues}
               onSelectedValuesChange={onSelectedValuesChange}

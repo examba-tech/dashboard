@@ -10,22 +10,22 @@ const Settings = () => {
 
     const handleButtonClick1 = () => {
         setMessageVisible1(true);
-        setTimeout(() => setMessageVisible1(false), 6000); // Ocultar mensaje después de 5 segundos
+        setTimeout(() => setMessageVisible1(false), 6000); 
     };
 
     const handleButtonClick2 = () => {
         setMessageVisible2(true);
-        setTimeout(() => setMessageVisible2(false), 6000); // Ocultar mensaje después de 5 segundos
+        setTimeout(() => setMessageVisible2(false), 6000); 
     };
 
     const handleButtonClick3 = () => {
         setMessageVisible3(true);
-        setTimeout(() => setMessageVisible3(false), 4000); // Ocultar mensaje después de 5 segundos
+        setTimeout(() => setMessageVisible3(false), 4000); 
     };
 
     const handleButtonClick4 = () => {
         setMessageVisible4(true);
-        setTimeout(() => setMessageVisible4(false), 4000); // Ocultar mensaje después de 5 segundos
+        setTimeout(() => setMessageVisible4(false), 4000); 
     };
 
     return (
@@ -78,8 +78,7 @@ const Settings = () => {
                             type="text"
                             name="fullName"
                             id="fullName"
-                            placeholder="Mateu Andrés"
-                            //defaultValue="Mateu"
+                            placeholder="Belén Rodríguez"
                             />
 
                       </div>
@@ -109,7 +108,6 @@ const Settings = () => {
                             />
                             </svg>
                         </span>
-                            {/* </div> */}
 
 
                       <input
@@ -117,8 +115,7 @@ const Settings = () => {
                         type="text"
                         name="phoneNumber"
                         id="phoneNumber"
-                        placeholder="+990 3343 7865"
-                        //defaultValue="+990 3343 7865"
+                        placeholder="+34 646 780 233"
                       />
                       </div>
                     </div>
@@ -161,8 +158,7 @@ const Settings = () => {
                         type="email"
                         name="emailAddress"
                         id="emailAddress"
-                        placeholder="mateuandres.ics@gmail.com"
-                        //defaultValue="devidjond45@gmail.com"
+                        placeholder="belenrodriguez.ics@gmail.com"
                       />
                     </div>
                   </div>
@@ -196,8 +192,7 @@ const Settings = () => {
                         type="text"
                         name="Username"
                         id="Username"
-                        placeholder="MateuAndresICS"
-                        //defaultValue="devidjhon24"
+                        placeholder="BelenRodriguezICS"
                         />
                     </div>
                   </div>
@@ -246,7 +241,6 @@ const Settings = () => {
                         id="bio"
                         rows={6}
                         placeholder="Observacions i fets a destacar..."
-                        //defaultValue="Observacions i fets a destacar..."
                       ></textarea>
                     </div>
                   </div>
@@ -287,14 +281,6 @@ const Settings = () => {
               <div className="p-7">
                 <form action="#">
                   <div className="mb-4 flex items-center gap-3">
-                    {/* <div className="h-14 w-14 rounded-full">
-                      <Image
-                        src={"/images/user/user-03.png"}
-                        width={55}
-                        height={55}
-                        alt="User"
-                      />
-                    </div> */}
                     <img src={"/user-rectangle-solid-24.png"} alt="User Icon" className="w-16 h-16" />
                     <div>
                       <span className="mb-1.5 text-black dark:text-white">
@@ -349,7 +335,6 @@ const Settings = () => {
                         name="nouRol"
                         id="rolID"
                         placeholder="EMPRESA_ROL_(XX)"
-                        //defaultValue="EMPRESA_ROL_(XX)"
                       />
                     </div>
                   <div className="relative mb-5.5 block w-full cursor-pointer appearance-none bg-gray px-4 py-4 dark:bg-meta-4 sm:py-7.5">
