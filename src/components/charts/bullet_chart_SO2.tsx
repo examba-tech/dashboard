@@ -44,7 +44,7 @@ const segments: Segment[] = [
   { start: 750, end: 900, color: "#AB8187" },
 ];
 
-const data = [{ name: "Aggregated", value: 900 }]; // Valor máximo para abarcar todo el rango
+const data = [{ name: "Aggregated", value: 900 }]; 
 
 const CustomizedBar: React.FC<CustomizedBarProps> = (props) => {
   const { x, y, width, height, segments } = props;

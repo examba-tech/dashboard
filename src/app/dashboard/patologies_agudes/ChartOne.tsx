@@ -55,10 +55,6 @@ const options: ApexOptions = {
     width: [2, 2],
     curve: "straight",
   },
-  //labels: {
-  //  show: false,
-  //   position: "top",
-  //},
   grid: {
     xaxis: {
       lines: {
@@ -116,7 +112,7 @@ const options: ApexOptions = {
     max: 100,
     labels: {
       formatter: function(value) {
-        return value.toFixed(2); // Redondea al segundo decimal
+        return value.toFixed(2); 
       }
     }
   },
@@ -130,20 +126,6 @@ interface ChartOneProps {
   }[];
   selectedMunicipi: string;
 }
-
-//   const handleReset = () => {
-//     setState((prevState) => ({
-//       ...prevState,
-//     }));
-//   };
-//   handleReset;
-
-//   const [infoVisible, setInfoVisible] = useState(false);
-
-//   const toggleInfo = () => {
-//     setInfoVisible(!infoVisible);
-//   };
-
   
   const ChartOne: React.FC<ChartOneProps> = ({ series, selectedMunicipi }) => {
   const [infoVisible, setInfoVisible] = useState(false);

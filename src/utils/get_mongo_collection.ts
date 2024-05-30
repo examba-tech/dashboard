@@ -16,16 +16,6 @@ export async function getMongoCollection(
         }
       );
 
-
-    // const res = await fetch(
-    //   "http://localhost:3000/api/mongo/" + collection_name + "?" + new URLSearchParams(params),
-    //   //"http://localhost:3000/api/mongo/" + collection_name, //+ "?" + new URLSearchParams(params),
-      
-    //   {
-    //     cache: "force-cache",
-    //   }
-    // );
-
     if (!res.ok) {
       throw new Error("Failed to fetch topics");
     }

@@ -2,7 +2,6 @@
 import ChartThree from "./ChartThree";
 import ChartTwo from "./ChartTwo";
 import ChartTwoEdats from "./ChartTwoEdats";
-//import MapaOne from "./Mapa";
 import React, { useState } from "react";
 import { getMongoCollection } from "@/src/utils/get_mongo_collection";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -27,7 +26,7 @@ const calculateTotalCasesBySex = (
 
   info.forEach((entry: Interfaces.Estatiques) => {
     if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
-      return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
+      return; 
     }
 
     if (entry.Sexe == "H") {
@@ -121,7 +120,7 @@ const calculateTotalCasesByEdats = (
 
   info.forEach((entry: Interfaces.Estatiques) => {
     if (selectedDiagnostic && entry.DIAGNOSTIC !== selectedDiagnostic) {
-      return; // Si hay un diagnóstico seleccionado y no coincide con el de la entrada, salta esta iteración
+      return; 
     }
     if (entry.FranjaEdat === "15-44") {
       totalCasesByEdats.de_15_44 +=
@@ -252,8 +251,7 @@ const HomePage = () => {
   >([]);
 
   const [selectedDiagnostic, setSelectedDiagnostic] =
-    React.useState<string>("ASMA"); // Valor predeterminado
-  // Función para manejar el cambio de diagnóstico seleccionado
+    React.useState<string>("ASMA"); 
 
   const handleDiagnosticChange = (diagnostic: string) => {
     setSelectedDiagnostic(diagnostic);

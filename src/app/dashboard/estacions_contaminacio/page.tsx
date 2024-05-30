@@ -10,10 +10,9 @@ import '@/src/app/dashboard/estilo_info.css';
 
 const HomePage = () => {
 
-  //const [estacionesExpandidas, setEstacionesExpandidas] = useState([]);
+  
   const [estacionesExpandidas, setEstacionesExpandidas] = useState<number[]>([]);
 
-  // Función para alternar la expansión de una estación
   const toggleExpansion = (index: number) => {
     if (estacionesExpandidas.includes(index)) {
       setEstacionesExpandidas(estacionesExpandidas.filter((item) => item !== index));
@@ -22,10 +21,8 @@ const HomePage = () => {
     }
   };
 
-  //const [estacionesExpandidas, setEstacionesExpandidas] = useState([]);
   const [contaminantesExpandidos, setcontaminantesExpandidos] = useState<number[]>([]);
 
-  // Función para alternar la expansión de una estación
   const toggleExpansion2 = (index: number) => {
     if (contaminantesExpandidos.includes(index)) {
       setcontaminantesExpandidos(contaminantesExpandidos.filter((item) => item !== index));

@@ -36,10 +36,6 @@ const PredictionsAlerts: React.FC<PredictionsAlertsProps> = ({ predictions }) =>
   const errorAlerts: React.ReactNode[] = [];
   const warningAlerts: React.ReactNode[] = [];
 
-  // Extract the date from the first prediction
-  //const { DIA, MES, ANY } = predictions[0];
-  // const formattedDate = `${Number(DIA)}/${Number(MES)}/${Number(ANY)}`;
-
   predictions.forEach((pred) => {
     if (closedAlerts.includes(pred.NOM_MUNICIPI.toString())) return;
 

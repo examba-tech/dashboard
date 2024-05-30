@@ -11,7 +11,6 @@ import {
 } from "recharts";
 import dayjs from "dayjs";
 
-// Define el tipo de datos para las visitas y NO2
 interface DataPoint {
   name: string;
   data: number;
@@ -23,7 +22,6 @@ interface CombinedDataPoint {
   sos: number;
 }
 
-// Define el tipo de props para el componente MyLineChart
 interface MyLineChartProps {
   mergedVisits: DataPoint[];
   mergedSos: DataPoint[];
@@ -32,7 +30,6 @@ interface MyLineChartProps {
   endDate: dayjs.Dayjs;
 }
 
-// Función para combinar los datos de mergedVisits y mergedNos en un solo array
 const combineData = (visits: DataPoint[], sos: DataPoint[]): CombinedDataPoint[] => {
   return visits.map((visit, index) => ({
     name: visit.name,
@@ -51,7 +48,6 @@ const MyLineChart_vis_SO2: React.FC<MyLineChartProps> = ({ mergedVisits, mergedS
   const formattedBeginDate = beginDate.format('DD-MM-YYYY');
   const formattedEndDate = endDate.format('DD-MM-YYYY');
 
-  // Combina los datos
   const combinedData = combineData(mergedVisits, mergedSos);
 
   return (
@@ -150,8 +146,6 @@ const MyLineChart_vis_SO2: React.FC<MyLineChartProps> = ({ mergedVisits, mergedS
               }}
               labelStyle={{ color: "black" }}
             />
-            {/* <Line type="monotone" dataKey="data" stroke="#80CAEE" />
-            <Line type="monotone" dataKey="nos" stroke="#B22222" /> */}
             <Line yAxisId="left" type="monotone" dataKey="data" stroke="#2471A3" name={selectedMunicipi}/>
             <Line yAxisId="right" type="monotone" dataKey="sos" stroke="#B03A2E" name="SO2"/>
 
